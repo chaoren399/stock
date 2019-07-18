@@ -25,7 +25,7 @@
 
            var tar_value = s3.rows[i].cells[3].innerHTML;
            var net_value = s3.rows[i].cells[4].innerHTML;
-            if(net_value - tar_value <= 0){
+            if(net_value - tar_value <= 0){ // 判断净值是否比预设的低
 
                var netvalueColor= document.getElementById("table-7").rows[i].cells[4];
 
@@ -33,11 +33,15 @@
         }
 
 
-{#            var rate= s3.rows[i].cells[5+1].innerHTML;#}
-{#            if (rate < 0){#}
-{#                 var rateColor= document.getElementById("table-7").rows[i].cells[5+1];#}
-{#                 rateColor.style.color='red';#}
-{#            }#}
+            // 判断 自己长期定投 颜色为 wheat 小麦色
+
+            var code = s3.rows[i].cells[2].innerHTML;
+
+            if(code == 100032 || code == 110031 ||code == 110003 ||code == 540006 ){
+                var rowColor= document.getElementById("table-7").rows[i].cells[2];
+                rowColor.style.color= 'orange';
+            }
+
 
         }
 

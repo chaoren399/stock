@@ -134,7 +134,7 @@ if __name__ == '__main__':
     df_1 = pd.read_csv(fundpool_path, dtype=object)
     codes = df_1.iloc[:,1].values
     # codes = ['166002','163406']
-    codes = ['180012']
+    codes = ['110031']
     for code in codes:
         print code;
         time.sleep(10)
