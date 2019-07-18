@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+
+<link rel="stylesheet" type="text/css" href="/static/css/test.css">
+
+
+<body onload="show1()">
+
+
+
+
+   <center>
+      <input type="text" value="111" id="mytext">
+      <table id=" table-7" >
+          <thead>
+        <th>名称</th>
+        <th>代码</th>
+        <th>最新价格</th>
+        <th>最低</th>
+        <th>最高</th>
+        <th>价值率</th>
+
+        <th>更新日期</th>
+
+         <th>name_y</th>
+        </thead>
+          <tr>
+              <td id="td1">第一行第一列</td><td id="td2">第一行第二列</td>
+          </tr>
+           <tr>
+              <td>第二行第一列</td><td>第二行第二列</td><td>第二行第三列</td>
+          </tr>
+          <tr>
+              <td>第三行第一列</td><td>第三行第二列</td>
+          </tr>
+      </table>
+   </center>
+
+<script type="text/javascript">
+
+    function show(){
+        // 获取id为 mytext 的普通元素值
+        var mytext = document.getElementById("mytext").value;
+
+        //用标记id的td元素 获取值方法
+        var td1 = document.getElementById("td1").innerHTML;
+
+        //用获取table(通过其id ) 获取指定的行，列
+        var mytable = document.getElementById("mytable").rows[1].cells[2].innerHTML;
+
+        //遍历 table表格
+        var s3 = document.getElementsByTagName("table")[0]; //获取第一个表格
+
+//        alert(td1);    //第一行第一列
+//        alert(mytable);  //第二行第三列
+        for(var i=0;i<s3.rows.length;i++){
+            for(var j=0;j<s3.rows[i].cells.length;j++){
+//                alert(s3.rows[i].cells[j].innerHTML);
+            }
+        }
+    }
+</script>
+
+   <!--我的测试表格颜色-->
+   <h1> 11111</h1>
+
+<center>
+
+      <table border="1" width="60%" id="table-7 ">
+          <tr>
+              <td id="td11">1</td><td id="td21">2</td>
+          </tr>
+           <tr>
+              <td>第二行第一列</td><td>第二行第二列</td><td>第二行第三列</td>
+          </tr>
+          <tr>
+              <td>第三行第一列</td><td>第三行第二列</td>
+          </tr>
+      </table>
+   </center>
+
+
+<script type="text/javascript">
+
+    function show1(){
+
+
+        //用标记id的td元素 获取值方法
+        var td1 = document.getElementById("td11").innerHTML;
+
+        //用获取table(通过其id ) 获取指定的行，列
+        var mytable = document.getElementById("mytable").rows[1].cells[2].innerHTML;
+
+        //遍历 table表格
+        var s3 = document.getElementsByTagName("table")[0]; //获取第一个表格
+
+//        alert(td1);    //第一行第一列
+//        alert(mytable);  //第二行第三列
+        for(var i=0;i<s3.rows.length;i++){
+            for(var j=0;j<s3.rows[i].cells.length;j++){
+//                alert(s3.rows[i].cells[j].innerHTML);
+            }
+        }
+    }
+</script>
+</body>
+</html>

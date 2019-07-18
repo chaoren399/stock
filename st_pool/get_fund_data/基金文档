@@ -1,0 +1,68 @@
+
+
+
+d9,110031,易方达恒生国企ETF联结A,1.16,,,重点-别墅- 近3年定投收益5%(不能定投了),,3年4星，5年3星,15亿,2012
+e6,160212,国泰估值优势股票,,,,失败-近3年的定投收益率-14%(不能定投了),,3年2星，5年4星,24亿,2010
+
+d8,270048,广发纯债债券A,1.2,,, 近3年定投收益 4%,,3年3星， 5年5星,5亿,2012
+
+
+兴全趋势投资混合(LOF) (媳妇蛋卷定投 100 2019年05月27日)
+
+
+———mac
+
+1 . workon evn3-stock  (更改了工作虚拟空间)
+2 .  cd /Users/zzy/PycharmProjects/python-workspace/stock
+3 .  python manage.py runserver 8080
+
+
+2019年4月4日
+
+
+每次保存完 csv 格式,必须用 notpad++ 转换成 utf-8的编码
+
+1.
+https://blog.csdn.net/github_26672553/article/details/78662563
+
+http://fund.eastmoney.com/f10/F10DataApi.aspx?type=lsjz&code=000001&page=1&per=1
+
+
+天天基金网数据接口
+https://blog.csdn.net/weizhixiang/article/details/51445054
+
+
+'http://fundgz.1234567.com.cn/js/001186.js'
+返回数据格式
+jsonpgz (
+{
+"fundcode": "519983",
+"name": "富国文体健康股票",
+"jzrq": "2019-04-03",(净值日期-取这个,数据延迟因为要晚一天)
+"dwjz": "1.4550", (单位净值--取这个 任何基金最初的净值都是1元. 每天晚上8点30 更新当日净值)
+"gsz": "1.4662", (净值估算)
+"gszzl": "0.77",(估算涨幅)
+"gztime": "2019-04-04 15:00" (估算日期)
+}
+)
+
+
+1. 定投投资收益计算器
+
+http://99fund.com/main/planning/jjgjx/dttz/index.shtml
+
+2. 晨星 排名
+http://cn.morningstar.com/quicktake/F000000416?place=qq
+
+
+
+3. 基金历史数据
+
+http://data.funds.hexun.com/outxml/detail/openfundnetvalue.aspx?fundcode=519688&startdate=2016-11-21&enddate=2018-12-08
+
+
+使用的是 百度的 echars echarts.min.js
+就用了一个简单的 ui . 数据是从 views 传过去的
+get_fund_old_data.py 是负责把历史数据 下载下来的. 不知道为什么到 2019年07月15日 只能更新 7 月 04 号的数据.
+这个数据需要重新搞一份.
+4.

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>基金池</title>
+    	<link rel="stylesheet" type="text/css" href="/static/css/table.css">
+        <!--<link rel="stylesheet" type="text/css" href="/static/css/main.css">-->
+
+</head>
+
+
+
+
+
+<body>
+
+<script type="text/javascript">
+
+    window.onload = function(){
+
+        //遍历 table表格
+        var s3 = document.getElementsByTagName("table")[0]; //获取第一个表格
+
+        for(var i=1;i<s3.rows.length;i++){
+
+           var tar_value = s3.rows[i].cells[3].innerHTML;
+           var net_value = s3.rows[i].cells[4].innerHTML;
+            if(net_value - tar_value <= 0){
+
+               var netvalueColor= document.getElementById("table-7").rows[i].cells[4];
+
+               netvalueColor.style.color='red';
+        }
+
+
+{#            var rate= s3.rows[i].cells[5+1].innerHTML;#}
+{#            if (rate < 0){#}
+{#                 var rateColor= document.getElementById("table-7").rows[i].cells[5+1];#}
+{#                 rateColor.style.color='red';#}
+{#            }#}
+
+        }
+
+
+
+    }
+
+</script>
+<a style="color: #ff0000; "  > 1. (中欧价值发现混合A) 收益超过 1000,则卖出.  </a>
+<a href="/linian/" target="_blank"> <span style="color:#0000FF;">投资理念 </span></a>
+<a> ----  hhh ----</a>
+<a href="/fundold/" target="_blank"> <span style="color:#0000FF;">趋势图 </span></a>
+<a> ----  hhh ----</a>
+<a href="/download/" target="_blank"> <span style="color:#0000FF;">更新数据 </span></a>
+<a> ----  hhh ----</a>
+
+
+
+
+</br>
+<a   >  2.目标: 收益可以抵消月供.  每个月6300元的月供, 一年需要 75600 元 约7.6万 按照每年收益率16%计算 .需要的资金本金为: 47万
+按照每年收益率 20 %计算: 需要本金38万.38万 按照每个月1万的积累,可以是2年就足够了.
+--------------end2019年04月05日  蛋卷3 年定投收益 和天天基金3 年累计涨幅不同 主要参考 3 年定投收益</a>
+
+
+</br>
+
+目标追求稳定的 16%的收益率
+
+</br>
+
+
+<ul>
+    <table id="table-7"> <!-- Replace "table-1" with any of the design numbers -->
+
+        <thead>
+        <th>序号</th>
+        <th>名称</th>
+        <th>代码</th>
+        <th>期望净值</th>
+        <th>最新净值</th>
+        <th>净值日期</th>
+        <th>重点关注</th>
+        <th>价值率 </th>
+        <th>星晨评级</th>
+        <th>规模</th>
+        <th>成立日期</th>
+
+    <th> <a href="/stock/" target="_blank"> <span style="color:#0000FF;">股票链接 </span></a></th>
+        </thead>
+    {% for fund in fundlist %}
+            <tbody>
+            <tr>
+            <td >{{fund.order}}</td>
+
+            <td id="stockname"> <a href="{{fund.url}}"  target="_blank"> <span style="color:#0000FF;">{{fund.name}} </span></a></td>
+            <td>{{fund.code}}</td>
+            <td style="color: black" id="stocktrade">{{fund.tar_value}}</td>
+
+            <td id="stocklowprice">{{fund.net_value}}</td>
+            <td>{{fund.jzrq}}</td>
+            <td>{{fund.zhongdian}}</td>
+            <td>{{fund.jiazhilv}}</td>
+            <td>{{fund.pingji}}</td>
+            <td>{{fund.guimo}}</td>
+            <td>{{fund.chenglirq}}</td>
+
+
+            </tr>
+            </tbody>
+        {%empty%}
+
+        <li>啥也没有1</li>
+        {% endfor %}
+
+        </table>
+
+</ul>
+
+<a>小规模: 小于1亿  (国家规定基金最小是5000万)
+大规模:100亿 ,200亿,
+中规模 : 20-50亿(推荐)</a>
+
+
+</body>
+
+
+</html>
