@@ -1,16 +1,23 @@
 #encoding=utf-8
 import urllib
 
+import logging
+from django.http import HttpResponse
+from django.http import JsonResponse
 from django.shortcuts import render
 from models import StockInfo, FundInfo
 import  pandas as pd
 import os
 # Create your views here.
 from st_pool.get_fund_data import getfunddata
+from st_pool.get_fund_data.fund_old_data.get_fund_old_data import load_user_agent, get_urls
 from st_pool.get_stock_data import getstockdata
 import json
 import datetime
 import requests
+import time
+
+from stock.settings import BASE_DIR
 
 '''
 股票池 UI
@@ -95,7 +102,7 @@ def linian_show(request):
 '''
 def fundold_show(request):
 
-    fundpool_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/st_pool' + '/get_fund_data/基金池.csv'
+    fundpool_path = BASE_DIR + '/st_pool' + '/get_fund_data/基金池.csv'
 
     print fundpool_path
     # dict = {'Name': [["2000-06-05", 116], ["2000-06-06", 129]], 'Age': 7, 'Class': 'First'}
@@ -112,7 +119,7 @@ def fundold_show(request):
         dict_cod_name.setdefault(str(code),name) # code: name 字典
         codes.append(code)
 
-        oldfunddatapath=  os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/st_pool' + '/get_fund_data/'+'fund_old_data/data/'
+        oldfunddatapath= BASE_DIR+ '/st_pool' + '/get_fund_data/'+'fund_old_data/data/'
         df = pd.read_csv(oldfunddatapath + code + '.csv', dtype=object)
         df.columns = ['date', 'value']
         df_new = df.sort_values(by='date', axis=0, ascending=True)  # 按照日期排序
@@ -148,8 +155,8 @@ http://58.87.68.70/downfunddata/data/000172.csv
 def downdata_from_carxiuli(request):
 
 
-    fundpool_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/st_pool' + '/get_fund_data/基金池.csv'
-    datapath = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/st_pool' + '/get_fund_data/fund_old_data/data/'
+    fundpool_path = BASE_DIR+ '/st_pool/get_fund_data/基金池.csv'
+    datapath = BASE_DIR+ '/st_pool/get_fund_data/fund_old_data/data/'
     df_1 = pd.read_csv(fundpool_path, dtype=object)
 
     i = 0;
@@ -170,6 +177,75 @@ def downdata_from_carxiuli(request):
 
     return render(request, 'st_pool/downdata.html',{'info':info})
 
+'''
+下载控制程序
+从第三方服务器上下载数据
+http://data.funds.hexun.com/outxml/detail/openfundnetvalue.aspx?fundcode=519688&startdate=2019-02-21&enddate=2019-07-21
+
+动态显示日志
+https://www.jianshu.com/p/bc40ac5bbea9
+'''
+
+num_progress = 0 # 当前的后台进度值（不喜欢全局变量也可以很轻易地换成别的方法代替）
+
+allcodenum =''
+
+def downdata_from_hexun(request):
+    global num_progress
+    global  allcodenum
+    load_user_agent()
+
+    fundpool_path = BASE_DIR + '/st_pool/get_fund_data/基金池.csv'
+    df_1 = pd.read_csv(fundpool_path, dtype=object)
+    codes = df_1.iloc[:,1].values
+    info = []
+    # codes = ['000172']
+    codes = ['000172','000577','110031']
+    i = 0;
+    str1 = ''
+    for code in codes:
+        time.sleep(10)  #//睡觉
+        x = get_urls(code)
+        str1 = str1 + '(' + str(i + 1) + '-' + code + ')'
+        print 'come x '
+        if (x == 'read the log'):
+            str1= str1+ 'read the log  has error'
+            # print 'x-reason' + x
+        i = i + 1
+        allcodenum=str1
+        info = '完成  '+str(i)+'只基金下载'+str1
+        logging.error('codes.count'+str(len(codes)))
+        num_progress = i * 100 / len(codes);  # 更新后台进度值，因为想返回百分数所以乘100
+    print  'num_progress='+str(num_progress)
+    return JsonResponse({'res_1':info,'res_2':1}, safe=False)
+
+
+'''
+控制下载界面 html
+'''
+def downdata_from_hexun_ui(request):
+
+    return render(request, 'st_pool/datahexun.html')
+
+
+
+'''
+更新进度条进度
+'''
+def show_progress(request):
+    print  'show_progress -num_progress=' + str(num_progress)
+    return JsonResponse({'num_progress':num_progress,'allcodenum':allcodenum}, safe=False)
+
+'''
+展示日志界面
+'''
+def show_logs(request):
+    logpath = BASE_DIR+'/stock/log/fund.log'
+
+    with open(logpath) as file_object:
+        contents = file_object.read()
+
+    return render(request, 'st_pool/showlogs.html',{'contents':contents})
 def testJS(request):
     return render(request, 'st_pool/testjs.html')
 

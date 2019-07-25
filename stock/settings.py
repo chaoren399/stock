@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import logging
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -126,5 +127,14 @@ STATICFILES_DIRS=[
     os.path.join(BASE_DIR,'static')
 ]
 
+#logging
+BASE_LOG_DIR = os.path.join(BASE_DIR, "stock/log")
 
-
+logging.basicConfig(level=logging.ERROR,  # 控制台打印的日志级别
+                    filename=BASE_LOG_DIR + '/fund.log',
+                    filemode='a',  ##模式，有w和a，w就是写模式，每次都会重新写日志，覆盖之前的日志
+                    # a是追加模式，默认如果不写的话，就是追加模式
+                    format=
+                    '%(asctime)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s'
+                    # 日志格式
+                    )

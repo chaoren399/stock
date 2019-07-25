@@ -8,6 +8,8 @@
 
 #
 import urllib
+
+import logging
 import requests
 import pandas as pd
 # x = pd.DataFrame({"x1":[1,2,2,3],"x2":[4,3,2,1]})
@@ -48,7 +50,7 @@ import datetime
 # (datetime.datetime(2010,03,01) - datetime.datetime(2010,02,01)).days
 #
 # print((datetime.datetime(2010,03,01) - datetime.datetime(2010,02,01)).days-5)
-
+from stock.settings import BASE_DIR
 
 
 def downdata_from_carxiuli():
@@ -75,6 +77,18 @@ def downdata_from_carxiuli():
     with open("12.ipg", "wb") as code:
         code.write(f.content)
 
+import os
 
 if __name__ == '__main__':
-    downdata_from_carxiuli()
+    # downdata_from_carxiuli()
+
+    root_dir = os.path.dirname(os.path.abspath('.'))
+    print  BASE_DIR
+    logging.warning("sdfasdfasd")
+    # f = open(BASE_DIR + '/st_pool/get_fund_data/fund_old_data/data/' + '000172' + '.csv', 'w')
+
+
+    # f.write('2019-05-04'+ ',' + '233' + '\n')
+
+
+    # f.close()

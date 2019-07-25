@@ -58,11 +58,130 @@ http://cn.morningstar.com/quicktake/F000000416?place=qq
 
 3. 基金历史数据
 
-http://data.funds.hexun.com/outxml/detail/openfundnetvalue.aspx?fundcode=519688&startdate=2016-11-21&enddate=2018-12-08
+http://data.funds.hexun.com/outxml/detail/openfundnetvalue.aspx?fundcode=519688&startdate=2018-11-21&enddate=2019-07-08
 
 
 使用的是 百度的 echars echarts.min.js
 就用了一个简单的 ui . 数据是从 views 传过去的
 get_fund_old_data.py 是负责把历史数据 下载下来的. 不知道为什么到 2019年07月15日 只能更新 7 月 04 号的数据.
 这个数据需要重新搞一份.
-4.
+4.  python 相对路径
+
+https://www.cnblogs.com/chaoren399/p/11224934.html
+
+5. 前台后台 交互:
+
+https://www.cnblogs.com/chaoren399/p/11156175.html
+
+ajax  实时更新后台数据
+
+https://www.cnblogs.com/xibuhaohao/p/10192052.html
+6. python 学习目录
+file:///Volumes/apple-sd/doc-apple-sd/doc/python-课件和资料/zzy_all_index.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
