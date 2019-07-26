@@ -93,7 +93,7 @@ def get_urls(fund_code):
         startdate = '2019-01-01'
         # enddate = '2019-07-10'
         enddate =  str(datetime.date.today())
-        print 'enddate'+ str(enddate)
+        # print 'enddate'+ str(enddate)
 
         url = 'http://data.funds.hexun.com/outxml/detail/openfundnetvalue.aspx?fundcode=' + str(fundcode) + '&startdate=' + startdate + '&enddate=' + enddate
         #  url 连同 headers，一起构造Request请求，这个请求将附带 IE9.0 浏览器的User-Agent
@@ -103,8 +103,8 @@ def get_urls(fund_code):
             # 向服务器发送这个请求
             response = urllib2.urlopen(request)
         except urllib2.URLError, e:
-
-            logging.error( e.reason)
+            logging.error('get url error ')
+            logging.error(e.reason)
             return  'read the log '
         html = response.read()
         # print html
@@ -117,6 +117,7 @@ def get_urls(fund_code):
         for fund in funds:  # 对数组funds[]循环
             f.write(fund.fld_enddate+','+fund.fld_unitnetvalue+'\n')
             # print(fund)
+        logging.error('--------------get  funds data :'+str(fundcode) + '---done')
         funds = []#循环到下一个基金的时候要清空全局数组的数据 必须要
         f.close()
 

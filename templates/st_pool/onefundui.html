@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+   <head>
+       <meta charset="utf-8">
+         <title>单基金走势</title>
+   </head>
+   <body style="height: 80%; margin: 0">
+       <div id="container" style="height: 100%"></div>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+
+
+
+{#       https://echarts.baidu.com/examples/editor.html?c=line-simple  #}
+<script type="text/javascript">
+
+var data = {{ data|safe }};
+
+
+
+var fundcode1 = {{ code|safe }};
+
+
+
+console.log('fundcode'+fundcode1)
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+
+
+var datatime = data.map(function (item) {
+            return item[0];
+        });
+var datavalue = data.map(function (item) {
+            return item[1];
+        });
+
+option = {
+    title: {
+                text: fundcode1 //#名称
+            },
+
+    xAxis: {
+        type: 'category',
+        data: datatime,
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [{
+        data: datavalue,
+        type: 'line'
+    }]
+};
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>
+   </body>
+</html>

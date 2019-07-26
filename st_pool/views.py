@@ -200,7 +200,7 @@ def downdata_from_hexun(request):
     codes = df_1.iloc[:,1].values
     info = []
     # codes = ['000172']
-    codes = ['000172','000577','110031']
+    # codes = ['000172','000577','110031']
     i = 0;
     str1 = ''
     for code in codes:
@@ -214,7 +214,7 @@ def downdata_from_hexun(request):
         i = i + 1
         allcodenum=str1
         info = '完成  '+str(i)+'只基金下载'+str1
-        logging.error('codes.count'+str(len(codes)))
+        # logging.error('all funds data = '+str(len(codes)))
         num_progress = i * 100 / len(codes);  # 更新后台进度值，因为想返回百分数所以乘100
     print  'num_progress='+str(num_progress)
     return JsonResponse({'res_1':info,'res_2':1}, safe=False)
@@ -246,6 +246,54 @@ def show_logs(request):
         contents = file_object.read()
 
     return render(request, 'st_pool/showlogs.html',{'contents':contents})
+
+def clear_logs(request):
+    logpath = BASE_DIR + '/stock/log/fund.log'
+    f = open(logpath, 'w')
+    f.write(' ')
+    f.close()
+    return JsonResponse({'res':1,}, safe=False)
+
+'''
+单个基金走势图
+
+http://127.0.0.1:8081/onefund/?fund=000172
+
+'''
+def one_fundolddata_show(request):
+    fundcode = request.GET['fund'].zfill(6)
+
+
+    code = fundcode
+    oldfunddatapath = BASE_DIR + '/st_pool' + '/get_fund_data/' + 'fund_old_data/data/'
+    df = pd.read_csv(oldfunddatapath + code + '.csv', dtype=object)
+    df.columns = ['date', 'value']
+    df_new = df.sort_values(by='date', axis=0, ascending=True)  # 按照日期排序
+    data = []
+    for index, row in df_new.iterrows():
+            date = row['date']
+            # //处理日期
+            x = date.split("-", 2)
+            anyday = datetime.datetime(int(x[0]), int(x[1]), int(x[2])).strftime("%w")
+
+            if (anyday == '5'):  # 选择周五的数据
+                value = row['value']
+                xx = [str(date), value]
+                data.append(xx)
+            today = datetime.date.today()
+            y = str(today).split("-", 2)
+            # 显示 最后一个周五 到目前 之间的几天数据
+            if ((datetime.datetime(int(y[0]), int(y[1]), int(y[2])) - datetime.datetime(int(x[0]), int(x[1]),
+                                                                                        int(x[2]))).days < 5):
+                value = row['value']
+                xx = [str(date), value]
+                data.append(xx)
+
+    code =['fund',str(fundcode)] # 不知道什么原因, 000172 被转成 233 之类的数字
+
+    return render(request, 'st_pool/onefundui.html',{'code': code,'data':data})
+
+
 def testJS(request):
     return render(request, 'st_pool/testjs.html')
 

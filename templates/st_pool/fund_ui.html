@@ -60,6 +60,9 @@
 
 </script>
 
+<a href="/stock/" target="_blank"> <span style="color:#0000FF;">股票链接 </span></a>
+
+<a> ----  hhh ----</a>
 <a href="/linian/" target="_blank"> <span style="color:#0000FF;">投资理念 </span></a>
 <a> ----  hhh ----</a>
 <a href="/fundold/" target="_blank"> <span style="color:#0000FF;">趋势图 </span></a>
@@ -98,15 +101,16 @@
         <th>规模</th>
         <th>成立日期</th>
 
-    <th> <a href="/stock/" target="_blank"> <span style="color:#0000FF;">股票链接 </span></a></th>
+    <th> 0</th>
         </thead>
     {% for fund in fundlist %}
             <tbody>
             <tr>
-            <td >{{fund.order}}</td>
+            <td ><a href="/onefund/?fund={{fund.code}}"  target="_blank"> {{fund.order}} </a></td>
 
             <td id="stockname"> <a href="{{fund.url}}"  target="_blank"> <span style="color:#0000FF;">{{fund.name}} </span></a></td>
-            <td>{{fund.code}}</td>
+            <td> {{fund.code}}</td>
+
             <td style="color: black" id="stocktrade">{{fund.tar_value}}</td>
 
             <td id="stocklowprice">{{fund.net_value}}</td>
