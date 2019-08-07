@@ -35,27 +35,50 @@ var datavalue = data.map(function (item) {
             return item[1];
         });
 
-option = {
-    title: {
-                text: fundcode1 //#名称
-            },
+{#option = {#}
+{#    title: {#}
+{#                text: fundcode1 //#名称#}
+{#            },#}
+{##}
+{#    xAxis: {#}
+{#        type: 'category',#}
+{#        data: datatime,#}
+{#    },#}
+{#    yAxis: {#}
+{#        type: 'value'#}
+{#    },#}
+{#    series: [{#}
+{#                name: '净值',#}
+{#                type: 'line',#}
+{#                data: datavalue#}
+{#            }]#}
+{##}
 
-    xAxis: {
-        type: 'category',
-        data: datatime,
-    },
-    yAxis: {
-        type: 'value'
-    },
-    series: [{
-        data: datavalue,
-        type: 'line'
-    }]
-};
-;
-if (option && typeof option === "object") {
-    myChart.setOption(option, true);
-}
+
+
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+            text: fundcode1 //#名称
+        },
+        tooltip: {},
+        legend: {
+            data: ['销量1']
+        },
+        xAxis: {
+            data: datatime
+        },
+        yAxis: {},
+        series: [{
+            name: '净值',
+            type: 'line',
+            data: datavalue
+        }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
        </script>
    </body>
 </html>

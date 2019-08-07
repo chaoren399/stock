@@ -31,7 +31,7 @@ def stock_pool_show(request):
 
     list = []
     for i, row in stocks.iterrows():
-        print  'i=', i
+        # print  'i=', i
 
         st = StockInfo()
         st.code = row[0]
@@ -75,7 +75,7 @@ def fund_show(request):
             fd.zhongdian = row[6]
         elif():
             fd.zhongdian = '0'
-        print fd.zhongdian
+        # print fd.zhongdian
         fd.url = "http://fund.eastmoney.com/" + fd.code + ".html"
 
         fd.jiazhilv= row[7]  #价值率
@@ -98,13 +98,13 @@ def linian_show(request):
 
 
 '''
-基金净值走势图
+基金净值走势图 所有
 '''
 def fundold_show(request):
 
     fundpool_path = BASE_DIR + '/st_pool' + '/get_fund_data/基金池.csv'
 
-    print fundpool_path
+    # print fundpool_path
     # dict = {'Name': [["2000-06-05", 116], ["2000-06-06", 129]], 'Age': 7, 'Class': 'First'}
 
     dict ={}
@@ -120,7 +120,7 @@ def fundold_show(request):
         codes.append(code)
 
         oldfunddatapath= BASE_DIR+ '/st_pool' + '/get_fund_data/'+'fund_old_data/data/'
-        df = pd.read_csv(oldfunddatapath + code + '.csv', dtype=object)
+        df = pd.read_csv(oldfunddatapath + code + '.csv', dtype=object,header=None)
         df.columns = ['date', 'value']
         df_new = df.sort_values(by='date', axis=0, ascending=True)  # 按照日期排序
         data = []
@@ -142,7 +142,7 @@ def fundold_show(request):
                 xx = [str(date), value]
                 data.append(xx)
         dict.setdefault(code,data)
-    print 'dict_cod_name='+str(dict_cod_name)
+    # print 'dict_cod_name='+str(dict_cod_name)
     # return render(request, 'st_pool/old_fund_ui.html', {'dict': json.dumps(dict)} )
     return render(request, 'st_pool/old_fund_ui.html', {'codes': json.dumps(codes), 'dict': json.dumps(dict),'dict_cod_name':json.dumps(dict_cod_name)} )
 
@@ -266,12 +266,12 @@ def one_fundolddata_show(request):
 
     code = fundcode
     oldfunddatapath = BASE_DIR + '/st_pool' + '/get_fund_data/' + 'fund_old_data/data/'
-    df = pd.read_csv(oldfunddatapath + code + '.csv', dtype=object)
+    df = pd.read_csv(oldfunddatapath + code + '.csv', dtype=object,header=None)
     df.columns = ['date', 'value']
     df_new = df.sort_values(by='date', axis=0, ascending=True)  # 按照日期排序
     data = []
     for index, row in df_new.iterrows():
-            date = row['date']
+            date = row['date']  #'2019-01-16'
             # //处理日期
             x = date.split("-", 2)
             anyday = datetime.datetime(int(x[0]), int(x[1]), int(x[2])).strftime("%w")

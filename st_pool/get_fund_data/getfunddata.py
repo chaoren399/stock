@@ -10,6 +10,10 @@ import urllib2
 import json
 import requests
 
+
+'''
+获取基金当日净值
+'''
 def getdata(fundpool_path):
 #1. 打开基金池表格
     df_1 = pd.read_csv(fundpool_path,dtype=object)
