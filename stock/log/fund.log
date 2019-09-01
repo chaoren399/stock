@@ -1,19 +1,21 @@
- 2019-08-07 15:04:14,469 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :163406---done
-2019-08-07 15:04:24,545 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :160119---done
-2019-08-07 15:04:34,657 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :519712---done
-2019-08-07 15:04:47,635 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :519068---done
-2019-08-07 15:04:57,719 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :519688---done
-2019-08-07 15:05:07,786 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :166005---done
-2019-08-07 15:05:18,253 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :163402---done
-2019-08-07 15:05:28,608 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :540006---done
-2019-08-07 15:05:38,935 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :110003---done
-2019-08-07 15:05:49,251 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :100032---done
-2019-08-07 15:05:59,581 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :110031---done
-2019-08-07 15:06:09,928 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :200008---done
-2019-08-07 15:06:20,168 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :270002---done
-2019-08-07 15:06:30,235 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :000577---done
-2019-08-07 15:06:40,296 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :217022---done
-2019-08-07 15:06:50,359 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :519704---done
-2019-08-07 15:07:00,449 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :000172---done
-2019-08-07 15:07:10,552 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :166002---done
-2019-08-07 15:07:21,041 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :180012---done
+ 2019-08-21 15:45:57,483 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :163406---done
+2019-08-21 15:46:07,782 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :160119---done
+2019-08-21 15:46:18,091 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :519712---done
+2019-08-21 15:46:28,407 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :519068---done
+2019-08-21 15:46:38,511 - get_fund_old_data.py[line:106] - ERROR: get url error 
+2019-08-21 15:46:38,512 - get_fund_old_data.py[line:107] - ERROR: Forbidden
+2019-08-21 15:46:48,818 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :166005---done
+2019-08-21 15:46:59,383 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :163402---done
+2019-08-21 15:47:09,722 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :540006---done
+2019-08-21 15:47:20,060 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :110003---done
+2019-08-21 15:47:30,523 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :100032---done
+2019-08-21 15:47:40,878 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :110031---done
+2019-08-21 15:47:51,176 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :200008---done
+2019-08-21 15:48:01,511 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :270002---done
+2019-08-21 15:48:11,650 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :000577---done
+2019-08-21 15:48:21,799 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :217022---done
+2019-08-21 15:48:31,878 - get_fund_old_data.py[line:106] - ERROR: get url error 
+2019-08-21 15:48:31,878 - get_fund_old_data.py[line:107] - ERROR: Forbidden
+2019-08-21 15:48:42,023 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :000172---done
+2019-08-21 15:48:52,160 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :166002---done
+2019-08-21 15:49:02,691 - get_fund_old_data.py[line:120] - ERROR: --------------get  funds data :180012---done
