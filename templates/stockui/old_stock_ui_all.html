@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>走势图基金UI</title>
+		<style type="text/css">
+			body,h1{margin: 0;padding: 0;}
+			.left{
+				float: left;
+				width: 33%;
+				background-color: orange;
+				color: green;
+				height: 250px;
+			}
+
+			.middle{
+				float: left;
+				width: 33%;
+				background-color: papayawhip;
+				height: 250px;
+				color: gray;
+			}
+            .right{
+				float: right;
+				width: 33%;
+				background-color: wheat;
+				height: 250px;
+				color: red;
+			}
+			.main{width: 90%;
+			margin: 0 auto;
+			text-align: center;
+			}
+		</style>
+	</head>
+
+
+
+
+
+
+
+{# <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>#}
+   <script type="text/javascript" src="/static/js/echarts.min.js"></script>
+
+
+
+
+	<body>
+       <div id="maincontainer">
+           2020年股市 5 万元. 基金 15 万元.  20 万的计划收益率 12% 来计算
+        </div>
+	</body>
+
+
+
+<script type="text/javascript">
+
+var x = 3;
+
+
+    // 字典
+var dict = {{ dict|safe }};
+ 
+var container =document.getElementById('maincontainer');
+        var node=container.nextSibling;
+        oDiv = document.createElement('div');
+var alldiv ='';
+
+{# 第1次 for 循环遍历 dict  用来生成 div #}
+
+var codes = {{ codes|safe }};
+
+for (i in codes){
+    var x= codes[i]
+    console.log('codesi='+i)
+
+    if(i%3==0){
+        var a = i/3;
+        var str = '<br>'+a+'a</br>'
+
+
+
+        var str1 = '<div id="main'+a+'" class="main1">'
+
+        var str2 = '<div id="main'+a+'0" class="left"></div> '
+
+        var str3 = '<div id="main'+a+'1" class="middle"></div>'
+        var str4 = '<div id="main'+a+'2" class="right"></div></div>'
+
+        console.log(' str1+ +str2+str3+str4='+ str1+str2+str3+str4)
+
+
+        var str5 = str+str1+str2+str3+str4;
+
+        alldiv = alldiv+ str5
+
+    }
+}
+
+oDiv.innerHTML = alldiv
+container.parentNode.insertBefore(oDiv, node)
+node=oDiv.nextSibling;
+
+</script>
+
+
+    <script type="text/javascript">
+
+        var y1 = 1;
+{# 第二次 for 循环遍历 dict  用来填充数据#}
+var codes = {{ codes|safe }};
+var dict = {{ dict|safe }};
+var dict_cod_name= {{ dict_cod_name|safe }};
+var j = 0; // 发现用  for  里边的索引无法控制 .只能定义一个变量了
+for (i in codes){
+    var code= codes[i]
+    console.log('codesi='+i)
+    console.log('dict[code]=' + dict[codes[i]])
+
+    if(i%3==0){
+
+{#        第一列 数据      #}
+
+        data0 = dict[codes[j]]
+
+
+        var dateList0 = data0.map(function (item) {
+            return item[0];
+        });
+        var valueList0 = data0.map(function (item) {
+            return item[1];
+        });
+        var a1 = i/3
+        var divid0 = 'main' + a1 + '0'
+
+        var myChart0 = echarts.init(document.getElementById(divid0));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: codes[j]+'--'+dict_cod_name[codes[j]]  //#名称
+            },
+            tooltip: {},
+            legend: {
+                data: ['销量1']
+            },
+            xAxis: {
+                data: dateList0
+            },
+            yAxis: {},
+            series: [{
+                name: '收盘价',
+                type: 'line',
+                data: valueList0
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart0.setOption(option);
+
+
+
+        // 第二列
+
+        var data1 = dict[codes[j+1]]
+        console.log('data1='+data1)
+        var dateList1= data1.map(function (item) {
+            return item[0];
+        });
+        var valueList1 = data1.map(function (item) {
+            return item[1];
+        });
+
+        var divid1 = 'main' + a1 + '1'
+        var myChart1 = echarts.init(document.getElementById(divid1));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: codes[j+1]+'--'+dict_cod_name[codes[j+1]]
+            },
+            tooltip: {},
+            legend: {
+                data: ['销量1']
+            },
+            xAxis: {
+                data: dateList1
+            },
+            yAxis: {},
+            series: [{
+                name: '收盘价',
+                type: 'line',
+                data: valueList1
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart1.setOption(option);
+
+
+
+         // 第3列
+
+        data2 = dict[codes[j+2]]
+
+
+        var dateList2 = data2.map(function (item) {
+            return item[0];
+        });
+        var valueList2 = data2.map(function (item) {
+            return item[1];
+        });
+
+         var divid2 = 'main' + a1 + '2'
+        var myChart2 = echarts.init(document.getElementById(divid2));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: codes[j+2]+'--'+dict_cod_name[codes[j+2]]
+            },
+            tooltip: {},
+            legend: {
+                data: ['销量1']
+            },
+            xAxis: {
+                data: dateList2
+            },
+            yAxis: {},
+            series: [{
+                name: '收盘价',
+                type: 'line',
+                data: valueList2
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart2.setOption(option);
+
+
+    }
+j++;
+
+
+}
+
+
+
+
+    </script>
+
+<div id="container">
+<input type="text" id="test"><button id="add">添加</button>
+</div>
+<div><p>tetse</p></div>
+<script type="text/javascript">
+    var stri = " "
+var add = document.getElementById('add');
+var container =document.getElementById('container');
+var node=container.nextSibling;
+add.onclick = function(){
+oDiv = document.createElement('div');
+oDiv.innerHTML = '<div id="main2" class="main1"> <div id="main23" class="left">左边</div> <div id="main24" class="middle">中间信息</div> <div class="right">右边</div> </div>';
+container.parentNode.insertBefore(oDiv, node)
+node=oDiv.nextSibling;
+
+}
+function test(test){
+test.parentNode.parentNode.removeChild(test.parentNode);
+}
+</script>
+</html>

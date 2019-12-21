@@ -8,15 +8,14 @@ import logging
 import pandas as pd
 import os,random
 
-
 import urllib2
 
 from xml.sax import parse, ContentHandler, parseString  #引入继承包ContentHandler
 #基金净值的类
 import time
 
+from st_pool.zzyutils import user_agents, load_user_agent
 from stock.settings import BASE_DIR
-
 
 class Fund:
     #定义初始化属性，和xml文件属性相同
@@ -54,19 +53,7 @@ class funddemo(ContentHandler):
         self.tag=content   #写了self的，就可以定义为全局变量
 
 
-user_agents=list()
-#加载 user_agents配置文件
-def load_user_agent():
-    fpath  = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    fpath = BASE_DIR+ '/st_pool/get_fund_data/user_agents'
 
-    # print 'fpath'+fpath
-    fp = open(fpath, 'r')
-    line  = fp.readline().strip('\n')
-    while(line):
-        user_agents.append(line)
-        line = fp.readline().strip('\n')
-    fp.close()
 
 
 
@@ -117,7 +104,7 @@ def get_urls(fund_code):
         for fund in funds:  # 对数组funds[]循环
             f.write(fund.fld_enddate+','+fund.fld_unitnetvalue+'\n')
             # print(fund)
-        logging.error('--------------get  funds data :'+str(fundcode) + '---done')
+        logging.info('--'+str(fundcode) + '--done')
         funds = []#循环到下一个基金的时候要清空全局数组的数据 必须要
         f.close()
 
@@ -132,7 +119,7 @@ if __name__ == '__main__':
     df_1 = pd.read_csv(fundpool_path, dtype=object)
     codes = df_1.iloc[:,1].values
     # codes = ['166002','163406']
-    codes = ['1100319']
+    codes = ['110031']
     for code in codes:
         print code;
         time.sleep(10)  #//睡觉

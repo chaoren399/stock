@@ -2,11 +2,17 @@
 <html style="height: 100%">
    <head>
        <meta charset="utf-8">
-         <title>单基金走势</title>
+         <title>单股票走势</title>
    </head>
    <body style="height: 80%; margin: 0">
-       <div id="container" style="height: 100%"></div>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+       <div id="container" style="height: 100%"> </div>
+
+
+        stock_pool_path = BASE_DIR + '/st_pool/get_stock_data_2019/股票池.csv'
+
+        <script type="text/javascript" src="/static/js/echarts.min.js"></script>
+{#       <script type="text/javascript" src="/Users/zzy/PycharmProjects/python-workspace/stock/static/js/echarts.min.js"></script>#}
+{#       <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>#}
 
 
 
@@ -70,7 +76,7 @@ var datavalue = data.map(function (item) {
         },
         yAxis: {},
         series: [{
-            name: '净值',
+            name: '收盘价',
             type: 'line',
             data: datavalue
         }]

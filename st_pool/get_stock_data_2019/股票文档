@@ -1,0 +1,12 @@
+
+1. 获取 5 年的历史数据
+getstockeydata.py ->  getdatafrom_ts_5years
+
+下载一次就可以, 以后如果要想下载单独的一只股票,那么单独运行此文件 getdatafrom_ts_5years
+
+
+2. 添加一支新股票
+
+第 1要下载最新的数据,
+第 2 要更新 5 年的数据 getdatafrom_ts_5years
+

@@ -14,13 +14,15 @@ d8,270048,广发纯债债券A,1.2,,, 近3年定投收益 4%,,3年3星， 5年5�
 
 1 . workon evn3-stock  (更改了工作虚拟空间)
 2 .  cd /Users/zzy/PycharmProjects/python-workspace/stock
-3 .  python manage.py runserver 8080
+3 .  python manage.py runserver 8087
+每次保存完 csv 格式,必须用 notpad++ 转换成 utf-8的编码
+/fundold/  显示基金所有的趋势图  如果不显示, 说明 是 数据有错误, 请查看 data /先每个文件是否对
 
 
 2019年4月4日
 
 
-每次保存完 csv 格式,必须用 notpad++ 转换成 utf-8的编码
+
 
 1.
 https://blog.csdn.net/github_26672553/article/details/78662563
