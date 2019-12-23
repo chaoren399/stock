@@ -235,8 +235,13 @@ def show_logs(request):
 
     with open(logpath) as file_object:
         contents = file_object.read()
+        logs = contents.split('--done')
 
-    return render(request, 'fundui/showlogs.html', {'contents':contents})
+    # logs=[]
+    # logs.append('2323')
+    # logs.append('23233')
+    count = len(logs)
+    return render(request, 'fundui/showlogs.html', {'logs':logs,'count':count})
 
 def clear_logs(request):
     logpath = BASE_DIR + '/stock/log/fund.log'

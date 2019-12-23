@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
+import datetime
 import time
 
 import tushare as ts
@@ -10,17 +11,18 @@ import logging
 from stock.settings import BASE_DIR
 
 '''
-获取股票池的历史数据 tushare get_hist_data
+获取股票池的最近 1 年的 数据 tushare get_hist_data
 
 '''
 def getdatafrom_ts(stock_code):
-    # df =  ts.get_hist_data('600887',start='2014-01-01',end='2019-01-01') #获取 5 年的历史数据
-    df =  ts.get_hist_data('600887',start='2019-01-01',end='2019-12-10')
+
+    enddate = str(datetime.date.today()) #获取股票池的最近 1 年的 数据
+    df =  ts.get_hist_data(stock_code,start='2019-01-01',end=enddate)
     f = open(BASE_DIR + '/st_pool/get_stock_data_2019/stock_old_data/data/' + stock_code + '.csv', 'w')
     for index, row in df.iterrows():
         f.write(index + ',' + str(row['open']) + '\n')
     f.close()
-
+    logging.info('--'+str(stock_code) + '--done')
 
 '''
 获取股票池的5年历史数据  (一般情况不会用到.)

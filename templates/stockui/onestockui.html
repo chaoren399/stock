@@ -20,18 +20,14 @@
 <script type="text/javascript">
 
 var data = {{ data|safe }};
+var stockinfo = {{ stockinfo|safe }};
 
 
-
-var fundcode1 = {{ code|safe }};
-
-
-
-console.log('fundcode'+fundcode1)
 var dom = document.getElementById("container");
 var myChart = echarts.init(dom);
 var app = {};
 option = null;
+
 
 
 var datatime = data.map(function (item) {
@@ -41,31 +37,13 @@ var datavalue = data.map(function (item) {
             return item[1];
         });
 
-{#option = {#}
-{#    title: {#}
-{#                text: fundcode1 //#名称#}
-{#            },#}
-{##}
-{#    xAxis: {#}
-{#        type: 'category',#}
-{#        data: datatime,#}
-{#    },#}
-{#    yAxis: {#}
-{#        type: 'value'#}
-{#    },#}
-{#    series: [{#}
-{#                name: '净值',#}
-{#                type: 'line',#}
-{#                data: datavalue#}
-{#            }]#}
-{##}
 
 
 
     // 指定图表的配置项和数据
     var option = {
         title: {
-            text: fundcode1 //#名称
+            text: stockinfo['code']+':'+stockinfo['name'] //#股票名称
         },
         tooltip: {},
         legend: {

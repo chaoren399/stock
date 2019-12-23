@@ -29,10 +29,10 @@ urlpatterns = [
     url(r'^gupiao/$',view_stock.stock_show),
 
     url(r'^downstockfromtushare/$', view_stock.down_stock_data_from_tushare),
-    url(r'^onestock/$', view_stock.one_stockeolddata_show),  # 单个股票走势图  http://127.0.0.1:8081/onestock/?stock=600887
+    url(r'^onestock/$', view_stock.one_stock_olddata_show),  # 单个股票走势图  http://127.0.0.1:8081/onestock/?stock=600887
 
 
-    url(r'^down_stocke_data_ui/$', view_stock.down_stocke_data_ui), # 下边 3 个是用来控制进度条的
+    url(r'^down_stock_data_ui/$', view_stock.down_stock_data_ui), # 下边 3 个是用来控制进度条的
     url(r'^down_stock_data_from_tushare/$', view_stock.down_stock_data_from_tushare),
     url(r'^show_downstock_progress/$', view_stock.show_downstock_progress),
 

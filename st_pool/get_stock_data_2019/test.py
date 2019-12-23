@@ -3,7 +3,7 @@
 from django.conf.urls import include, url
 import os
 import pandas as pd
-
+import tushare as ts
 from st_pool.get_stock_data_2019.getstockdata import getdatafrom_ts_5years
 from stock.settings import BASE_DIR
 
@@ -14,27 +14,30 @@ allcodenum =''
 3下载股票的历史数据 
 '''
 def down_stock_data_from_tushare():
-    global num_progress
-    global  allcodenum
-
     stock_pool_path = BASE_DIR + '/st_pool/get_stock_data_2019/股票池.csv'
-    df_1 = pd.read_csv(stock_pool_path, dtype=object)
-    i=0;
-    codes= df_1.shape[0] # 行数
-    print 'codes='+ str(codes)
-    str1=''
-    for index, row in df_1.iterrows():
-        code = row[0].zfill(6)
-        # getdatafrom_ts(code) #600887
-        getdatafrom_ts_5years(code)  # 下载 5 年的历史股票数据
-        str1 = str1 + '(' + str(i + 1) + '-' + code + ')'
-        # print code
-        i=i+1
-        info = '完成  ' + str(i) + '只基金下载'
 
-    allcodenum = str1
-    num_progress = i * 100 / codes;  # 更新后台进度值，因为想返回百分数所以乘100
-    print  'num_progress=' + str(num_progress)
+    oldstockdatapath_5year = BASE_DIR + '/st_pool/get_stock_data_2019/stock_old_data/data_2014_2019/'
+    oldstockdatapath_1year = BASE_DIR + '/st_pool/get_stock_data_2019/stock_old_data/data/'
+    df_1 = pd.read_csv(stock_pool_path, dtype=object)
+    code = '000001'
+    df = pd.read_csv(oldstockdatapath_5year + code + '.csv', dtype=object, header=None)
+    df.columns = ['date', 'value']
+    df1 = pd.read_csv(oldstockdatapath_1year + code + '.csv', dtype=object, header=None)
+    df1.columns = ['date', 'value']
+    # print df
+    res = df.append(df1)
+    res = res.sort_values(by='date', axis=0, ascending=True)  # 按照日期排序
+    print res
+
+
+
+
+
+
+
+
 
 if __name__ == '__main__':
-    down_stock_data_from_tushare()
+    # down_stock_data_from_tushare()
+
+    print ts.get_hist_data('600887', start='2014-01-01', end='2019-01-01')
