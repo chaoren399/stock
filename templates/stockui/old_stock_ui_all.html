@@ -27,7 +27,7 @@
 				height: 250px;
 				color: red;
 			}
-			.main{width: 90%;
+			.main{width: 100%;
 			margin: 0 auto;
 			text-align: center;
 			}
@@ -112,6 +112,8 @@ node=oDiv.nextSibling;
 var codes = {{ codes|safe }};
 var dict = {{ dict|safe }};
 var dict_cod_name= {{ dict_cod_name|safe }};
+var dict_max_min= {{ dict_max_min|safe }};
+
 var j = 0; // 发现用  for  里边的索引无法控制 .只能定义一个变量了
 for (i in codes){
     var code= codes[i]
@@ -139,7 +141,8 @@ for (i in codes){
         // 指定图表的配置项和数据
         var option = {
             title: {
-                text: codes[j]+'--'+dict_cod_name[codes[j]]  //#名称
+                text: codes[j]+'--'+dict_cod_name[codes[j]] , //#股票名称
+                link:'/onestock/?stock='+codes[j]
             },
             tooltip: {},
             legend: {
@@ -149,17 +152,25 @@ for (i in codes){
                 data: dateList0
             },
             yAxis: {},
-            series: [{
-                name: '收盘价',
-                type: 'line',
-                data: valueList0
-            }]
+
+            series: {
+                        name: '收盘价',
+                        type: 'line',
+                        data: valueList0,
+                        markLine: {
+                            silent: true,
+                            data: [{
+                                yAxis:  dict_max_min[codes[j]][0]   //最低值
+                            }, {
+                                yAxis: dict_max_min[codes[j]][1]   //最高值
+                            },]
+                        }
+                    }
+
         };
 
         // 使用刚指定的配置项和数据显示图表。
         myChart0.setOption(option);
-
-
 
         // 第二列
 
@@ -178,7 +189,8 @@ for (i in codes){
         // 指定图表的配置项和数据
         var option = {
             title: {
-                text: codes[j+1]+'--'+dict_cod_name[codes[j+1]]
+                text: codes[j+1]+'--'+dict_cod_name[codes[j+1]],
+                link:'/onestock/?stock='+codes[j+1]
             },
             tooltip: {},
             legend: {
@@ -188,11 +200,23 @@ for (i in codes){
                 data: dateList1
             },
             yAxis: {},
-            series: [{
-                name: '收盘价',
-                type: 'line',
-                data: valueList1
-            }]
+
+
+
+            series: {
+                        name: '收盘价',
+                        type: 'line',
+                        data: valueList0,
+                        markLine: {
+                            silent: true,
+                            data: [{
+                                yAxis:  dict_max_min[codes[j+1]][0]   //最低值
+                            }, {
+                                yAxis: dict_max_min[codes[j+1]][1]   //最高值
+                            },]
+                        }
+                    }
+
         };
 
         // 使用刚指定的配置项和数据显示图表。
@@ -218,7 +242,8 @@ for (i in codes){
         // 指定图表的配置项和数据
         var option = {
             title: {
-                text: codes[j+2]+'--'+dict_cod_name[codes[j+2]]
+                text: codes[j+2]+'--'+dict_cod_name[codes[j+2]],
+                link:'/onestock/?stock='+codes[j+2]
             },
             tooltip: {},
             legend: {
@@ -228,11 +253,24 @@ for (i in codes){
                 data: dateList2
             },
             yAxis: {},
-            series: [{
-                name: '收盘价',
-                type: 'line',
-                data: valueList2
-            }]
+
+
+
+            series: {
+                        name: '收盘价',
+                        type: 'line',
+                        data: valueList0,
+                        markLine: {
+                            silent: true,
+                            data: [{
+                                yAxis:  dict_max_min[codes[j+2]][0]   //最低值
+                            }, {
+                                yAxis: dict_max_min[codes[j+2]][1]   //最高值
+                            },]
+                        }
+                    }
+
+
         };
 
         // 使用刚指定的配置项和数据显示图表。

@@ -251,24 +251,5 @@ j++;
 
     </script>
 
-<div id="container">
-<input type="text" id="test"><button id="add">添加</button>
-</div>
-<div><p>tetse</p></div>
-<script type="text/javascript">
-    var stri = " "
-var add = document.getElementById('add');
-var container =document.getElementById('container');
-var node=container.nextSibling;
-add.onclick = function(){
-oDiv = document.createElement('div');
-oDiv.innerHTML = '<div id="main2" class="main1"> <div id="main23" class="left">左边</div> <div id="main24" class="middle">中间信息</div> <div class="right">右边</div> </div>';
-container.parentNode.insertBefore(oDiv, node)
-node=oDiv.nextSibling;
 
-}
-function test(test){
-test.parentNode.parentNode.removeChild(test.parentNode);
-}
-</script>
 </html>

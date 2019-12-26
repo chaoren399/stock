@@ -21,6 +21,7 @@
 
 var data = {{ data|safe }};
 var stockinfo = {{ stockinfo|safe }};
+var maxmin = {{ maxmin|safe }};
 
 
 var dom = document.getElementById("container");
@@ -53,11 +54,19 @@ var datavalue = data.map(function (item) {
             data: datatime
         },
         yAxis: {},
-        series: [{
+        series: {
             name: '收盘价',
             type: 'line',
-            data: datavalue
-        }]
+            data: datavalue,
+            markLine: {
+                silent: true,
+                data: [{
+                    yAxis: maxmin['min']   //最低值
+                }, {
+                    yAxis: maxmin['max']   //最高值
+                },]
+            }
+        }
     };
 
     // 使用刚指定的配置项和数据显示图表。

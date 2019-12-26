@@ -115,7 +115,9 @@ def one_stock_olddata_show(request):
         if(code_1 == code):
             stockname = dfname.iloc[index, 1]
 
-            stockname=stockname.decode("utf-8").encode("utf-8")
+            # stockname=stockname.decode("utf-8").encode("utf-8")
+            lowprice=dfname.iloc[index, 2]
+            upprice=dfname.iloc[index, 3]
             break;
 
 
@@ -152,7 +154,9 @@ def one_stock_olddata_show(request):
     # print 'data='+ data
 
     stockinfo ={"name":stockname,"code":stockcode}
-    return render(request, 'stockui/onestockui.html', { 'stockinfo': json.dumps(stockinfo),'data':data})
+    maxmin= {"min":lowprice,"max":upprice}
+    return render(request, 'stockui/onestockui.html', { 'stockinfo': json.dumps(stockinfo),'data':data,'maxmin':maxmin})
+    # return render(request, 'stockui/onestockui_1.html', { 'stockinfo': json.dumps(stockinfo),'data':data})
 
 ''''
 所有股票的走势图
@@ -169,11 +173,16 @@ def stock_old_all_show(request):
 
     dict ={}
     dict_cod_name={}
+    dict_max_min={} # 最大值最小值
     df_1 = pd.read_csv(stock_pool_path, dtype=object)
     codes=[]
     for index, row in df_1.iterrows():
         name = df_1.iloc[index, 1]
         code = df_1.iloc[index, 0].zfill(6)  # 股票代码
+
+        lowprice = df_1.iloc[index, 2]
+        upprice = df_1.iloc[index, 3]
+        max_min = [lowprice,upprice]
         print 'code----'+code
         dict_cod_name.setdefault(str(code),name) # code: name 字典
         codes.append(code)
@@ -186,6 +195,7 @@ def stock_old_all_show(request):
 
         # print 'df='+df
         data = []
+
         for index,row in df_new.iterrows():
             date = row['date']
             # //处理日期
@@ -204,6 +214,7 @@ def stock_old_all_show(request):
                 xx = [str(date), value]
                 data.append(xx)
         dict.setdefault(code,data)
+        dict_max_min.setdefault(code,max_min)
     print 'dict_cod_name='+str(dict_cod_name)
     # return render(request, 'st_pool/old_fund_ui.html', {'dict': json.dumps(dict)} )
-    return render(request, 'stockui/old_stock_ui_all.html', {'codes': json.dumps(codes), 'dict': json.dumps(dict), 'dict_cod_name':json.dumps(dict_cod_name)})
+    return render(request, 'stockui/old_stock_ui_all.html', {'codes': json.dumps(codes), 'dict': json.dumps(dict), 'dict_cod_name':json.dumps(dict_cod_name),'dict_max_min':json.dumps(dict_max_min)})

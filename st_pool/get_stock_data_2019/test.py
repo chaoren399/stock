@@ -40,4 +40,7 @@ def down_stock_data_from_tushare():
 if __name__ == '__main__':
     # down_stock_data_from_tushare()
 
-    print ts.get_hist_data('600887', start='2014-01-01', end='2019-01-01')
+    # print ts.get_hist_data('600887', start='2014-01-01', end='2019-01-01')
+    stock_basedata_path = BASE_DIR + '/st_pool/get_stock_data_2019/stock_old_data/data_base'
+    df = ts.get_stock_basics()
+    df.to_csv(stock_basedata_path+'/1.csv')
