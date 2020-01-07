@@ -10,8 +10,8 @@ import  pandas as pd
 import os
 # Create your views here.
 from st_pool.get_fund_data import getfunddata
-from st_pool.get_fund_data.fund_old_data.get_fund_old_data import  get_urls
-from st_pool.get_stock_data import getstockdata
+from st_pool.get_fund_data.fund_old_data.get_fund_old_data import get_urls, get_urls_fundata_5yeas
+
 from st_pool.zzyutils import load_user_agent
 import json
 import datetime
@@ -19,30 +19,6 @@ import requests
 import time
 
 from stock.settings import BASE_DIR
-
-'''
-股票池 UI
-'''
-def stock_pool_show(request):
-    path3 = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    stock_pool_path = path3+'/st_pool' + '/get_stock_data/股票池.csv'
-    stocks  = getstockdata.getdata(stock_pool_path)
-    list = []
-    for i, row in stocks.iterrows():
-        # print  'i=', i
-        st = StockInfo()
-        st.code = row[0]
-        st.name = row[1]
-        st.lowprice = row[2]
-        st.upprice = row[3]
-        st.order = row[4]
-        st.tar_value=row[5]
-        st.now_price=row[6]
-        st.jiazhilv = row[7]
-        st.date = row[8]
-        list.append(st)
-        # stocklist.update(stocklist2)
-    return render(request, 'fundui/stock_ui.html', {'stocklist': list})
 
 '''
 基金池 UI
@@ -88,57 +64,6 @@ def fund_show(request):
 def linian_show(request):
     return render(request, 'fundui/linian_show.html')
 
-
-'''
-基金净值走势图 所有
-'''
-def fundold_show(request):
-
-    fundpool_path = BASE_DIR + '/st_pool' + '/get_fund_data/基金池.csv'
-
-    print  'fundpool_paht '+ fundpool_path
-    # print fundpool_path
-    # dict = {'Name': [["2000-06-05", 116], ["2000-06-06", 129]], 'Age': 7, 'Class': 'First'}
-
-    dict ={}
-    dict_cod_name={}
-    df_1 = pd.read_csv(fundpool_path, dtype=object)
-    codes=[]
-    for index, row in df_1.iterrows():
-        name = df_1.iloc[index, 2]
-        code = df_1.iloc[index, 1]  # 基金代码
-        print 'code----'+code
-        dict_cod_name.setdefault(str(code),name) # code: name 字典
-        codes.append(code)
-
-        oldfunddatapath= BASE_DIR+ '/st_pool' + '/get_fund_data/'+'fund_old_data/data/'
-        df = pd.read_csv(oldfunddatapath + code + '.csv', dtype=object,header=None)
-        df.columns = ['date', 'value']
-        df_new = df.sort_values(by='date', axis=0, ascending=True)  # 按照日期排序
-
-        # print 'df='+df
-        data = []
-        for index,row in df_new.iterrows():
-            date = row['date']
-            # //处理日期
-            x = date.split("-", 2)
-            anyday = datetime.datetime(int(x[0]), int(x[1]), int(x[2])).strftime("%w")
-
-            if (anyday == '5'):  #选择周五的数据
-                value = row['value']
-                xx = [str(date),value]
-                data.append(xx)
-            today = datetime.date.today()
-            y = str(today).split("-", 2)
-            # 显示 最后一个周五 到目前 之间的几天数据
-            if((datetime.datetime(int(y[0]),int(y[1]),int(y[2])) - datetime.datetime(int(x[0]), int(x[1]), int(x[2]))).days <5):
-                value = row['value']
-                xx = [str(date), value]
-                data.append(xx)
-        dict.setdefault(code,data)
-    # print 'dict_cod_name='+str(dict_cod_name)
-    # return render(request, 'st_pool/old_fund_ui.html', {'dict': json.dumps(dict)} )
-    return render(request, 'fundui/old_fund_ui.html', {'codes': json.dumps(codes), 'dict': json.dumps(dict), 'dict_cod_name':json.dumps(dict_cod_name)})
 
 
 '''
@@ -197,6 +122,8 @@ def downdata_from_hexun(request):
     for code in codes:
         time.sleep(10)  #//睡觉
         x = get_urls(code)
+        # x = get_urls_fundata_5yeas(code) #获取 5 年基金数据
+
         str1 = str1 + '(' + str(i + 1) + '-' + code + ')'
         print 'come x '
         if (x == 'read the log'):
@@ -253,7 +180,7 @@ def clear_logs(request):
 '''
 单个基金走势图
 
-http://127.0.0.1:8081/onefund/?fund=000172
+http://127.0.0.1:8081/one_fund_ui/?fund=000172
 
 '''
 def one_fundolddata_show(request):
@@ -262,9 +189,27 @@ def one_fundolddata_show(request):
 
     code = fundcode
     print 'code'+code
+    fundpool_path = BASE_DIR + '/st_pool' + '/get_fund_data/基金池.csv'
+    df_1 = pd.read_csv(fundpool_path, dtype=object)
+    codes = []
+    # 获取编码对应的基金名称
+    fundname = ""
+    for index, row in df_1.iterrows():
+
+
+        code1 = df_1.iloc[index, 1]  # 基金代码
+        if(code1==fundcode ):
+            fundname = df_1.iloc[index, 2]
+            break;
+
+
     # data201801-201908
     oldfunddatapath = BASE_DIR + '/st_pool' + '/get_fund_data/' + 'fund_old_data/data/'
+    oldfunddatapath_5years = BASE_DIR + '/st_pool' + '/get_fund_data/' + 'fund_old_data/data2016-2019/'
+
     df = pd.read_csv(oldfunddatapath + code + '.csv', dtype=object,header=None)
+    df1 = pd.read_csv(oldfunddatapath_5years + code + '.csv', dtype=object,header=None)
+    df = df.append(df1)
     df.columns = ['date', 'value']
 
     df_new = df.sort_values(by='date', axis=0, ascending=True)  # 按照日期排序
@@ -290,8 +235,65 @@ def one_fundolddata_show(request):
                 data.append(xx)
     # print 'data='+ data
     code =['fund',str(fundcode)] # 不知道什么原因, 000172 被转成 233 之类的数字
+    fundinfo = {"name": fundname, "code": fundcode}
+    return render(request, 'fundui/one_fund_ui.html', {'fundinfo': json.dumps(fundinfo),'data':data})
 
-    return render(request, 'fundui/onefundui.html', {'code': code, 'data':data})
+
+'''
+基金净值走势图 所有
+'''
+def fundold_show(request):
+
+    fundpool_path = BASE_DIR + '/st_pool' + '/get_fund_data/基金池.csv'
+
+    print  'fundpool_paht '+ fundpool_path
+    # print fundpool_path
+    # dict = {'Name': [["2000-06-05", 116], ["2000-06-06", 129]], 'Age': 7, 'Class': 'First'}
+
+    dict ={}
+    dict_cod_name={}
+    df_1 = pd.read_csv(fundpool_path, dtype=object)
+    codes=[]
+    for index, row in df_1.iterrows():
+        name = df_1.iloc[index, 2]
+        code = df_1.iloc[index, 1]  # 基金代码
+        print 'code----'+code
+        dict_cod_name.setdefault(str(code),name) # code: name 字典
+        codes.append(code)
+
+        oldfunddatapath= BASE_DIR+ '/st_pool' + '/get_fund_data/'+'fund_old_data/data/'
+        oldfunddatapath_5years= BASE_DIR+ '/st_pool' + '/get_fund_data/'+'fund_old_data/data2016-2019/'
+
+        df = pd.read_csv(oldfunddatapath + code + '.csv', dtype=object,header=None)
+        df1 = pd.read_csv(oldfunddatapath_5years + code + '.csv', dtype=object,header=None)
+        df = df.append(df1)
+        df.columns = ['date', 'value']
+        df_new = df.sort_values(by='date', axis=0, ascending=True)  # 按照日期排序
+
+        # print 'df='+df
+        data = []
+        for index,row in df_new.iterrows():
+            date = row['date']
+            # //处理日期
+            x = date.split("-", 2)
+            anyday = datetime.datetime(int(x[0]), int(x[1]), int(x[2])).strftime("%w")
+
+            if (anyday == '5'):  #选择周五的数据
+                value = row['value']
+                xx = [str(date),value]
+                data.append(xx)
+            today = datetime.date.today()
+            y = str(today).split("-", 2)
+            # 显示 最后一个周五 到目前 之间的几天数据
+            if((datetime.datetime(int(y[0]),int(y[1]),int(y[2])) - datetime.datetime(int(x[0]), int(x[1]), int(x[2]))).days <5):
+                value = row['value']
+                xx = [str(date), value]
+                data.append(xx)
+        dict.setdefault(code,data)
+    # print 'dict_cod_name='+str(dict_cod_name)
+    # return render(request, 'st_pool/old_fund_ui.html', {'dict': json.dumps(dict)} )
+    return render(request, 'fundui/old_fund_ui_all.html', {'codes': json.dumps(codes), 'dict': json.dumps(dict), 'dict_cod_name':json.dumps(dict_cod_name)})
+
 
 
 def testJS(request):

@@ -20,14 +20,15 @@
 <script type="text/javascript">
 
 var data = {{ data|safe }};
+var fundinfo = {{ fundinfo|safe }};
 
 
 
-var fundcode1 = {{ code|safe }};
 
 
 
-console.log('fundcode'+fundcode1)
+
+console.log('fundinfo'+fundinfo)
 var dom = document.getElementById("container");
 var myChart = echarts.init(dom);
 var app = {};
@@ -41,40 +42,26 @@ var datavalue = data.map(function (item) {
             return item[1];
         });
 
-{#option = {#}
-{#    title: {#}
-{#                text: fundcode1 //#名称#}
-{#            },#}
-{##}
-{#    xAxis: {#}
-{#        type: 'category',#}
-{#        data: datatime,#}
-{#    },#}
-{#    yAxis: {#}
-{#        type: 'value'#}
-{#    },#}
-{#    series: [{#}
-{#                name: '净值',#}
-{#                type: 'line',#}
-{#                data: datavalue#}
-{#            }]#}
-{##}
-
-
 
     // 指定图表的配置项和数据
     var option = {
         title: {
-            text: fundcode1 //#名称
+            text: fundinfo['code']+':'+fundinfo['name'] //#基金名称
         },
-        tooltip: {},
+        tooltip: { // 设置 鼠标停在位置显示 数据
+            trigger: 'axis',
+            position: function (pt) {
+                return [pt[0], '10%'];
+            }
+        },
+
         legend: {
             data: ['销量1']
         },
         xAxis: {
             data: datatime
         },
-        yAxis: {},
+        yAxis: { type: 'value'},
         series: [{
             name: '净值',
             type: 'line',

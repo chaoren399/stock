@@ -45,8 +45,14 @@ var datavalue = data.map(function (item) {
     var option = {
         title: {
             text: stockinfo['code']+':'+stockinfo['name'] //#股票名称
+
         },
-        tooltip: {},
+        tooltip: {
+            trigger: 'axis',
+            position: function (pt) {
+                return [pt[0], '10%'];
+            }
+        },
         legend: {
             data: ['销量1']
         },
@@ -59,6 +65,8 @@ var datavalue = data.map(function (item) {
             type: 'line',
             data: datavalue,
             markLine: {
+                symbol:"none",               //去掉警戒线最后面的箭头
+
                 silent: true,
                 data: [{
                     yAxis: maxmin['min']   //最低值

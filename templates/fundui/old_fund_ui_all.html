@@ -27,10 +27,13 @@
 				height: 250px;
 				color: red;
 			}
-			.main{width: 90%;
-			margin: 0 auto;
-			text-align: center;
+			.main1{
+                width: 100%;
+			    margin: 0 auto;
+			    text-align: center;
+                height:250px;
 			}
+            .zzymaincss{ border:1px solid #F00; width:94%;height: 110%;}
 		</style>
 	</head>
 
@@ -51,6 +54,11 @@
   等待 数据库完善, 自定义一个爬虫 然后每天都要写数据. 运行. 数据异常的可以看做是 0 .
 
         </div>
+
+       <div id = "zzymain" class="zzymaincss"> </div>
+
+
+       <div >   --------------------我是分割线--------------------</div>
 	</body>
 
 
@@ -63,9 +71,7 @@ var x = 3;
     // 字典
 var dict = {{ dict|safe }};
  
-var container =document.getElementById('maincontainer');
-        var node=container.nextSibling;
-        oDiv = document.createElement('div');
+
 var alldiv ='';
 
 {# 第1次 for 循环遍历 dict  用来生成 div #}
@@ -98,17 +104,13 @@ for (i in codes){
 
     }
 }
-
-oDiv.innerHTML = alldiv
-container.parentNode.insertBefore(oDiv, node)
-node=oDiv.nextSibling;
+document.getElementById("zzymain").innerHTML = alldiv;
 
 </script>
 
+<script type="text/javascript">
 
-    <script type="text/javascript">
-
-        var y1 = 1;
+var y1 = 1;
 {# 第二次 for 循环遍历 dict  用来填充数据#}
 var codes = {{ codes|safe }};
 var dict = {{ dict|safe }};
@@ -140,9 +142,15 @@ for (i in codes){
         // 指定图表的配置项和数据
         var option = {
             title: {
-                text: codes[j]+'--'+dict_cod_name[codes[j]]  //#名称
+                text: codes[j]+'--'+dict_cod_name[codes[j]],  //#名称
+                link:'/onefund/?fund='+codes[j]
             },
-            tooltip: {},
+            tooltip: {
+                trigger: 'axis',
+                position: function (pt) {
+                    return [pt[0], '10%'];
+                }
+            },
             legend: {
                 data: ['销量1']
             },
@@ -179,9 +187,15 @@ for (i in codes){
         // 指定图表的配置项和数据
         var option = {
             title: {
-                text: codes[j+1]+'--'+dict_cod_name[codes[j+1]]
+                text: codes[j+1]+'--'+dict_cod_name[codes[j+1]],
+                link:'/onefund/?fund='+codes[j+1]
             },
-            tooltip: {},
+            tooltip: {
+                trigger: 'axis',
+                position: function (pt) {
+                    return [pt[0], '10%'];
+                }
+            },
             legend: {
                 data: ['销量1']
             },
@@ -219,9 +233,15 @@ for (i in codes){
         // 指定图表的配置项和数据
         var option = {
             title: {
-                text: codes[j+2]+'--'+dict_cod_name[codes[j+2]]
+                text: codes[j+2]+'--'+dict_cod_name[codes[j+2]],
+                link:'/onefund/?fund='+codes[j+2]
             },
-            tooltip: {},
+            tooltip: {
+                trigger: 'axis',
+                position: function (pt) {
+                    return [pt[0], '10%'];
+                }
+            },
             legend: {
                 data: ['销量1']
             },
@@ -247,9 +267,7 @@ j++;
 }
 
 
-
-
-    </script>
+</script>
 
 
 </html>

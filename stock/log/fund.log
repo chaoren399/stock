@@ -1,1 +1,20 @@
- 
+ 2020-01-07 19:00:37,565 - get_fund_old_data.py[line:107] - INFO: --110003--done
+2020-01-07 19:00:47,978 - get_fund_old_data.py[line:107] - INFO: --100032--done
+2020-01-07 19:00:58,159 - get_fund_old_data.py[line:107] - INFO: --110031--done
+2020-01-07 19:01:08,356 - get_fund_old_data.py[line:107] - INFO: --163402--done
+2020-01-07 19:01:18,531 - get_fund_old_data.py[line:107] - INFO: --540006--done
+2020-01-07 19:01:28,653 - get_fund_old_data.py[line:107] - INFO: --163406--done
+2020-01-07 19:01:38,816 - get_fund_old_data.py[line:107] - INFO: --160119--done
+2020-01-07 19:01:49,062 - get_fund_old_data.py[line:107] - INFO: --519712--done
+2020-01-07 19:01:59,278 - get_fund_old_data.py[line:107] - INFO: --519068--done
+2020-01-07 19:02:09,503 - get_fund_old_data.py[line:107] - INFO: --519688--done
+2020-01-07 19:02:19,634 - get_fund_old_data.py[line:107] - INFO: --166005--done
+2020-01-07 19:02:29,791 - get_fund_old_data.py[line:107] - INFO: --200008--done
+2020-01-07 19:02:40,120 - get_fund_old_data.py[line:107] - INFO: --270002--done
+2020-01-07 19:02:54,431 - get_fund_old_data.py[line:107] - INFO: --000577--done
+2020-01-07 19:03:04,559 - get_fund_old_data.py[line:107] - INFO: --217022--done
+2020-01-07 19:03:14,627 - get_fund_old_data.py[line:93] - ERROR: get url error 
+2020-01-07 19:03:14,627 - get_fund_old_data.py[line:94] - ERROR: Forbidden
+2020-01-07 19:03:24,789 - get_fund_old_data.py[line:107] - INFO: --000172--done
+2020-01-07 19:03:34,919 - get_fund_old_data.py[line:107] - INFO: --166002--done
+2020-01-07 19:03:45,084 - get_fund_old_data.py[line:107] - INFO: --180012--done

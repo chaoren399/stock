@@ -68,6 +68,13 @@
 
  $(function () {
         $('.btn').on('click', function () {
+
+                 var clearlogsurl = '/clearlogs'
+
+                 $.getJSON(clearlogsurl, function (res) {
+
+                 })
+
                 console.log("come in ")
                 var log = ""
                 var sitv = setInterval(function(){

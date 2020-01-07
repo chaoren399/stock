@@ -63,7 +63,7 @@ def down_stock_data_from_tushare(request):
         # print code
         i=i+1
         tmp = i;
-        info = '完成  ' + str(i) + '只基金下载'
+        info = '完成  ' + str(i) + '只股票下载'
         # time.sleep(5)  # //睡觉
 
         allcodenum = str1
