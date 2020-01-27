@@ -1,270 +1,311 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>走势图基金UI</title>
-		<style type="text/css">
-			body,h1{margin: 0;padding: 0;}
-			.left{
-				float: left;
-				width: 33%;
-				background-color: orange;
-				color: green;
-				height: 250px;
-			}
+<head>
+    <meta charset="UTF-8">
+    <title>走势图基金UI</title>
+    <style type="text/css">
+        body, h1 {
+            margin: 0;
+            padding: 0;
+        }
 
-			.middle{
-				float: left;
-				width: 33%;
-				background-color: papayawhip;
-				height: 250px;
-				color: gray;
-			}
-            .right{
-				float: right;
-				width: 33%;
-				background-color: wheat;
-				height: 250px;
-				color: red;
-			}
-			.main1{
-                width: 100%;
-			    margin: 0 auto;
-			    text-align: center;
-                height:250px;
-			}
-            .zzymaincss{ border:1px solid #F00; width:94%;height: 110%;}
-		</style>
-	</head>
+        .left {
+            float: left;
+            width: 33%;
+            background-color: orange;
+            color: green;
+            height: 250px;
+        }
 
+        .middle {
+            float: left;
+            width: 33%;
+            background-color: papayawhip;
+            height: 250px;
+            color: gray;
+        }
 
+        .right {
+            float: right;
+            width: 33%;
+            background-color: wheat;
+            height: 250px;
+            color: red;
+        }
 
+        .main1 {
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+            height: 250px;
+        }
 
-
+        .zzymaincss {
+            border: 1px solid #F00;
+            width: 94%;
+            height: 110%;
+        }
+    </style>
+</head>
 
 
 {# <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>#}
-   <script type="text/javascript" src="/static/js/echarts.min.js"></script>
+<script type="text/javascript" src="/static/js/echarts.min.js"></script>
 
 
+<body>
+<div id="maincontainer">
+    等待 数据库完善, 自定义一个爬虫 然后每天都要写数据. 运行. 数据异常的可以看做是 0 .
+
+</div>
+
+<div id="zzymain" class="zzymaincss"></div>
 
 
-	<body>
-       <div id="maincontainer">
-  等待 数据库完善, 自定义一个爬虫 然后每天都要写数据. 运行. 数据异常的可以看做是 0 .
-
-        </div>
-
-       <div id = "zzymain" class="zzymaincss"> </div>
-
-
-       <div >   --------------------我是分割线--------------------</div>
-	</body>
-
+<div> --------------------我是分割线--------------------</div>
+</body>
 
 
 <script type="text/javascript">
 
-var x = 3;
+    var x = 3;
 
 
     // 字典
-var dict = {{ dict|safe }};
- 
-
-var alldiv ='';
-
-{# 第1次 for 循环遍历 dict  用来生成 div #}
-
-var codes = {{ codes|safe }};
-
-for (i in codes){
-    var x= codes[i]
-    console.log('codesi='+i)
-
-    if(i%3==0){
-        var a = i/3;
-        var str = '<br>'+a+'a</br>'
+    var dict = {{ dict|safe }};
 
 
+    var alldiv = '';
 
-        var str1 = '<div id="main'+a+'" class="main1">'
+    {# 第1次 for 循环遍历 dict  用来生成 div #}
 
-        var str2 = '<div id="main'+a+'0" class="left"></div> '
+    var codes = {{ codes|safe }};
 
-        var str3 = '<div id="main'+a+'1" class="middle"></div>'
-        var str4 = '<div id="main'+a+'2" class="right"></div></div>'
+    for (i in codes) {
+        var x = codes[i]
+        console.log('codesi=' + i)
 
-        console.log(' str1+ +str2+str3+str4='+ str1+str2+str3+str4)
+        if (i % 3 == 0) {
+            var a = i / 3;
+            var str = '<br>' + a + 'a</br>'
 
 
-        var str5 = str+str1+str2+str3+str4;
+            var str1 = '<div id="main' + a + '" class="main1">'
 
-        alldiv = alldiv+ str5
+            var str2 = '<div id="main' + a + '0" class="left"></div> '
 
+            var str3 = '<div id="main' + a + '1" class="middle"></div>'
+            var str4 = '<div id="main' + a + '2" class="right"></div></div>'
+
+            console.log(' str1+ +str2+str3+str4=' + str1 + str2 + str3 + str4)
+
+
+            var str5 = str + str1 + str2 + str3 + str4;
+
+            alldiv = alldiv + str5
+
+        }
     }
-}
-document.getElementById("zzymain").innerHTML = alldiv;
+    document.getElementById("zzymain").innerHTML = alldiv;
 
 </script>
 
 <script type="text/javascript">
 
-var y1 = 1;
-{# 第二次 for 循环遍历 dict  用来填充数据#}
-var codes = {{ codes|safe }};
-var dict = {{ dict|safe }};
-var dict_cod_name= {{ dict_cod_name|safe }};
-var j = 0; // 发现用  for  里边的索引无法控制 .只能定义一个变量了
-for (i in codes){
-    var code= codes[i]
-    console.log('codesi='+i)
-    console.log('dict[code]=' + dict[codes[i]])
+    var y1 = 1;
+    {# 第二次 for 循环遍历 dict  用来填充数据#}
+    var codes = {{ codes|safe }};
+    var dict = {{ dict|safe }};
+    var dict_cod_name = {{ dict_cod_name|safe }};
+    var dict_max_min = {{ dict_max_min|safe }};
 
-    if(i%3==0){
+    var j = 0; // 发现用  for  里边的索引无法控制 .只能定义一个变量了
+    for (i in codes) {
+        var code = codes[i]
+        console.log('codesi=' + i)
+        console.log('dict[code]=' + dict[codes[i]])
 
-{#        第一列 数据      #}
+        if (i % 3 == 0) {
 
-        data0 = dict[codes[j]]
+            {#        第一列 数据      #}
 
+            data0 = dict[codes[j]]
+            var dateList0 = data0.map(function (item) {
+                return item[0];
+            });
+            var valueList0 = data0.map(function (item) {
+                return item[1];
+            });
+            var a1 = i / 3
+            var divid0 = 'main' + a1 + '0'
+            var myChart0 = echarts.init(document.getElementById(divid0));
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    text: dict_cod_name[codes[j]],  //#名称
+                    link: '/onefund/?fund=' + codes[j],
+                    textStyle: {//主标题文本样式{"fontSize": 18,"fontWeight": "bolder","color": "#333"}
+                        fontFamily: 'Arial, Verdana, sans...',
+                        fontSize: 13,
+                        fontStyle: 'normal',
+                        fontWeight: 'normal',
+                    },
+                    subtext: codes[j],//副标题文本，'\n'指定换行
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    position: function (pt) {
+                        return [pt[0], '10%'];
+                    }
+                },
+                legend: {
+                    data: ['销量1']
+                },
+                xAxis: {
+                    data: dateList0
+                },
+                yAxis: {},
+                series: [{
+                    name: '净值',
+                    type: 'line',
+                    data: valueList0,
+                    markLine: {
+                        symbol: "none",               //去掉警戒线最后面的箭头
+                        silent: true,
+                        data: [{
+                            yAxis: dict_max_min[codes[j]][0]   //最低值
+                        }]
+                    }
+                }]
 
-        var dateList0 = data0.map(function (item) {
-            return item[0];
-        });
-        var valueList0 = data0.map(function (item) {
-            return item[1];
-        });
-        var a1 = i/3
-        var divid0 = 'main' + a1 + '0'
+            };
 
-        var myChart0 = echarts.init(document.getElementById(divid0));
-
-        // 指定图表的配置项和数据
-        var option = {
-            title: {
-                text: codes[j]+'--'+dict_cod_name[codes[j]],  //#名称
-                link:'/onefund/?fund='+codes[j]
-            },
-            tooltip: {
-                trigger: 'axis',
-                position: function (pt) {
-                    return [pt[0], '10%'];
-                }
-            },
-            legend: {
-                data: ['销量1']
-            },
-            xAxis: {
-                data: dateList0
-            },
-            yAxis: {},
-            series: [{
-                name: '净值',
-                type: 'line',
-                data: valueList0
-            }]
-        };
-
-        // 使用刚指定的配置项和数据显示图表。
-        myChart0.setOption(option);
-
-
-
-        // 第二列
-
-        var data1 = dict[codes[j+1]]
-        console.log('data1='+data1)
-        var dateList1= data1.map(function (item) {
-            return item[0];
-        });
-        var valueList1 = data1.map(function (item) {
-            return item[1];
-        });
-
-        var divid1 = 'main' + a1 + '1'
-        var myChart1 = echarts.init(document.getElementById(divid1));
-
-        // 指定图表的配置项和数据
-        var option = {
-            title: {
-                text: codes[j+1]+'--'+dict_cod_name[codes[j+1]],
-                link:'/onefund/?fund='+codes[j+1]
-            },
-            tooltip: {
-                trigger: 'axis',
-                position: function (pt) {
-                    return [pt[0], '10%'];
-                }
-            },
-            legend: {
-                data: ['销量1']
-            },
-            xAxis: {
-                data: dateList1
-            },
-            yAxis: {},
-            series: [{
-                name: '净值',
-                type: 'line',
-                data: valueList1
-            }]
-        };
-
-        // 使用刚指定的配置项和数据显示图表。
-        myChart1.setOption(option);
+            // 使用刚指定的配置项和数据显示图表。
+            myChart0.setOption(option);
 
 
+            // 第二列
 
-         // 第3列
+            var data1 = dict[codes[j + 1]]
+            console.log('data1=' + data1)
+            var dateList1 = data1.map(function (item) {
+                return item[0];
+            });
+            var valueList1 = data1.map(function (item) {
+                return item[1];
+            });
 
-        data2 = dict[codes[j+2]]
+            var divid1 = 'main' + a1 + '1'
+            var myChart1 = echarts.init(document.getElementById(divid1));
+
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    text: dict_cod_name[codes[j + 1]],
+                    link: '/onefund/?fund=' + codes[j + 1],
+                    textStyle: {//主标题文本样式{"fontSize": 18,"fontWeight": "bolder","color": "#333"}
+                        fontFamily: 'Arial, Verdana, sans...',
+                        fontSize: 13,
+                        fontStyle: 'normal',
+                        fontWeight: 'normal',
+                    },
+                    subtext: codes[j + 1],//副标题文本，'\n'指定换行
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    position: function (pt) {
+                        return [pt[0], '10%'];
+                    }
+                },
+                legend: {
+                    data: ['销量1']
+                },
+                xAxis: {
+                    data: dateList1
+                },
+                yAxis: {},
+                series: [{
+                    name: '净值',
+                    type: 'line',
+                    data: valueList1,
+                    markLine: {
+                        symbol: "none",               //去掉警戒线最后面的箭头
+                        silent: true,
+                        data: [{
+                            yAxis: dict_max_min[codes[j + 1]][0]   //最低值
+                        }]
+                    }
+                }]
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart1.setOption(option);
 
 
-        var dateList2 = data2.map(function (item) {
-            return item[0];
-        });
-        var valueList2 = data2.map(function (item) {
-            return item[1];
-        });
+            // 第3列
 
-         var divid2 = 'main' + a1 + '2'
-        var myChart2 = echarts.init(document.getElementById(divid2));
+            data2 = dict[codes[j + 2]]
 
-        // 指定图表的配置项和数据
-        var option = {
-            title: {
-                text: codes[j+2]+'--'+dict_cod_name[codes[j+2]],
-                link:'/onefund/?fund='+codes[j+2]
-            },
-            tooltip: {
-                trigger: 'axis',
-                position: function (pt) {
-                    return [pt[0], '10%'];
-                }
-            },
-            legend: {
-                data: ['销量1']
-            },
-            xAxis: {
-                data: dateList2
-            },
-            yAxis: {},
-            series: [{
-                name: '净值',
-                type: 'line',
-                data: valueList2
-            }]
-        };
 
-        // 使用刚指定的配置项和数据显示图表。
-        myChart2.setOption(option);
+            var dateList2 = data2.map(function (item) {
+                return item[0];
+            });
+            var valueList2 = data2.map(function (item) {
+                return item[1];
+            });
+
+            var divid2 = 'main' + a1 + '2'
+            var myChart2 = echarts.init(document.getElementById(divid2));
+
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    text: dict_cod_name[codes[j + 2]],
+                    link: '/onefund/?fund=' + codes[j + 2],
+                    textStyle: {//主标题文本样式{"fontSize": 18,"fontWeight": "bolder","color": "#333"}
+                        fontFamily: 'Arial, Verdana, sans...',
+                        fontSize: 28,
+                        fontStyle: 'normal',
+                        fontWeight: 'bolder',
+                    },
+                    subtext: codes[j + 2],//副标题文本，'\n'指定换行
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    position: function (pt) {
+                        return [pt[0], '10%'];
+                    }
+                },
+                legend: {
+                    data: ['销量1']
+                },
+                xAxis: {
+                    data: dateList2
+                },
+                yAxis: {},
+                series: [{
+                    name: '净值',
+                    type: 'line',
+                    data: valueList2,
+                    markLine: {
+                        symbol: "none",               //去掉警戒线最后面的箭头
+                        silent: true,
+                        data: [{
+                            yAxis: dict_max_min[codes[j + 2]][0]   //最低值
+                        }]
+                    }
+                }]
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart2.setOption(option);
+
+
+        }
+        j++;
 
 
     }
-j++;
-
-
-}
 
 
 </script>

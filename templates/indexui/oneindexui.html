@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+   <head>
+       <meta charset="utf-8">
+         <title>单指数走势</title>
+   </head>
+   <body style="height: 80%; margin: 0">
+       <div id="container" style="height: 100%"> </div>
+
+
+        指数 周线  走势图
+
+        <script type="text/javascript" src="/static/js/echarts.min.js"></script>
+{#       <script type="text/javascript" src="/Users/zzy/PycharmProjects/python-workspace/stock/static/js/echarts.min.js"></script>#}
+{#       <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>#}
+
+
+
+{#       https://www.echartsjs.com/examples/zh/editor.html?c=candlestick-sh  #}
+<script type="text/javascript">
+
+var data_index = {{ data|safe }};
+var indexinfo = {{ indexinfo|safe }};
+
+
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+
+
+
+var upColor = '#ec0000';
+var upBorderColor = '#8A0000';
+var downColor = '#00da3c';
+var downBorderColor = '#008F28';
+
+
+// 数据意义：开盘(open)，收盘(close)，最低(lowest)，最高(highest)
+
+
+var data0=splitData(data_index)
+
+
+
+function splitData(rawData) {
+    var categoryData = [];
+    var values = []
+    for (var i = 0; i < rawData.length; i++) {
+        categoryData.push(rawData[i].splice(0, 1)[0]);
+        values.push(rawData[i])
+    }
+    return {
+        categoryData: categoryData,
+        values: values
+    };
+}
+
+
+
+
+
+option = {
+    title: {
+        text: indexinfo['code']+':'+indexinfo['name'],//'上证指数'
+        left: 0
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross'
+        }
+    },
+    legend: {
+        data: ['周K']
+    },
+    grid: {
+        left: '10%',
+        right: '10%',
+        bottom: '15%'
+    },
+    xAxis: {
+        type: 'category',
+        data: data0.categoryData,
+        scale: true,
+        boundaryGap: false,
+        axisLine: {onZero: false},
+        splitLine: {show: false},
+        splitNumber: 20,
+        min: 'dataMin',
+        max: 'dataMax'
+    },
+    yAxis: {
+        scale: true,
+        splitArea: {
+            show: true
+        }
+    },
+    dataZoom: [   // datazoom  底部默认的 进度条
+        {
+            type: 'inside',
+            start: 50,
+            end: 100
+        },
+        {
+            show: true,
+            type: 'slider',
+            top: '90%',
+            start: 50,
+            end: 100
+        }
+    ],
+    series: [
+        {
+            name: '周K',
+            type: 'candlestick',
+            data: data0.values,
+            itemStyle: {
+                color: upColor,
+                color0: downColor,
+                borderColor: upBorderColor,
+                borderColor0: downBorderColor
+            },
+            markPoint: {
+                label: {
+                    normal: {
+                        formatter: function (param) {
+                            return param != null ? Math.round(param.value) : '';
+                        }
+                    }
+                },
+                data: [
+                    {
+                        name: 'XX标点',
+                        coord: ['2013/5/31', 2300],
+                        value: 2300,
+                        itemStyle: {
+                            color: 'rgb(41,60,85)'
+                        }
+                    },
+                    {
+                        name: 'highest value',
+                        type: 'max',
+                        valueDim: 'highest'
+                    },
+                    {
+                        name: 'lowest value',
+                        type: 'min',
+                        valueDim: 'lowest'
+                    },
+                    {
+                        name: 'average value on close',
+                        type: 'average',
+                        valueDim: 'close'
+                    }
+                ],
+                tooltip: {
+                    formatter: function (param) {
+                        return param.name + '<br>' + (param.data.coord || '');
+                    }
+                }
+            },
+            markLine: {
+                symbol: ['none', 'none'],
+                data: [
+
+                    {
+                        name: 'min line on close',
+                        type: 'min',
+                        valueDim: 'close'
+                    },
+                    {
+                        name: 'max line on close',
+                        type: 'max',
+                        valueDim: 'close'
+                    }
+                ]
+            }
+        },
+
+
+
+    ]
+};
+
+
+
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+       </script>
+   </body>
+</html>

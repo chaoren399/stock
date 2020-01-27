@@ -20,7 +20,7 @@ def getdatafrom_ts(stock_code):
     df =  ts.get_hist_data(stock_code,start='2019-01-01',end=enddate)
     f = open(BASE_DIR + '/st_pool/get_stock_data_2019/stock_old_data/data/' + stock_code + '.csv', 'w')
     for index, row in df.iterrows():
-        f.write(index + ',' + str(row['open']) + '\n')
+        f.write(index + ',' + str(row['close']) + '\n')
     f.close()
     logging.info('--'+str(stock_code) + '--done')
 
@@ -35,7 +35,7 @@ def getdatafrom_ts_5years(stock_code):
     df = ts.get_hist_data(stock_code, start='2014-01-01', end='2019-01-01')
     f = open(BASE_DIR + '/st_pool/get_stock_data_2019/stock_old_data/data_2014_2019/' + stock_code + '.csv', 'w')
     for index, row in df.iterrows():
-        f.write(index + ',' + str(row['open']) + '\n')
+        f.write(index + ',' + str(row['close']) + '\n')
     f.close()
     logging.info('--' + str(stock_code) + '--done')
 

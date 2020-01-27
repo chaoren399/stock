@@ -200,6 +200,7 @@ def one_fundolddata_show(request):
         code1 = df_1.iloc[index, 1]  # 基金代码
         if(code1==fundcode ):
             fundname = df_1.iloc[index, 2]
+            lowprice = df_1.iloc[index, 3]
             break;
 
 
@@ -213,7 +214,7 @@ def one_fundolddata_show(request):
     df.columns = ['date', 'value']
 
     df_new = df.sort_values(by='date', axis=0, ascending=True)  # 按照日期排序
-    print 'df=' + df
+    # print 'df=' + df
     data = []
     for index, row in df_new.iterrows():
             date = row['date']  #'2019-01-16'
@@ -236,7 +237,8 @@ def one_fundolddata_show(request):
     # print 'data='+ data
     code =['fund',str(fundcode)] # 不知道什么原因, 000172 被转成 233 之类的数字
     fundinfo = {"name": fundname, "code": fundcode}
-    return render(request, 'fundui/one_fund_ui.html', {'fundinfo': json.dumps(fundinfo),'data':data})
+    maxmin = {"min": lowprice}
+    return render(request, 'fundui/one_fund_ui.html', {'fundinfo': json.dumps(fundinfo),'data':data,'maxmin':maxmin})
 
 
 '''
@@ -252,11 +254,17 @@ def fundold_show(request):
 
     dict ={}
     dict_cod_name={}
+    dict_max_min={} # 目标线
     df_1 = pd.read_csv(fundpool_path, dtype=object)
     codes=[]
     for index, row in df_1.iterrows():
         name = df_1.iloc[index, 2]
         code = df_1.iloc[index, 1]  # 基金代码
+
+        lowprice = df_1.iloc[index, 3]
+
+        max_min = [lowprice]
+
         print 'code----'+code
         dict_cod_name.setdefault(str(code),name) # code: name 字典
         codes.append(code)
@@ -290,9 +298,10 @@ def fundold_show(request):
                 xx = [str(date), value]
                 data.append(xx)
         dict.setdefault(code,data)
+        dict_max_min.setdefault(code,max_min)
     # print 'dict_cod_name='+str(dict_cod_name)
     # return render(request, 'st_pool/old_fund_ui.html', {'dict': json.dumps(dict)} )
-    return render(request, 'fundui/old_fund_ui_all.html', {'codes': json.dumps(codes), 'dict': json.dumps(dict), 'dict_cod_name':json.dumps(dict_cod_name)})
+    return render(request, 'fundui/old_fund_ui_all.html', {'codes': json.dumps(codes), 'dict': json.dumps(dict), 'dict_cod_name':json.dumps(dict_cod_name),'dict_max_min':json.dumps(dict_max_min)})
 
 
 

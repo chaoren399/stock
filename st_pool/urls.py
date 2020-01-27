@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
 from django.conf.urls import include, url
+
+from st_pool import view_index
 from . import views_fund
 from . import view_stock
 
@@ -39,5 +41,7 @@ urlpatterns = [
     url(r'^stock_old_all_show/$', view_stock.stock_old_all_show), #所有股票走势图
     # url(r'^stock_readme/$', views.stock_readme), #一些操作要点
 
-
+    # 2020年01月26日  index 指数--------------------
+    url(r'^oneindex/$', view_index.one_index_olddata_show),  # 单个指数走势图  http://127.0.0.1:8081/oneindex/?index=hs300
+    url(r'^index_old_all_show/$', view_index.index_old_all_show),  # 所有股票走势图
 ]

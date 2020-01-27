@@ -131,7 +131,7 @@ def one_stock_olddata_show(request):
     df.columns = ['date', 'value']
 
     df_new = df.sort_values(by='date', axis=0, ascending=True)  # 按照日期排序
-    print 'df=' + df
+    # print 'df=' + df
     data = []
     for index, row in df_new.iterrows():
             date = row['date']  #'2019-01-16'

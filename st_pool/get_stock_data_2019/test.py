@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
-from django.conf.urls import include, url
+# from django.conf.urls import include, url
 import os
 import pandas as pd
 import tushare as ts
@@ -38,9 +38,11 @@ def down_stock_data_from_tushare():
 
 
 if __name__ == '__main__':
-    # down_stock_data_from_tushare()
+    # print   ts.get_hist_data("sh000300", start='2014-01-01', end='2019-01-01',ktype='W')
 
-    # print ts.get_hist_data('600887', start='2014-01-01', end='2019-01-01')
-    stock_basedata_path = BASE_DIR + '/st_pool/get_stock_data_2019/stock_old_data/data_base'
-    df = ts.get_stock_basics()
-    df.to_csv(stock_basedata_path+'/1.csv')
+    # ts.get_hist_data('600848', ktype='W')  # 获取周k线数据
+
+    # print ts.get_hist_data('600848', ktype='W') #获取周k线数据
+    # print ts.get_hist_data('512010', ktype='W') #获取周k线数据
+    print ts.get_hist_data('hs300',start='2014-01-01', end='2019-01-01',ktype='W')
+
