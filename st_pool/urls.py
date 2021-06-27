@@ -13,6 +13,8 @@ urlpatterns = [
     url(r'^linian/$', views_fund.linian_show),#投资理念
     url(r'^fundold/$', views_fund.fundold_show), #所有基金走势图
     url(r'^onefund/$', views_fund.one_fundolddata_show), #单个基金走势图  http://127.0.0.1:8081/onefund/?fund=000172
+    url(r'^onefund050002/$', views_fund.data_show_050002), # 博时沪深 300 单个基金走势图  http://127.0.0.1:8087/onefund050002/
+
 
     url(r'^download/$', views_fund.downdata_from_carxiuli),
 

@@ -3,104 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <title>股票池UI</title>
-    	<link rel="stylesheet" type="text/css" href="/static/css/table.css">
-        <!--<link rel="stylesheet" type="text/css" href="/static/css/main.css">-->
+    <link rel="stylesheet" type="text/css" href="/static/css/table.css">
+    <!--<link rel="stylesheet" type="text/css" href="/static/css/main.css">-->
 </head>
 
-<a> ----  hhh ----</a>
+<a> ---- hhh ----</a>
 <a href="/down_stock_data_ui" target="_blank"> <span style="color:#0000FF;">股票数据更新</span></a>
 
-<a> ----  hhh ----</a>
+<a> ---- hhh ----</a>
 <a href="/stock_old_all_show" target="_blank"> <span style="color:#0000FF;"> 趋势图 </span></a>
 
 
-
-
 <br> </br>
-<a style="color: #ff0000; "  > 选出 5 只股票.在东方财富网分别买入一只, 然后在涨乐 APP 中逢低就买 </a>
+<a style="color: #ff0000; "> 选出 5 只股票.在东方财富网分别买入一只, 然后在涨乐 APP 中逢低就买 </a>
 </br>
 <a>
 
 
-<body>
+    <body>
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
-    window.onload = function(){
+        window.onload = function () {
 
-        //遍历 table表格
-        var s3 = document.getElementsByTagName("table")[0]; //获取第一个表格
+            //遍历 table表格
+            var s3 = document.getElementsByTagName("table")[0]; //获取第一个表格
 
-        for(var i=1;i<s3.rows.length;i++){
+            for (var i = 1; i < s3.rows.length; i++) {
 
-           var stocklowprice= s3.rows[i].cells[4].innerHTML;
-           var stocktrade = s3.rows[i].cells[3].innerHTML;
-            if(stocktrade - stocklowprice < 0){
+                var stocklowprice = s3.rows[i].cells[4].innerHTML;
+                var stocktrade = s3.rows[i].cells[3].innerHTML;
+                if (stocktrade - stocklowprice < 0) {
 
-               var stocktradeColor= document.getElementById("table-7").rows[i].cells[2+1];
+                    var stocktradeColor = document.getElementById("table-7").rows[i].cells[2 + 1];
 
-               stocktradeColor.style.color='red';
-        }
+                    stocktradeColor.style.color = 'red';
+                }
 
 
-            var rate= s3.rows[i].cells[5+1].innerHTML;
-            if (rate < 0){
-                 var rateColor= document.getElementById("table-7").rows[i].cells[5+1];
-                 rateColor.style.color='red';
+                var rate = s3.rows[i].cells[5 + 1].innerHTML;
+                if (rate < 0) {
+                    var rateColor = document.getElementById("table-7").rows[i].cells[5 + 1];
+                    rateColor.style.color = 'red';
+                }
+
             }
 
+
         }
 
+    </script>
 
 
-    }
+    <ul>
+        <table id="table-7"> <!-- Replace "table-1" with any of the design numbers -->
 
-</script>
+            <thead>
+            <th>序号</th>
+            <th>名称</th>
+            <th>代码</th>
+            <th>最新价格</th>
+            <th>最低</th>
+            <th>最高</th>
+            <th>价值率</th>
+            <th>更新日期</th>
+            <th><a href="/fund/" target="_blank"> <span style="color:#0000FF;">基金链接 </span></a></th>
 
+            </thead>
+            {% for stock in stocklist %}
+                <tbody>
+                <tr>
+                    <td><a href="/onestock/?stock={{ stock.code }}" target="_blank"> {{ stock.order }} </a></td>
+                    <td id="stockname"><a href="http://quote.eastmoney.com/{{ stock.code }}.html" target="_blank"> <span
+                            style="color:#0000FF;">{{ stock.name }}</span></a></td>
+                    <td>{{ stock.code }}</td>
+                    <td style="color: black" id="stocktrade">{{ stock.now_price }}</td>
 
-<ul>
-    <table id="table-7"> <!-- Replace "table-1" with any of the design numbers -->
+                    <td id="stocklowprice">{{ stock.lowprice }}</td>
+                    <td>{{ stock.upprice }}</td>
+                    <td>{{ stock.jiazhilv }}</td>
 
-        <thead>
-        <th>序号</th>
-        <th>名称</th>
-        <th>代码</th>
-        <th>最新价格</th>
-        <th>最低</th>
-        <th>最高</th>
-        <th>价值率</th>
-        <th>更新日期</th>
-        <th> <a href="/fund/" target="_blank"> <span style="color:#0000FF;">基金链接 </span></a></th>
+                    <td>{{ stock.date }}</td>
+                    <td>{{ stock.name_y }}</td>
+                </tr>
+                </tbody>
+            {% empty %}
 
-        </thead>
-    {% for stock in stocklist %}
-            <tbody>
-            <tr>
-            <td > <a href="/onestock/?stock={{stock.code}}"  target="_blank"> {{stock.order}} </a> </td>
-            <td id="stockname"> <a href="http://quote.eastmoney.com/{{stock.code}}.html" target="_blank"> <span style="color:#0000FF;">{{stock.name}}</span></a></td>
-            <td>{{stock.code}}</td>
-            <td style="color: black" id="stocktrade">{{stock.now_price}}</td>
-
-            <td id="stocklowprice">{{stock.lowprice}}</td>
-             <td>{{stock.upprice}}</td>
-             <td>{{stock.jiazhilv}}</td>
-
-             <td>{{stock.date}}</td>
-             <td>{{stock.name_y}}</td>
-            </tr>
-            </tbody>
-        {%empty%}
-
-        <li>啥也没有1</li>
-        {% endfor %}
+                <li>啥也没有1</li>
+            {% endfor %}
 
         </table>
 
-</ul>
+    </ul>
 
 
---------------end
+    --------------end
 
- <a href="http://www.hao123.com/" target="_blank"> <span style="color:#0000FF;">hao123 2019年12月21日 </span></a>
-2019年12月21日
-</body>
+    <a href="http://www.hao123.com/" target="_blank"> <span style="color:#0000FF;">hao123 2019年12月21日 </span></a>
+    2019年12月21日
+    </body>
+
+</a>
+
+{% include "footer.html" %}
+
+
+</html>

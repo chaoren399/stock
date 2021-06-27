@@ -305,6 +305,33 @@ def fundold_show(request):
 
 
 
+
+'''
+博时沪深 300 指数基金 (050002)
+
+'''
+def data_show_050002(request):
+    print("data_show_050002 come in ")
+    # 获取编码对应的基金名称
+    fundname = "博时沪深 300 指数基金"
+    fundcode='050002'
+    oldfunddatapath = BASE_DIR + '/st_pool' + '/get_fund_data/' + 'fund_old_data/'
+    df = pd.read_csv(oldfunddatapath+'other/050002/'  + '050002.csv', dtype=object, header=None)
+    df.columns = ['date', 'value']
+    df_new = df.sort_values(by='date', axis=0, ascending=True)  # 按照日期 从新到旧 排序
+    data = []
+    for index, row in df_new.iterrows():
+        date = row['date']  # '2019-01-16'
+        value = row['value']
+        xx = [str(date), value]
+        data.append(xx)
+    code = ['fund', str(fundcode)]  # 不知道什么原因, 000172 被转成 233 之类的数字
+    fundinfo = {"name": fundname, "code": fundcode}
+    maxmin = {"min": '1'}
+    return render(request, 'fundui/other/one_fund_ui_050002.html',
+                  {'fundinfo': json.dumps(fundinfo), 'data': data, 'maxmin': maxmin})
+
+
 def testJS(request):
     return render(request, 'fundui/testjs.html')
 

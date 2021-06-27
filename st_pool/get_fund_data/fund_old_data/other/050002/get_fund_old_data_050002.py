@@ -137,8 +137,8 @@ def get_urls_fundata_5yeas(fund_code):
 
     # print user_agent
     fundcode = fund_code
-    startdate = '2016-01-01'
-    enddate = '2019-01-01'
+    startdate = '2003-01-01'
+    enddate = '2021-02-10'
     # enddate = str(datetime.date.today())
     # print 'enddate'+ str(enddate)
 

@@ -73,7 +73,7 @@ if __name__ == '__main__':
     # getdata(stock_pool_path)
 
     # getdatafrom_ts('600848')
-    # getdatafrom_ts_5years('600848')
+    getdatafrom_ts_5years('512010')
 
 
 

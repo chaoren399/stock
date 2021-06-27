@@ -16,21 +16,21 @@
 
 <script type="text/javascript">
 
-    window.onload = function(){
+    window.onload = function() {
 
         //遍历 table表格
         var s3 = document.getElementsByTagName("table")[0]; //获取第一个表格
 
-        for(var i=1;i<s3.rows.length;i++){
+        for (var i = 1; i < s3.rows.length; i++) {
 
-           var tar_value = s3.rows[i].cells[3].innerHTML;
-           var net_value = s3.rows[i].cells[4].innerHTML;
-            if(net_value - tar_value <= 0){ // 判断净值是否比预设的低
+            var tar_value = s3.rows[i].cells[3].innerHTML;
+            var net_value = s3.rows[i].cells[4].innerHTML;
+            if (net_value - tar_value <= 0) { // 判断净值是否比预设的低
 
-               var netvalueColor= document.getElementById("table-7").rows[i].cells[4];
+                var netvalueColor = document.getElementById("table-7").rows[i].cells[4];
 
-               netvalueColor.style.color='red';
-        }
+                netvalueColor.style.color = 'red';
+            }
 
 
             // 判断 自己长期定投 颜色为 wheat 小麦色
@@ -43,19 +43,18 @@
             {#}#}
 
 
-            //收益1000计划
+                //收益1000计划
 
-            if(code == 519712 || code == 519068 ||code == 519688 ||code == 166005){
-                var rowColor= document.getElementById("table-7").rows[i].cells[2];
-                rowColor.style.color= 'red';
+                if (code == 519712 || code == 519068 || code == 519688 || code == 166005) {
+                    var rowColor = document.getElementById("table-7").rows[i].cells[2];
+                    rowColor.style.color = 'red';
+                }
+
+
             }
 
 
-
         }
-
-
-
     }
 
 </script>
@@ -86,7 +85,7 @@
 </a>
 
 </br>
-<a>
+
 
   4. 易方达恒生ETF联接(别墅100)	110031 都是围绕 1.2 波动.低于就买入 1000 元.  实验成功
 <a> ----  hhh ----</a>
@@ -179,6 +178,8 @@
 
 3.目标追求稳定的 16%的收益率
 
+
+
 </br>
 
 <a> ----  hhh ----</a>
@@ -187,6 +188,8 @@
 <br> </br>
 <a>
     8.
+    <a href="/onefund050002/" target="_blank"> <span style="color:#0000FF;">博时沪深 300 </span></a>
+
 </a>
 
 
@@ -196,6 +199,8 @@
 </a>
 
 </body>
+</a>
+{% include "footer.html" %}
 
 
 </html>

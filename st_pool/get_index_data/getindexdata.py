@@ -19,7 +19,7 @@ def getdatafrom_ts(index_code):
     enddate = str(datetime.date.today()) #获取股票池的最近 1 年的 数据
     # df =  ts.get_hist_data(index_code,start='2019-01-01',end=enddate)
     # df =  ts.get_hist_data('600848', ktype='W') #获取周k线数据
-    df =  ts.get_hist_data(index_code, start='2014-01-01', end='2020-01-26', ktype='W') #获取周k线数据
+    df =  ts.get_hist_data(index_code, start='2014-01-01', end=enddate, ktype='W') #获取周k线数据
     # df =  ts.get_hist_data('sz50', start='2014-01-01', end='2020-01-26', ktype='W') #获取周k线数据
 
     f = open(BASE_DIR + '/st_pool/get_index_data/index_old_data/data/' + index_code + '.csv', 'w')
@@ -48,7 +48,8 @@ def getdatafrom_ts_5years(stock_code):
 
 if __name__ == '__main__':
 
-    getdatafrom_ts ('hs300')
+
+    getdatafrom_ts ('cyb')
 
 
 

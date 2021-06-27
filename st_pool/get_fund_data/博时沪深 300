@@ -1,0 +1,31 @@
+
+2021年02月09日
+
+获取 博时沪深 300 指数基金 (050002)  的净值走势图.
+
+
+http://127.0.0.1:8087/onefund050002/
+
+
+
+存放数据目录: get_fund_data / fund_old_data / other / 050002
+
+
+第一步: 获取数据
+get_fund_data/fund_old_data/other/050002/get_fund_old_data_050002.py
+
+第二步: 展示数据
+
+views_fund.py   处理数据, 并把数据 发送给 UI ,
+
+templates/fundui/other/one_fund_ui_050002.html
+
+
+
+第三步: 映射 地址  urls.py
+
+http://127.0.0.1:8087/onefund050002/
+
+
+
+
