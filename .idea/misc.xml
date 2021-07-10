@@ -16,9 +16,12 @@
       </profile-state>
     </entry>
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 2.7.10 virtualenv at ~/.virtualenvs/evn3-stock" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 2.7 (stock)" project-jdk-type="Python SDK" />
   <component name="PyCharmProfessionalAdvertiser">
     <option name="shown" value="true" />
+  </component>
+  <component name="PyPackaging">
+    <option name="earlyReleasesAsUpgrades" value="true" />
   </component>
   <component name="masterDetails">
     <states>

@@ -16,3 +16,4 @@ six==1.12.0
 soupsieve==1.9.2
 tushare==1.2.37
 urllib3==1.25.3
+uwsgi-2.0.19.1

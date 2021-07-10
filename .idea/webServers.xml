@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="06bf0901-21d4-4320-b48a-e63cc44f52df" name="test" url="http://43.128.67.141/">
+        <fileTransfer rootFolder="/root/zzystock" accessType="SFTP" host="43.128.67.141" port="22" sshConfigId="e01cfe99-5c34-40d9-834f-0747d73f3f14" sshConfig="root@43.128.67.141:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
