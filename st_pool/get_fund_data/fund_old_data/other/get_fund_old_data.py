@@ -85,7 +85,7 @@ def get_urls(fund_code):
 
     # print user_agent
     fundcode = fund_code
-    startdate = '2019-01-01'
+    startdate = '2016-01-01'
     # enddate = '2019-07-10'
     enddate = str(datetime.date.today())
     # print 'enddate'+ str(enddate)
@@ -104,10 +104,13 @@ def get_urls(fund_code):
         return 'read the log '
     html = response.read()
     # print html
+    tmp ='/st_pool/get_fund_data/fund_old_data/other/'+fund_code+'/'
+    p= '/st_pool/get_fund_data/fund_old_data/data/'
 
-    f = open(BASE_DIR + '/st_pool/get_fund_data/fund_old_data/data/' + fund_code + '.csv', 'w')
+    f = open(BASE_DIR + tmp + fund_code + '.csv', 'w')
     try:
         parseString(html, funddemo())  # parse的方法，分别指明xml文件，并调用查找的类方法
+        print "解析parse html"
     except:
         logging.error('parseString error ')
     for fund in funds:  # 对数组funds[]循环
@@ -137,8 +140,8 @@ def get_urls_fundata_5yeas(fund_code):
 
     # print user_agent
     fundcode = fund_code
-    startdate = '2019-01-01'
-    enddate = '2021-02-10'
+    startdate = '2016-01-01'
+    enddate = '2019-01-01'
     # enddate = str(datetime.date.today())
     # print 'enddate'+ str(enddate)
 
@@ -157,7 +160,10 @@ def get_urls_fundata_5yeas(fund_code):
     html = response.read()
     # print html
 
-    f = open(BASE_DIR + '/st_pool/get_fund_data/fund_old_data/data2016-2019/' + fund_code + '.csv', 'w')
+
+    p = '/st_pool/get_fund_data/fund_old_data/data2016-2019/'
+
+    f = open(BASE_DIR + p + fund_code + '.csv', 'w')
     try:
         parseString(html, funddemo())  # parse的方法，分别指明xml文件，并调用查找的类方法
     except:
@@ -173,5 +179,6 @@ def get_urls_fundata_5yeas(fund_code):
 if __name__ == '__main__':
     # get_urls_fundata_5yeas('002692')
     # get_urls_fundata_5yeas('519066')
-    get_urls_fundata_5yeas('050002')
-    # get_urls('050002')
+    # get_urls_fundata_5yeas('050002')
+    # get_urls('519712')
+    get_urls('519712')

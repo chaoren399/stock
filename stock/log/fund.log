@@ -64,3 +64,10 @@
 2021-06-28 16:16:21,089 - get_fund_old_data.py[line:116] - INFO: --519068--done
 2021-06-28 16:18:40,569 - get_fund_old_data.py[line:118] - INFO: --519068--done
 2021-06-28 20:44:28,691 - get_fund_old_data.py[line:118] - INFO: --519712--done
+2021-07-11 21:01:55,341 - get_fund_old_data_003044.py[line:168] - INFO: --003044--done
+2021-07-11 21:03:12,966 - get_fund_old_data_003044.py[line:116] - INFO: --003044--done
+2021-07-11 21:15:54,632 - get_fund_old_data_003044.py[line:169] - INFO: --003044--done
+2021-07-11 21:17:21,434 - get_fund_old_data.py[line:118] - INFO: --003044--done
+2021-07-11 21:20:09,758 - get_fund_old_data.py[line:118] - INFO: --003044--done
+2021-07-11 21:20:57,597 - get_fund_old_data.py[line:119] - INFO: --003044--done
+2021-07-11 21:27:06,193 - get_fund_old_data.py[line:119] - INFO: --519712--done
