@@ -181,4 +181,4 @@ if __name__ == '__main__':
     # get_urls_fundata_5yeas('519066')
     # get_urls_fundata_5yeas('050002')
     # get_urls('519712')
-    get_urls('519712')
+    get_urls('000595')
