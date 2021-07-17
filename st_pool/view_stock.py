@@ -58,7 +58,7 @@ def down_stock_data_from_tushare(request):
 
         code = row[0].zfill(6)
         getdatafrom_ts(code) #600887  下载最近一年的历史数据
-        # getdatafrom_ts_5years(code)  # 下载 5 年的历史股票数据
+        getdatafrom_ts_5years(code)  # 下载 5 年的历史股票数据
         str1 = str1 + '(' + str(i + 1) + '-' + code + ')'
         # print code
         i=i+1
