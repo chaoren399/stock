@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>走势图指数UI</title>
+    <style type="text/css">
+        body, h1 {
+            margin: 0;
+            padding: 0;
+        }
+
+        .left {
+            float: left;
+            width: 33%;
+            background-color: orange;
+            color: green;
+            height: 250px;
+        }
+
+        .middle {
+            float: left;
+            width: 32%;
+            background-color: papayawhip;
+            height: 250px;
+            color: gray;
+        }
+
+        .right {
+            float: left;
+            width: 33%;
+            background-color: wheat;
+            height: 250px;
+            color: red;
+        }
+
+        .main1 {
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+            height: 250px;
+        }
+
+        .zzymaincss {
+            border: 1px solid #F00;
+            width: 100%;
+            height: 110%;
+        }
+    </style>
+</head>
+
+
+{# <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>#}
+<script type="text/javascript" src="/static/js/echarts.min.js"></script>
+
+
+<body>
+<div id="maincontainer">
+
+    看指数, 越跌越投
+</div>
+
+<div id="zzymain" class="zzymaincss"></div>
+
+
+<div> --------------------我是分割线--------------------</div>
+</body>
+
+
+<script type="text/javascript">
+
+    var x = 3;
+
+    // 字典
+    var dict = {{ dict|safe }};
+
+    var alldiv = '';
+
+    {# 第1次 for 循环遍历 dict  用来生成 div #}
+
+    var codes = {{ codes|safe }};
+
+    for (i in codes) {
+        var x = codes[i]
+        console.log('codesi=' + i)
+        if (i % 3 == 0) {
+            var a = i / 3;
+            var str = '<br>' + a + 'a</br>' // 0a
+            var str1 = '<div id="main' + a + '" class="main1">'
+            var str2 = '<div id="main' + a + '0" class="left"></div> '
+            var str3 = '<div id="main' + a + '1" class="middle"></div>'
+            var str4 = '<div id="main' + a + '2" class="right"></div></div>'
+
+            console.log(' str1+ +str2+str3+str4=' + str1 + str2 + str3 + str4)
+            var str5 = str + str1 + str2 + str3 + str4;
+            alldiv = alldiv + str5
+        }
+    }
+
+    document.getElementById("zzymain").innerHTML = alldiv;
+</script>
+
+
+<script type="text/javascript">
+
+    var y1 = 1;
+    {# 第二次 for 循环遍历 dict  用来填充数据#}
+    var codes = {{ codes|safe }};
+    var dict = {{ dict|safe }};
+    var dict_cod_name = {{ dict_cod_name|safe }};
+    {#var dict_max_min= {{ dict_max_min|safe }};#}
+
+    var j = 0; // 发现用  for  里边的索引无法控制 .只能定义一个变量了
+    for (i in codes) {
+        var code = codes[i]
+        console.log('codesi=' + code)
+        console.log('dict[code]=' + dict[codes[i]])
+
+        if (i % 3 == 0) {
+
+            {#        第一列 数据      #}
+
+            var a1 = i / 3
+            var divid0 = 'main' + a1 + '0'
+            var myChart0 = echarts.init(document.getElementById(divid0));
+
+
+            var upColor = '#ec0000';
+            var upBorderColor = '#8A0000';
+            var downColor = '#00da3c';
+            var downBorderColor = '#008F28';
+
+
+// 数据意义：开盘(open)，收盘(close)，最低(lowest)，最高(highest)
+
+
+            var data0 = splitData(dict[codes[j]])
+
+
+            function splitData(rawData) {
+                var categoryData = [];
+                var values = []
+                for (var i = 0; i < rawData.length; i++) {
+                    categoryData.push(rawData[i].splice(0, 1)[0]);
+                    values.push(rawData[i])
+                }
+                return {
+                    categoryData: categoryData,
+                    values: values
+                };
+            }
+
+
+            option = {
+                title: {
+                    text: dict_cod_name[codes[j]],//'上证指数'
+                    left: 0,
+                    link: '/oneindex/?index=' + codes[j]
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross'
+                    }
+                },
+                legend: {
+                    data: ['周K']
+                },
+                grid: {
+                    left: '10%',
+                    right: '10%',
+                    bottom: '10%',
+                    top:'15%'
+                },
+                xAxis: {
+                    type: 'category',
+                    data: data0.categoryData,
+                    scale: true,
+                    boundaryGap: false,
+                    axisLine: {onZero: false},
+                    splitLine: {show: false},
+                    splitNumber: 20,
+                    min: 'dataMin',
+                    max: 'dataMax'
+                },
+                yAxis: {
+                    scale: true,
+                    splitArea: {
+                        show: true
+                    }
+                },
+
+                series: [
+                    {
+
+                        type: 'candlestick',
+                        data: data0.values,
+                        itemStyle: {
+                            color: upColor,
+                            color0: downColor,
+                            borderColor: upBorderColor,
+                            borderColor0: downBorderColor
+                        },
+                        markPoint: {
+                            label: {
+                                normal: {
+                                    formatter: function (param) {
+                                        return param != null ? Math.round(param.value) : '';
+                                    }
+                                }
+                            },
+
+                            tooltip: {
+                                formatter: function (param) {
+                                    return param.name + '<br>' + (param.data.coord || '');
+                                }
+                            }
+                        },
+                        markLine: {
+                            symbol: ['none', 'none'],
+                            data: [
+
+                                {
+                                    name: 'min line on close',
+                                    type: 'min',
+                                    valueDim: 'close'
+                                },
+                                {
+                                    name: 'max line on close',
+                                    type: 'max',
+                                    valueDim: 'close'
+                                }
+                            ]
+                        }
+                    },
+
+
+                ]
+            };
+
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart0.setOption(option);
+
+            // 第二列
+
+
+            var divid1 = 'main' + a1 + '1'
+            var myChart1 = echarts.init(document.getElementById(divid1));
+
+
+            var upColor = '#ec0000';
+            var upBorderColor = '#8A0000';
+            var downColor = '#00da3c';
+            var downBorderColor = '#008F28';
+
+
+// 数据意义：开盘(open)，收盘(close)，最低(lowest)，最高(highest)
+
+
+            var data1 = splitData(dict[codes[j + 1]])
+
+
+            function splitData(rawData) {
+                var categoryData = [];
+                var values = []
+                for (var i = 0; i < rawData.length; i++) {
+                    categoryData.push(rawData[i].splice(0, 1)[0]);
+                    values.push(rawData[i])
+                }
+                return {
+                    categoryData: categoryData,
+                    values: values
+                };
+            }
+
+
+
+
+            option = {
+                title: {
+                    text: dict_cod_name[codes[j + 1]],
+                    left: 0,
+                    link: '/oneindex/?index=' + codes[j + 1]
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross'
+                    }
+                },
+                legend: {
+                    data: ['周K']
+                },
+                grid: {
+                    left: '10%',
+                    right: '10%',
+                    bottom: '10%',
+                    top:'15%'
+                },
+                xAxis: {
+                    type: 'category',
+                    data: data1.categoryData,
+                    scale: true,
+                    boundaryGap: false,
+                    axisLine: {onZero: false},
+                    splitLine: {show: false},
+                    splitNumber: 20,
+                    min: 'dataMin',
+                    max: 'dataMax'
+                },
+                yAxis: {
+                    scale: true,
+                    splitArea: {
+                        show: true
+                    }
+                },
+
+                series: [
+                    {
+
+                        type: 'candlestick',
+                        data: data1.values,
+                        itemStyle: {
+                            color: upColor,
+                            color0: downColor,
+                            borderColor: upBorderColor,
+                            borderColor0: downBorderColor
+                        },
+                        markPoint: {
+                            label: {
+                                normal: {
+                                    formatter: function (param) {
+                                        return param != null ? Math.round(param.value) : '';
+                                    }
+                                }
+                            },
+
+                            tooltip: {
+                                formatter: function (param) {
+                                    return param.name + '<br>' + (param.data.coord || '');
+                                }
+                            }
+                        },
+                        markLine: {
+                            symbol: ['none', 'none'],
+                            data: [
+
+                                {
+                                    name: 'min line on close',
+                                    type: 'min',
+                                    valueDim: 'close'
+                                },
+                                {
+                                    name: 'max line on close',
+                                    type: 'max',
+                                    valueDim: 'close'
+                                }
+                            ]
+                        }
+                    },
+
+
+                ]
+            };
+
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart1.setOption(option);
+
+
+            // 第3列
+
+
+            var divid2 = 'main' + a1 + '2'
+            var myChart2 = echarts.init(document.getElementById(divid2));
+
+
+            var upColor = '#ec0000';
+            var upBorderColor = '#8A0000';
+            var downColor = '#00da3c';
+            var downBorderColor = '#008F28';
+
+
+// 数据意义：开盘(open)，收盘(close)，最低(lowest)，最高(highest)
+
+
+            var data2 = splitData(dict[codes[j + 2]])
+
+
+            function splitData(rawData) {
+                var categoryData = [];
+                var values = []
+                for (var i = 0; i < rawData.length; i++) {
+                    categoryData.push(rawData[i].splice(0, 1)[0]);
+                    values.push(rawData[i])
+                }
+                return {
+                    categoryData: categoryData,
+                    values: values
+                };
+            }
+
+
+
+
+            option = {
+                title: {
+                    text: dict_cod_name[codes[j + 2]],
+                    left: 0,
+                    link: '/oneindex/?index=' + codes[j + 2]
+
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross'
+                    }
+                },
+                legend: {
+                    data: ['周K']
+                },
+                grid: {
+                    left: '10%',
+                    right: '10%',
+                    bottom: '10%',
+                    top:'15%'
+                },
+                xAxis: {
+                    type: 'category',
+                    data: data2.categoryData,
+                    scale: true,
+                    boundaryGap: false,
+                    axisLine: {onZero: false},
+                    splitLine: {show: false},
+                    splitNumber: 20,
+                    min: 'dataMin',
+                    max: 'dataMax'
+                },
+                yAxis: {
+                    scale: true,
+                    splitArea: {
+                        show: true
+                    }
+                },
+
+                series: [
+                    {
+
+                        type: 'candlestick',
+                        data: data2.values,
+                        itemStyle: {
+                            color: upColor,
+                            color0: downColor,
+                            borderColor: upBorderColor,
+                            borderColor0: downBorderColor
+                        },
+                        markPoint: {
+                            label: {
+                                normal: {
+                                    formatter: function (param) {
+                                        return param != null ? Math.round(param.value) : '';
+                                    }
+                                }
+                            },
+
+                            tooltip: {
+                                formatter: function (param) {
+                                    return param.name + '<br>' + (param.data.coord || '');
+                                }
+                            }
+                        },
+                        markLine: {
+                            symbol: ['none', 'none'],
+                            data: [
+
+                                {
+                                    name: 'min line on close',
+                                    type: 'min',
+                                    valueDim: 'close'
+                                },
+                                {
+                                    name: 'max line on close',
+                                    type: 'max',
+                                    valueDim: 'close'
+                                }
+                            ]
+                        }
+                    },
+
+
+                ]
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart2.setOption(option);
+        }
+        j++;
+
+
+    }
+
+</script>
+
+{% include "footer.html" %}
+
+</html>

@@ -45,5 +45,12 @@ urlpatterns = [
 
     # 2020年01月26日  index 指数--------------------
     url(r'^oneindex/$', view_index.one_index_olddata_show),  # 单个指数走势图  http://127.0.0.1:8081/oneindex/?index=hs300
-    url(r'^index_old_all_show/$', view_index.index_old_all_show),  # 所有股票走势图
+    url(r'^index_old_all_show/$', view_index.index_old_all_show),  # 所有指数走势图
+
+    url(r'^down_index_data_ui/$', view_index.down_index_data_ui),  # 下边 3 个是用来控制进度条的
+    url(r'^down_index_data_from_tushare/$', view_index.down_index_data_from_tushare),
+    url(r'^show_downindex_progress/$', view_index.show_downindex_progress),
+
+
+
 ]

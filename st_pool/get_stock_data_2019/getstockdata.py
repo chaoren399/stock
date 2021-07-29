@@ -34,7 +34,7 @@ def getdatafrom_ts(stock_code):
 
 #2021年07月16日  tushare 接口更新, 需要用token
 # https://waditu.com/document/1?doc_id=40
-
+#getdatafrom_ts_5years
 def getstockdatafrom_ts_5years(stock_code):
     # df =  ts.get_hist_data('600887',start='2014-01-01',end='2019-01-01') #获取 5 年的历史数据
     # df = ts.get_hist_data(stock_code, start='2014-01-01', end='2019-01-01')

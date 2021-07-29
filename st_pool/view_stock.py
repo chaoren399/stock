@@ -6,7 +6,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 
 from st_pool.get_stock_data_2019 import getstockdata
-from st_pool.get_stock_data_2019.getstockdata import getdatafrom_ts, getdatafrom_ts_5years
+from st_pool.get_stock_data_2019.getstockdata import getdatafrom_ts, getstockdatafrom_ts_5years
 from st_pool.models import StockInfo
 from stock.settings import BASE_DIR
 import json
@@ -58,7 +58,7 @@ def down_stock_data_from_tushare(request):
 
         code = row[0].zfill(6)
         getdatafrom_ts(code) #600887  下载最近一年的历史数据
-        getdatafrom_ts_5years(code)  # 下载 5 年的历史股票数据
+        getstockdatafrom_ts_5years(code)  # 下载 5 年的历史股票数据
         str1 = str1 + '(' + str(i + 1) + '-' + code + ')'
         # print code
         i=i+1

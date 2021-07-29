@@ -6,7 +6,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 
 from st_pool.get_stock_data_2019 import getstockdata
-from st_pool.get_stock_data_2019.getstockdata import getdatafrom_ts, getdatafrom_ts_5years
+from st_pool.get_stock_data_2019.getstockdata import getdatafrom_ts
 from st_pool.models import StockInfo
 from stock.settings import BASE_DIR
 import json
@@ -63,7 +63,7 @@ def one_index_olddata_show(request):
 
 
 ''''
-2所有股票的走势图
+2所有指数的走势图
 '''
 
 
@@ -116,23 +116,30 @@ def index_old_all_show(request):
                   {'codes': json.dumps(codes), 'dict': json.dumps(dict),'dict_cod_name':json.dumps(dict_cod_name)})
 
 
+
+num_progress = 0 # 当前的后台进度值（不喜欢全局变量也可以很轻易地换成别的方法代替）
+allcodenum =''
+tmp=1
+
 '''
-3下载股票的历史数据 
+3下载指数的历史数据 
 '''
 
 
-def down_stock_data_from_tushare(request):
+def down_index_data_from_tushare(request):
     global num_progress
     global allcodenum
     global tmp
-    stock_pool_path = BASE_DIR + '/st_pool/get_stock_data_2019/股票池.csv'
+    stock_pool_path = BASE_DIR + '/st_pool/get_index_data/指数池.csv'
     df_1 = pd.read_csv(stock_pool_path, dtype=object)
+
+    codes = df_1.iloc[:, 0].values
     i = 0;
-    codes = df_1.shape[0]  # 行数
+    # codes = df_1.shape[0]  # 行数
 
     str1 = ''
-    for index, row in df_1.iterrows():
-        code = row[0].zfill(6)
+    for code in codes:
+
         getdatafrom_ts(code)  # 600887  下载最近一年的历史数据
         # getdatafrom_ts_5years(code)  # 下载 5 年的历史股票数据
         str1 = str1 + '(' + str(i + 1) + '-' + code + ')'
@@ -140,10 +147,10 @@ def down_stock_data_from_tushare(request):
         i = i + 1
         tmp = i;
         info = '完成  ' + str(i) + '只股票下载'
-        # time.sleep(5)  # //睡觉
+        time.sleep(5)  # //睡觉
 
         allcodenum = str1
-        num_progress = i * 100 / codes;  # 更新后台进度值，因为想返回百分数所以乘100
+        num_progress = i * 100 / len(codes);  # 更新后台进度值，因为想返回百分数所以乘100
         print  'num_progress=' + str(num_progress)
     # return JsonResponse({'res_1': info, 'res_2': 1}, safe=False)
     return JsonResponse({'res_1': info, 'res_2': 1}, safe=False)
@@ -154,8 +161,8 @@ def down_stock_data_from_tushare(request):
 '''
 
 
-def down_stock_data_ui(request):
-    return render(request, 'stockui/downstockui.html')
+def down_index_data_ui(request):
+    return render(request, 'indexui/downindexui.html')
 
 
 '''
@@ -163,7 +170,7 @@ def down_stock_data_ui(request):
 '''
 
 
-def show_downstock_progress(request):
+def show_downindex_progress(request):
     print  'show_downstock_progress =' + str(num_progress)
     print 'tmp=' + str(tmp)
     return JsonResponse({'num_progress': num_progress, 'allcodenum': allcodenum}, safe=False)

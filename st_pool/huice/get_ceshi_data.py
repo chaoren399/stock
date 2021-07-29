@@ -72,7 +72,7 @@ http://data.funds.hexun.com/outxml/detail/openfundnetvalue.aspx?fundcode=519688&
 '''
 
 
-def get_urls(fund_code):
+def get_ceshi_data(fund_code):
     global funds
     load_user_agent()
     length = len(user_agents)
@@ -121,64 +121,9 @@ def get_urls(fund_code):
     f.close()
 
 
-'''
-获取历史 5 年的基金数据
-'''
-
-
-def get_urls_fundata_5yeas(fund_code):
-    load_user_agent()
-    global funds
-
-    length = len(user_agents)
-    index = random.randint(0, length - 1)
-    user_agent = user_agents[index]
-    headers = {
-        'User-Agent': user_agent,
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
-    }
-
-    # print user_agent
-    fundcode = fund_code
-    startdate = '2016-01-01'
-    enddate = '2019-01-01'
-    # enddate = str(datetime.date.today())
-    # print 'enddate'+ str(enddate)
-
-    url = 'http://data.funds.hexun.com/outxml/detail/openfundnetvalue.aspx?fundcode=' + str(
-        fundcode) + '&startdate=' + startdate + '&enddate=' + enddate
-    #  url 连同 headers，一起构造Request请求，这个请求将附带 IE9.0 浏览器的User-Agent
-    try:
-        request = urllib2.Request(url, headers=headers)
-
-        # 向服务器发送这个请求
-        response = urllib2.urlopen(request)
-    except urllib2.URLError, e:
-        logging.error('get url error ')
-        logging.error(e.reason)
-        return 'read the log '
-    html = response.read()
-    # print html
-
-
-    p = '/st_pool/get_fund_data/fund_old_data/data2016-2019/'
-
-    f = open(BASE_DIR + p + fund_code + '.csv', 'w')
-    try:
-        parseString(html, funddemo())  # parse的方法，分别指明xml文件，并调用查找的类方法
-    except:
-        logging.error('parseString error ')
-    for fund in funds:  # 对数组funds[]循环
-        f.write(fund.fld_enddate + ',' + fund.fld_unitnetvalue + '\n')
-        # print(fund)
-    logging.info('--' + str(fundcode) + '--done')
-    funds = []  # 循环到下一个基金的时候要清空全局数组的数据 必须要
-    f.close()
-
-
 if __name__ == '__main__':
-    # get_urls_fundata_5yeas('002692')
+
     # get_urls_fundata_5yeas('519066')
     # get_urls_fundata_5yeas('050002')
     # get_urls('519712')
-    get_urls('000595')
+    get_ceshi_data('000595')

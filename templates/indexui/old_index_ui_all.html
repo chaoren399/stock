@@ -11,15 +11,15 @@
 
         .left {
             float: left;
-            width: 33%;
-            background-color: orange;
+            width: 99%;
+            background-color: wheat;
             color: green;
             height: 250px;
         }
 
         .middle {
             float: left;
-            width: 33%;
+            width: 1%;
             background-color: papayawhip;
             height: 250px;
             color: gray;
@@ -27,7 +27,7 @@
 
         .right {
             float: left;
-            width: 33%;
+            width: 1%;
             background-color: wheat;
             height: 250px;
             color: red;
@@ -42,7 +42,7 @@
 
         .zzymaincss {
             border: 1px solid #F00;
-            width: 94%;
+            width: 100%;
             height: 110%;
         }
     </style>
@@ -82,18 +82,19 @@
     for (i in codes) {
         var x = codes[i]
         console.log('codesi=' + i)
-        if (i % 3 == 0) {
-            var a = i / 3;
+        {#if (i % 3 == 0) {#}
+
+            var a = i ;
             var str = '<br>' + a + 'a</br>' // 0a
             var str1 = '<div id="main' + a + '" class="main1">'
-            var str2 = '<div id="main' + a + '0" class="left"></div> '
-            var str3 = '<div id="main' + a + '1" class="middle"></div>'
-            var str4 = '<div id="main' + a + '2" class="right"></div></div>'
+            var str2 = '<div id="main' + a + '0" class="left"></div></div> '
 
-            console.log(' str1+ +str2+str3+str4=' + str1 + str2 + str3 + str4)
-            var str5 = str + str1 + str2 + str3 + str4;
+
+
+            console.log(' str1+ +str2+str3+str4=' + str1 + str2 )
+            var str5 = str + str1 + str2 ;
             alldiv = alldiv + str5
-        }
+
     }
 
     document.getElementById("zzymain").innerHTML = alldiv;
@@ -115,11 +116,10 @@
         console.log('codesi=' + code)
         console.log('dict[code]=' + dict[codes[i]])
 
-        if (i % 3 == 0) {
 
             {#        第一列 数据      #}
 
-            var a1 = i / 3
+            var a1 = i
             var divid0 = 'main' + a1 + '0'
             var myChart0 = echarts.init(document.getElementById(divid0));
 
@@ -241,259 +241,8 @@
             // 使用刚指定的配置项和数据显示图表。
             myChart0.setOption(option);
 
-            // 第二列
 
 
-            var divid1 = 'main' + a1 + '1'
-            var myChart1 = echarts.init(document.getElementById(divid1));
-
-
-            var upColor = '#ec0000';
-            var upBorderColor = '#8A0000';
-            var downColor = '#00da3c';
-            var downBorderColor = '#008F28';
-
-
-// 数据意义：开盘(open)，收盘(close)，最低(lowest)，最高(highest)
-
-
-            var data1 = splitData(dict[codes[j + 1]])
-
-
-            function splitData(rawData) {
-                var categoryData = [];
-                var values = []
-                for (var i = 0; i < rawData.length; i++) {
-                    categoryData.push(rawData[i].splice(0, 1)[0]);
-                    values.push(rawData[i])
-                }
-                return {
-                    categoryData: categoryData,
-                    values: values
-                };
-            }
-
-
-
-
-            option = {
-                title: {
-                    text: dict_cod_name[codes[j + 1]],
-                    left: 0,
-                    link: '/oneindex/?index=' + codes[j + 1]
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: {
-                        type: 'cross'
-                    }
-                },
-                legend: {
-                    data: ['周K']
-                },
-                grid: {
-                    left: '10%',
-                    right: '10%',
-                    bottom: '10%',
-                    top:'15%'
-                },
-                xAxis: {
-                    type: 'category',
-                    data: data1.categoryData,
-                    scale: true,
-                    boundaryGap: false,
-                    axisLine: {onZero: false},
-                    splitLine: {show: false},
-                    splitNumber: 20,
-                    min: 'dataMin',
-                    max: 'dataMax'
-                },
-                yAxis: {
-                    scale: true,
-                    splitArea: {
-                        show: true
-                    }
-                },
-
-                series: [
-                    {
-
-                        type: 'candlestick',
-                        data: data1.values,
-                        itemStyle: {
-                            color: upColor,
-                            color0: downColor,
-                            borderColor: upBorderColor,
-                            borderColor0: downBorderColor
-                        },
-                        markPoint: {
-                            label: {
-                                normal: {
-                                    formatter: function (param) {
-                                        return param != null ? Math.round(param.value) : '';
-                                    }
-                                }
-                            },
-
-                            tooltip: {
-                                formatter: function (param) {
-                                    return param.name + '<br>' + (param.data.coord || '');
-                                }
-                            }
-                        },
-                        markLine: {
-                            symbol: ['none', 'none'],
-                            data: [
-
-                                {
-                                    name: 'min line on close',
-                                    type: 'min',
-                                    valueDim: 'close'
-                                },
-                                {
-                                    name: 'max line on close',
-                                    type: 'max',
-                                    valueDim: 'close'
-                                }
-                            ]
-                        }
-                    },
-
-
-                ]
-            };
-
-
-            // 使用刚指定的配置项和数据显示图表。
-            myChart1.setOption(option);
-
-
-            // 第3列
-
-
-            var divid2 = 'main' + a1 + '2'
-            var myChart2 = echarts.init(document.getElementById(divid2));
-
-
-            var upColor = '#ec0000';
-            var upBorderColor = '#8A0000';
-            var downColor = '#00da3c';
-            var downBorderColor = '#008F28';
-
-
-// 数据意义：开盘(open)，收盘(close)，最低(lowest)，最高(highest)
-
-
-            var data2 = splitData(dict[codes[j + 2]])
-
-
-            function splitData(rawData) {
-                var categoryData = [];
-                var values = []
-                for (var i = 0; i < rawData.length; i++) {
-                    categoryData.push(rawData[i].splice(0, 1)[0]);
-                    values.push(rawData[i])
-                }
-                return {
-                    categoryData: categoryData,
-                    values: values
-                };
-            }
-
-
-
-
-            option = {
-                title: {
-                    text: dict_cod_name[codes[j + 2]],
-                    left: 0,
-                    link: '/oneindex/?index=' + codes[j + 2]
-
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: {
-                        type: 'cross'
-                    }
-                },
-                legend: {
-                    data: ['周K']
-                },
-                grid: {
-                    left: '10%',
-                    right: '10%',
-                    bottom: '10%',
-                    top:'15%'
-                },
-                xAxis: {
-                    type: 'category',
-                    data: data2.categoryData,
-                    scale: true,
-                    boundaryGap: false,
-                    axisLine: {onZero: false},
-                    splitLine: {show: false},
-                    splitNumber: 20,
-                    min: 'dataMin',
-                    max: 'dataMax'
-                },
-                yAxis: {
-                    scale: true,
-                    splitArea: {
-                        show: true
-                    }
-                },
-
-                series: [
-                    {
-
-                        type: 'candlestick',
-                        data: data2.values,
-                        itemStyle: {
-                            color: upColor,
-                            color0: downColor,
-                            borderColor: upBorderColor,
-                            borderColor0: downBorderColor
-                        },
-                        markPoint: {
-                            label: {
-                                normal: {
-                                    formatter: function (param) {
-                                        return param != null ? Math.round(param.value) : '';
-                                    }
-                                }
-                            },
-
-                            tooltip: {
-                                formatter: function (param) {
-                                    return param.name + '<br>' + (param.data.coord || '');
-                                }
-                            }
-                        },
-                        markLine: {
-                            symbol: ['none', 'none'],
-                            data: [
-
-                                {
-                                    name: 'min line on close',
-                                    type: 'min',
-                                    valueDim: 'close'
-                                },
-                                {
-                                    name: 'max line on close',
-                                    type: 'max',
-                                    valueDim: 'close'
-                                }
-                            ]
-                        }
-                    },
-
-
-                ]
-            };
-
-            // 使用刚指定的配置项和数据显示图表。
-            myChart2.setOption(option);
-        }
         j++;
 
 

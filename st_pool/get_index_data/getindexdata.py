@@ -19,7 +19,7 @@ def getdatafrom_ts(index_code):
     enddate = str(datetime.date.today()) #获取股票池的最近 1 年的 数据
     # df =  ts.get_hist_data(index_code,start='2019-01-01',end=enddate)
     # df =  ts.get_hist_data('600848', ktype='W') #获取周k线数据
-    df =  ts.get_hist_data(index_code, start='2014-01-01', end=enddate, ktype='W') #获取周k线数据
+    df =  ts.get_hist_data(index_code, start='2001-01-01', end=enddate, ktype='W') #获取周k线数据
     # df =  ts.get_hist_data('sz50', start='2014-01-01', end='2020-01-26', ktype='W') #获取周k线数据
 
     f = open(BASE_DIR + '/st_pool/get_index_data/index_old_data/data/' + index_code + '.csv', 'w')
@@ -29,27 +29,33 @@ def getdatafrom_ts(index_code):
     f.close()
     logging.info('--'+str(index_code) + '--done')
 
-'''
-获取股票池的5年历史数据  (一般情况不会用到.)
 
-'''
-
-
-def getdatafrom_ts_5years(stock_code):
-    # df =  ts.get_hist_data('600887',start='2014-01-01',end='2019-01-01') #获取 5 年的历史数据
-    df = ts.get_hist_data(stock_code, start='2014-01-01', end='2019-01-01')
-    f = open(BASE_DIR + '/st_pool/get_stock_data_2019/stock_old_data/data_2014_2019/' + stock_code + '.csv', 'w')
-    for index, row in df.iterrows():
-        f.write(index + ',' + str(row['open']) + '\n')
-    f.close()
-    logging.info('--' + str(stock_code) + '--done')
-
+def get_zhishuchi_alldata():
+    fundpool_path = BASE_DIR + '/st_pool/get_index_data/指数池.csv'
+    df_1 = pd.read_csv(fundpool_path, dtype=object)
+    codes = df_1.iloc[:, 0].values
+    print codes
+    i = 0;
+    str1 = ''
+    for code in codes:
+        time.sleep(2)  # //睡觉
+        print code
+        x = getdatafrom_ts(code)
 
 
 if __name__ == '__main__':
 
 
-    getdatafrom_ts ('cyb')
+    # getdatafrom_ts ('cyb')
+    # get_zhishuchi_alldata()
+    # getdatafrom_ts ('sz50')
+
+
+    fundpool_path = BASE_DIR + '/st_pool/get_index_data/指数池.csv'
+    df_1 = pd.read_csv(fundpool_path, dtype=object)
+    codes = df_1.iloc[:, 0].values
+    print len(codes)
+
 
 
 
