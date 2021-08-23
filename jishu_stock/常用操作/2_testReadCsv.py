@@ -13,7 +13,7 @@ reload(sys)
 sys.setdefaultencoding('utf8')
 
 if __name__ == '__main__':
-    path = BASE_DIR + '/jishu_stock/七星落长空/data/stockcodelist.csv'
+    path = BASE_DIR + '/jishu_stock/bQiXingLuoChangKong/data/stockcodelist_No_ST.csv'
     # print "ssss"
     print path
     count = 0

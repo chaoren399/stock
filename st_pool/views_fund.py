@@ -120,7 +120,7 @@ def downdata_from_hexun(request):
     i = 0;
     str1 = ''
     for code in codes:
-        time.sleep(10)  #//睡觉
+        time.sleep(5)  #//睡觉
         x = get_urls(code)
         # x = get_urls_fundata_5yeas(code) #获取 5 年基金数据
 
