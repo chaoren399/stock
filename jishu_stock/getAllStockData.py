@@ -57,7 +57,7 @@ if __name__ == '__main__':
 
     localpath= '/jishu_stock/stockdata/data1/'
     today = starttime.strftime('%Y%m%d')
-    getAllStockData(start_date = '20200801',end_date = today,localpath=localpath)
+    getAllStockData(start_date = '20190801',end_date = today,localpath=localpath)
 
     endtime = datetime.datetime.now()
     print  "总共运行时长:"

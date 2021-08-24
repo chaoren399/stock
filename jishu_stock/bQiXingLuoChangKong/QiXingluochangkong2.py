@@ -63,14 +63,13 @@ def getallstockdata_is7start2_FromLocal(localpath1):
             # print data7_1
 
             isyes = isAn7start2_model_pro(data7_1, stock_code)
-            if (isyes == '1'):
-                liststocks.append(stock_code)
-                print "几个了---------------------------------------:" + str(len(liststocks))
+
 
 '''
 #2 单独一个函数 判断是不是符合 7 星落长空模型
 '''
 def isAn7start2_model_pro(dataframe_df,stockcode):
+    dataframe_df = dataframe_df.reset_index(drop=True)  # 重新建立索引 ,
     open_price = dataframe_df.ix[0][5]
     close= dataframe_df.ix[0][2]
     riqi = dataframe_df.ix[0][1]

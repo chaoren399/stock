@@ -35,7 +35,7 @@ def getallstockdata_isKangLong_fromLocal(localpath1):
             df = pd.read_csv(stockdata_path, index_col=0)
             # print df
             if (df.empty):
-                return
+                continue
                 # 1 得到 第一个 7 交易日数据
                 # iloc只能用数字索引，不能用索引名
             data7_1 = df.iloc[0:3]  # 前7行

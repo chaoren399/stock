@@ -52,3 +52,42 @@ a1=data.ix[0]['ma5_13_cha']
 
 
 '''
+
+
+''''
+10
+
+pandas删除含有空值的行
+
+data = data.dropna(how='any', axis=0) 可以用
+df.dropna(axis=0, how='any', inplace=True)  不能用
+
+https://blog.csdn.net/Guo_ya_nan/article/details/81042882
+axis：
+0: 行操作（默认）
+1: 列操作
+how：
+any: 只要有空值就删除（默认）
+all:全部为空值才删除
+inplace：
+False: 返回新的数据集（默认）
+True: 在愿数据集上操作
+
+'''
+
+''''
+11
+
+1、python中数据框求每列的最大值和最小值
+
+df.min()
+df.max()
+
+'''
+
+
+''''
+12  按照列 排序
+ df_week = df_week.sort_values(by='trade_date', axis=0, ascending=False)  # 按照日期 从新到旧 排序
+
+'''

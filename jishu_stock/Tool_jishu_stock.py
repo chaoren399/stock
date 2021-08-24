@@ -34,6 +34,22 @@ def getMax_High_fromDataFrame(data):
     return maxData
 
 '''
+获取 之前 -30 , 1 天之前的日期
+'20210813'
+'''
+def getRiQi_Befor_Ater_Days(date,numdays):
+    day1riqi = str(date)
+    cur_day = datetime.datetime(int(day1riqi[0:4]), int(day1riqi[4:6]), int(day1riqi[6:8]))
+    result_date = cur_day + datetime.timedelta(days=numdays)
+    try:
+        result_date = result_date.strftime('%Y%m%d')
+    except Exception as e:
+        print e
+
+
+    return result_date
+
+'''
 获取 之前 30 天之前的日期
 '20210813'
 '''

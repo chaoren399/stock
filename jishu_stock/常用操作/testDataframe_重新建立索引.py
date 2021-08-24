@@ -22,7 +22,11 @@ dataframe_df[1:4]
 '''
 
 '''
+df.reset_index()
 data3days = data3days.reset_index(drop=True)  # 重新建立索引 ,
+
+https://blog.csdn.net/qq_36523839/article/details/80640139?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-11.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-11.control
+
 data3days
 '''
 
