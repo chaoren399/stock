@@ -12,6 +12,12 @@ import tushare as ts
 import pandas as pd
 from stock.settings import BASE_DIR
 
+'''
+下跌趋势判断 
+
+思路 当前日期的近 7 天的最低点,  判断 半年的 最低点是不是 小于那个值
+'''
+
 def getallstockdata_isXiaDie(start_date,end_date):
     path = BASE_DIR + '/jishu_stock/bQiXingLuoChangKong/data/stockcodelist_No_ST.csv'
     # print "ssss"

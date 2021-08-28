@@ -23,7 +23,8 @@ def getAllStockData(start_date , end_date, localpath):
     # 查询当前所有正常上市交易的股票列表
     pro = ts.pro_api()
 
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
     # print "ssss"
     print path
     data = pd.read_csv(path, dtype={'code': str})
@@ -31,22 +32,37 @@ def getAllStockData(start_date , end_date, localpath):
     start_date = start_date
     end_date = end_date
     count = 0
-    for index, row in data.iterrows():
-        count = count + 1
-        # print row['ts_code']
-        name = row['name']
-        stock_code = row['ts_code']
-        if ('ST' not in name):
-            # 下载股票信息 近一个月的
-            time.sleep(0.05)  # //睡觉
+    if(len(data.columns)==1): # 只有一列股票代码,没有股票名称
+        for index, row in data.iterrows():
+            count = count + 1
 
-            # df = pro.daily(ts_code=stock_code, start_date=start_date, end_date=end_date)
-            # df = pro.daily(ts_code=stock_code, start_date='20210701', end_date='20210802')
-            #  2021年08月16日 增加 ma5 ma13 ma 34
-            df = ts.pro_bar(ts_code=stock_code, start_date=start_date, end_date=end_date, ma=[5, 13, 34])
-            stockdata_path = BASE_DIR + localpath
-            df.to_csv(stockdata_path + stock_code + ".csv")
-            print count
+            stock_code = row['ts_code']
+            if (1):
+                # 下载股票信息 近一个月的
+                time.sleep(0.05)  # //睡觉
+                df = ts.pro_bar(ts_code=stock_code, start_date=start_date, end_date=end_date, ma=[5, 13, 34])
+                stockdata_path = BASE_DIR + localpath
+                df.to_csv(stockdata_path + stock_code + ".csv")
+                print count
+
+    else:
+
+        for index, row in data.iterrows():
+            count = count + 1
+            # print row['ts_code']
+            name = row['name']
+            stock_code = row['ts_code']
+            if ('ST' not in name):
+                # 下载股票信息 近一个月的
+                time.sleep(0.05)  # //睡觉
+
+                # df = pro.daily(ts_code=stock_code, start_date=start_date, end_date=end_date)
+                # df = pro.daily(ts_code=stock_code, start_date='20210701', end_date='20210802')
+                #  2021年08月16日 增加 ma5 ma13 ma 34
+                df = ts.pro_bar(ts_code=stock_code, start_date=start_date, end_date=end_date, ma=[5, 13, 34])
+                stockdata_path = BASE_DIR + localpath
+                df.to_csv(stockdata_path + stock_code + ".csv")
+                print count
 
 
 

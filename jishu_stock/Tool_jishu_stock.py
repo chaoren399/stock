@@ -6,9 +6,32 @@ import time
 from stock.settings import BASE_DIR
 import pandas as pd
 import tushare as ts
-def writeLog_to_txt(info):
+
+'''
+time.sleep(0.03)  # //睡觉
+'''
+
+'''
+给信息 还有路径 写入文件
+'''
+
+def writeLog_to_txt_path(info ,path):
+    with open(path, "a") as f:
+        f.write(info + '' + "\n")
+
+'''
+固定路径的写入
+'''
+def writeLog_to_txt(info,code):
     path = BASE_DIR + '/jishu_stock/JieGuo/' + datetime.datetime.now().strftime(
         '%Y-%m-%d') + '.txt'
+
+    if(isInQiangShi_gupiaochi(code)):
+        info = info +'--强势股票--'
+
+    info= info+'--'+get_Stock_Name(code)
+    print info
+
     with open(path, "a") as f:
         f.write(info + '' + "\n")
 
@@ -110,27 +133,35 @@ def isShangZhang_QuShi(data):
         return 1
     return 0
 
-if __name__ == '__main__':
-    localpath1 = '/jishu_stock/stockdata/data1/'
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
-    # print "ssss"
-    # print path
-    count = 0
-    data = pd.read_csv(path, dtype={'code': str})
+
+
+'''
+给出 股票代码 得到 股票的名字
+'''
+def  get_Stock_Name(code):
+    path = path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
+    data = pd.read_csv(path)
     for index, row in data.iterrows():
-        # print row['ts_code']
-        stock_code = row['ts_code']
-        name = row['name']
-        if ('ST' not in name):
-            stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
-            # df =  pd.read_csv(stockdata_path, dtype={'code': str})
-            df = pd.read_csv(stockdata_path, index_col=0)
-            # print df
-            if (df.empty):
-                continue
-                # 1 得到 第一个 7 交易日数据
-                # iloc只能用数字索引，不能用索引名
-            data7_1 = df.iloc[0:70]  # 前7行
-            isShangZhang_QuShi(data7_1)
-            time.sleep(0.03)  # //睡觉
+        if (row['ts_code'] == code):
+            return row['name']
+
+
+'''
+判断一只股票是不是 在强势股票池中
+'''
+def isInQiangShi_gupiaochi(code):
+    path =  path = BASE_DIR + '/jishu_stock/stockdata/强势和我的股票池.csv'
+    data = pd.read_csv(path)
+
+    count = 0
+    if (len(data.columns) == 1):  # 只有一列股票代码,没有股票名称
+        for index, row in data.iterrows():
+            if(row['ts_code'] == code):
+
+                return 1
+    return 0
+if __name__ == '__main__':
+    # isInQiangShi_gupiaochi('603041.SH')
+    print get_Stock_Name('603040.SH')
+
 

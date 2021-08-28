@@ -3,6 +3,8 @@
 import datetime
 import tushare as ts
 import pandas as pd
+
+from jishu_stock.Tool_jishu_stock import writeLog_to_txt
 from stock.settings import BASE_DIR
 
 
@@ -16,6 +18,7 @@ from stock.settings import BASE_DIR
 def getallstockdata_isV_fromLocal(localpath1):
     print  'V 型 反转 start'
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
 
     # path = BASE_DIR + '/jishu_stock/stockdata/xiadiecodes.csv'
     # print "ssss"
@@ -35,18 +38,13 @@ def getallstockdata_isV_fromLocal(localpath1):
             continue
             # 1 得到 第一个 7 交易日数据
             # iloc只能用数字索引，不能用索引名
-        # data7_1 = df.iloc[0:1]  # 是不是 涨停盘
-        data7_1 = df.iloc[0:22]  # 是不是 涨停盘
-
+        data7_1 = df.iloc[0:1]  # 是不是 涨停盘
+        # data7_1 = df.iloc[3:4]  # 是不是 涨停盘
+        # data7_1 = data7_1.reset_index(drop=True)  # 重新建立索引 ,
+        # print data7_1
         # 2 单独一个函数 判断是不是符合 V型反转
-        # isyes = isAnV_model(data7_1, stock_code)
-        isAnV_model_pro_22days(data7_1, stock_code)
+        isyes = isAnV_model(data7_1, stock_code)
 
-
-def isAnV_model_pro_22days(data,stock_code):
-    for index, row in data.iterrows():
-        data=data[index:index+1]
-        isAnV_model(data, stock_code)
 
 
 
@@ -132,10 +130,7 @@ def isXiaDieZhangting(stock_code,date):
     if ((cur_day-min_day).days < 6):
         info =  stock_code + "  " + "--------- V型反转---------" + str(date)
         print info
-        path = BASE_DIR + '/jishu_stock/JieGuo/' + datetime.datetime.now().strftime(
-            '%Y-%m-%d') + '.txt'
-        with open(path, "a") as f:
-            f.write(info + '' + "\n")
+        writeLog_to_txt(info, stock_code)
 
     #     print("ok1")
 

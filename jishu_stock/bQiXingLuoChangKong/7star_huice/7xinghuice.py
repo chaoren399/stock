@@ -77,8 +77,8 @@ def getallstockdata_is7start_FromLocal(localpath1):
         data7_1 = df.iloc[37:59]  # 6 月份的
         # data7_1 = df.iloc[1:8]  # 前7行
         # 2 单独一个函数 判断是不是符合 7 星落长空模型
-        # isAn7start_model_pro(data7_1, stock_code)  # 七星 1
-        isAn7start2_model_pro(data7_1, stock_code) # 七星 2
+        isAn7start_model_pro(data7_1, stock_code)  # 七星 1
+        # isAn7start2_model_pro(data7_1, stock_code) # 七星 2
 
 
 def isAn7start_model_pro(dataframe_df,stockcode):

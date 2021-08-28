@@ -19,7 +19,6 @@ from stock.settings import BASE_DIR
 '''
 def getallstockdata_isKangLong_fromLocal(localpath1):
     print "亢龙有悔 start "
-    # path = BASE_DIR + '/jishu_stock/bQiXingLuoChangKong/data/stockcodelist_No_ST.csv'
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
     # print "ssss"
     # print path
@@ -28,8 +27,8 @@ def getallstockdata_isKangLong_fromLocal(localpath1):
     for index, row in data.iterrows():
         # print row['ts_code']
         stock_code = row['ts_code']
-        name = row['name']
-        if ('ST' not in name):
+
+        if (1):
             stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
             # df =  pd.read_csv(stockdata_path, dtype={'code': str})
             df = pd.read_csv(stockdata_path, index_col=0)
@@ -110,8 +109,8 @@ def  isKanglongyouhui_3Days_data(data3days,stockcode):
                             # print day2yinxian
                          # 上涨趋势,  最近的最小值 大于 近 30 天的最小值
                             info =  "yinyin yang "+stockcode +"-------------------符合亢龙有悔"+str(riqi)
-                            print  info
-                            writeLog_to_txt(info)
+                            # print  info
+                            writeLog_to_txt(info,stockcode)
                             return 1
 
 

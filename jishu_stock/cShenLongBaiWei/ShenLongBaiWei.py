@@ -129,8 +129,8 @@ def isAnShenLongBaiwei_model(data,stock_code):
 
 
                                         info = stock_code + "  " + str(pct_chg) + "--------- 神龙摆尾---------" + str(day2riqi) + " 突破阳线日期"+str(day1riqi)
-                                        print info
-                                        writeLog_to_txt(info)
+                                        # print info
+                                        writeLog_to_txt(info,stock_code)
 
                                         return 1;
         count = count + 1

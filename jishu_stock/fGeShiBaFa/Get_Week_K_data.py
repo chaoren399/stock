@@ -48,6 +48,7 @@ def cover_day_K_to_Week_K(df,outpath):
 
 def getAllWeekKdata(localpath1):
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
     count = 0
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():

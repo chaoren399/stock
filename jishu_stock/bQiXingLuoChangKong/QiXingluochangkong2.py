@@ -48,8 +48,8 @@ def getallstockdata_is7start2_FromLocal(localpath1):
     for index, row in data.iterrows():
         # print row['ts_code']
         stock_code = row['ts_code']
-        name = row['name']
-        if('ST' not  in name):
+
+        if(1):
             stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
             # df =  pd.read_csv(stockdata_path, dtype={'code': str})
             df = pd.read_csv(stockdata_path, index_col=0)
@@ -98,8 +98,8 @@ def isAn7start2_model_pro(dataframe_df,stockcode):
                                     if(pct_chg_1>0):#1 阳 , 时间理论 1 阳
                                     #符合 bQiXingLuoChangKong
                                         info = stockcode+"--------------------符合 七星落长空2----3-1-2-1-1 第 9 天买入------------"+str(riqi)
-                                        print info
-                                        writeLog_to_txt(info)
+                                        # print info
+                                        writeLog_to_txt(info,stockcode)
                                         return 1
 
     return 0

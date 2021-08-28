@@ -35,13 +35,25 @@ def getallstockdata_isV_fromLocal(localpath1):
             continue
             # 1 得到 第一个 7 交易日数据
             # iloc只能用数字索引，不能用索引名
-        data7_1 = df.iloc[0:1]  # 是不是 涨停盘
-        # data7_1 = df.iloc[3:4]  # 是不是 涨停盘
-        # data7_1 = data7_1.reset_index(drop=True)  # 重新建立索引 ,
-        # print data7_1
-        # 2 单独一个函数 判断是不是符合 V型反转
-        isyes = isAnV_model(data7_1, stock_code)
+        # data7_1 = df.iloc[0:1]  # 是不是 涨停盘
+        data7_1 = df.iloc[22:44]  # 是不是 涨停盘
+        # data7_1 = df.iloc[0:22]  # 是不是 涨停盘
 
+        # 2 单独一个函数 判断是不是符合 V型反转
+        # isyes = isAnV_model(data7_1, stock_code)
+        isAnV_model_pro_22days(data7_1, stock_code)
+
+
+def isAnV_model_pro_22days(data,stock_code):
+    # print data[1:2]
+    data = data.reset_index(drop=True)  # 重新建立索引 ,
+
+    for index, row in data.iterrows():
+        # print index+1
+        data1=data[index:index+1]
+        # print data1
+        isAnV_model(data1, stock_code)
+        # print '11'
 
 
 

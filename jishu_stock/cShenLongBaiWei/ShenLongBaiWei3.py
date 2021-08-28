@@ -3,6 +3,8 @@
 import datetime
 import tushare as ts
 import pandas as pd
+
+from jishu_stock.Tool_jishu_stock import writeLog_to_txt
 from stock.settings import BASE_DIR
 
 
@@ -22,8 +24,8 @@ def getallstockdata_isShenLongBaiWei3_fromLocal(localpath1):
     for index, row in data.iterrows():
         # print row['ts_code']
         stock_code = row['ts_code']
-        name = row['name']
-        if ('ST' not in name):
+
+        if (1):
 
             stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
             # df =  pd.read_csv(stockdata_path, dtype={'code': str})
@@ -80,11 +82,8 @@ def isAnShenLongBaiwei_model(dataframe_df,stock_code):
             pct_chg_day3 = dataframe_df.ix[0][8]
             if(pct_chg_day3 > 0):
                 info =  stock_code + "  " + str(pct_chg_day1) + "--------- 神龙摆尾3---------" + str(riqiday1)
-                print  info
-                path = BASE_DIR + '/jishu_stock/JieGuo/' + datetime.datetime.now().strftime(
-                    '%Y-%m-%d') + '.txt'
-                with open(path, "a") as f:
-                    f.write(info + '' + "\n")
+                # print  info
+                writeLog_to_txt(info, stock_code)
                 return 1
 
 

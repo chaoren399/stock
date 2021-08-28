@@ -9,11 +9,7 @@ from stock.settings import BASE_DIR
 '''
 
 
-思路:  找到 涨停板 后, 看趋势,  
-
-向前 走 连续是的三根 阴线 就可以判定是 
-
-或者 是  收盘价都很低 
+ 找到 当天的涨停板  
 
 
 '''
@@ -40,16 +36,16 @@ def getallstockdata_isZhangTingBan_fromLocal(localpath1):
             return
             # 1 得到 第一个 7 交易日数据
             # iloc只能用数字索引，不能用索引名
-        data7_1 = df.iloc[0:1]  # 前10个交易日
-        # data7_1 = data7_1.reset_index(drop=True)  # 重新建立索引 ,
-        # print data7_1
-        # 2 单独一个函数 判断是不是符合  神龙摆尾
-        isyes = isAnV_model(data7_1, stock_code)
+        # data7_1 = df.iloc[0:1]  # 前10个交易日
+        data7_1 = df.iloc[2:3]  # 前10个交易日
+
+        # 2 单独一个函数 判断是不是符合
+        isyes = isAn_ZhangtingBan_model(data7_1, stock_code)
         if (isyes == '1'):
             # liststocks.append(stock_code)
             print "几个了---------------------------------------:"
 
-def isAnV_model(data,stock_code):
+def isAn_ZhangtingBan_model(data,stock_code):
 
     '''
     60  00 开头的 10%
@@ -74,9 +70,10 @@ def isAnV_model(data,stock_code):
 
         # print index
         pct_chg = row['pct_chg']
+        riqi= row['trade_date']
 
         if(pct_chg > zhangfuMax):  # 涨停板
-            print stock_code + "  " + str(pct_chg) + "--------- V型反转---------"
+            print stock_code + "  " + str(pct_chg) + "--------- 涨停板  ---------"+str(riqi)
 
             return 1;
         count = count + 1

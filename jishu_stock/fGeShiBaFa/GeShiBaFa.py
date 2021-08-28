@@ -19,7 +19,9 @@ trade_date,open,close,high,low,WeekMa10,WeekMa60,Week60-10
 
 '''
 def getallstockdata_is_GeShi_8fa():
+    print '------start 葛式八法---'
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
     count = 0
     data = pd.read_csv(path, dtype={'code': str})
     # print len(data)

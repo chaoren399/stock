@@ -21,6 +21,7 @@ https://tushare.pro/document/2?doc_id=109
 
 '''
 def get_5_13_34_RiJunXian(localpath1):
+    print  '--日均线组合5-13-34  start--'
     ts.set_token('731d2ea0abcf1f14d59ec7215d6ec520e09a439fccd2772c43a906be')
     pro = ts.pro_api()
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
@@ -65,8 +66,8 @@ def isRiJunxianZuHe_mode(dataframe_df, stock_code):
     isYes = isLow_in_60days(stock_code,riqi,min_10_tian)
     if( count==2 and isYes == 1):
         info ="-----日均线组合5-13-34 成功了" +' ----'+ stock_code +' ----'+ str(riqi)
-        print info
-        writeLog_to_txt(info)
+        # print info
+        writeLog_to_txt(info,stock_code)
 
 '''
 得到 之前的 60 天的数据, 只要当天是最大值, 说明是上涨趋势. 可以排除很多了 

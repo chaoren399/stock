@@ -11,6 +11,7 @@ from jishu_stock.cShenLongBaiWei.ShenLongBaiWei3 import getallstockdata_isShenLo
 from jishu_stock.aKangLongyouHui.kanglongyouhui import getallstockdata_isKangLong_fromLocal
 from jishu_stock.dVXingFanZhuan.VXingFanzhuan_all import getallstockdata_isV_fromLocal
 from jishu_stock.eRiJunXianZuhe.RiJunXianZuhe import get_5_13_34_RiJunXian
+from jishu_stock.gShuangLong_Qushui.ShuangLong_Qushui import getallstockdata_is_ShuangLong_Qushui_FromLocal
 from jishu_stock.getAllStockData import getAllStockData
 
 
@@ -22,9 +23,9 @@ def yijianyunxing():
 
     today = starttime.strftime('%Y%m%d')
 
-    getAllStockData(start_date='20200701', end_date=today, localpath=localpath1)
+    # getAllStockData(start_date='20200701', end_date=today, localpath=localpath1)
 
-    #亢龙有悔
+    #1亢龙有悔
     getallstockdata_isKangLong_fromLocal(localpath1)
     #2 七星落长空 1
     getallstockdata_is7start_FromLocal(localpath1=localpath1)
@@ -32,13 +33,15 @@ def yijianyunxing():
     getallstockdata_is7start2_FromLocal(localpath1)
     # 3 神龙摆尾
     getallstockdata_isShenLongBaiWei_fromLocal(localpath1)
-    # 神龙摆尾3
+    #4 神龙摆尾3
     getallstockdata_isShenLongBaiWei3_fromLocal(localpath1)
-    # V型 反转
+    #5 V型 反转
     getallstockdata_isV_fromLocal(localpath1)
 
-    # 5-13-34 均线组合
+    #6 5-13-34 均线组合
     get_5_13_34_RiJunXian(localpath1)
+    #7  双龙取水 模型
+    getallstockdata_is_ShuangLong_Qushui_FromLocal
 
 if __name__ == '__main__':
 
