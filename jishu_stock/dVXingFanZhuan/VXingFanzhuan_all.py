@@ -4,7 +4,7 @@ import datetime
 import tushare as ts
 import pandas as pd
 
-from jishu_stock.Tool_jishu_stock import writeLog_to_txt
+from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode
 from stock.settings import BASE_DIR
 
 
@@ -13,10 +13,13 @@ from stock.settings import BASE_DIR
 
 1. 判断当天是不是 涨停板
 2. 根据条件 , 是不是近 3 天 最低值附近出现的涨停盘, 急速下跌
+
+
 '''
 
 def getallstockdata_isV_fromLocal(localpath1):
-    print  'V 型 反转 start'
+    info1=  'V 型 反转 start'
+    writeLog_to_txt_nocode(info1)
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
     # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
 
@@ -129,7 +132,7 @@ def isXiaDieZhangting(stock_code,date):
     # print((cur_day-min_day).days)  # 1
     if ((cur_day-min_day).days < 6):
         info =  stock_code + "  " + "--------- V型反转---------" + str(date)
-        print info
+        # print info
         writeLog_to_txt(info, stock_code)
 
     #     print("ok1")

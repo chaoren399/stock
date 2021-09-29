@@ -5,7 +5,7 @@ import tushare as ts
 import pandas as pd
 from pandas import DataFrame
 
-from jishu_stock.Tool_jishu_stock import writeLog_to_txt
+from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode
 from stock.settings import BASE_DIR
 data1 = {
     'ts_code':['Ohio','Ohio','Ohio','Nevada','Nevada','Nevada1','Nevada2'],
@@ -39,7 +39,8 @@ liststocks = []
 
 
 def getallstockdata_is7start2_FromLocal(localpath1):
-    print "7 星落长空2   start  3-1-2-1-1 第 9 天买入 "
+    info1= "7 星落长空2   start  3-1-2-1-1 第 9 天买入 "
+    writeLog_to_txt_nocode(info1)
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
     # print "ssss"
     print path

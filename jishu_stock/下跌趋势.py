@@ -19,7 +19,7 @@ from stock.settings import BASE_DIR
 '''
 
 def getallstockdata_isXiaDie(start_date,end_date):
-    path = BASE_DIR + '/jishu_stock/bQiXingLuoChangKong/data/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
     # print "ssss"
     print path
     count = 0
@@ -30,8 +30,8 @@ def getallstockdata_isXiaDie(start_date,end_date):
 
     for index, row in data.iterrows():
         # print row['ts_code']
-        name = row['name']
-        if ('ST' not in name):
+
+        if (1):
             ss = anstock_isXiaDieQushi(row['ts_code'],start_date,end_date)
             if(not(ss ==0)):
                 codes.append(ss)

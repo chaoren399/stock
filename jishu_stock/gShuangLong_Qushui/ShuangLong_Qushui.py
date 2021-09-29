@@ -4,17 +4,25 @@ import datetime
 import tushare as ts
 import pandas as pd
 
-from jishu_stock.Tool_jishu_stock import writeLog_to_txt
+from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode
 from stock.settings import BASE_DIR
 '''
 双龙取水
 思路: 判断 2 跟 k 线是不是满足 涨停板, 一个是放量, 另一个是缩量
 
 原理: 庄家的空间洗盘
+
+自己总结 
+1-之前 有 跳空的要注意
+2-横盘的不要
+3- 放量不明显的不要
+
+2021年09月01日 经过回测, 失败的概率很高 , 7月份 成功率只有 0.2
 '''
 
 def getallstockdata_is_ShuangLong_Qushui_FromLocal(localpath1):
-    print "双龙取水  start "
+    info1= "双龙取水  start "
+    writeLog_to_txt_nocode(info1)
     # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
     # path = BASE_DIR + '/jishu_stock/stockdata/xiadiecodes.csv'
@@ -35,22 +43,20 @@ def getallstockdata_is_ShuangLong_Qushui_FromLocal(localpath1):
         # print df
         if (df.empty):
             continue
-        # data7_1 = df.iloc[16:38]  # 7 月份的
-        data7_1 = df.iloc[0:2]  # 6 月份的
-        # data7_1 = df.iloc[1:8]  # 前7行
-        # 2 单独一个函数 判断是不是符合 7 星落长空模型
-        isAn_ShuangLong_Qushui_model_pro(data7_1, stock_code)  # 七星 1
-        # isAn7start2_model_pro(data7_1, stock_code) # 七星 2
 
 
-def isAn_ShuangLong_Qushui_model_pro(dataframe_df,stockcode):
-    len1 = len(dataframe_df)
-    # print len1
-    for i in range(0,len1-2+1):
-        # print "i" + str(i )+ "j"+str(i+3)
-        # print dataframe_df[i:i+3]
-        # isKanglongyouhui_3Days_data(dataframe_df[0:3])
-        isAn_2ZhangtingBan_model(dataframe_df[i:i+2],stockcode)
+        data7_1 = df.iloc[0:2]  #
+        # data7_1 = df.iloc[2:4]  #
+        # data7_1 = df.iloc[3:5]  #
+        # data7_1 = df.iloc[:5]  #
+
+        isAn_2ZhangtingBan_model(data7_1, stock_code)
+        # len1= len(data7_1)
+        #
+        # for i in range(0, len1 - 2 + 1):
+        #     isAn_2ZhangtingBan_model(data7_1[i:i + 2], stock_code)
+
+
 
 '''
 判断 2 跟 k 线是不是满足 涨停板, 一个是放量, 另一个是缩量
@@ -62,7 +68,7 @@ def isAn_ShuangLong_Qushui_model_pro(dataframe_df,stockcode):
 '''
 def isAn_2ZhangtingBan_model(data,stock_code):
     data = data.reset_index(drop=True)  # 重新建立索引 ,
-    print data
+    # print data
 
     if(len(data) ==2):
         data = data.reset_index(drop=True)  # 重新建立索引 ,

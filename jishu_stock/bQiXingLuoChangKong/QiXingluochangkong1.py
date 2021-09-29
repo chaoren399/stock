@@ -7,7 +7,7 @@ import tushare as ts
 import pandas as pd
 from pandas import DataFrame
 
-from jishu_stock.Tool_jishu_stock import writeLog_to_txt
+from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode
 from stock.settings import BASE_DIR
 data1 = {
     'ts_code':['Ohio','Ohio','Ohio','Nevada','Nevada','Nevada1','Nevada2'],
@@ -33,13 +33,17 @@ liststocks = []
 
 '''
 得到一只股票判断 是不是满足 7 星落长空的标准 
+
+复习 2021年09月01日   一定是  下跌中, 最好是 下跌中横盘
 '''
 
 
 
 
 def getallstockdata_is7start_FromLocal(localpath1):
-    print "7 星落长空1  start "
+    info1 = "7 星落长空1  start "
+
+    writeLog_to_txt_nocode(info1 )
 
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
 

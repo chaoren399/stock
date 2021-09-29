@@ -4,7 +4,7 @@ import datetime
 import tushare as ts
 import pandas as pd
 
-from jishu_stock.Tool_jishu_stock import writeLog_to_txt, isShangZhang_QuShi
+from jishu_stock.Tool_jishu_stock import writeLog_to_txt, isShangZhang_QuShi, writeLog_to_txt_nocode
 
 from stock.settings import BASE_DIR
 
@@ -18,7 +18,8 @@ from stock.settings import BASE_DIR
 先把最近7 天的 数据拿到 最小值MIN7,  然后对比最近 30 天的数据做对比, 只要 min7  是最大的说明 这是一个上涨趋势
 '''
 def getallstockdata_isKangLong_fromLocal(localpath1):
-    print "亢龙有悔 start "
+    info1="亢龙有悔 start "
+    writeLog_to_txt_nocode(info1 )
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
     # print "ssss"
     # print path

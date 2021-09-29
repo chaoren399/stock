@@ -4,7 +4,7 @@ import datetime
 import tushare as ts
 import pandas as pd
 
-from jishu_stock.Tool_jishu_stock import writeLog_to_txt
+from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode
 from stock.settings import BASE_DIR
 
 
@@ -14,7 +14,8 @@ from stock.settings import BASE_DIR
 
 
 def getallstockdata_isShenLongBaiWei3_fromLocal(localpath1):
-    print "神龙摆尾3   start "
+    info1= "神龙摆尾3   start "
+    writeLog_to_txt_nocode(info1)
 
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
     # print "ssss"
@@ -89,6 +90,13 @@ def isAnShenLongBaiwei_model(dataframe_df,stock_code):
 
 
     return 0;
+
+'''
+神 3 需要重新改程序
+'''
+def test_isAnShenLongBaiwei_model():
+    #603079.SH  10.013--------- 神龙摆尾3---------20210916--圣达生物
+    return 0
 
 if __name__ == '__main__':
     import datetime

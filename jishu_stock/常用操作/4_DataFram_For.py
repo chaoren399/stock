@@ -2,6 +2,15 @@
 # -*- coding: utf8 -*-
 # for i in range(1, 10)
 
+
+'''
+# 两个数据合并
+   df = pd.read_csv(oldfunddatapath + code + '.csv', dtype=object,header=None)
+    df1 = pd.read_csv(oldfunddatapath_5years + code + '.csv', dtype=object,header=None)
+    df = df.append(df1)
+    df.columns = ['date', 'value']
+
+'''
 ''''
 
 
@@ -24,6 +33,8 @@ data_merge['差值'] = data_merge['数量_x'] - data_merge['数量_y']
 
 df = df[['ts_code','trade_date','ma5','ma13']]
 
+取前 3 行
+data7_1 = df.iloc[0:3]
 '''
 
 
@@ -88,6 +99,14 @@ df.max()
 
 ''''
 12  按照列 排序
- df_week = df_week.sort_values(by='trade_date', axis=0, ascending=False)  # 按照日期 从新到旧 排序
+    data = data.sort_values(by='trade_date', axis=0, ascending=True)  # 按照日期 从旧到新 排序
+    data = data.reset_index(drop=True)  # 重新建立索引 ,
+    data = data.reset_index()  # 重新建立索引 , 保留日期
+
+
+     ts_code  trade_date  open  high  ...    ma13     ma_v_13    ma34     ma_v_34
+0  000006.SZ    20210826  4.64  4.72  ...  4.6254  64885.3354  4.6179  69862.9471
+1  000006.SZ    20210827  4.63  4.65  ...  4.6215  70125.2015  4.6097  70755.0403
+2  000006.SZ    20210830  4.55  4.55  ...  4.6069  68943.3223  4.5991  71789.6232
 
 '''
