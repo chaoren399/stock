@@ -113,6 +113,7 @@ def isAnShenLongBaiwei_model(data,stock_code):
             if(day1close > day2DayangxianClose and  day1open >day2Dayangxianopen and day1open < day2DayangxianClose):
                 # print1(day1riqi)
                 # print1(day2riqi)
+                # print1(stock_code)
                 # print get_date1_date2_days(day2riqi,day1riqi)
 
 
@@ -235,7 +236,8 @@ def test_Befor_data():
 
 
         data6_1 = df.iloc[0:40]  # 前10个交易日
-        data6_1 = df.iloc[44:84]  # 前10个交易日
+        data6_1 = df.iloc[44:84]  # 前10个交易日 7 月份
+        data6_1 = df.iloc[44:90]  # 前10个交易日 7 月份
 
         len_1=len(data6_1)
 
@@ -251,7 +253,7 @@ if __name__ == '__main__':
     # anstock_isShenLongBaiWei_model('000539.SZ','20210701', '20210805')
     localpath1 = '/jishu_stock/stockdata/data1/'
     # getallstockdata_isShenLongBaiWei_fromLocal(localpath1)
-    # test_Befor_data()
+    # test_Befor_data() # 找到 7 月份的数据
     test_isAnShenLongBaiwei_model() # 老师案例
     # test_xueyuan() # 学员案例
 

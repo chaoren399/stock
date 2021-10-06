@@ -35,7 +35,7 @@ def get_all_JiuSiYiSheng_1(localpath1):
         df = pd.read_csv(stockdata_path, index_col=0)
 
         data6_1 = df.iloc[0:4]  # 前4行
-        data6_1 = df.iloc[1:5]  # 前4行
+        # data6_1 = df.iloc[1:5]  # 前4行
         # data6_1 = df.iloc[20:32]  # 前6行
         len1 = len(data6_1)
         isAn_JiuSiYiSheng_1_model(data6_1, stock_code)
@@ -238,7 +238,7 @@ def test_Befor_data():
 
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
-    # get_all_JiuSiYiSheng_1(localpath1)
-    test_isAn_JiuSiYiSheng_1_model()
+    get_all_JiuSiYiSheng_1(localpath1)
+    # test_isAn_JiuSiYiSheng_1_model()
     # test_Befor_data()
     # test_600173()

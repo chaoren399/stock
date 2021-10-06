@@ -63,9 +63,26 @@ def testfina_indicator():
     day3_npta=df.ix[0]['npta']
     print day3
     print day3_npta
+'''
+获取上证 50 的数据 测试
+'''
+def test_get_50_data():
+    # df = ts.pro_bar(ts_code='000001.SH',  start_date='20180101', end_date='20181011')
+    # df = ts.pro_bar(ts_code='000016.SZ', adj='qfq', start_date='20180101', end_date='20181011')
+    # print df
+
+    df = ts.pro_bar(ts_code='000001.SH', asset='I',freq='D',start_date='2020-01-07 ',end_date='2020-01-08 ')
+
+
+    print df
+
+
+
+
 
 if __name__ == '__main__':
     # getETFdata()
     # getDuoZhi_Gupiao()
     # testLiRunbiao()
-    testfina_indicator()
+    # testfina_indicator()
+    test_get_50_data()

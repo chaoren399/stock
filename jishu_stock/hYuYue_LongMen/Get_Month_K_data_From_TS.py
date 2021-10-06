@@ -53,8 +53,8 @@ https://waditu.com/document/2?doc_id=145
 '''
 def test_getTushare_Month_k():
     pro = ts.pro_api()
-
-    df = pro.monthly(ts_code='000001.SZ', start_date='20150101', end_date='20181101',
+    today = starttime.strftime('%Y%m%d')
+    df = pro.monthly(ts_code='000001.SZ', start_date='20150101', end_date=today,
                      fields='ts_code,trade_date,open,high,low,close,vol,amount')
 
     print df
@@ -71,9 +71,9 @@ if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
 
     today = starttime.strftime('%Y%m%d')
-    getMonth_K_Data(start_date = '20150101',end_date = today,localpath=localpath1)
+    # getMonth_K_Data(start_date = '20150101',end_date = today,localpath=localpath1)
 
-
+    test_getTushare_Month_k()
 
     endtime = datetime.datetime.now()
     print  "总共运行时长:"

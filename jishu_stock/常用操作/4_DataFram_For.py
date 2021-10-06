@@ -10,6 +10,9 @@
     df = df.append(df1)
     df.columns = ['date', 'value']
 
+
+     df = df[['ts_code', 'trade_date', 'low', 'ma5', 'ma13', 'ma34']]
+
 '''
 ''''
 

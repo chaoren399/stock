@@ -138,6 +138,9 @@ def isAn_KangLongYouHuiXiongShiMoQi_model(data,data2,stockcode):
 
 
 
+'''
+测试案例
+'''
 def test_isAn_KangLongYouHuiXiongShiMoQi_model():
 
     ts.set_token('731d2ea0abcf1f14d59ec7215d6ec520e09a439fccd2772c43a906be')

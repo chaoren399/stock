@@ -4,7 +4,7 @@ import datetime
 import tushare as ts
 import pandas as pd
 
-from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode
+from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, print1
 from stock.settings import BASE_DIR
 
 
@@ -14,6 +14,12 @@ from stock.settings import BASE_DIR
 1. 判断当天是不是 涨停板
 2. 根据条件 , 是不是近 3 天 最低值附近出现的涨停盘, 急速下跌
 
+https://www.yuque.com/chaoren399/eozlgk/kcmgi6
+
+思路:
+1.得到涨停板后 获取 这只股票之前的 90 天数据 (这个数据可以更改)
+2. 计算最低价, 如果最低价 的日期 与 涨停板的日期 相减 < 3 那么 ,就可以看看了.
+            
 
 '''
 
@@ -103,7 +109,7 @@ def isXiaDieZhangting(stock_code,date):
     cur_day = datetime.datetime(int(date[0:4]), int(date[4:6]), int(date[6:8]))
     # cur_day = datetime(int(date[0:4]), int(date[4:6]), int(date[6:8]))
     # the_date = datetime.datetime(y, m, d)
-    result_date = cur_day + datetime.timedelta(days=-30)
+    result_date = cur_day + datetime.timedelta(days=-90)
     # result_date = result_date.strftime('%Y-%m-%d')
     result_date = result_date.strftime('%Y%m%d')
     pro = ts.pro_api()
@@ -138,6 +144,78 @@ def isXiaDieZhangting(stock_code,date):
     #     print("ok1")
 
 
+'''
+测试老师用的案例
+'''
+def test_V_anli():
+    # print1(tt)
+
+    #1  002028 思源电气
+    df = ts.pro_bar(ts_code='002028.SZ', adj='qfq', start_date='20200104', end_date='20210112')
+    data7_1 = df.iloc[0:1]  # 是不是 涨停盘
+    # 单独一个函数 判断是不是符合 V型反转
+    isAnV_model(data7_1, '002028.SZ')
+
+    #2  600216 浙江医药
+    df = ts.pro_bar(ts_code='600216.SH', adj='qfq', start_date='20200104', end_date='20210209')
+    data7_1 = df.iloc[0:1]  # 是不是 涨停盘
+    # 单独一个函数 判断是不是符合 V型反转
+    isAnV_model(data7_1, '600216.SH')
+
+
+    #3  002017 东信和平
+    df = ts.pro_bar(ts_code='002017.SZ', adj='qfq', start_date='20200104', end_date='20201229')
+    data7_1 = df.iloc[0:1]  # 是不是 涨停盘
+    # 单独一个函数 判断是不是符合 V型反转
+    isAnV_model(data7_1, '002017.SZ')
+
+
+    #4  000608 阳光股份
+
+    df = ts.pro_bar(ts_code='000608.SZ', adj='qfq', start_date='20200104', end_date='20210115')
+    data7_1 = df.iloc[0:1]  # 是不是 涨停盘
+    # 单独一个函数 判断是不是符合 V型反转
+    isAnV_model(data7_1, '000608.SZ')
+
+    #5  000545 金浦钛业
+
+    df = ts.pro_bar(ts_code='000545.SZ', adj='qfq', start_date='20200104', end_date='20210209')
+    data7_1 = df.iloc[0:1]  # 是不是 涨停盘
+    # 单独一个函数 判断是不是符合 V型反转
+    isAnV_model(data7_1, '000545.SZ')
+
+    #我自己做的 石基信息 002153
+
+    df = ts.pro_bar(ts_code='002153.SZ', adj='qfq', start_date='20200104', end_date='20210903')
+    data7_1 = df.iloc[0:1]  # 是不是 涨停盘
+    # 单独一个函数 判断是不是符合 V型反转
+    isAnV_model(data7_1, '002153.SZ')
+
+
+
+'''
+回测 8 月份的数据
+'''
+def test_Befor_data():
+    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+
+    data = pd.read_csv(path, dtype={'code': str})
+    for index, row in data.iterrows():
+        # print row['ts_code']
+        stock_code = row['ts_code']
+        stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
+        df = pd.read_csv(stockdata_path, index_col=0)
+
+        # data6_1 = df.iloc[0:4]  # 前4行
+        data6_1 = df.iloc[0:1]  # 前4行
+        data6_1 = df.iloc[22:44]  # 前4行
+
+        len_1=len(data6_1)
+
+        for i in range(0, len_1 - 1 + 1):
+            # print "i" + str(i )+ "j"+str(i+3)
+            isAnV_model(data6_1[i:i + 1], stock_code)
+
 
 if __name__ == '__main__':
     import datetime
@@ -147,8 +225,7 @@ if __name__ == '__main__':
     # getallstockdata_isShenLongBaiWei('20210701', '20210805')
     # anstock_isShenLongBaiWei_model('000539.SZ','20210701', '20210805')
     localpath1 = '/jishu_stock/stockdata/data1/'
-    getallstockdata_isV_fromLocal(localpath1)
-    # getDemoData()    # 实战单只 股票的是否满足 V 型反转
-    endtime = datetime.datetime.now()
-    print  "总共运行时长:"
-    print (endtime - starttime).seconds
+    # getallstockdata_isV_fromLocal(localpath1)
+
+    # test_V_anli()
+    test_Befor_data()

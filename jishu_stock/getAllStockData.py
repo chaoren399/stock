@@ -152,7 +152,7 @@ def test_002923():
     df = ts.pro_bar(ts_code=stock_code, adj='qfq', start_date=start_date, end_date=end_date, ma=[5, 13, 34])
     stockdata_path = BASE_DIR + localpath
     print  '--' + stock_code
-    # print df.empty
+    # print df.empt
 
     if (df is None or df.empty):
         print '--df.empty--' + str(stock_code)
