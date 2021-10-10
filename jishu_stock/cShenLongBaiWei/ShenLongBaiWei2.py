@@ -288,8 +288,8 @@ def test_Befor_data():
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
     # test_isAn_ShenLongBaiWei2_laoshi()
-    test_Befor_data()
+    # test_Befor_data()
     # test_isAn_ShenLongBaiWei2_ziji()
 
-    # get_all_ShenLongBaiWei2(localpath1)
+    get_all_ShenLongBaiWei2(localpath1)
 

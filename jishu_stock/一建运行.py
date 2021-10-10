@@ -9,8 +9,10 @@ from jishu_stock.aKangLongyouHui.KangLongYouHui_DaPan import get_all_KangLongYou
 from jishu_stock.bQiXingLuoChangKong.QiXingluochangkong1 import getallstockdata_is7start_FromLocal
 from jishu_stock.bQiXingLuoChangKong.QiXingluochangkong2 import getallstockdata_is7start2_FromLocal
 from jishu_stock.cShenLongBaiWei.ShenLongBaiWei import getallstockdata_isShenLongBaiWei_fromLocal
+from jishu_stock.cShenLongBaiWei.ShenLongBaiWei0 import get_all_isShenLongBaiWei0
 from jishu_stock.cShenLongBaiWei.ShenLongBaiWei2 import get_all_ShenLongBaiWei2
-from jishu_stock.cShenLongBaiWei.ShenLongBaiWei3 import getallstockdata_isShenLongBaiWei3_fromLocal
+from jishu_stock.cShenLongBaiWei.ShenLongBaiWei3 import getallstockdata_isShenLongBaiWei3_fromLocal, \
+    get_all_ShenLongBaiWei3
 from jishu_stock.aKangLongyouHui.kanglongyouhui import getallstockdata_isKangLong_fromLocal
 from jishu_stock.cShenLongBaiWei.ShenLongBaiWei4 import getallstockdata_isShenLongBaiWei4_fromLocal
 from jishu_stock.dVXingFanZhuan.VXingFanzhuan_all import getallstockdata_isV_fromLocal
@@ -23,6 +25,8 @@ from jishu_stock.kQingTingDianShui_QueKou.QueKou_QingTingDianShui import get_all
 from jishu_stock.lLingBoWeiBu.LingBoWeiBu import get_all_LingBoWeiBu
 from jishu_stock.mJiuSiYiSheng.JiuSiYiSheng1 import get_all_JiuSiYiSheng_1
 from jishu_stock.mJiuSiYiSheng.JiuSiYiSheng2 import get_all_JiuSiYiSheng_2
+from jishu_stock.nYiYiDaiLao.YiYiDaiLao import get_all_YiYiDaiLao
+from jishu_stock.oYiJIanShuangDiao.YiJianShuangDiao import get_all_YiJianShuangDiao
 from jishu_stock.zYouQianJun.YouQianJun120_250 import get_all_120_250
 
 
@@ -41,18 +45,29 @@ def yijianyunxing():
 
     # 1 V型 反转
     getallstockdata_isV_fromLocal(localpath1)
+    # 熊市末期亢龙有悔 个股上的应用:
+    get_all_KangLongYouHuiXiongShiMoQi(localpath1)
 
-    # 2 神龙摆尾1
+    # 2以逸待劳
+    get_all_YiYiDaiLao(localpath1)
+
+    # 一箭双雕
+    get_all_YiJianShuangDiao(localpath1)
+
+    # 神龙摆尾0
+    get_all_isShenLongBaiWei0(localpath1)
+
+    #  神龙摆尾1
     getallstockdata_isShenLongBaiWei_fromLocal(localpath1)
     # 神龙摆尾2
     get_all_ShenLongBaiWei2(localpath1)
+    #  神龙摆尾3
+    get_all_ShenLongBaiWei3(localpath1)
 
     # 3 神龙摆尾 4
     getallstockdata_isShenLongBaiWei4_fromLocal(localpath1)
 
-    # 4亢龙有悔
-    # getallstockdata_isKangLong_fromLocal(localpath1)
-    get_all_KangLongYouHuiXiongShiMoQi(localpath1)  # 熊市末期亢龙有悔 个股上的应用:
+
 
     #12 九死一生(1) #好用 分上涨和下跌 2 个阶段
     get_all_JiuSiYiSheng_1(localpath1)
@@ -63,15 +78,11 @@ def yijianyunxing():
     # 8 龙战于野
     getallstockdata_isLongZhan_YuYe(localpath1)
 
-    # 6 5-13-34 日均线组合
-    get_5_13_34_RiJunXian(localpath1)
 
 
-    #4 神龙摆尾3
-    getallstockdata_isShenLongBaiWei3_fromLocal(localpath1)
 
-    #7  双龙取水 模型
-    getallstockdata_is_ShuangLong_Qushui_FromLocal(localpath1)
+
+
     # 9 蜻蜓点水  缺口理论
     get_all_QingTingDianShui(localpath1)
     # 10 凌波微步  缺口理论  模板
@@ -93,6 +104,11 @@ def yijianyunxing():
 
     # 15 葛式八法
     # getallstockdata_is_GeShi_8fa()
+
+    #7  双龙取水 模型
+    getallstockdata_is_ShuangLong_Qushui_FromLocal(localpath1)
+    # 6 5-13-34 日均线组合
+    get_5_13_34_RiJunXian(localpath1)
 
 
 

@@ -6,7 +6,12 @@ import pandas as pd
 
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, print1
 from stock.settings import BASE_DIR
+import pandas as pd
 
+# 显示所有列
+pd.set_option('display.max_columns', None)
+# 显示所有行
+pd.set_option('display.max_rows', None)
 
 '''
 找到涨停板
@@ -107,10 +112,8 @@ def isXiaDieZhangting(stock_code,date):
         print " date is null"
     # print "laile "
     cur_day = datetime.datetime(int(date[0:4]), int(date[4:6]), int(date[6:8]))
-    # cur_day = datetime(int(date[0:4]), int(date[4:6]), int(date[6:8]))
-    # the_date = datetime.datetime(y, m, d)
+
     result_date = cur_day + datetime.timedelta(days=-90)
-    # result_date = result_date.strftime('%Y-%m-%d')
     result_date = result_date.strftime('%Y%m%d')
     pro = ts.pro_api()
     df = pro.daily(ts_code=stock_code, start_date=result_date, end_date=date)
@@ -135,7 +138,7 @@ def isXiaDieZhangting(stock_code,date):
     min_day = datetime.datetime(int(date1[0:4]), int(date1[4:6]), int(date1[6:8]))
     # print min_day
 
-    # print((cur_day-min_day).days)  # 1
+    print((cur_day-min_day).days)  # 1
     if ((cur_day-min_day).days < 6):
         info =  stock_code + "  " + "--------- V型反转---------" + str(date)
         # print info
@@ -147,7 +150,7 @@ def isXiaDieZhangting(stock_code,date):
 '''
 测试老师用的案例
 '''
-def test_V_anli():
+def test_V_anli_laoshi():
     # print1(tt)
 
     #1  002028 思源电气
@@ -192,6 +195,15 @@ def test_V_anli():
     isAnV_model(data7_1, '002153.SZ')
 
 
+def test_V_anli_ziji():
+
+
+    df = ts.pro_bar(ts_code='000889.SZ',adj='qfq', start_date='20200101', end_date='20211009')
+    df = ts.pro_bar(ts_code='000889.SZ', start_date='20200101', end_date='20211009')
+    data7_1 = df.iloc[0:1]  # 是不是 涨停盘
+    print data7_1
+    # 单独一个函数 判断是不是符合 V型反转
+    isAnV_model(data7_1, '000889.SZ')
 
 '''
 回测 8 月份的数据
@@ -227,5 +239,6 @@ if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
     # getallstockdata_isV_fromLocal(localpath1)
 
-    # test_V_anli()
-    test_Befor_data()
+    # test_V_anli_laoshi()
+    # test_Befor_data()
+    test_V_anli_ziji()

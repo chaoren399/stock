@@ -102,7 +102,7 @@ def writeLog_to_txt_path(info ,path):
 固定路径的写入
 '''
 def writeLog_to_txt(info,code):
-    path = BASE_DIR + '/jishu_stock/JieGuo/9月/' + datetime.datetime.now().strftime(
+    path = BASE_DIR + '/jishu_stock/JieGuo/10月/' + datetime.datetime.now().strftime(
         '%Y-%m-%d') + '.txt'
 
     info = info + '--' + get_Stock_Name(code)
@@ -114,8 +114,6 @@ def writeLog_to_txt(info,code):
         info = info + '--小树股票池'
     if(is_YouQianJun_gupiaochi(code)==1):
         info = info + '--有钱君股票池'
-
-
 
     # info= info+'--'+get_Stock_Name(code)
     print info

@@ -5,7 +5,7 @@ import exceptions
 
 import tushare as ts
 import pandas as pd
-from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode
+from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode,print1
 from stock.settings import BASE_DIR
 
 ''''
@@ -58,14 +58,15 @@ def isAn_LingBoWeiBu_model(data,stockcode):
     if(len_data >= 6):
         data = data.sort_values(by='trade_date', axis=0, ascending=True)  # 按照日期 从旧到新 排序
         data = data.reset_index(drop=True)  # 重新建立索引 ,
-        # print data
+        print1( data)
         riqi = data.ix[3]['trade_date']  # 阳线的日期
 
         # 设置两个 key
         key_1=0;
         key_2=0;
 
-
+        print1(key_1)
+        print1(key_2)
         if(key_1==1 and  key_2 ==1):
             info = "-----缺口理论, 凌波微步  成功了" + ' ----' + stockcode + ' ----' + str(riqi)
             # print info

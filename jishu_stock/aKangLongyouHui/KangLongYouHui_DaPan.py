@@ -36,7 +36,7 @@ def get_all_KangLongYouHui_DaPan():
     today = starttime.strftime('%Y%m%d')
     for zhishu  in zhishus:
         stock_code=zhishu
-        print ('指数: %s' % zhishu)
+        print ('开始测试指数: %s' % zhishu )
         df = ts.pro_bar(ts_code=stock_code, adj='qfq', start_date='20180101', end_date=today)
         data6_1 = df.iloc[0:3]  # 前6行
         isAn_KangLongYouHui_DaPan_model(data6_1, stock_code)

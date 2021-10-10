@@ -77,12 +77,18 @@ def test_get_50_data():
     print df
 
 
-
-
+'''
+获取不到 振幅
+'''
+def test_zhenfu():
+    # df = ts.pro_bar(ts_code='000001.SH', adj='qfq', start_date=start_date, end_date=end_date, ma=[5, 13, 34])
+    df = ts.pro_bar(ts_code='000001.SH', asset='I',freq='D',start_date='2020-01-07 ',end_date='2020-01-08 ',amp='Y')
+    print df
 
 if __name__ == '__main__':
     # getETFdata()
     # getDuoZhi_Gupiao()
     # testLiRunbiao()
     # testfina_indicator()
-    test_get_50_data()
+    # test_get_50_data()
+    test_zhenfu()
