@@ -4,7 +4,8 @@ import datetime
 import tushare as ts
 import pandas as pd
 
-from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, getRiQi_Befor_Ater_Days, print1
+from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, getRiQi_Befor_Ater_Days, print1, \
+    writeLog_to_txt_path_getcodename
 from stock.settings import BASE_DIR
 
 
@@ -32,13 +33,13 @@ https://www.yuque.com/chaoren399/eozlgk/fkbnbi
 '''
 
 
-def getallstockdata_isShenLongBaiWei4_fromLocal(localpath1):
+def get_all_ShenLongBaiWei4(localpath1):
     info1= "神龙摆尾4  下跌横盘缓慢上涨 66 且 3 个月内最大值  start "
     writeLog_to_txt_nocode(info1)
 
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
     # print "ssss"
-    print path
+    # print path
     count = 0
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
@@ -156,9 +157,12 @@ def  isAn_ShenLongBaiwei4_model_pro(dataframe_df,stock_code):
 
             if(key_4==1):
 
-                info = stock_code + "--------- 神龙摆尾4---------" + str(riqi)+'--'+str(riqi_0)
+                info = "--------- 神4---------" + str(riqi)+'--'+str(riqi_0)
                 # print  info
                 writeLog_to_txt(info, stock_code)
+
+                path = '神4.txt'
+                writeLog_to_txt_path_getcodename(info, path, stock_code)
 
 '''
 判断 前 66 天 的最高价 是不是 低于 某个值

@@ -6,8 +6,8 @@ import exceptions
 import tushare as ts
 import pandas as pd
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, isYangXian, print1, \
-    getRiQi_Befor_Ater_Days, getMin_low_fromDataFrame
-from jishu_stock.z_tool.isZhangTingBan import isAn_ZhangtingBan
+    getRiQi_Befor_Ater_Days, getMin_low_fromDataFrame, writeLog_to_txt_path_getcodename
+from jishu_stock.z_tool.isZhangTingBan import isZhangTingBan
 from stock.settings import BASE_DIR
 
 import pandas as pd
@@ -113,7 +113,7 @@ def isAn_ShenLongBaiWei2_model(data,stockcode):
             day2_zhangtingban_close=0
             for index, row in data1.iterrows():
                 count=count+1
-                if(isAn_ZhangtingBan(row)==1): # 把第一天为涨停板的 过滤掉  如果是涨停板
+                if(isZhangTingBan(row)==1): # 把第一天为涨停板的 过滤掉  如果是涨停板
                     day2_zhangtingban_close=row['close']
                     riqi1= row['trade_date']
                     break
@@ -146,9 +146,12 @@ def isAn_ShenLongBaiWei2_model(data,stockcode):
                     info = "--下跌横盘"
                     key_5=1
                 # print1(key_5)
-                info = info+"-----神龙摆尾 2  成功了" + ' ----' + stockcode +'--'+ "涨停板日期"+str(riqi1)+' ----' + str(riqi)
+                info = info+"-----神2  成功了---" + "涨停板日期"+str(riqi1)+' ----' + str(riqi)
                 # print info
                 writeLog_to_txt(info, stockcode)
+
+                path = '神2.txt'
+                writeLog_to_txt_path_getcodename(info, path, stockcode)
 
 
 '''

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
 # for i in range(1, 10)
-from jishu_stock.fGeShiBaFa.GeShiBaFa_Mai2 import is_big_to_small, is_small_to_big
+from jishu_stock.GeShiBaFa.GeShiBaFa_Mai2 import is_big_to_small, is_small_to_big
 
 
 def test_for():

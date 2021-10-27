@@ -8,11 +8,11 @@ from stock.settings import BASE_DIR
 #     f.write(response.text)
 datetime.datetime.now().strftime('%Y-%m-%d' )
 qianzhu= datetime.datetime.now().strftime('%Y-%m-%d' )
-shuchupath = BASE_DIR + '/jishu_stock/JieGuo/'+qianzhu+'.txt'
+shuchupath = BASE_DIR + '/jishu_stock/zJieGuo/'+qianzhu+'.txt'
 with open(shuchupath,"a") as f:
     f.write("aaaq"+''+"\n")
 
-shuchupath = BASE_DIR + '/jishu_stock/JieGuo/2021-08-15.txt'
+shuchupath = BASE_DIR + '/jishu_stock/zJieGuo/2021-08-15.txt'
 
 fp = open(shuchupath, "a")
 fp.write("hello1 python")

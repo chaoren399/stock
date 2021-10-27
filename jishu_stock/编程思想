@@ -11,3 +11,8 @@ print
 1. 未复权、前复权、后复权
 
 https://tushare.pro/document/2?doc_id=109
+
+
+2
+path = '神0.txt'
+writeLog_to_txt_path_getcodename(info, path, stockcode)

@@ -82,7 +82,7 @@ def is_150_250_jincha_mode(data,stockcode):
         # print1(key_2)
 
         if(key_1==1 and  key_2 ==1):
-            info = "-----有钱君-120-250 均线交易法 成功了" + ' ----' + stockcode + ' ----' + str(riqi)
+            info = "-----有钱君-120-250 均线交易法 成功了 ----" + str(riqi)
             # print info
             writeLog_to_txt(info, stockcode)
 

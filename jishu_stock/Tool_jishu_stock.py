@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
+import collections
 import datetime
 import time
 
@@ -31,6 +32,24 @@ def test_getallstockdata_isLongZhan_YuYe():
 
 '''
 
+
+'''
+判断一行是不是 阴线, 返回 1 是阴线, 返回0 是阳线
+isYangXian(row)是有缺陷的,比如 开盘价=收盘价的时候 也判断为阴线
+
+'''
+def isYinXian(row):
+    # print row['open']
+    # print row['close']
+    # print len(row)
+    if(len(row) > 0):
+        # print'-----'
+        if(row['open'] > row['close']):
+            # print row['open']
+            return 1
+        # if(row['open'] == row['close']):
+        #     return 2 # 不阴不阳
+    return 0
 
 
 '''
@@ -93,17 +112,40 @@ def is_big_to_small(data):
             return 1
     return 0
 
+'''
+可以指定路径, 并且 得到股票名字的 
+价格中枢用到
+'''
+def writeLog_to_txt_path_getcodename(info ,path,code):
+    info = info + '--' + get_Stock_Name(code)
+
+    if (isInQiangShi_gupiaochi(code) == 1):
+        info = info + '--强势股票'
+
+    if (is_XiaoShu_gupiaochi(code) == 1):
+        info = info + '--小树股票池'
+    if (is_YouQianJun_gupiaochi(code) == 1):
+        info = info + '--有钱君股票池'
+
+    info = info + '**' + str(code)
+    print info
+    with open(path, "a") as f:
+        f.write(info + '' + "\n")
 
 def writeLog_to_txt_path(info ,path):
     with open(path, "a") as f:
         f.write(info + '' + "\n")
 
+
+#  下边的  writeLog_to_txt  writeLog_to_txt_nocode 两个函数用用一路径
+path = BASE_DIR + '/jishu_stock/zJieGuo/10月/' + datetime.datetime.now().strftime(
+        '%Y-%m-%d') + '.txt'
 '''
 固定路径的写入
 '''
 def writeLog_to_txt(info,code):
-    path = BASE_DIR + '/jishu_stock/JieGuo/10月/' + datetime.datetime.now().strftime(
-        '%Y-%m-%d') + '.txt'
+    # path = BASE_DIR + '/jishu_stock/zJieGuo/10月/' + datetime.datetime.now().strftime(
+    #     '%Y-%m-%d') + '.txt'
 
     info = info + '--' + get_Stock_Name(code)
 
@@ -115,25 +157,61 @@ def writeLog_to_txt(info,code):
     if(is_YouQianJun_gupiaochi(code)==1):
         info = info + '--有钱君股票池'
 
+    info = info +'**'+str(code)
+
     # info= info+'--'+get_Stock_Name(code)
     print info
 
     with open(path, "a") as f:
         f.write(info + '' + "\n")
 
-
-
-
 '''
 固定路径的写入
 '''
 def writeLog_to_txt_nocode(info):
-    path = BASE_DIR + '/jishu_stock/JieGuo/9月/' + datetime.datetime.now().strftime(
-        '%Y-%m-%d') + '.txt'
+    # path = BASE_DIR + '/jishu_stock/zJieGuo/10月/' + datetime.datetime.now().strftime(
+    #     '%Y-%m-%d') + '.txt'
+
+    qianzhui ='---------------------------------------'
+    info = qianzhui + info + qianzhui
     print info
+
 
     with open(path, "a") as f:
         f.write(info + '' + "\n")
+
+'''
+通过分析每天的日志,得到 一只股票出现 2 次模型的 个股
+
+
+通常来讲，我们如果只是迭代文件对象每一行，
+并做一些处理，是不需要将文件对象转成列表的，因为文件对象本身可迭代，而且是按行迭代：
+'''
+
+def get_2stockcode():
+    # ss='-----有钱君-120-250 均线交易法 成功了 ----20210917--药明康德--小树股票池--有钱君股票池**603259.SH'
+    # print ss.split('**')
+    list=[]
+    with open(path, "r") as f:
+        for line in f:
+            # print line
+            ss = line.split('**')
+            # print len(ss)
+            if(len(ss)>1):  #https://www.cnblogs.com/zyber/p/9578240.html
+                list.append(ss[1].rstrip('\n'))
+    dic = collections.Counter(list)
+    # print dic
+    list3='一只股票出现 2 次模型的 个股--'+'\n'
+    for key in dic:
+        shuliang= dic[key]
+        if(shuliang>1):
+            # print(key, dic[key])
+            # list2.append((key, dic[key]))
+            list3=list3+str(key)+'='+str(shuliang) +'\n'
+
+    with open(path, "a") as f:
+        f.write(str(list3)+'\n')
+
 
 '''
 从 dataframe 中 找到 每日K 线中最低值 中最小的 那个数值
@@ -300,8 +378,9 @@ def isInQiangShi_gupiaochi(code):
 
 if __name__ == '__main__':
     # isInQiangShi_gupiaochi('603041.SH')
-    print get_Stock_Name('603040.SH')
+    # print get_Stock_Name('603040.SH')
     # stoc_code_zhuanhuan()
     # get_houzhui_code('000661')
+    get_2stockcode()
 
 

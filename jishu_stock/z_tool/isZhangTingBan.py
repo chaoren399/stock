@@ -14,7 +14,7 @@ from stock.settings import BASE_DIR
 
 
 
-def isAn_ZhangtingBan(row):
+def isZhangTingBan(row):
     '''
     60  00 开头的 10%
 
