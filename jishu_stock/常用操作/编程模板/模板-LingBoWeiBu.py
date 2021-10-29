@@ -5,9 +5,9 @@ import exceptions
 
 import tushare as ts
 import pandas as pd
-from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode,print1, isYinXian, isYangXian
+from jishu_stock.Tool_jishu_stock import *
 from stock.settings import BASE_DIR
-from jishu_stock.z_tool.ShiTiDaXiao import getShiTiDaXiao
+from jishu_stock.z_tool.ShiTiDaXiao import *
 import pandas as pd
 # 显示所有列
 pd.set_option('display.max_columns', None)
@@ -77,7 +77,7 @@ def isAn_LingBoWeiBu_model(data,stockcode):
         if(key_1==1 and  key_2 ==1):
             info = ''
 
-            info = info + "-----缺口理论, 凌波微步  成功了" + ' ----' + stockcode + ' ----' + str(riqi)
+            info = info + "-----缺口理论, 凌波微步  成功了"  + str(riqi)
             # print info
             writeLog_to_txt(info, stockcode)
 

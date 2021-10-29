@@ -143,12 +143,15 @@ def isAn_GeShanDaNiu_model(data,stockcode):
                 info = info + "-----隔山打牛 放量中阳线 捕捉涨停 " + ' ----' + stockcode + ' ----' + str(riqi)
                 # print info
                 writeLog_to_txt(info, stockcode)
+                # print 'zhaozhiyong '
 
                 #单独处理 隔山打牛的 每天运行的结果, 后期回测使用 .
                 #/Users/mac/PycharmProjects/gitproject/stock/
 
                 # path = BASE_DIR + '/jishu_stock/jishu_stock/GeShanDaNiu/隔山打牛.txt'
                 path = '隔山打牛.txt'
+
+                # print path
                 writeLog_to_txt_path_getcodename(info, path, stockcode)
 
 
@@ -195,11 +198,11 @@ def test_Befor_data():
         stock_code = row['ts_code']
         stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
         df = pd.read_csv(stockdata_path, index_col=0)
-        data7_4 = df.iloc[22:42]  # 前10个交易日
+        data7_4 = df.iloc[22:60]  # 前10个交易日
         len_1=len(data7_4)
-        for i in range(0, len_1 - 3 + 1):
+        for i in range(0, len_1 - 35 + 1):
             # print "i" + str(i )+ "j"+str(i+3)
-            isAn_GeShanDaNiu_model(data7_4[i:i + 3], stock_code)
+            isAn_GeShanDaNiu_model(data7_4[i:i + 35], stock_code)
 
 
 
@@ -207,3 +210,4 @@ if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
     # get_all_GeShanDaNiu(localpath1)
     test_isAn_GeShanDaNiu_laoshi()
+    # test_Befor_data()

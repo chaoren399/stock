@@ -5,8 +5,10 @@ import exceptions
 
 import tushare as ts
 import pandas as pd
+
+from jishu_stock.GeShiBaFa.Get_Week_K_data_From_Ts import getAllWeekKdata
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, print1, isYinXian, isYangXian, \
-    writeLog_to_txt_path_getcodename
+    writeLog_to_txt_path_getcodename, writeLog_to_txt_path, jiagezhongshu_writeLog_to_txt_path_getcodename
 from jishu_stock.z_tool.PyDateTool import get_date1_date2_days
 from jishu_stock.z_tool.getMin_Max import getMin_fromDataFrame
 from stock.settings import BASE_DIR
@@ -20,6 +22,8 @@ pd.set_option('display.max_rows', None)
 ''''
 价格中枢 看跌做涨
 https://www.yuque.com/chaoren399/eozlgk/va1wks/
+
+前提: 下跌谷底, 筑底后的低位
 
 周K线有.上影线的阳线
 上影线比实体长一倍以上
@@ -189,17 +193,19 @@ def isAn_KanDieZuoZhang_model(data,stockcode):
 
                 info = ''
                 info=info+'价格中枢='+str(jiage_zhongshu)
-                info=info+'-上影线长度='+str(week1_shangyingxian_changdu)#week1_shangyingxian_changdu > week1_quanbu_changdu
-                info=info+'-全部长度='+str(week1_quanbu_changdu)#week1_shangyingxian_changdu > week1_quanbu_changdu
+                info=info+'-第2周最高价='+str(week2_high)
+                # info=info+'-上影线长度='+str(week1_shangyingxian_changdu)#week1_shangyingxian_changdu > week1_quanbu_changdu
+                # info=info+'-全部长度='+str(week1_quanbu_changdu)#week1_shangyingxian_changdu > week1_quanbu_changdu
                 info=info+'-与最小值相差'+str(days/7)+'周'
-                info=info+'-上影线比实体长1倍 大于2最好='+str(shangyingxian_bi_shiti)
+                info=info+'-上影线比实体长1倍大于2最好='+str(shangyingxian_bi_shiti)
                 info = info + "-----价格中枢 看跌做涨  成功了" + ' ----' + stockcode + ' ----' + str(riqi)
 
                 path = BASE_DIR + '/jishu_stock/zJieGuo/JiaGeZhongShu/' + datetime.datetime.now().strftime(
                     '%Y-%m-%d') + '.txt'
 
+                jiagezhongshu_writeLog_to_txt_path_getcodename(info, path, stockcode)
 
-                writeLog_to_txt_path_getcodename(info, path, stockcode)
+
 
 
 
@@ -239,9 +245,11 @@ def test_isAn_KanDieZuoZhang_laoshi():
 '''
 def test_isAn_KanDieZuoZhang_ziji():
     #自己的 案例
-    df1 = ts.pro_bar(ts_code='002507.SZ',adj='qfq',freq='W',  start_date='20210206', end_date='20211026')
-    data7_1 = df1.iloc[0:6]  # 前7行
-    isAn_KanDieZuoZhang_model(data7_1,'002507.SZ')
+    df1 = ts.pro_bar(ts_code='002958.SZ',adj='qfq',freq='W',  start_date='20210206', end_date='20211025')
+    data7_1 = df1.iloc[0:100]  # 前7行
+    isAn_KanDieZuoZhang_model(data7_1,'002958.SZ')
+    #价格中枢=3.97-与最小值相差10周-上影线比实体长1倍 大于2最好=8.00--
+    # ---价格中枢 看跌做涨  成功了 ----002958.SZ ----20211015--青农商行
 
 '''
 回测 8 月份的数据
@@ -270,6 +278,7 @@ def test_Befor_data():
 
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
+    getAllWeekKdata(localpath1) #每周运行钱需要先下载数据
     get_all_jiagezhongshu_KanDieZuoZhang(localpath1)
     # test_isAn_KanDieZuoZhang_laoshi()
     # test_Befor_data()

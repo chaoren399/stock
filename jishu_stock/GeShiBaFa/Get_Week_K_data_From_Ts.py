@@ -33,6 +33,10 @@ def getAllWeekKdata(localpath1):
         stock_code = row['ts_code']
 
         outpath= BASE_DIR + '/jishu_stock/stockdata/WEEK_DATA_K/' + stock_code +'_Week'+ ".csv"
+
+        count = count+1
+        print str(count) +'--'+str(stock_code)
+
         time.sleep(0.03)  # //睡觉2021
         # df = ts.pro_bar(ts_code=stock_code, adj='qfq', freq='W', start_date='20180101', end_date='20210922')
         df = ts.pro_bar(ts_code=stock_code, adj='qfq', freq='W', start_date='20150101', end_date=str(today))
@@ -40,8 +44,7 @@ def getAllWeekKdata(localpath1):
         cover_day_K_to_Week_K(df,outpath)
 
 
-        count = count+1
-        print str(count) +'--'+str(stock_code)
+
 def cover_day_K_to_Week_K(df,outpath):
     if(len(df)==0):
         return 0

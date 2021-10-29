@@ -146,7 +146,7 @@ def isXiaDieZhangting(stock_code,date):
         writeLog_to_txt(info, stock_code)
 
         path = 'V型反转.txt'
-        writeLog_to_txt_path_getcodename(info, path, stockcode)
+        writeLog_to_txt_path_getcodename(info, path, stock_code)
 
     #     print("ok1")
 

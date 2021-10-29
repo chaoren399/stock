@@ -113,8 +113,34 @@ def is_big_to_small(data):
     return 0
 
 '''
+价格中枢用到 专用
+
 可以指定路径, 并且 得到股票名字的 
-价格中枢用到
+
+'''
+
+def jiagezhongshu_writeLog_to_txt_path_getcodename(info ,path,code):
+    info = info + '--' + get_Stock_Name(code)
+
+    if (isInQiangShi_gupiaochi(code) == 1):
+        info = info + '--强势股票'
+
+    if (is_XiaoShu_gupiaochi(code) == 1):
+        info = info + '--小树股票池'
+    if (is_YouQianJun_gupiaochi(code) == 1):
+        info = info + '--有钱君股票池'
+
+    info = info + '**' + str(code)
+    print info
+
+    with open(path, "a") as f:
+        f.write(info + '' + "\n")
+
+
+
+'''
+用来对每一个模型 做积累统计, 这样后期方便回测
+可以指定路径, 并且 得到股票名字的 
 '''
 def writeLog_to_txt_path_getcodename(info ,path,code):
     info = info + '--' + get_Stock_Name(code)
@@ -128,7 +154,9 @@ def writeLog_to_txt_path_getcodename(info ,path,code):
         info = info + '--有钱君股票池'
 
     info = info + '**' + str(code)
-    print info
+    # print info
+
+    path = BASE_DIR + '/jishu_stock/zJieGuo/huizong/' + path
     with open(path, "a") as f:
         f.write(info + '' + "\n")
 
@@ -141,7 +169,7 @@ def writeLog_to_txt_path(info ,path):
 path = BASE_DIR + '/jishu_stock/zJieGuo/10月/' + datetime.datetime.now().strftime(
         '%Y-%m-%d') + '.txt'
 '''
-固定路径的写入
+固定路径的写入 带 code 的, 每个输出都有的
 '''
 def writeLog_to_txt(info,code):
     # path = BASE_DIR + '/jishu_stock/zJieGuo/10月/' + datetime.datetime.now().strftime(

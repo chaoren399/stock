@@ -139,7 +139,7 @@ def isAn_KangLongYouHui_GeGu_model(data,stockcode):
             if(key_5==1):
                 info='有跳空'
             else:
-                info='-----'
+                info='无跳空'
             info = info+"--亢龙有悔个股胜率70%以上--" + str(riqi)
             # print info
             writeLog_to_txt(info, stockcode)

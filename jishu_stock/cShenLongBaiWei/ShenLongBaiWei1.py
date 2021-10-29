@@ -141,8 +141,8 @@ def isAnShenLongBaiwei_model(data,stock_code):
                                         # print info
                                         writeLog_to_txt(info,stock_code)
 
-                                        path = '神 1.txt'
-                                        writeLog_to_txt_path_getcodename(info, path, stockcode)
+                                        path = '神1.txt'
+                                        writeLog_to_txt_path_getcodename(info, path, stock_code)
 
                                         return 1;
         count = count + 1

@@ -7,6 +7,7 @@ from jishu_stock.DaYou.DaYou import get_all_DaYou
 from jishu_stock.FanKeWeiZhu.FanKeWeiZhu import get_all_FanKeWeiZhu
 from jishu_stock.FeiLongZaiTian.FeiLongZaiTian import get_all_FeiLongZaiTian
 from jishu_stock.FengHuiLuZhuan.FengHuiLuZhuan import get_all_FengHuiLuZhuan
+from jishu_stock.GeShanDaNiu.GeShanDaNiu import get_all_GeShanDaNiu
 from jishu_stock.JiuSiYiSheng.jiusiyisheng1 import get_all_jiusiyisheng1
 from jishu_stock.KanDieZuoZhang.KanDieZuoZhang import get_all_KanDieZuoZhang
 from jishu_stock.KangLongyouHui.KangLongYouHuiGeGu import get_all_KangLongYouHui_GeGu
@@ -47,6 +48,10 @@ def yijianyunxing():
 
     getAllStockData(start_date='20200701', end_date=today, localpath=localpath1) #这个时间 提供一年的得到 MA34
 
+    #雾里看花, 特殊的十字星 还没验证
+    get_all_WuLiKanHua(localpath1)
+    #隔山打牛
+    get_all_GeShanDaNiu(localpath1)
     #  5-13-34 日均线组合
     get_all_5_13_34(localpath1)
     #有惊无险 2-1 2021年10月25日 get_all_YouJingWuXian2_1(localpath1):
@@ -120,8 +125,6 @@ def yijianyunxing():
     getallstockdata_is_ShuangLong_Qushui_FromLocal(localpath1)
 
 
-    #雾里看花, 特殊的十字星 还没验证
-    get_all_WuLiKanHua(localpath1)
 
     # 14 有钱君-120-250 均线交易法
     get_all_120_250()
