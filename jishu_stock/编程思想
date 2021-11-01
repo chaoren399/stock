@@ -16,3 +16,6 @@ https://tushare.pro/document/2?doc_id=109
 2
 path = '神0.txt'
 writeLog_to_txt_path_getcodename(info, path, stockcode)
+
+
+3. 涨幅 pct_chg	 , 振幅 amp,

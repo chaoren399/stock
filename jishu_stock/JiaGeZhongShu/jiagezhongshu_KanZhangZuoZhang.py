@@ -35,7 +35,7 @@ jiagezhognshu_KanZhangZuoZhang
 '''
 
 def get_all_jiagezhognshu_KanZhangZuoZhang(localpath1):
-    info1=  '--价格中枢-看涨做涨 start--   '
+    info1=  '--上涨初期 价格中枢-看涨做涨 start--   '
     writeLog_to_txt_nocode(info1)
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path, dtype={'code': str})
@@ -233,17 +233,24 @@ def test_Befor_data():
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
         stock_code = row['ts_code']
-        stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
-        df = pd.read_csv(stockdata_path, index_col=0)
-        data7_4 = df.iloc[22:42]  # 前10个交易日
-        len_1=len(data7_4)
-        for i in range(0, len_1 - 3 + 1):
-            # print "i" + str(i )+ "j"+str(i+3)
-            isAn_jiagezhognshu_KanZhangZuoZhang_model(data7_4[i:i + 3], stock_code)
 
+        stockdata_path = BASE_DIR + '/jishu_stock/stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+        df = pd.read_csv(stockdata_path, index_col=0)
+            # print df
+        if (df.empty):
+            continue
+
+        df = df.reset_index(drop=False)  # 重新建立索引 ,
+        data7_4 = df.iloc[8:10]  # 1 年有 52 周
+
+        len_1=len(data7_4)
+        for i in range(0, len_1 - 2 + 1):
+            # print "i" + str(i )+ "j"+str(i+3)
+            isAn_jiagezhognshu_KanZhangZuoZhang_model(data7_4[i:i + 2], stock_code)
 
 
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
     # get_all_jiagezhognshu_KanZhangZuoZhang(localpath1)
-    test_isAn_jiagezhognshu_KanZhangZuoZhang_laoshi() #测试老师的案例
+    # test_isAn_jiagezhognshu_KanZhangZuoZhang_laoshi() #测试老师的案例
+    test_Befor_data()

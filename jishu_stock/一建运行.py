@@ -5,6 +5,7 @@ import datetime
 from jishu_stock.ChuShuiFuRong.ChuShuiFuRong import get_all_ChuShuiFuRong
 from jishu_stock.DaYou.DaYou import get_all_DaYou
 from jishu_stock.FanKeWeiZhu.FanKeWeiZhu import get_all_FanKeWeiZhu
+from jishu_stock.FanKeWeiZhu.FanKeWeiZhu_Plus import get_all_FanKeWeiZhu_Plus
 from jishu_stock.FeiLongZaiTian.FeiLongZaiTian import get_all_FeiLongZaiTian
 from jishu_stock.FengHuiLuZhuan.FengHuiLuZhuan import get_all_FengHuiLuZhuan
 from jishu_stock.GeShanDaNiu.GeShanDaNiu import get_all_GeShanDaNiu
@@ -68,6 +69,8 @@ def yijianyunxing():
     get_all_FeiLongZaiTian(localpath1)
     #反客为主 上涨 一天强势洗盘 胜率 80%
     get_all_FanKeWeiZhu(localpath1)
+    #反客为主plus
+    get_all_FanKeWeiZhu_Plus(localpath1)
     #0  上证 50 上证指数  大盘亢龙有悔
     get_all_KangLongYouHui_DaPan()
     # 1 V型 反转

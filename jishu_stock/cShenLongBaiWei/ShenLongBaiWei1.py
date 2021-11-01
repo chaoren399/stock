@@ -230,6 +230,16 @@ def test_xueyuan():
     print1(df_x3)
     isAnShenLongBaiwei_model(df_x3, '603520.SH')
 
+def test_linshi():
+
+    # 双汇发展, 是神1 , 有一个线的开盘价 突破了 涨停板的开盘价, 所以不太符合程序,然后程序就选不出来.
+
+    df_x3 = ts.pro_bar(ts_code='000895.SZ', start_date='20190403', end_date='20211029')
+    df_x3 = df_x3.iloc[0:40]  # 前4行
+    # print1(df_x3)
+    isAnShenLongBaiwei_model(df_x3, '000895.SZ')
+
+
 '''
 回测 6月份的数据
 '''
@@ -264,7 +274,8 @@ if __name__ == '__main__':
     # getall_ShenLongBaiWei1(localpath1)
     # test_Befor_data() # 找到 7 月份的数据
     # test_isAnShenLongBaiwei_model() # 老师案例
-    test_xueyuan() # 学员案例
+    # test_xueyuan() # 学员案例
+    test_linshi()
 
 
 

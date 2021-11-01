@@ -188,8 +188,10 @@ if __name__ == '__main__':
 
     # test1()
     localpath1 = '/jishu_stock/stockdata/data1/'
-    getAllWeekKdata(localpath1)  # 默认是运行当天的日期 可以 手动修改日期
-    # test_getTushare_Week_k()
+    getAllWeekKdata(localpath1)  # 默认是运行当天的日期 可以 手动修改日期  #周 5 下午 4 点数据不准
+    #下次测试一下  晚上 6 点的数据
+    # 周五的 晚上 8 点以后是可以
+
 
     # test_cover_day_K_to_Week_K() #测试一个股票转化为 周 K
 
