@@ -7,6 +7,7 @@ import tushare as ts
 import pandas as pd
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, print1, isYangXian, is_big_to_small, \
     writeLog_to_txt_path_getcodename, isYinXian
+from jishu_stock.z_tool.ShiTiDaXiao import getShiTiDaXiao
 from stock.settings import BASE_DIR
 
 import pandas as pd
@@ -29,6 +30,10 @@ https://www.yuque.com/chaoren399/eozlgk/ysft12/
 涨幅5%以.上
 以模型最低价作为止损价
 
+反客为主前必定是阳线, 因为是突然出现
+
+
+
 一般可这样区分：
  小阴线和小阳线的波动范围一般在0.6--1.5%；
  中阴线和中阳线的波动范围一般在1.6-3.5%；
@@ -44,7 +49,7 @@ https://www.yuque.com/chaoren399/eozlgk/ysft12/
 '''
 
 def get_all_FanKeWeiZhu_Plus(localpath1):
-    info1=  '--反客为主Plus 找 刚起来 不超过 3 个月的 强庄主力仅用一天的强势洗盘 start--   '
+    info1=  '--反客为主Plus找刚起来不超过3个月的 强庄主力仅用一天的强势洗盘 --   '
     writeLog_to_txt_nocode(info1)
 
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
@@ -97,6 +102,9 @@ def isAn_FanKeWeiZhu_Plus_model(data,stockcode):
         key_4=0; # 阳线涨幅 5% 以上
 
         key_5=0; #  10 周,60 周均线是不是向上
+        key_6=0; # 反客为主前必定是阳线, 因为是突然出现
+
+
 
 
 
@@ -111,6 +119,7 @@ def isAn_FanKeWeiZhu_Plus_model(data,stockcode):
 
         yinxian_pct_chg=0
         yangxian_pct_chg=0
+        yangxian_daxiao=0
         for index, row in data1.iterrows():
             if(index==0 and isYinXian(row) ==1):
                 count1=count1+1
@@ -127,6 +136,7 @@ def isAn_FanKeWeiZhu_Plus_model(data,stockcode):
                 day2_close = row['close']
 
                 yangxian_pct_chg=row['pct_chg']
+                yangxian_daxiao=getShiTiDaXiao(row)
         # format(float(a) / float(b), '.2f'))
         if(count1==2):
             key_1=1
@@ -139,9 +149,11 @@ def isAn_FanKeWeiZhu_Plus_model(data,stockcode):
             for index,row in data0.iterrows():
                 if(index==0):
                     day0_close=row['close']
+                    if( isYangXian(row)==1):
+                        key_6=1
             yinxian_zhenfu =  round (((day1_high - day1_low) / day0_close) * 100,2)
-            # if(yinxian_pct_chg < -4 or yinxian_zhenfu > 5): #阴线 跌幅 4% 以上或者振幅5%以上
-            if(yinxian_pct_chg < -4 and  yinxian_zhenfu > 5): #阴线 跌幅 4% 以上或者振幅5%以上
+            if(yinxian_pct_chg < -4 or yinxian_zhenfu > 5): #阴线 跌幅 4% 以上或者振幅5%以上
+            # if(yinxian_pct_chg < -4 and  yinxian_zhenfu > 5): #阴线 跌幅 4% 以上或者振幅5%以上
                 key_3=1
 
 
@@ -155,8 +167,9 @@ def isAn_FanKeWeiZhu_Plus_model(data,stockcode):
         # print1(key_2)
         # print1(key_3)
         # print1(key_4)
+        # print1(key_6)
         # print1(yangxian_pct_chg)
-        if(key_1==1 and  key_2 ==1 and key_3==1 and key_4==1):
+        if(key_1==1 and  key_2 ==1 and key_3==1 and key_4==1 and key_6==1):
             # 10 周均线是不是向上
 
             if(is10_60Week_XiangShang(stockcode, riqi) ==2):
@@ -169,6 +182,7 @@ def isAn_FanKeWeiZhu_Plus_model(data,stockcode):
                     info=info+'--阴线涨幅='+str(yinxian_pct_chg)
                     info=info+'--阴线振幅='+str(yinxian_zhenfu)
                     info=info+'--阳线涨幅='+str(yangxian_pct_chg)
+                    info=info+'--阳线大小='+str(yangxian_daxiao)
                     if(key_5==1):
                         info=info+"10-60周向上"
                     else:
@@ -330,8 +344,8 @@ def test_Befor_data():
 
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
-    # get_all_FanKeWeiZhu_Plus(localpath1)
+    get_all_FanKeWeiZhu_Plus(localpath1)
     # test_isAn_FanKeWeiZhu_Plus_laoshi_10yue()
     # test_isAn_FanKeWeiZhu_Plus_laoshi_6yue()
-    test_Befor_data()
+    # test_Befor_data()
     # test_isAn_FanKeWeiZhu_Plus_ziji()

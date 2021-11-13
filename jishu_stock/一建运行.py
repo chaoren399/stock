@@ -7,8 +7,13 @@ from jishu_stock.DaYou.DaYou import get_all_DaYou
 from jishu_stock.FanKeWeiZhu.FanKeWeiZhu import get_all_FanKeWeiZhu
 from jishu_stock.FanKeWeiZhu.FanKeWeiZhu_Plus import get_all_FanKeWeiZhu_Plus
 from jishu_stock.FeiLongZaiTian.FeiLongZaiTian import get_all_FeiLongZaiTian
+from jishu_stock.FeiLongZaiTian.FeiLongZaiTian2 import get_all_FeiLongZaiTian2
 from jishu_stock.FengHuiLuZhuan.FengHuiLuZhuan import get_all_FengHuiLuZhuan
 from jishu_stock.GeShanDaNiu.GeShanDaNiu import get_all_GeShanDaNiu
+from jishu_stock.JiaGeZhongShu.JGZS_RuanAll import JGZS_yijianyunxing
+from jishu_stock.JianLongZaiTian.JianLongZaiTian1 import get_all_JianLongZaiTian1
+from jishu_stock.JianLongZaiTian.JianLongZaiTian2 import get_all_JianLongZaiTian2
+from jishu_stock.JieJie.JieJie import get_all_JieJie
 from jishu_stock.JiuSiYiSheng.jiusiyisheng1 import get_all_jiusiyisheng1
 from jishu_stock.KanDieZuoZhang.KanDieZuoZhang import get_all_KanDieZuoZhang
 from jishu_stock.KangLongyouHui.KangLongYouHuiGeGu import get_all_KangLongYouHui_GeGu
@@ -16,8 +21,11 @@ from jishu_stock.KangLongyouHui.KangLongYouHui_DaPan import get_all_KangLongYouH
 from jishu_stock.LiuAnHuaMing.LiuAnHuaMing import get_all_LiuAnHuaMing
 from jishu_stock.LongZhan_YuYe.LongZhanYuYe import get_all_LongZhanYuYe
 from jishu_stock.PiJiTaiLai.PiJiTaiLai import get_all_PiJiTaiLai
-from jishu_stock.Tool_jishu_stock import get_2stockcode
+from jishu_stock.QiBaoJunXian.QiBaoJunXian1 import get_all_QiBaoJunXian1
+from jishu_stock.QiBaoJunXian.QiBaoJunXian2 import get_all_QiBaoJunXian2
+from jishu_stock.Tool_jishu_stock import get_2stockcode, dingshi_ceshi
 from jishu_stock.WuLiKanHua.WuLiKanHua import get_all_WuLiKanHua
+from jishu_stock.YiYiDaiLao.YiYiDaiLao2 import get_all_YiYiDaiLao2
 from jishu_stock.YouJingWuXian.YouJingWuXian1 import get_all_YouJingWuXian1
 from jishu_stock.YouJingWuXian.YouJingWuXian2 import get_all_YouJingWuXian2_1
 from jishu_stock.bQiXingLuoChangKong.QiXingluochangkong1 import getallstockdata_is7start_FromLocal
@@ -38,31 +46,44 @@ from jishu_stock.YiJIanShuangDiao.YiJianShuangDiao import get_all_YiJianShuangDi
 from jishu_stock.zYouQianJun.YouQianJun120_250 import get_all_120_250
 from jishu_stock.RiJunXianZuhe.RiJunXianZuHe import get_all_5_13_34
 
+'''
+周线 价格中枢一键运行
+'''
+def jiagezhognshu_yijianyunxing():
+    JGZS_yijianyunxing()
 
+'''
+日线 一键运行
+平时下午 4 点准时更新
+周五数据延迟, 5:58 可以下载
+'''
 def yijianyunxing():
-
     # 日线 操作
-
     localpath1 = '/jishu_stock/stockdata/data1/'
-
     today = starttime.strftime('%Y%m%d')
+    dingshi_ceshi()
 
     getAllStockData(start_date='20200701', end_date=today, localpath=localpath1) #这个时间 提供一年的得到 MA34
+
+    #见龙在田1 判断 3个 K 线 , 一阳一阴一阳
+    get_all_JianLongZaiTian1(localpath1)
+    #见龙在田2 判断 2 个 K 线 , 一阳一阴
+    get_all_JianLongZaiTian2(localpath1)
+    # 结界, 后期有账户再操作
+    get_all_JieJie(localpath1)
+    #起爆均线 1
+    get_all_QiBaoJunXian1(localpath1)
+    #起爆均线 2
+    get_all_QiBaoJunXian2(localpath1)
 
     #雾里看花, 特殊的十字星 还没验证
     get_all_WuLiKanHua(localpath1)
     #隔山打牛
     get_all_GeShanDaNiu(localpath1)
-    #  5-13-34 日均线组合
-    get_all_5_13_34(localpath1)
-    #有惊无险 2-1 2021年10月25日 get_all_YouJingWuXian2_1(localpath1):
-    get_all_YouJingWuXian2_1(localpath1)
-    #有惊无险 1 2021年10月25日
-    get_all_YouJingWuXian1(localpath1)
+
     #出水芙蓉 主力底部强势洗盘
     get_all_ChuShuiFuRong(localpath1)
-    #柳暗花明 底部强势上涨
-    get_all_LiuAnHuaMing(localpath1)
+
     #看跌做涨 上涨结构 抄底 尾盘买入
     get_all_KanDieZuoZhang(localpath1)
     # 飞龙在天, 是萧先生 所有模型里边,挣钱最多, 最快的一个.  胜率最高的
@@ -75,40 +96,58 @@ def yijianyunxing():
     get_all_KangLongYouHui_DaPan()
     # 1 V型 反转
     getallstockdata_isV_fromLocal(localpath1)
+    # 8 龙战于野
+    get_all_LongZhanYuYe(localpath1)
     # 一箭双雕 复盘 8 月份 94% 的成功率
     get_all_YiJianShuangDiao(localpath1)
     #大有模型
     get_all_DaYou(localpath1)
-    # 8 龙战于野
-    get_all_LongZhanYuYe(localpath1)
 
-    # 熊市末期亢龙有悔 个股上的应用:
-    get_all_KangLongYouHui_GeGu(localpath1)
     # 2以逸待劳  完美符合模型, 第 6 天阳线收盘
     get_all_YiYiDaiLao(localpath1)
 
+    # 熊市末期亢龙有悔 个股上的应用:
+    get_all_KangLongYouHui_GeGu(localpath1)
+
+
     #否极泰来 97% 的超高胜率
     get_all_PiJiTaiLai(localpath1)
-
-    # 神龙摆尾0
-    get_all_isShenLongBaiWei0(localpath1)
     #  神龙摆尾1
     getall_ShenLongBaiWei1(localpath1)
 
-    # 神龙摆尾2
-    get_all_ShenLongBaiWei2(localpath1)
-    #  神龙摆尾3
-    get_all_ShenLongBaiWei3(localpath1)
-
     #峰回路转  当天条件挂单
     get_all_FengHuiLuZhuan(localpath1)
+    #飞龙在天2, 超短线  第 3 天盯收盘价 高过小 K 线实体买入
+    get_all_FeiLongZaiTian2(localpath1)
+    # 2以逸待劳  完美符合模型, 前 5 天满足模型, 第 6 天待定
+    get_all_YiYiDaiLao2(localpath1)
+
+    #  神龙摆尾3
+    get_all_ShenLongBaiWei3(localpath1)
+    # 神龙摆尾0
+    get_all_isShenLongBaiWei0(localpath1)
+    # 神龙摆尾2
+    get_all_ShenLongBaiWei2(localpath1)
+
+
+
     # 神龙摆尾4
     get_all_ShenLongBaiWei4(localpath1)
 
+    #柳暗花明 底部强势上涨
+    get_all_LiuAnHuaMing(localpath1)
     #12 九死一生(1)底部强势反转
     get_all_jiusiyisheng1(localpath1)
     #13 九死一生(2)底部弱势反转
     get_all_JiuSiYiSheng_2(localpath1)
+
+    #  5-13-34 日均线组合
+    get_all_5_13_34(localpath1)
+    #有惊无险 2-1 2021年10月25日 get_all_YouJingWuXian2_1(localpath1):
+    get_all_YouJingWuXian2_1(localpath1)
+    #有惊无险 1 2021年10月25日
+    get_all_YouJingWuXian1(localpath1)
+
     # 9 蜻蜓点水  缺口理论
     get_all_QingTingDianShui(localpath1)
     # 10 凌波微步  缺口理论  模板
@@ -118,16 +157,11 @@ def yijianyunxing():
     # 七星落长空 2
     getallstockdata_is7start2_FromLocal(localpath1)
 
-
-
-
     # 15 葛式八法
     # getallstockdata_is_GeShi_8fa()
 
     #7  双龙取水 模型
     getallstockdata_is_ShuangLong_Qushui_FromLocal(localpath1)
-
-
 
     # 14 有钱君-120-250 均线交易法
     get_all_120_250()

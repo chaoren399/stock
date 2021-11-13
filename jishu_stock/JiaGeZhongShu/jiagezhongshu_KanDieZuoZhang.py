@@ -7,9 +7,10 @@ import tushare as ts
 import pandas as pd
 
 from jishu_stock.GeShiBaFa.Get_Week_K_data_From_Ts import getAllWeekKdata
+from jishu_stock.JiaGeZhongShu.jiagezhognshu_Get_Week_K_data import getAll_jiagezhongshu_WeekKdata
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, print1, isYinXian, isYangXian, \
     writeLog_to_txt_path_getcodename, writeLog_to_txt_path, jiagezhongshu_writeLog_to_txt_path_getcodename
-from jishu_stock.z_tool.PyDateTool import get_date1_date2_days
+from jishu_stock.z_tool.PyDateTool import get_date1_date2_days, riqi_geshi_zhuanhua1
 from jishu_stock.z_tool.getMin_Max import getMin_fromDataFrame
 from stock.settings import BASE_DIR
 from jishu_stock.z_tool.ShiTiDaXiao import getShiTiDaXiao
@@ -60,7 +61,7 @@ def get_all_jiagezhongshu_KanDieZuoZhang(localpath1):
         # print '1111111'
         for index, row in data.iterrows():
             stock_code = row['ts_code']
-            stockdata_path = BASE_DIR + '/jishu_stock/stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+            stockdata_path = BASE_DIR + '/jishu_stock/stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
             df = pd.read_csv(stockdata_path, index_col=0)
             # print df
             if (df.empty):
@@ -112,7 +113,7 @@ def isAn_KanDieZuoZhang_model(data,stockcode):
         week1_open=0
         week1_close=0
         week1_low=0
-
+        week1_shiti=0
         week2_shiti=0
         week2_close=0
         week2_high=0
@@ -126,6 +127,7 @@ def isAn_KanDieZuoZhang_model(data,stockcode):
                 week1_open=row['open']
                 week1_close=row['close']
                 week1_low=row['low']
+                week1_shiti=getShiTiDaXiao(row)
 
 
             if(index==1):  # 第 2 周
@@ -186,13 +188,19 @@ def isAn_KanDieZuoZhang_model(data,stockcode):
 
         if(key_1==1 and  key_2 ==1 and key_3==1 and key_4==1 and key_5==1 and key_6==1):
             row = getMin_fromDataFrame(data)
+
             min_date = row['trade_date']
+            min_date=riqi_geshi_zhuanhua1(min_date)
+            riqi=riqi_geshi_zhuanhua1(riqi)
+            # print1(min_date)
+            # print1(riqi)
             days = get_date1_date2_days(min_date, riqi)
             # print1(days/7)
             if( (days/7)< 13):
 
                 info = ''
                 info=info+'价格中枢='+str(jiage_zhongshu)
+                info=info+'阳线实体='+str(week1_shiti)
                 info=info+'-第2周最高价='+str(week2_high)
                 # info=info+'-上影线长度='+str(week1_shangyingxian_changdu)#week1_shangyingxian_changdu > week1_quanbu_changdu
                 # info=info+'-全部长度='+str(week1_quanbu_changdu)#week1_shangyingxian_changdu > week1_quanbu_changdu
@@ -204,7 +212,8 @@ def isAn_KanDieZuoZhang_model(data,stockcode):
                     '%Y-%m-%d') + '.txt'
 
                 jiagezhongshu_writeLog_to_txt_path_getcodename(info, path, stockcode)
-
+                path = '价格中枢看跌做涨.txt'
+                writeLog_to_txt_path_getcodename(info, path, stockcode)
 
 
 
@@ -260,7 +269,8 @@ def test_Befor_data():
     for index, row in data.iterrows():
         stock_code = row['ts_code']
 
-        stockdata_path = BASE_DIR + '/jishu_stock/stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+        # stockdata_path = BASE_DIR + '/jishu_stock/stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+        stockdata_path = BASE_DIR + '/jishu_stock/stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
         df = pd.read_csv(stockdata_path, index_col=0)
             # print df
         if (df.empty):
@@ -278,8 +288,9 @@ def test_Befor_data():
 
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
-    getAllWeekKdata(localpath1) #每周运行钱需要先下载数据
+    # getAll_jiagezhongshu_WeekKdata(localpath1) #每周运行钱需要先下载数据
     get_all_jiagezhongshu_KanDieZuoZhang(localpath1)
+
     # test_isAn_KanDieZuoZhang_laoshi()
     # test_Befor_data()
     # test_isAn_KanDieZuoZhang_ziji()

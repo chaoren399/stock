@@ -29,7 +29,7 @@ https://www.yuque.com/chaoren399/eozlgk/dl33zz
 '''
 
 def get_all_YiYiDaiLao(localpath1):
-    info1=  '--以逸待劳主力洗盘模型 start--   '
+    info1=  '--以逸待劳 完美符合模型, 第 6 天阳线收盘主力洗盘模型 start--   '
     writeLog_to_txt_nocode(info1)
 
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'

@@ -6,7 +6,7 @@ import exceptions
 import tushare as ts
 import pandas as pd
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, print1, isYangXian, is_big_to_small, \
-    is_small_to_big, isYinXian
+    is_small_to_big, isYinXian, writeLog_to_txt_path_getcodename
 from jishu_stock.z_tool.ShiTiDaXiao import getShiTiDaXiao
 from jishu_stock.z_tool.is5_13_34_ShangZhang import is5_13_34_XiangShang
 from stock.settings import BASE_DIR
@@ -162,6 +162,9 @@ def isAn_DaYou_model(data,stockcode):
                 info = info+"-----大有,上涨初期,洗盘模型,下跌后横盘半年以上 ---- " + str(riqi)
                 # print info
                 writeLog_to_txt(info, stockcode)
+
+                path = '大有.txt'
+                writeLog_to_txt_path_getcodename(info, path, stockcode)
 
 
 

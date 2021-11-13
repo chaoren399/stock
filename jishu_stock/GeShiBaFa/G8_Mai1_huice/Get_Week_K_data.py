@@ -56,6 +56,7 @@ def cover_day_K_to_Week_K(df,outpath):
     # print df
     df = df.dropna(how='any', axis=0)#删除 列数据为空的 的行
     # df = df[0:450]
+    # print df
 
     # 获取周k
     df_week = pd.DataFrame()
@@ -75,13 +76,15 @@ def cover_day_K_to_Week_K(df,outpath):
     df_week = df_week.dropna(how='any', axis=0)#删除 列数据为空的 的行
     df_week.sort_index(axis=1, ascending=False)
     df_week = df_week.sort_values(by='trade_date', axis=0, ascending=False)  # 按照日期 从新到旧 排序
-    # print  df_week
+    print1(df_week)
     df_week.to_csv(outpath)
 
     return 1
 
-
-def test_002319():
+'''
+测试一个股票转化为 周 K 
+'''
+def test_000001():
     # stock_code='002319.SZ'
     # stock_code='002297.SZ'
     stock_code='000001.SZ'
@@ -102,20 +105,7 @@ def test_002319():
 
 
     cover_day_K_to_Week_K(df, outpath)
-'''
-测试一个股票转化为 周 K 
-'''
-def test_cover_day_K_to_Week_K():
 
-
-    stock_code='000001.SZ'
-    outpath = BASE_DIR + '/jishu_stock/stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
-
-    localpath1 = '/jishu_stock/stockdata/data1/'
-    stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
-    df = pd.read_csv(stockdata_path, index_col=0)
-    print df
-    cover_day_K_to_Week_K(df, outpath)
 
 
 if __name__ == '__main__':
@@ -125,9 +115,9 @@ if __name__ == '__main__':
 
     # test1()
     localpath1 = '/jishu_stock/stockdata/data1/'
-    getAllWeekKdata(localpath1)
-    # test_002319()
-    # test_cover_day_K_to_Week_K() #测试一个股票转化为 周 K
+    # getAllWeekKdata(localpath1)
+    test_000001() #测试一个股票转化为 周 K
+
 
     endtime = datetime.datetime.now()
     print  "总共运行时长:"

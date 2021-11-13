@@ -5,7 +5,7 @@ import datetime
 import tushare as ts
 import sys
 
-from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode
+from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, writeLog_to_txt_path_getcodename
 from stock.settings import BASE_DIR
 import pandas as pd
 import time
@@ -36,6 +36,11 @@ def getAllStockData(start_date , end_date, localpath):
             return 0
         if(len(df1)>0):
             print df1[0:2]
+            writeLog_to_txt_nocode(df1.ix[0]['trade_date'])
+            path = '00_测试定时任务.txt'
+            stockcode = '000001.SZ'
+            info='下载数据开始='+str(df1.ix[0]['trade_date'])
+            writeLog_to_txt_path_getcodename(info, path, stockcode)
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
     # print "ssss"
     print path
@@ -69,7 +74,7 @@ def getAllStockData(start_date , end_date, localpath):
                 time.sleep(0.03)  # //睡觉2021
                 # time.sleep(0.01)  # //睡觉 2015
                 #  2021年08月16日 增加 ma5 ma13 ma 34
-                df = ts.pro_bar(ts_code=stock_code,adj='qfq', start_date=start_date, end_date=end_date, ma=[5, 13, 34])
+                df = ts.pro_bar(ts_code=stock_code,adj='qfq', start_date=start_date, end_date=end_date, ma=[5, 13, 34,144,169,75])
                 stockdata_path = BASE_DIR + localpath
                 print str(count) + '--' + stock_code
                 if (df is None or df.empty):

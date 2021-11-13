@@ -3,7 +3,16 @@
 # for i in range(1, 10)
 from datetime import datetime
 
-from jishu_stock.Tool_jishu_stock import print1
+
+''''
+2021-07-09 到 20210709
+
+'''
+def riqi_geshi_zhuanhua1(s):
+    # s = '2019-01-20'
+    ss= datetime.strptime(s, '%Y-%m-%d')  # 2019-01-20 00:00:00
+    day = datetime.strftime(ss, '%Y%m%d')
+    return day
 
 '''
 判断 2 个日期 相差 几天
@@ -24,4 +33,6 @@ def get_date1_date2_days(startdate, enddate):
 if __name__ == '__main__':
     enddate = '20210720'
     startdate = '20210719'
-    print get_date1_date2_days(startdate,enddate)
+    # print get_date1_date2_days(startdate,enddate)
+    date1='2021-07-09'
+    riqi_geshi_zhuanhua1(date1)

@@ -6,7 +6,7 @@ import exceptions
 import tushare as ts
 import pandas as pd
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, print1, isYangXian, is_small_to_big, \
-    writeLog_to_txt_path_getcodename
+    writeLog_to_txt_path_getcodename, isYinXian
 from jishu_stock.z_tool.PyDateTool import get_date1_date2_days
 from jishu_stock.z_tool.ShiTiDaXiao import getShiTiDaXiao
 from jishu_stock.z_tool.getMin_Max import getMin_fromDataFrame
@@ -83,6 +83,8 @@ def isAn_WuLiKanHua_model(data,stockcode):
 
         key_5=0; #5日均线 明显上升 ,获取 5 天的数据
 
+        key_6=0; #6上下影线 相差不大
+
         day1_open =0
         day1_close =0
         day1_high = 0
@@ -93,6 +95,9 @@ def isAn_WuLiKanHua_model(data,stockcode):
         day2_low = 0
 
         yangxian_shiti=0
+        day1_shangyingxian=0
+        day1_xiayingxian=0
+        shang_xia_yingxian=0
         for index,row in data1.iterrows():
             if(index==0 and getShiTiDaXiao(row) <0.5 ):
                 key_1=1
@@ -100,6 +105,14 @@ def isAn_WuLiKanHua_model(data,stockcode):
                 day1_close=row['close']
                 day1_high=row['high']
                 day1_low=row['low']
+                if(isYinXian(row)==1):#如果是十字星阳线
+                    day1_shangyingxian=day1_high -day1_open
+                    day1_xiayingxian= day1_close-day1_low
+                else:
+                    day1_shangyingxian=day1_high -day1_close
+                    day1_xiayingxian= day1_open-day1_low
+
+
             if(key_1==1 and index==1 and isYangXian(row)==1):
                 key_2=1
                 day2_open=row['open']
@@ -144,6 +157,11 @@ def isAn_WuLiKanHua_model(data,stockcode):
 
             if(is_small_to_big(ma5s)==1):
                 key_5=1
+            # 6上下影线 相差不大
+            day1_xiayingxian=day1_xiayingxian+0.00001
+            shang_xia_yingxian= round(day1_shangyingxian /day1_xiayingxian,2)
+            # print1(day1_shangyingxian)
+            # print1(day1_xiayingxian)
 
 
         # print1(key_1)
@@ -152,10 +170,12 @@ def isAn_WuLiKanHua_model(data,stockcode):
         # print1(key_4)
         # print1(key_5)
         # print1(days_chahzi)
+        # print1(shang_xia_yingxian)
         if(key_1==1 and  key_2 ==1 and key_3==1 and key_4==1and key_5==1):
 
             info=''
-            info = info+'-阳线=' + str(yangxian_shiti)
+            info = info+'阳线=' + str(yangxian_shiti)
+            info = info+'--上下影线相差不大=' + str(shang_xia_yingxian)
 
             info =info + "-----雾里看花 ----"  + str(riqi)
             # print info

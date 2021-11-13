@@ -91,7 +91,9 @@ def isAn_KangLongYouHui_DaPan_model(data,stockcode):
         # print1(key_2)
         # print1(key_3)
         if(key_1==1 and key_3==1 ):
-            info = "-----亢龙有悔 大盘  成功了 ----"  + str(riqi)
+            info=''
+            info = info+str(stockcode)
+            info = info+"--大盘亢龙有悔成功了--"  + str(riqi)
             # print info
             # writeLog_to_txt(info, stockcode)
 

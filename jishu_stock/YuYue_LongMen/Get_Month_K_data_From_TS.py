@@ -12,6 +12,7 @@ from stock.settings import BASE_DIR
 https://www.jb51.net/article/213955.htm
 日K 转换为 月K
 每月 运行一次, 本次运行时间 2021年09月11日
+2021年11月12日
 
 https://tushare.pro/register?reg=456282 
 '''

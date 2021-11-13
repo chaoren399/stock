@@ -7,7 +7,8 @@ import tushare as ts
 import pandas as pd
 from pandas import DataFrame
 
-from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, isInQiangShi_gupiaochi, get_Stock_Name
+from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, isInQiangShi_gupiaochi, \
+    get_Stock_Name, writeLog_to_txt_path_getcodename
 from stock.settings import BASE_DIR
 
 
@@ -101,9 +102,9 @@ def is_YuYueLongMen_model(data, stock_code):
                 key_isxiangjiang_2015_2018=0
                 return
 
-        #3 获取最近 2 个月的数据
+        #3 获取最近 3个月的数据
         data_len= len(data)
-        df_2021_5=data[data_len-3:data_len-1]  # 获取除 最近一个月之外的 2 个月数据
+        df_2021_5=data[data_len-3:data_len]  # 获取最近 3 个月是不是上涨
         df_2021_5 = df_2021_5.reset_index(drop=True)
         # print df_2021_5
         key_is_shangzhang_5=0#  判断近 5 个月是不是上涨
@@ -124,6 +125,9 @@ def is_YuYueLongMen_model(data, stock_code):
             print info
             with open(path, "a") as f:
                 f.write(info + '' + "\n")
+
+            path = '鱼跃龙门.txt'
+            writeLog_to_txt_path_getcodename(info, path, stock_code)
             return
 
 
@@ -153,10 +157,11 @@ def test_is_YuYueLongMen_model():
     # stock_code = '002533.SZ' #金杯电工
     # stock_code = '002536.SZ' #飞龙股份
     stock_code = '000059.SZ' #飞龙股份
+    stock_code = '000158.SZ' #飞龙股份
     stockdata_path = BASE_DIR + '/jishu_stock/stockdata/MONTH_DATA_K/' + stock_code + '_Month' + ".csv"
     print "测试---test_is_YuYueLongMen_model "
     df = pd.read_csv(stockdata_path, index_col=0)
-    print df[0:3]
+    # print df[0:3]
     is_YuYueLongMen_model(df, stock_code)
 if __name__ == '__main__':
     starttime = datetime.datetime.now()

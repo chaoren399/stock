@@ -85,10 +85,19 @@ def test_zhenfu():
     df = ts.pro_bar(ts_code='000001.SH', asset='I',freq='D',start_date='2020-01-07 ',end_date='2020-01-08 ',amp='Y')
     print df
 
+'''
+测试最新的数据
+'''
+def test_zuiXin_shuju():
+    df1 = ts.pro_bar(ts_code='000001.SZ', adj='qfq', start_date='20210801', end_date='20211112')
+    print df1[0:2]
+
+
 if __name__ == '__main__':
     # getETFdata()
     # getDuoZhi_Gupiao()
     # testLiRunbiao()
     # testfina_indicator()
     # test_get_50_data()
-    test_zhenfu()
+    # test_zhenfu()
+    test_zuiXin_shuju()

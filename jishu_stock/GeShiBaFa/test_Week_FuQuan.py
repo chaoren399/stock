@@ -22,7 +22,7 @@ https://tushare.pro/document/2?doc_id=109
 '''
 def test_fuquan():
 
-    df = ts.pro_bar(ts_code='000685.SZ', adj='qfq',freq	='W',start_date='20180101', end_date='20210922')
+    df = ts.pro_bar(ts_code='000685.SZ', adj='qfq',freq	='W',start_date='20180101', end_date='20211102')
 
     df = df.sort_values(by='trade_date', axis=0, ascending=True)  # 按照日期 从新到旧 排序
     # df = df.sort_values(by='trade_date', axis=0, ascending=True)  # 按照日期 从旧到新 排序
@@ -33,7 +33,7 @@ def test_fuquan():
     # print df
     df = df.dropna(how='any', axis=0)  # 删除 列数据为空的 的行
 
-    # print df
+    print df
     df_week = df
 
     df_week['WeekMa10'] = df_week['close'].rolling(10).mean()
@@ -53,7 +53,35 @@ def test_fuquan():
     df1 = df.iloc[0:4]  # 把前 2 周的数据保留, 我只要找到 合适得买点   前3行 最近 3 周的数据
     df2 = df.iloc[0:8]  # 把前 2 周的数据保留, 我只要找到 合适得买点   前3行 最近 3 周的数据
 
-    isAn_GEShi8_model(df1,df2, '000685.SZ')
+    # isAn_GEShi8_model(df1,df2, '000685.SZ')
+
+'''
+
+测试 不复权 的成功 
+'''
+def test_getTushare_Week_k_bufuquan():
+    pro = ts.pro_api()
+
+    # df = pro.weekly(ts_code='000001.SZ',start_date='20180101', end_date='20210920',
+    #                  fields='ts_code,trade_date,open,high,low,close,vol,amount')
+
+    df = pro.weekly(ts_code='000685.SZ',start_date='20180101', end_date='20211102',
+                     fields='ts_code,trade_date,open,high,low,close,vol,amount')
+
+
+    df = df.sort_values(by='trade_date', axis=0, ascending=True)  # 按照日期 从新到旧 排序
+    # df = df.sort_values(by='trade_date', axis=0, ascending=True)  # 按照日期 从旧到新 排序
+    # df.set_index('trade_date', inplace=True)
+
+    # 将 date 设定为 index
+    df.set_index('trade_date', inplace=True)
+    # print df
+    df = df.dropna(how='any', axis=0)  # 删除 列数据为空的 的行
+
+    print df
+
+
 
 if __name__ == '__main__':
-    test_fuquan()
+    # test_fuquan()
+    test_getTushare_Week_k_bufuquan()

@@ -86,7 +86,7 @@ def is_small_to_big(data):
     len_data = len(data)
     if(len_data > 0):
         is_small_to_big_flag=1
-        for i in range(0, len_data - 1):
+        for i in range(0, len_data - 1):  #思路, 只要有个一 数据 大于后边数据 那么就不满足 由小到大排序
             # week10_60s[i:i+1]
             if (data[i] > data[i + 1]):
                 is_small_to_big_flag = 0
@@ -166,7 +166,7 @@ def writeLog_to_txt_path(info ,path):
 
 
 #  下边的  writeLog_to_txt  writeLog_to_txt_nocode 两个函数用用一路径
-path = BASE_DIR + '/jishu_stock/zJieGuo/10月/' + datetime.datetime.now().strftime(
+path = BASE_DIR + '/jishu_stock/zJieGuo/11月/' + datetime.datetime.now().strftime(
         '%Y-%m-%d') + '.txt'
 '''
 固定路径的写入 带 code 的, 每个输出都有的
@@ -326,7 +326,7 @@ def isShangZhang_QuShi(data):
     #得到近期数据
 
     ts.set_token('731d2ea0abcf1f14d59ec7215d6ec520e09a439fccd2772c43a906be')
-    pro = ts.pro_api()
+
     pro = ts.pro_api()
     df30 = pro.daily(ts_code=stock_code, start_date=date_30days, end_date=date_1day)
     df60 = pro.daily(ts_code=stock_code, start_date=date_60days, end_date=date_1day)
@@ -344,7 +344,8 @@ def isShangZhang_QuShi(data):
 给出 股票代码 得到 股票的名字
 '''
 def  get_Stock_Name(code):
-    path = path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
+    # path = path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
+    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path)
     for index, row in data.iterrows():
         if (row['ts_code'] == code):
@@ -401,7 +402,15 @@ def isInQiangShi_gupiaochi(code):
                 return 1
     return 0
 
-
+'''
+单纯 测试 cronette定时任务是不是启动成功
+'''
+def dingshi_ceshi():
+    print '看看能不能引用到'
+    path = '00_测试定时任务.txt'
+    info='看看能不能引用到'+str( datetime.datetime.now())
+    stockcode='000001.SZ'
+    writeLog_to_txt_path_getcodename(info, path, stockcode)
 
 
 if __name__ == '__main__':

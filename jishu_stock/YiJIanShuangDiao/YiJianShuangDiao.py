@@ -6,7 +6,7 @@ import exceptions
 import tushare as ts
 import pandas as pd
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, isYangXian, print1, \
-    writeLog_to_txt_path_getcodename
+    writeLog_to_txt_path_getcodename, isYinXian
 from jishu_stock.z_tool.is5_13_34_ShangZhang import is5_13_34_XiangShang
 from stock.settings import BASE_DIR
 
@@ -130,14 +130,14 @@ def isAn_YiJianShuangDiao_model(data,stockcode):
                 day1_close=row['close']
                 yangxian_shiti = format(((row['close'] - row['open']) / row['open']) * 100, '.2f')  # (开盘价-收盘价)÷开盘价＜0.5%
 
-            if(index==1 and isYangXian(row)==0): #小阴线
+            if(index==1 and isYinXian(row)==1): #小阴线
                 count=count+1
                 day2_open=row['open']
                 day2_close=row['close']
 
                 yinxian_shiti1 = format(((row['close'] - row['open']) / row['open']) * 100, '.2f')  # (开盘价-收盘价)÷开盘价＜0.5%
 
-            if(index==2 and isYangXian(row)==0): #小阴线
+            if(index==2 and isYinXian(row)==1): #小阴线
                 count=count+1
                 day3_open = row['open']
                 day3_close=row['close']
@@ -168,6 +168,7 @@ def isAn_YiJianShuangDiao_model(data,stockcode):
             # print1(yinxian_shiti2)
 
             xiaoshiti_yinxian=1.6 # 小实体阴线 值为 2 老师的案例都成功
+            # xiaoshiti_yinxian=2 # 小实体阴线 值为 2 老师的案例都成功
             if(abs(float(yinxian_shiti1)) <xiaoshiti_yinxian  and abs(float(yinxian_shiti2))<xiaoshiti_yinxian):
                 if( abs(float(yinxian_shiti1)) > 0.1 and abs(float(yinxian_shiti2)) > 0.1):
                     key_7=1
@@ -213,14 +214,16 @@ def isAn_YiJianShuangDiao_model(data,stockcode):
                 info =info+ '2个阴线高开(极少见)'
             else:
                 info =info+'没有阴线高开-----'
-            info = info+'-中阳线=' + str(yangxian_shiti) + ',' +'小阴线1=' + str(yinxian_shiti1) + ',' + '小阴线2=' + str(yinxian_shiti2)
+            if (key_4==2 and is5_13_34_XiangShang(data,0)>2):
 
-            info = info+"-----一箭双雕 主力中继洗盘模型 ---- "  + str(riqi)
-            # print info
-            writeLog_to_txt(info, stockcode)
+                info = info+'-中阳线=' + str(yangxian_shiti) + ',' +'小阴线1=' + str(yinxian_shiti1) + ',' + '小阴线2=' + str(yinxian_shiti2)
 
-            path = '一箭双雕.txt'
-            writeLog_to_txt_path_getcodename(info, path, stockcode)
+                info = info+"-----一箭双雕 主力中继洗盘模型 ---- "  + str(riqi)
+                # print info
+                writeLog_to_txt(info, stockcode)
+
+                path = '一箭双雕.txt'
+                writeLog_to_txt_path_getcodename(info, path, stockcode)
 
 
 
@@ -335,10 +338,10 @@ def test_Befor_data():
 
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
-    get_all_YiJianShuangDiao(localpath1)
+    # get_all_YiJianShuangDiao(localpath1)
     # test_isAn_YiJianShuangDiao_laoshi()#测试老师举例 5个成功案例 其中一个 阴线实体为0,一个阴线实体大于 1.6  总共 3 个成功
     # test_isAn_YiJianShuangDiao_laoshi_shibai_anli()#测试老师举例讲解学生 失败案例
 
     # test_isAn_YiJianShuangDiao_ziji()
-    # test_Befor_data() #测试 8 月份所有数据
+    test_Befor_data() #测试 8 月份所有数据
     # linshi()

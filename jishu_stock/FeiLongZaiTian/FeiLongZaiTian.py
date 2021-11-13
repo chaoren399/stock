@@ -177,9 +177,9 @@ def test_isAn_FeiLongZaiTian_ziji():
 
 
     #自己的 案例
-    df1 = ts.pro_bar(ts_code='000929.SZ',adj='qfq', start_date='20210206', end_date='20211021')
+    df1 = ts.pro_bar(ts_code='002354.SZ',adj='qfq', start_date='20210206', end_date='20211110')
     data7_1 = df1.iloc[0:6]  # 前7行
-    isAn_FeiLongZaiTian_model(data7_1,'000929.SZ')
+    isAn_FeiLongZaiTian_model(data7_1,'002354.SZ')
 
 def test_xueyuan_anli():
 
@@ -210,6 +210,6 @@ if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
     # test_isAn_FeiLongZaiTian_laoshi()
     # get_all_FeiLongZaiTian(localpath1)
-    test_Befor_data()
-    # test_isAn_FeiLongZaiTian_ziji()
+    # test_Befor_data()
+    test_isAn_FeiLongZaiTian_ziji()
     # test_xueyuan_anli()

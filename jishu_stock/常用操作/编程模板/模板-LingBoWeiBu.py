@@ -38,15 +38,11 @@ def get_all_LingBoWeiBu(localpath1):
         stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
         df = pd.read_csv(stockdata_path, index_col=0)
 
-        data6_1 = df.iloc[2:8]  # 前6行
+        data6_1 = df.iloc[0:30]  # 前6行
         # data6_1 = df.iloc[20:32]  # 前6行
         len1 = len(data6_1)
         isAn_LingBoWeiBu_model(data6_1, stock_code)
 
-        # print len1
-        for i in range(0, len1 - 3 + 1):
-
-            isKanglongyouhui_3Days_data(dataframe_df[i:i + 3], stockcode)
 
 
 '''
@@ -61,10 +57,10 @@ def isAn_LingBoWeiBu_model(data,stockcode):
         print str(stockcode) + '--data --is null'
     if(len_data >= 6):
         data = data.sort_values(by='trade_date', axis=0, ascending=True)  # 按照日期 从旧到新 排序
-        data = data.reset_index(drop=True)  # 重新建立索引 ,
+        data = data.reset_index(drop=False)  # 重新建立索引 ,默认为false，索引列（被设置为索引的列）被还原为普通列，并将索引重置为整数索引，否则直接丢弃索引列。
 
         data1= data[len_data-2:len_data]
-        data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
+        data1 = data1.reset_index(drop=False)  # 重新建立索引 ,
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
         print1(data1)
 
@@ -80,6 +76,8 @@ def isAn_LingBoWeiBu_model(data,stockcode):
             info = info + "-----缺口理论, 凌波微步  成功了"  + str(riqi)
             # print info
             writeLog_to_txt(info, stockcode)
+            path = '----Plus.txt'
+            writeLog_to_txt_path_getcodename(info, path, stockcode)
 
 
 '''

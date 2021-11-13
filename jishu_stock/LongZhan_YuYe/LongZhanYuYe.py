@@ -92,7 +92,7 @@ def isAn_LongZhanYuYe_model(data,stockcode):
                 if(index==1 and isYinXian(row)==1): #次日大阴线
                     day2_open = row['open']
                     day2_shiti=getShiTiDaXiao(row)
-                    print1(day2_shiti)
+                    # print1(day2_shiti)
                     if(day2_shiti >2.9):
                         key_2=1
                 if(index==2 and isYangXian(row)==1):
@@ -102,6 +102,7 @@ def isAn_LongZhanYuYe_model(data,stockcode):
         # print1(key_1)
         # print1(key_2)
         # print1(key_3)
+        print1(day2_shiti)
         if(key_1==1 and  key_2 ==1and key_3==1):
             info = ''
             info= info+ '阴线实体大于3.6最好:'+str(day2_shiti)
@@ -151,9 +152,9 @@ def test_isAn_LongZhanYuYe_laoshi():
 def test_isAn_LongZhanYuYe_ziji():
 
     #自己的 案例
-    df1 = ts.pro_bar(ts_code='002507.SZ',adj='qfq', start_date='20210206', end_date='20211008')
+    df1 = ts.pro_bar(ts_code='603335.SH',adj='qfq', start_date='20210206', end_date='20211108')
     data7_1 = df1.iloc[0:6]  # 前7行
-    isAn_LongZhanYuYe_model(data7_1,'002507.SZ')
+    isAn_LongZhanYuYe_model(data7_1,'603335.Sh')
 
 '''
 回测 8 月份的数据
@@ -179,5 +180,6 @@ def test_Befor_data():
 
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
-    get_all_LongZhanYuYe(localpath1)
+    # get_all_LongZhanYuYe(localpath1)
     # test_isAn_LongZhanYuYe_laoshi()
+    test_isAn_LongZhanYuYe_ziji()

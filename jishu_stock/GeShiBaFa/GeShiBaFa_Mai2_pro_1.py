@@ -8,6 +8,8 @@ from stock.settings import BASE_DIR
 '''
 https://www.cnblogs.com/chaoren399/p/15231305.html
 
+https://xueqiu.com/3476656801/202373674
+
 葛式八法 买 2
 
 2021年09月10日 通过 学员朋友的选股测试, 我发现 鱼跃龙门 很好用,

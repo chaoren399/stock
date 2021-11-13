@@ -19,3 +19,11 @@ writeLog_to_txt_path_getcodename(info, path, stockcode)
 
 
 3. 涨幅 pct_chg	 , 振幅 amp,
+
+4 .  data = data.reset_index(drop=False)
+   # 重新建立索引 ,默认为false，索引列（被设置为索引的列）被还原为普通列，并将索引重置为整数索引，否则直接丢弃索引列。
+
+
+5.周线的前复权数据 都不对, 跟同花顺对应不上.
+只能把同花顺 改成 不复权 才可以可以看对应的数据对不对.
+df = ts.pro_bar(ts_code='300541.SZ', adj='qfq', freq='W', start_date='20170101', end_date='20210210')

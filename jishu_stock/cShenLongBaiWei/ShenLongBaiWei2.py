@@ -145,6 +145,8 @@ def isAn_ShenLongBaiWei2_model(data,stockcode):
                 if (is_HengPan(riqi1, stockcode) == 1): # key_5
                     info = "--下跌横盘"
                     key_5=1
+                else:
+                    info = "--不是横盘"
                 # print1(key_5)
                 info = info+"-----神2  成功了---" + "涨停板日期"+str(riqi1)+' ----' + str(riqi)
                 # print info

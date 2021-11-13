@@ -137,7 +137,7 @@ def isAn_GeShanDaNiu_model(data,stockcode):
         # print1(key_4)
         if(key_1==1 and  key_2 ==1 and key_3==1 and key_4==1 and key_6==1):
             count3=is5_13_34_XiangShang(data1,0)
-            if(count3>1):
+            if(count3>2):
                 info=''
                 info=info+'5-13-34 有 '+str(count3)+'个上升-'
                 info = info + "-----隔山打牛 放量中阳线 捕捉涨停 " + ' ----' + stockcode + ' ----' + str(riqi)
