@@ -201,13 +201,15 @@ def test_isAnShenLongBaiwei_model():
 测试后 学员的 案例 基本都通过
 
 但是有 2 个褔蓉科技,佛燃能源,是不符合模型的
+
+605277      新亚电子      这是个成功的神1  为什么程序没跑出来, 所以我要改进我的 程序
 '''
 def test_xueyuan():
     # 学员选出来的 002665 首航高科 完美符合模型
-    df_x1 = ts.pro_bar(ts_code='002665.SZ', start_date='20190403', end_date='20210902')
-    df_x1 = df_x1.iloc[0:40]  # 前4行
-    # print1(df_x1)
-    isAnShenLongBaiwei_model(df_x1, '002665.SZ')
+    # df_x1 = ts.pro_bar(ts_code='002665.SZ', start_date='20190403', end_date='20210902')
+    # df_x1 = df_x1.iloc[0:40]  # 前4行
+    # # print1(df_x1)
+    # isAnShenLongBaiwei_model(df_x1, '002665.SZ')
 
 
     # 学员选出来的 褔蓉科技 603327  ,
@@ -224,11 +226,11 @@ def test_xueyuan():
     # df_x3 = df_x3.iloc[0:40]  # 前4行
     # print1(df_x3)
     # isAnShenLongBaiwei_model(df_x3, '002911.SZ')
-
-    df_x3 = ts.pro_bar(ts_code='603520.SH', start_date='20190403', end_date='20211013')
+    # 学员选出来的 605277
+    df_x3 = ts.pro_bar(ts_code='605277.SH', start_date='20190403', end_date='20210826')
     df_x3 = df_x3.iloc[0:40]  # 前4行
-    print1(df_x3)
-    isAnShenLongBaiwei_model(df_x3, '603520.SH')
+    print1(df_x3[0:4])
+    isAnShenLongBaiwei_model(df_x3, '605277.SH')
 
 def test_linshi():
 
@@ -274,8 +276,8 @@ if __name__ == '__main__':
     # getall_ShenLongBaiWei1(localpath1)
     # test_Befor_data() # 找到 7 月份的数据
     # test_isAnShenLongBaiwei_model() # 老师案例
-    # test_xueyuan() # 学员案例
-    test_linshi()
+    test_xueyuan() # 学员案例
+    # test_linshi()
 
 
 

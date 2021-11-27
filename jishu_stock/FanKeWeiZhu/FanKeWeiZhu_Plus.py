@@ -32,7 +32,7 @@ https://www.yuque.com/chaoren399/eozlgk/ysft12/
 
 反客为主前必定是阳线, 因为是突然出现
 
-
+2021年11月17日  增加 之前是阳线的 条件  子勋 分享
 
 一般可这样区分：
  小阴线和小阳线的波动范围一般在0.6--1.5%；
@@ -193,7 +193,7 @@ def isAn_FanKeWeiZhu_Plus_model(data,stockcode):
                     writeLog_to_txt(info, stockcode)
 
                     path = '反客为主Plus.txt'
-                    # writeLog_to_txt_path_getcodename(info, path, stockcode)
+                    writeLog_to_txt_path_getcodename(info, path, stockcode)
 
 #10 周均线是不是向上
 def is10_60Week_XiangShang(stock_code, riqi):

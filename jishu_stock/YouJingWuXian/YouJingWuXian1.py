@@ -17,7 +17,7 @@ pd.set_option('display.max_rows', None)
 
 ''''
 有惊无险1
-https://www.yuque.com/chaoren399/eozlgk/npvm18/
+https://www.yuque.com/chaoren399/eozlgk/vehqag
 筑底后缓慢.上涨  (这里没说是 第一天是不是阳线, 但是案例都是阳线, 所以我的程序也是阳线)
 高开中/大阴线(高开低走)
 有惊无险1 ①之后3天价格不能跌破阴线的最低价,第4天买入

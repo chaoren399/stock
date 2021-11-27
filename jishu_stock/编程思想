@@ -27,3 +27,6 @@ writeLog_to_txt_path_getcodename(info, path, stockcode)
 5.周线的前复权数据 都不对, 跟同花顺对应不上.
 只能把同花顺 改成 不复权 才可以可以看对应的数据对不对.
 df = ts.pro_bar(ts_code='300541.SZ', adj='qfq', freq='W', start_date='20170101', end_date='20210210')
+
+
+6. 每笔交易止盈 9%, 止损 3%, 50%胜率,单利计算,不算手续费, 一个月交易两次,一年收益率 72%

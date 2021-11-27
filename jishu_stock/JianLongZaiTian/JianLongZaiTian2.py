@@ -188,7 +188,7 @@ def isAn_JianLongZaiTian2_model(data,stockcode):
             info = info + "--见龙在田--"  + str(riqi)
             # print info
             writeLog_to_txt(info, stockcode)
-            path = '----Plus.txt'
+            path = '见龙在田2.txt'
             writeLog_to_txt_path_getcodename(info, path, stockcode)
 
 

@@ -114,8 +114,8 @@ if __name__ == '__main__':
     starttime = datetime.datetime.now()
 
     localpath1 = '/jishu_stock/stockdata/data1/'
-    # getAll_jiagezhongshu_WeekKdata(localpath1)
-    test_000001() #测试一个股票转化为 周 K
+    getAll_jiagezhongshu_WeekKdata(localpath1)
+    # test_000001() #测试一个股票转化为 周 K
 
 
 

@@ -57,10 +57,10 @@ def isAn_LingBoWeiBu_model(data,stockcode):
         print str(stockcode) + '--data --is null'
     if(len_data >= 6):
         data = data.sort_values(by='trade_date', axis=0, ascending=True)  # 按照日期 从旧到新 排序
-        data = data.reset_index(drop=False)  # 重新建立索引 ,默认为false，索引列（被设置为索引的列）被还原为普通列，并将索引重置为整数索引，否则直接丢弃索引列。
+        data = data.reset_index(drop=True)  # 重新建立索引 ,默认为false，索引列（被设置为索引的列）被还原为普通列，并将索引重置为整数索引，否则直接丢弃索引列。
 
         data1= data[len_data-2:len_data]
-        data1 = data1.reset_index(drop=False)  # 重新建立索引 ,
+        data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
         print1(data1)
 

@@ -10,6 +10,7 @@ from jishu_stock.FeiLongZaiTian.FeiLongZaiTian import get_all_FeiLongZaiTian
 from jishu_stock.FeiLongZaiTian.FeiLongZaiTian2 import get_all_FeiLongZaiTian2
 from jishu_stock.FengHuiLuZhuan.FengHuiLuZhuan import get_all_FengHuiLuZhuan
 from jishu_stock.GeShanDaNiu.GeShanDaNiu import get_all_GeShanDaNiu
+from jishu_stock.GeShiBaFa.G8M2_RuanAll import G8M2_yijianyunxing
 from jishu_stock.JiaGeZhongShu.JGZS_RuanAll import JGZS_yijianyunxing
 from jishu_stock.JianLongZaiTian.JianLongZaiTian1 import get_all_JianLongZaiTian1
 from jishu_stock.JianLongZaiTian.JianLongZaiTian2 import get_all_JianLongZaiTian2
@@ -23,6 +24,8 @@ from jishu_stock.LongZhan_YuYe.LongZhanYuYe import get_all_LongZhanYuYe
 from jishu_stock.PiJiTaiLai.PiJiTaiLai import get_all_PiJiTaiLai
 from jishu_stock.QiBaoJunXian.QiBaoJunXian1 import get_all_QiBaoJunXian1
 from jishu_stock.QiBaoJunXian.QiBaoJunXian2 import get_all_QiBaoJunXian2
+from jishu_stock.SCS.SCS1 import get_all_SCS_1
+from jishu_stock.SiHuiFuRan.SiHuiFuRan import get_all_SiHuiFuRan
 from jishu_stock.Tool_jishu_stock import get_2stockcode, dingshi_ceshi
 from jishu_stock.WuLiKanHua.WuLiKanHua import get_all_WuLiKanHua
 from jishu_stock.YiYiDaiLao.YiYiDaiLao2 import get_all_YiYiDaiLao2
@@ -30,6 +33,7 @@ from jishu_stock.YouJingWuXian.YouJingWuXian1 import get_all_YouJingWuXian1
 from jishu_stock.YouJingWuXian.YouJingWuXian2 import get_all_YouJingWuXian2_1
 from jishu_stock.bQiXingLuoChangKong.QiXingluochangkong1 import getallstockdata_is7start_FromLocal
 from jishu_stock.bQiXingLuoChangKong.QiXingluochangkong2 import getallstockdata_is7start2_FromLocal
+from jishu_stock.cShenLongBaiWei.Shen1 import get_all_Shen1
 from jishu_stock.cShenLongBaiWei.ShenLongBaiWei1 import  getall_ShenLongBaiWei1
 from jishu_stock.cShenLongBaiWei.ShenLongBaiWei0 import get_all_isShenLongBaiWei0
 from jishu_stock.cShenLongBaiWei.ShenLongBaiWei2 import get_all_ShenLongBaiWei2
@@ -45,6 +49,13 @@ from jishu_stock.YiYiDaiLao.YiYiDaiLao import get_all_YiYiDaiLao
 from jishu_stock.YiJIanShuangDiao.YiJianShuangDiao import get_all_YiJianShuangDiao
 from jishu_stock.zYouQianJun.YouQianJun120_250 import get_all_120_250
 from jishu_stock.RiJunXianZuhe.RiJunXianZuHe import get_all_5_13_34
+
+
+'''
+G8M2 一键运行
+'''
+def g8m2_yijianyunxing():
+    G8M2_yijianyunxing()
 
 '''
 周线 价格中枢一键运行
@@ -65,6 +76,10 @@ def yijianyunxing():
 
     getAllStockData(start_date='20200701', end_date=today, localpath=localpath1) #这个时间 提供一年的得到 MA34
 
+    #晓波 SCS1
+    get_all_SCS_1(localpath1)
+    #死灰复燃
+    get_all_SiHuiFuRan(localpath1)
     #见龙在田1 判断 3个 K 线 , 一阳一阴一阳
     get_all_JianLongZaiTian1(localpath1)
     #见龙在田2 判断 2 个 K 线 , 一阳一阴
@@ -76,13 +91,14 @@ def yijianyunxing():
     #起爆均线 2
     get_all_QiBaoJunXian2(localpath1)
 
-    #雾里看花, 特殊的十字星 还没验证
-    get_all_WuLiKanHua(localpath1)
-    #隔山打牛
-    get_all_GeShanDaNiu(localpath1)
-
     #出水芙蓉 主力底部强势洗盘
     get_all_ChuShuiFuRong(localpath1)
+
+    #雾里看花, 特殊的十字星 还没验证
+    get_all_WuLiKanHua(localpath1)
+
+
+
 
     #看跌做涨 上涨结构 抄底 尾盘买入
     get_all_KanDieZuoZhang(localpath1)
@@ -114,6 +130,7 @@ def yijianyunxing():
     get_all_PiJiTaiLai(localpath1)
     #  神龙摆尾1
     getall_ShenLongBaiWei1(localpath1)
+    get_all_Shen1(localpath1) #pro
 
     #峰回路转  当天条件挂单
     get_all_FengHuiLuZhuan(localpath1)
@@ -124,13 +141,15 @@ def yijianyunxing():
 
     #  神龙摆尾3
     get_all_ShenLongBaiWei3(localpath1)
-    # 神龙摆尾0
-    get_all_isShenLongBaiWei0(localpath1)
+
+
     # 神龙摆尾2
     get_all_ShenLongBaiWei2(localpath1)
 
-
-
+    #隔山打牛
+    get_all_GeShanDaNiu(localpath1)
+    # 神龙摆尾0
+    get_all_isShenLongBaiWei0(localpath1)
     # 神龙摆尾4
     get_all_ShenLongBaiWei4(localpath1)
 

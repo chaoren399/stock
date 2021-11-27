@@ -50,8 +50,8 @@ def get_all_LongZhanYuYe(localpath1):
         stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
         df = pd.read_csv(stockdata_path, index_col=0)
 
-        data6_1 = df.iloc[0:3]  # 前6行
-        data6_1 = df.iloc[0:4]  # 前6行
+        # data6_1 = df.iloc[0:3]  # 前6行
+        data6_1 = df.iloc[0:10]  # 前6行
         # data6_1 = df.iloc[20:32]  # 前6行
         len1 = len(data6_1)
         isAn_LongZhanYuYe_model(data6_1, stock_code)
@@ -102,7 +102,7 @@ def isAn_LongZhanYuYe_model(data,stockcode):
         # print1(key_1)
         # print1(key_2)
         # print1(key_3)
-        print1(day2_shiti)
+        # print1(day2_shiti)
         if(key_1==1 and  key_2 ==1and key_3==1):
             info = ''
             info= info+ '阴线实体大于3.6最好:'+str(day2_shiti)
@@ -180,6 +180,6 @@ def test_Befor_data():
 
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
-    # get_all_LongZhanYuYe(localpath1)
+    get_all_LongZhanYuYe(localpath1)
     # test_isAn_LongZhanYuYe_laoshi()
-    test_isAn_LongZhanYuYe_ziji()
+    # test_isAn_LongZhanYuYe_ziji()

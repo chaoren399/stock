@@ -6,7 +6,7 @@ import exceptions
 import tushare as ts
 import pandas as pd
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, isYangXian, print1, \
-    writeLog_to_txt_path_getcodename
+    writeLog_to_txt_path_getcodename, isYinXian
 from stock.settings import BASE_DIR
 
 ''''
@@ -112,20 +112,20 @@ def isAn_YiYiDaiLao2_model(data,stockcode):
                 day1_close=row['close']
                 day1_amount=row['amount']
 
-            if(index==1 and isYangXian(row)==0): # 3 连阴线
+            if(index==1 and isYinXian(row)==1): # 3 连阴线
                 count=count+1
                 day2_open = row['open']
                 day2_high=row['high']
                 day2_low=row['low']
 
                 day2_amount = row['amount']
-            if(index==2 and isYangXian(row)==0): #3 连阴线
+            if(index==2 and isYinXian(row)==1): #3 连阴线
                 count= count+1
                 day3_open = row['open']
                 day3_high = row['high']
                 day3_low = row['low']
                 day3_amount = row['amount']
-            if(index==3 and isYangXian(row)==0): #3 连阴线
+            if(index==3 and isYinXian(row)==1): #3 连阴线
                 count= count+1
                 day4_open = row['open']
                 day4_high = row['high']
@@ -231,7 +231,7 @@ def test_Befor_data():
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
     # test_get_5_13_34_RiJunXian_Pro3()
-    test_isAn_YiYiDaiLao2_laoshi()
-    # get_all_YiYiDaiLao(localpath1)
+    # test_isAn_YiYiDaiLao2_laoshi()
+    get_all_YiYiDaiLao2(localpath1)
 
     # test_Befor_data()

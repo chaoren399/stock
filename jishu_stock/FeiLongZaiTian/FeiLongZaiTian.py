@@ -96,7 +96,7 @@ def isAn_FeiLongZaiTian_model(data,stockcode):
                     day2_open=row['open']
                     day2_close=row['close']
                     day2_low=row['low']
-                    if(day2_low > day1_high):
+                    if(day2_low > day1_high):#再判断是不是跳空 ,
                         key_3=1
                     day2_amount=row['amount']
                     if(day2_amount > day1_amount): #小 K 线成交量放大
@@ -184,9 +184,9 @@ def test_isAn_FeiLongZaiTian_ziji():
 def test_xueyuan_anli():
 
     #案例 xiao_K_shiti=1.44-----飞龙在天, 超短线  ----002234.SZ ----20211019--民和股份
-    df1 = ts.pro_bar(ts_code='002234.SZ', adj='qfq', start_date='20210206', end_date='20211021')
+    df1 = ts.pro_bar(ts_code='002270.SZ', adj='qfq', start_date='20210206', end_date='20211121')
     data7_1 = df1.iloc[0:6]  # 前7行
-    isAn_FeiLongZaiTian_model(data7_1, '002234.SZ')
+    isAn_FeiLongZaiTian_model(data7_1, '002270.SZ')
 
 '''
 回测 8 月份的数据
@@ -209,7 +209,7 @@ def test_Befor_data():
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
     # test_isAn_FeiLongZaiTian_laoshi()
-    # get_all_FeiLongZaiTian(localpath1)
+    get_all_FeiLongZaiTian(localpath1)
     # test_Befor_data()
-    test_isAn_FeiLongZaiTian_ziji()
+    # test_isAn_FeiLongZaiTian_ziji()
     # test_xueyuan_anli()

@@ -18,9 +18,20 @@ pd.set_option('display.max_rows', None)
 
 见龙在田1 判断 3个 K 线 , 一阳一阴一阳
 https://www.yuque.com/chaoren399/eozlgk/hrz8ri/
+
+
+上涨结构
+阳线后出现跳空高开的小阴线
+第3天阳线收盘价高过模型所有实体
+第四天买入
+
 上涨初期 中阳线，后面高开小阴线，再加一个中阳线高过所有价，买入
 小阴线成交量要小
 
+
+
+
+跳空高开是指开盘价格高过昨日收盘价
 JianLongZaiTian1
 
 创建日期: 2021年11月06日
@@ -68,7 +79,7 @@ def isAn_JianLongZaiTian1_model(data,stockcode):
         data2 = data2.reset_index(drop=False)  # 重新建立索引 ,
 
         # 设置两个 key
-        key_1=0; #1后面高开小阴线
+        key_1=0; #1后面跳空高开小阴线
         key_2=0;# 2小阴线 缩量
         key_3=0;# 3小阴线
         key_4=0; # 4再加一个中阳线高过所有价
@@ -115,7 +126,7 @@ def isAn_JianLongZaiTian1_model(data,stockcode):
 
         if(count==3):
 
-            # 1 后面高开小阴线
+            # 1 后面跳空高开小阴线
             if(day2_close > day1_close and day2_open >day1_close):
                 key_1 =1
 
@@ -174,7 +185,7 @@ def isAn_JianLongZaiTian1_model(data,stockcode):
             info = info + "--见龙在田--"  + str(riqi)
             # print info
             writeLog_to_txt(info, stockcode)
-            path = '----Plus.txt'
+            path = '见龙在田1.txt'
             writeLog_to_txt_path_getcodename(info, path, stockcode)
 
 
@@ -232,6 +243,6 @@ def test_Befor_data():
 
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
-    # get_all_JianLongZaiTian1(localpath1)
-    test_isAn_JianLongZaiTian1_laoshi()
+    get_all_JianLongZaiTian1(localpath1)
+    # test_isAn_JianLongZaiTian1_laoshi()
     # test_Befor_data()

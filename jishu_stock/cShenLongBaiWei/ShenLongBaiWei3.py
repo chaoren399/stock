@@ -35,7 +35,8 @@ https://www.yuque.com/chaoren399/eozlgk/xkdffs
 
 
 def get_all_ShenLongBaiWei3(localpath1):
-
+    info1=''
+    writeLog_to_txt_nocode(info1) #为了 跟上边的盯盘的峰回路转, 反客为主 辨别
     info1= "神龙摆尾3价格筑底后缓慢运行,第一个涨停板   start "
     writeLog_to_txt_nocode(info1)
 
