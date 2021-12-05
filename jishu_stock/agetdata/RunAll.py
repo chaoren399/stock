@@ -183,6 +183,7 @@ def test2():
         isAn_FengHuiLuZhuan_model(data6_1, stock_code)
         # isAn_FeiLongZaiTian2_model(data6_1, stock_code)
 
+
         # 早晨之星
         isAn_ZaoChenZhiXing_model(data6_1, stock_code)
         # get_all_ZaoChenZhiXing(localpath1)
