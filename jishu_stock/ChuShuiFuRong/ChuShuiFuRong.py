@@ -7,6 +7,7 @@ import tushare as ts
 import pandas as pd
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, print1, isYinXian, isYangXian, \
     writeLog_to_txt_path_getcodename
+from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
 from jishu_stock.z_tool.PyDateTool import get_date1_date2_days
 from jishu_stock.z_tool.ShiTiDaXiao import getShiTiDaXiao
 from jishu_stock.z_tool.getMin_Max import getMin_fromDataFrame
@@ -39,7 +40,8 @@ ChuShuiFuRong
 
 
 '''
-
+chengongs=[]
+modelname='出水芙蓉'
 def get_all_ChuShuiFuRong(localpath1):
     info1=  '--出水芙蓉 主力底部强势洗盘--   '
     writeLog_to_txt_nocode(info1)
@@ -77,6 +79,7 @@ def isAn_ChuShuiFuRong_model(data,stockcode):
         data1= data[len_data-2:len_data]
         data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
+        mairuriqi = data1.ix[0]['trade_date']  # 阳线的日期
         # print1(data1)
 
         data2= data[0: len_data]
@@ -101,6 +104,8 @@ def isAn_ChuShuiFuRong_model(data,stockcode):
         day2_close = 0
         day1_shiti=0
 
+
+
         for index, row in data1.iterrows():
             if(index==0 and isYinXian(row)==1):
                 count=count+1
@@ -113,6 +118,7 @@ def isAn_ChuShuiFuRong_model(data,stockcode):
                 day2_high=row['high']
                 day2_low=row['low']
                 day2_close=row['close']
+                mairuriqi=row['trade_date']
 
         if(count==2):
             key_1=1
@@ -135,13 +141,16 @@ def isAn_ChuShuiFuRong_model(data,stockcode):
 
             # print1(min_row_riqi)
             days_chahzi=get_date1_date2_days(min_row_riqi,riqi) # 出水芙蓉与最低值相差几天
-            # print days_chahzi
-            if(int(days_chahzi) < 22 and int(days_chahzi) > 3 ):
+
+            if(int(days_chahzi) < 44 and int(days_chahzi) > 3 ):
                 key_4=1
 
         # print1(key_1)
         # print1(key_2)
+        # print1(key_4)
         # print1(day1_shiti)
+        # print1(days_chahzi)
+
         # if(key_1==1 and  key_2 ==1 and key_3==1):
         if(key_1==1 and  key_2 ==1 and key_4==1):
             info = ''
@@ -153,6 +162,10 @@ def isAn_ChuShuiFuRong_model(data,stockcode):
 
             path = '出水芙蓉.txt'
             writeLog_to_txt_path_getcodename(info, path, stockcode)
+
+            chenggong_code={'stockcode':stockcode,'mairuriqi':mairuriqi,'zhiyingdian':day1_low}
+            # print1(day2_shizixing_low)
+            chengongs.append(chenggong_code)
 
 
 
@@ -182,11 +195,11 @@ def test_isAn_ChuShuiFuRong_laoshi():
 '''
 def test_isAn_ChuShuiFuRong_ziji():
     # 阴线实体=0.05-----出水芙蓉 主力底部强势洗盘 ----20211022--至正股份--强势股票**603991.SH
-
+#144-169不满足上涨-----起爆均线3----20211201--卫光生物**002880.SZ 为什么 出水芙蓉没检测到
     #自己的 案例
-    df1 = ts.pro_bar(ts_code='002507.SZ',adj='qfq', start_date='20210206', end_date='20211008')
+    df1 = ts.pro_bar(ts_code='002880.SZ',adj='qfq', start_date='20210206', end_date='20211129')
     data7_1 = df1.iloc[0:136]  # 前7行
-    isAn_ChuShuiFuRong_model(data7_1,'002507.SZ')
+    isAn_ChuShuiFuRong_model(data7_1,'002880.SZ')
 
 '''
 回测 8 月份的数据
@@ -203,14 +216,20 @@ def test_Befor_data():
 
 
         data7_4 = df.iloc[22:42]  # 前10个交易日
+        data7_4 = df.iloc[22:22+132+22]  # 前1个月个交易日
         len_1=len(data7_4)
 
-        for i in range(0, len_1 - 2 + 1):
+        for i in range(0, len_1 - 132 + 1):
             # print "i" + str(i )+ "j"+str(i+3)
-            isAn_ChuShuiFuRong_model(data7_4[i:i + 2], stock_code)
+            isAn_ChuShuiFuRong_model(data7_4[i:i + 132], stock_code)
 
 
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
-    get_all_ChuShuiFuRong(localpath1)
+    # get_all_ChuShuiFuRong(localpath1)
     # test_isAn_ChuShuiFuRong_laoshi()
+    # test_isAn_ChuShuiFuRong_ziji()
+    test_Befor_data()
+
+    jisuan_all_shouyilv(chengongs, modelname, 1.05)
+    jisuan_all_shouyilv(chengongs, modelname, 1.10)

@@ -122,12 +122,5 @@ if __name__ == '__main__':
 
 
 
-
-
-
-
-
-
-
     endtime = datetime.datetime.now()
     print  "总共运行时长:" +str((endtime - starttime).seconds)

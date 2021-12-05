@@ -277,8 +277,13 @@ def test_Befor_data():
 
 
 if __name__ == '__main__':
+    from time import *
+    starttime = time()
     localpath1 = '/jishu_stock/stockdata/data1/'
-    # get_all_SCS_1(localpath1)
+    get_all_SCS_1(localpath1)
     # test_isAn_SCS_1_laoshi1()
     # test_isAn_SCS_1_laoshi2()
-    test_Befor_data()
+    # test_Befor_data()
+
+    endtime = time()
+    print "总共运行时长:"+str(round((endtime - starttime) / 60 ,2))+"分钟"

@@ -9,6 +9,21 @@ from jishu_stock.z_tool.ShiTiDaXiao import getShiTiDaXiao
 from stock.settings import BASE_DIR
 
 '''
+给你定 一个数据段, 判断里边有没有熊市末期
+比如给定一个月的数据 
+如果这个数据集合里边存在熊市末期, 那么返回 1, 否则返回 0 
+
+有了这个工具真的非常 OK
+'''
+def hasXiongShiMoQi(data):
+    len_data=len(data)
+    for i in range(0, len_data - 3 + 1):
+        # print "i" + str(i )+ "j"+str(i+3)
+        if(isXiongShiMoQi(data[i:i + 3])==1):
+            return 1
+    return 0
+
+'''
 
 需要 3 个数据 
 急速下跌熊市末期

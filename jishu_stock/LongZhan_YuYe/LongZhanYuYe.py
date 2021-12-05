@@ -170,16 +170,18 @@ def test_Befor_data():
         df = pd.read_csv(stockdata_path, index_col=0)
 
 
-        data7_4 = df.iloc[22:42]  # 前10个交易日
+        # data7_4 = df.iloc[22:42]  # 前10个交易日
+        data7_4 = df.iloc[10:42]  # 前10个交易日
         len_1=len(data7_4)
 
-        for i in range(0, len_1 - 3 + 1):
+        for i in range(0, len_1 - 6 + 1):
             # print "i" + str(i )+ "j"+str(i+3)
-            isAn_LongZhanYuYe_model(data7_4[i:i + 3], stock_code)
+            isAn_LongZhanYuYe_model(data7_4[i:i + 6], stock_code)
 
 
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
-    get_all_LongZhanYuYe(localpath1)
+    # get_all_LongZhanYuYe(localpath1)
+    test_Befor_data()
     # test_isAn_LongZhanYuYe_laoshi()
     # test_isAn_LongZhanYuYe_ziji()

@@ -85,7 +85,7 @@ if __name__ == '__main__':
 
     path3 = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     stock_pool_path = path3 + '/get_stock_data/股票池.csv'
-    # getdata(stock_pool_path)
+    # agetdata(stock_pool_path)
 
     # getdatafrom_ts('600848')
     getdatafrom_ts('510300')

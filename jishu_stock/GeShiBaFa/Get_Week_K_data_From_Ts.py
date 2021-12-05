@@ -1,5 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf8')
 import datetime
 import time
 import tushare as ts
@@ -37,7 +41,8 @@ def getAllWeekKdata(localpath1):
         count = count+1
         print str(count) +'--'+str(stock_code)
 
-        time.sleep(0.03)  # //睡觉2021
+        # time.sleep(0.03)  # //睡觉2021
+        time.sleep(0.05)  # //睡觉2021
         # df = ts.pro_bar(ts_code=stock_code, adj='qfq', freq='W', start_date='20180101', end_date='20210922')
         df = ts.pro_bar(ts_code=stock_code, adj='qfq', freq='W', start_date='20150101', end_date=str(today))
         # print df
@@ -194,7 +199,3 @@ if __name__ == '__main__':
 
 
     # test_cover_day_K_to_Week_K() #测试一个股票转化为 周 K
-
-    endtime = datetime.datetime.now()
-    print  "总共运行时长:"
-    print (endtime - starttime).seconds

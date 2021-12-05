@@ -33,6 +33,7 @@ https://www.yuque.com/chaoren399/eozlgk/
 
 '''
 
+infolists=[]
 def get_all_FeiLongZaiTian2(localpath1):
     info1=  '--飞龙在天2, 超短线 第 3 天盯收盘价 高过小 K 线实体买入 start--   '
     writeLog_to_txt_nocode(info1)
@@ -50,6 +51,7 @@ def get_all_FeiLongZaiTian2(localpath1):
         len1 = len(data6_1)
         isAn_FeiLongZaiTian2_model(data6_1, stock_code)
 
+    return infolists
 '''
 #2 单独一个函数 判断 6 个数据是不是符合模型
 '''
@@ -119,6 +121,9 @@ def isAn_FeiLongZaiTian2_model(data,stockcode):
 
             path = '飞龙在天2.txt'
             writeLog_to_txt_path_getcodename(info, path, stockcode)
+
+            codeinfo = {'info': info, 'stockcode': stockcode}
+            infolists.append(codeinfo)
 
 
 '''

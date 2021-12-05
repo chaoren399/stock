@@ -75,7 +75,7 @@ def isAn_JianLongZaiTian1_model(data,stockcode):
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
         # print1(data1)
 
-        data2 = data[0:len_data-3]
+        data2 = data[len_data-18:len_data-3]
         data2 = data2.reset_index(drop=False)  # 重新建立索引 ,
 
         # 设置两个 key
@@ -219,9 +219,9 @@ def test_isAn_JianLongZaiTian1_laoshi():
 '''
 def test_isAn_JianLongZaiTian1_ziji():
     #自己的 案例
-    df1 = ts.pro_bar(ts_code='002507.SZ',adj='qfq', start_date='20210206', end_date='20211008')
-    data7_1 = df1.iloc[0:6]  # 前7行
-    isAn_JianLongZaiTian1_model(data7_1,'002507.SZ')
+    df1 = ts.pro_bar(ts_code='000635.SZ',adj='qfq', start_date='20210206', end_date='20211202')
+    data7_1 = df1.iloc[0:30]  # 前7行
+    isAn_JianLongZaiTian1_model(data7_1,'000635.SZ')
 
 '''
 回测 8 月份的数据
@@ -243,6 +243,7 @@ def test_Befor_data():
 
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
-    get_all_JianLongZaiTian1(localpath1)
+    # get_all_JianLongZaiTian1(localpath1)
     # test_isAn_JianLongZaiTian1_laoshi()
     # test_Befor_data()
+    test_isAn_JianLongZaiTian1_ziji()

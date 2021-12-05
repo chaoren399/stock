@@ -53,7 +53,7 @@ liststocks = []
 
 def getallstockdata_is7start_FromLocal(localpath1):
     print "7 星落长空1  start "
-    # path = BASE_DIR + '/jishu_stock/bQiXingLuoChangKong/data/stockcodelist_No_ST.csv'
+    # path = BASE_DIR + '/jishu_stock/rQiXingLuoChangKong/data/stockcodelist_No_ST.csv'
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
     # path = BASE_DIR + '/jishu_stock/stockdata/xiadiecodes.csv'
 
@@ -118,7 +118,7 @@ def isAn7start_model(dataframe_df,stockcode):
                             if(pct_chg_2<0):#阴
                                 pct_chg_1 = dataframe_df.ix[6][5] -dataframe_df.ix[6][2] # 收盘-开盘
                                 if(pct_chg_1 < 0):#阴
-                                    #符合 bQiXingLuoChangKong
+                                    #符合 rQiXingLuoChangKong
                                     info=  stockcode+"--------------------回测符合 七星落长空 3-2-1-1----------------"+str(riqi)
                                     print info
                                     info1= stockcode+','+str(riqi)
@@ -169,7 +169,7 @@ def isAn7start2_model(dataframe_df,stockcode):
                                 if(pct_chg_2>0):#1 阳 1 阳 , 时间理论 1 阳
                                     pct_chg_1 = dataframe_df.ix[0][5] -dataframe_df.ix[0][2] # 收盘-开盘
                                     if(pct_chg_1>0):#1 阳 , 时间理论 1 阳
-                                    #符合 bQiXingLuoChangKong
+                                    #符合 rQiXingLuoChangKong
                                         info = stockcode+"--------------------回测符合 七星落长空2----3-1-2-1-1 第 9 天买入------------"+str(riqi)
                                         print info
                                         info1 = stockcode+','+str(riqi)

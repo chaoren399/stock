@@ -5,9 +5,12 @@ import exceptions
 
 import tushare as ts
 import pandas as pd
+from time import *
 from jishu_stock.Tool_jishu_stock import *
+from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
 from stock.settings import BASE_DIR
 from jishu_stock.z_tool.ShiTiDaXiao import *
+from jishu_stock.z_tool.isXiongShiMoQi import  hasXiongShiMoQi
 import pandas as pd
 # 显示所有列
 pd.set_option('display.max_columns', None)
@@ -26,6 +29,8 @@ https://www.yuque.com/chaoren399/kb/ayfh2g
 
 
 '''
+chengongs=[]
+modelname='早晨之星2'
 
 def get_all_LingBoWeiBu(localpath1):
     info1=  '--缺口理论, 凌波微步 start--   '
@@ -79,6 +84,10 @@ def isAn_LingBoWeiBu_model(data,stockcode):
             path = '----Plus.txt'
             writeLog_to_txt_path_getcodename(info, path, stockcode)
 
+            chenggong_code={'stockcode':stockcode,'mairuriqi':day3_riqi,'zhiyingdian':day2_shizixing_low}
+            # print1(day2_shizixing_low)
+            chengongs.append(chenggong_code)
+
 
 '''
 测试老师的案例
@@ -122,5 +131,12 @@ def test_Befor_data():
 
 
 if __name__ == '__main__':
+    starttime = time()
     localpath1 = '/jishu_stock/stockdata/data1/'
     get_all_LingBoWeiBu(localpath1)
+
+    jisuan_all_shouyilv(chengongs, modelname, 1.05)
+    jisuan_all_shouyilv(chengongs, modelname, 1.10)
+
+    endtime = time()
+    print "总共运行时长:"+str(round((endtime - starttime) / 60 ,2))+"分钟"

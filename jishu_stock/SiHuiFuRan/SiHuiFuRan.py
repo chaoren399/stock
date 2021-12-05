@@ -6,7 +6,7 @@ import exceptions
 import tushare as ts
 import pandas as pd
 from jishu_stock.Tool_jishu_stock import *
-from jishu_stock.z_tool.isXiongShiMoQi import isXiongShiMoQi
+from jishu_stock.z_tool.isXiongShiMoQi import  hasXiongShiMoQi
 from stock.settings import BASE_DIR
 from jishu_stock.z_tool.ShiTiDaXiao import *
 import pandas as pd
@@ -27,9 +27,13 @@ https://www.yuque.com/chaoren399/eozlgk/meu5lk
 次日中阳线且收盘价高过小阴线的开盘价
 以近期最低价做止损
 
-写一个工具 专门判断 急速下跌  (连续至少3根阴线有低开有中/大阴线)
+写一个工具 专门判断 急速下跌  (连续至少3根阴线有低开有中/大阴线) hasXiongShiMoQi(data):
 
 还需要判断 是不是 最近半年最低值 
+思路: 
+找到最近4 天的数据, 先判断第一天的数据是不是近期 2 个月的最低值?
+如果是, 那么判断是不是满足条件
+
 
 SiHuiFuRan
 
@@ -46,15 +50,15 @@ def get_all_SiHuiFuRan(localpath1):
         stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
         df = pd.read_csv(stockdata_path, index_col=0)
 
-        data6_1 = df.iloc[0:66]  # 前6行
+        data6_1 = df.iloc[0:60]  # 前6行
         # data6_1 = df.iloc[20:32]  # 前6行
-        len1 = len(data6_1)
         isAn_SiHuiFuRan_model(data6_1, stock_code)
 
 
 
 '''
 #2 单独一个函数 判断 6 个数据是不是符合模型
+至少 30个交易日数据, 
 '''
 def isAn_SiHuiFuRan_model(data,stockcode):
     if (data is None or data.empty):
@@ -63,82 +67,91 @@ def isAn_SiHuiFuRan_model(data,stockcode):
     len_data = len(data)
     if (len_data == 0):
         print str(stockcode) + '--data --is null'
-    if(len_data >= 6):
+    if(len_data >= 10):
         data = data.sort_values(by='trade_date', axis=0, ascending=True)  # 按照日期 从旧到新 排序
         data = data.reset_index(drop=True)  # 重新建立索引 ,默认为false，索引列（被设置为索引的列）被还原为普通列，并将索引重置为整数索引，否则直接丢弃索引列。
 
         # print data
-        data1= data[len_data-3:len_data]
+        data1= data[len_data-4:len_data]
         data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
-        riqi = data1.ix[0]['trade_date']  # 阳线的日期
+        riqi = data1.ix[0]['trade_date']  # 最低价的日期
         # print1(data1)
 
-        data2= data[len_data-6:len_data-3]
+        data2= data[0:len_data-4]
         data2 = data2.reset_index(drop=True)  # 重新建立索引 ,
 
-        #还需要判断 是不是 最近半年最低值
+        # 首先判断是不是最低值
 
-        data3= data[0:len_data-6]
-        data3 = data3.reset_index(drop=True)  # 重新建立索引 ,
+        day0_low=0
+        for index,row in data1.iterrows():
+            if(index==0):
+                day0_low=row['low']
 
-        # print1(data2)
-
-        if( isXiongShiMoQi(data2) ==1 ): #熊市末期
-            mini_price= getMin_low_fromDataFrame(data2) # 最低价
-
+        if(day0_low == getMin_low_fromDataFrame(data)):
 
             # 设置两个 key
-            key_1=0; #第一天小阳线止跌(最低价不能创新低)
-            key_2=0;#次日小阴线(最低价不能创新低)
-            key_3=0;#次日中阳线且收盘价高过小阴线的开盘价
-            key_4=0; # 还需要判断 是不是 最近半年最低值
+            key_1=0; #1第一天小阳线止跌(最低价不能创新低)
+            key_2=0;#2次日小阴线(最低价不能创新低)
+            key_3=0;#3次日中阳线且收盘价高过小阴线的开盘价
+            key_4=0; # 4是否有 熊市末期
 
             count=0
-            day1_low=0
-            day2_low=0
-            day2_open=0
-            day3_close=0
-            for index,row in data1.iterrows():
-                if(index==0 and isYangXian(row)==1 ):
+            day1_xiaoyangxian_shiti=0
+            day1_xiaoyangxian_low=0
+            day2_xiaoyinxian_shiti=0
+            day2_xiaoyinxian_low=0
+            day2_xiaoyinxian_open=0
+            day3_zhongyangxian_shiti=0
+            day3_zhongyangxian_close=0
+            for index, row in data1.iterrows():
+                if (index == 1 and isYangXian(row)==1 ):
                     count=count+1
-                    day1_low= row['low']
-                if(index==1 and isYinXian(row)==1 ):
+                    day1_xiaoyangxian_shiti=getShiTiDaXiao(row)
+                    day1_xiaoyangxian_low=row['low']
+                if (index == 2 and isYinXian(row)==1 ):
                     count=count+1
-                    day2_low = row['low']
-                    day2_open=row['open']
-                if(index==2 and isYangXian(row)==1 ):
+                    day2_xiaoyinxian_shiti=getShiTiDaXiao(row)
+                    day2_xiaoyinxian_low=row['low']
+                    day2_xiaoyinxian_open=row['open']
+                if (index == 3 and isYangXian(row)==1 ):
                     count=count+1
-                    day3_close=row['close']
-
-            if(count==3): #
-
-                #1#第一天小阳线止跌(最低价不能创新低)
-                if(day1_low > mini_price) :
+                    day3_zhongyangxian_shiti=getShiTiDaXiao(row)
+                    day3_zhongyangxian_close=row['close']
+            if(count==3):
+                # 1第一天小阳线止跌(最低价不能创新低)
+                if(day1_xiaoyangxian_shiti<1.6 and day1_xiaoyangxian_low >= day0_low):
                     key_1=1
-                #2#次日小阴线(最低价不能创新低)
-                if(day2_low >= mini_price):
+                # 2次日小阴线(最低价不能创新低)
+                if(day2_xiaoyinxian_shiti<1.6 and day2_xiaoyinxian_low >= day0_low):
                     key_2=1
-                #次日中阳线且收盘价高过小阴线的开盘价
-                if(day3_close > day2_open):
-                    key_3=1
 
-                # 还需要判断 是不是 最近半年最低值
-                if (key_1 == 1 and key_2 == 1 and key_3 == 1):
-                    data3_min= getMin_low_fromDataFrame(data3)
-                    if(data3_min > mini_price):
-                        key_4=1
+                # 3次日中阳线且收盘价高过小阴线的开盘价
+                if(day3_zhongyangxian_shiti>1.6 and day3_zhongyangxian_close> day2_xiaoyinxian_open):
+                    key_3=1
+                # 4是否有 熊市末期
+                if(hasXiongShiMoQi(data2)==1):
+                    key_4=1
+
+
+
+
+
+
 
 
             #
             # print1(key_1)
             # print1(key_2)
             # print1(key_3)
-            # print1(key_4)
-            # print1(mini_price)
-            # print1(day2_low)
+            # # print1(key_4)
+            # print1(day1_xiaoyangxian_shiti)
+            # print1(day2_xiaoyinxian_shiti)
+            # print1(day3_zhongyangxian_shiti)
+            # print1(day2_xiaoyinxian_low)
+            # print1(day0_low)
 
 
-            if(key_1==1 and  key_2 ==1 and key_3==1 and key_4==1):
+            if(key_1==1 and  key_2 ==1 and key_3==1 and key_4==1 ):
                 # 还需要判断 是不是 最近半年最低值
 
                 info = ''
@@ -156,17 +169,30 @@ def isAn_SiHuiFuRan_model(data,stockcode):
 测试老师的案例
 '''
 def test_isAn_SiHuiFuRan_laoshi():
-    # 案例 1  000420
+    # 案例 1  000420 吉林化纤
     df1 = ts.pro_bar(ts_code='000420.SZ',adj='qfq', start_date='20200206', end_date='20210114')
     data7_1 = df1.iloc[0:106]  # 前7行
     isAn_SiHuiFuRan_model(data7_1,'000420.SZ')
 
-    # 案例 2
+    # 案例 2国中水务600187
     df1 = ts.pro_bar(ts_code='600187.SH',adj='qfq', start_date='20200206', end_date='20210802')
     data7_1 = df1.iloc[0:106]  # 前7行
     isAn_SiHuiFuRan_model(data7_1,'600187.SH')
 
-    # 案例 3
+    # 案例 4 海泰发展 600082
+    df1 = ts.pro_bar(ts_code='600082.SH',adj='qfq', start_date='20200206', end_date='20210802')
+    data7_1 = df1.iloc[0:106]  # 前7行
+    isAn_SiHuiFuRan_model(data7_1,'600082.SH')
+
+    # 案例 5 长虹华意**000404.SZ
+    df1 = ts.pro_bar(ts_code='000404.SZ', adj='qfq', start_date='20200206', end_date='20210802')
+    data7_1 = df1.iloc[0:106]  # 前7行
+    isAn_SiHuiFuRan_model(data7_1, '000404.SZ')
+
+    # 案例 6
+    df1 = ts.pro_bar(ts_code='688328.SH',adj='qfq', start_date='20200206', end_date='20211011')
+    data7_1 = df1.iloc[0:106]  # 前7行
+    isAn_SiHuiFuRan_model(data7_1,'688328.SH')
 
 '''
 测试自己的案例
@@ -188,7 +214,7 @@ def test_Befor_data():
         stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
         df = pd.read_csv(stockdata_path, index_col=0)
         data7_4 = df.iloc[22:98]  # 前128个交易日
-        data7_4 = df.iloc[44:120]  # 前128个交易日
+        # data7_4 = df.iloc[44:120]  # 前128个交易日
         len_1=len(data7_4)
         for i in range(0, len_1 - 66 + 1):
             # print "i" + str(i )+ "j"+str(i+3)

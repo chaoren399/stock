@@ -8,7 +8,12 @@ import pandas as pd
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, isYangXian, print1, \
     writeLog_to_txt_path_getcodename, isYinXian
 from stock.settings import BASE_DIR
+import pandas as pd
 
+# 显示所有列
+pd.set_option('display.max_columns', None)
+# 显示所有行
+pd.set_option('display.max_rows', None)
 ''''
 以逸待劳2主力洗盘模型 
  
@@ -55,6 +60,7 @@ def get_all_YiYiDaiLao2(localpath1):
 #2 单独一个函数 判断 6 个数据是不是符合模型
 '''
 def isAn_YiYiDaiLao2_model(data,stockcode):
+
     if (data is None or data.empty):
         print '--df.empty--' + str(stockcode)
         return 0
@@ -63,16 +69,17 @@ def isAn_YiYiDaiLao2_model(data,stockcode):
     if (len_data == 0):
         print str(stockcode) + '--data --is null'
     if(len_data >=5):
-
-        # data1= data[7:len_data-1]  #  阳线之前的数据
-        data1= data[5:len_data]  #  阳线之前的数据
-        data = data[0:5]
-        # data = data[1:6]
-        # print1(data1)
         data = data.sort_values(by='trade_date', axis=0, ascending=True)  # 按照日期 从旧到新 排序
         data = data.reset_index(drop=True)  # 重新建立索引 ,
-        # print data
-        riqi = data.ix[0]['trade_date']  # 阳线的日期
+
+
+        data1= data[len_data-5:len_data]  #  阳线之前的数据
+        data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
+        riqi = data1.ix[0]['trade_date']  # 阳线的日期
+
+
+        data2= data[len_data-5-5:len_data-5]  #  阳线之前的数据
+        data2 = data2.reset_index(drop=True)  # 重新建立索引 ,
 
         # 设置两个 key
         key_1=0;  #判断 1 个阳线 3 个阴线, 1 阳线  第 6 天的单独判断
@@ -105,7 +112,7 @@ def isAn_YiYiDaiLao2_model(data,stockcode):
         day3_amount=0
         day4_amount=0
 
-        for index,row in data.iterrows():
+        for index,row in data1.iterrows():
 
             if(index==0 and isYangXian(row)==1): #阳线
                 count= count+1
@@ -131,7 +138,7 @@ def isAn_YiYiDaiLao2_model(data,stockcode):
                 day4_high = row['high']
                 day4_low = row['low']
                 day4_amount = row['amount']
-            if(index==4and isYangXian(row)==1): #阳线
+            if(index==4 and isYangXian(row)==1): #阳线
                 count= count+1
                 day5_open=row['open']
 
@@ -142,7 +149,7 @@ def isAn_YiYiDaiLao2_model(data,stockcode):
 
         # 阳线之后3连阴最高价依次降低最低价依次降低
         if(day2_high > day3_high and day3_high > day4_high  and day2_low> day3_low and day3_low > day4_low):
-            if(day2_open > day3_open and day3_open > day4_open): # 为了限制一些比较杂的数据, 多加了这个条件
+            # if(day2_open > day3_open and day3_open > day4_open): # 为了限制一些比较杂的数据, 多加了这个条件
 
                 key_2=1
 
@@ -153,7 +160,7 @@ def isAn_YiYiDaiLao2_model(data,stockcode):
 
         # data1
         #就是第一个阳线要高于前 20 天的数据
-        for index, row in data1.iterrows():
+        for index, row in data2.iterrows():
            if(day1_close < row['open']):
                key_5=0
 
@@ -164,13 +171,10 @@ def isAn_YiYiDaiLao2_model(data,stockcode):
         # print1(key_5)
 
         if(key_1==1 and  key_2 ==1  and key_3 ==1  and key_5==1 ):
+
             info=''
-            # if(key_4==1):
-            #     info='明天可以买入'
-            #     # info='----------'
-            # else:
-            #     info='----------'
-            info =info+ "-----以逸待劳2主力洗盘模型 筑底后 缓慢上涨----" + str(riqi)
+
+            info =info+ "-----以逸待劳5 天满足,第 6 天盯盘 主力洗盘模型 筑底后 缓慢上涨----" + str(riqi)
             # print info
             writeLog_to_txt(info, stockcode)
             path = '以逸待劳2.txt'
@@ -184,11 +188,7 @@ def isAn_YiYiDaiLao2_model(data,stockcode):
 '''
 def test_isAn_YiYiDaiLao2_laoshi():
 
-    import pandas as pd
-    # 显示所有列
-    pd.set_option('display.max_columns', None)
-    # 显示所有行
-    pd.set_option('display.max_rows', None)
+
 
 
     # 案例1

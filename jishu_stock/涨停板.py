@@ -17,7 +17,7 @@ from stock.settings import BASE_DIR
 
 
 def getallstockdata_isZhangTingBan_fromLocal(localpath1):
-    # path = BASE_DIR + '/jishu_stock/bQiXingLuoChangKong/data/stockcodelist_No_ST.csv'
+    # path = BASE_DIR + '/jishu_stock/rQiXingLuoChangKong/data/stockcodelist_No_ST.csv'
     path = BASE_DIR + '/jishu_stock/stockdata/xiadiecodes.csv'
     # print "ssss"
     # print path

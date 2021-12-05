@@ -164,6 +164,8 @@ def isAn_JGZS_KanZhangZuoZhang_model(data,stockcode):
         # print1(key_5)
         # print1(key_6)
         # print1(shiti_yingxian_jibei)
+        # print1(shangyingxian_xiayingxian)
+
 
         # if(key_1==1 and  key_2 ==1 and key_3==1 and key_4==1 ):
         if(key_1==1 and  key_2 ==1 and key_3==1  and key_4==1 and key_5==1 and key_6==1 ):
@@ -220,12 +222,15 @@ def test_isAn_JGZS_KanZhangZuoZhang_ziji():
     #自己的 案例
     #价格中枢-实体一半=0.04---上影线是下的几倍=1.33---阳线实体=7.26---实体看涨做涨--2021-10-31--维力医疗**603309.SH
     # df1 = ts.pro_bar(ts_code='603309.SZ',adj='qfq', start_date='20210206', end_date='20211008')
-    stock_code = '603309.SH'
+    stock_code = '000812.SZ'
     stockdata_path = BASE_DIR + '/jishu_stock/stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
     df = pd.read_csv(stockdata_path, index_col=0)
     df = df.reset_index(drop=False)  # 重新建立索引 ,
     data7_1 = df.iloc[0:8]  # 前7行
-    isAn_JGZS_KanZhangZuoZhang_model(data7_1,'603309.SH')
+    isAn_JGZS_KanZhangZuoZhang_model(data7_1,'000812.SZ')
+
+
+
 
 '''
 回测 8 月份的数据
@@ -255,5 +260,5 @@ if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
     get_all_JGZS_KanZhangZuoZhang(localpath1)
     # test_isAn_JGZS_KanZhangZuoZhang_laoshi() #测试老师的案例
-    # test_isAn_jiagezhognshu_KanZhangZuoZhang_ziji()
+    # test_isAn_JGZS_KanZhangZuoZhang_ziji()
     # test_Befor_data()

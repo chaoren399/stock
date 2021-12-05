@@ -43,7 +43,7 @@ def get_all_KangLongYouHui_DaPan():
     # 上证指数 000001.SH
     df = ts.pro_bar(ts_code='000001.SH', adj='qfq',asset='I', start_date='20180101', end_date=today)
     data6_1 = df.iloc[0:3]  # 前6行
-    isAn_KangLongYouHui_DaPan_model(data6_1, '000016.SH')
+    isAn_KangLongYouHui_DaPan_model(data6_1, '000001.SH')
 
 '''
 #2 单独一个函数 判断 4 个数据是不是符合模型

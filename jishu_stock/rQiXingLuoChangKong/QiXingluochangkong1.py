@@ -96,7 +96,7 @@ def isAn7start_model_pro(dataframe_df,stockcode):
                             if(pct_chg_2<0):#阴
                                 pct_chg_1 = dataframe_df.ix[6][5] -dataframe_df.ix[6][2] # 收盘-开盘
                                 if(pct_chg_1 < 0):#阴
-                                    #符合 bQiXingLuoChangKong
+                                    #符合 rQiXingLuoChangKong
                                     info= "--------符合 七星落长空 3-2-1-1----------"+str(riqi)
                                     # print info
                                     writeLog_to_txt(info,stockcode)

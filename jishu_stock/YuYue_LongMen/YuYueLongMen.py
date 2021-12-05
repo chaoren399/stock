@@ -36,7 +36,7 @@ from stock.settings import BASE_DIR
 '''
 
 def getallstockdata_isYuYueLongMen_fromLocal():
-    print '------start 葛式八法---'
+    print '------start 鱼跃龙门  佛系翻倍---'
     # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
 

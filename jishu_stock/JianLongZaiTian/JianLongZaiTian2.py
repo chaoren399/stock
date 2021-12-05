@@ -15,19 +15,15 @@ pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
 
 ''''
-见龙在田2 判断 2 个 K 线 , 一阳一阴
-https://www.yuque.com/chaoren399/eozlgk/hrz8ri/
-上涨初期 中阳线，后面高开小阴线，再加一个中阳线高过所有价，买入
-小阴线成交量要小
 
-JianLongZaiTian2
+见龙在田2 
 
-创建日期: 2021年11月06日
-更新日期: 还没有测出好的结果, 目前只有 2 个案例,没有办法执行
+盘中买入,判断前 2 天是不是符合模型, 然后第 3 天盘中买入
+
 '''
 
 def get_all_JianLongZaiTian2(localpath1):
-    info1=  '--见龙在田2 start--   '
+    info1=  '--见龙在田2 第 3 天实盘 start--   '
     writeLog_to_txt_nocode(info1)
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path, dtype={'code': str})
@@ -63,17 +59,16 @@ def isAn_JianLongZaiTian2_model(data,stockcode):
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
         # print1(data1)
 
-        data2 = data[0:len_data-2]
+        data2 = data[len_data-15:len_data-2]
         data2 = data2.reset_index(drop=False)  # 重新建立索引 ,
 
         # 设置两个 key
-        key_1=0; #1后面高开小阴线
+        key_1=0; #1后面跳空高开小阴线
         key_2=0;# 2小阴线 缩量
         key_3=0;# 3小阴线
 
-
+        #
         key_5=1; # 5 第一天阳线的最高价要搞过 近期所有收盘价和开盘价
-        key_6=0; # 下影线长度 是上影线长度的 1.5 倍以上
 
 
 
@@ -87,8 +82,7 @@ def isAn_JianLongZaiTian2_model(data,stockcode):
         day3_close=0
         day1_yangxian_shitidaxiao=0
         day2_yinxian_shitidaxiao=0
-        day2_yinxian_shangyingxian=0
-        day2_yinxian_xiayingxian=0
+
         day2_low=0
         day2_high=0
 
@@ -110,18 +104,17 @@ def isAn_JianLongZaiTian2_model(data,stockcode):
                 day2_amount = row['amount']
 
 
-
         if(count==2):
 
-            # 1 后面高开小阴线
-            if(day2_close > day1_close):
+            # 1 后面跳空高开小阴线
+            if(day2_close > day1_close and day2_open >day1_close):
                 key_1 =1
 
             #2小阴线 缩量
             if(day2_amount < day1_amount ):
                 key_2=1
             # 3小阴线
-            if(day2_yinxian_shitidaxiao >0):
+            if(day2_yinxian_shitidaxiao >0 and day2_yinxian_shitidaxiao < 2):
                 key_3=1
 
 
@@ -131,20 +124,8 @@ def isAn_JianLongZaiTian2_model(data,stockcode):
             day2_yinxian_shangyingxian=day2_high-day2_open
             day2_yinxian_xiayingxian=day2_close-day2_low
 
-
-            day2_yinxian_shiti = day2_open-day2_close
-
             day2_yinxian_xiayingxian= day2_yinxian_xiayingxian + 0.00001
-            day2_yinxian_shiti=day2_yinxian_shiti + 0.00001
-            day2_yinxian_shangyingxian=day2_yinxian_shangyingxian + 0.00001
-
             day2_yinxian_beishu= day2_yinxian_shangyingxian/day2_yinxian_xiayingxian
-            day2_shangyingxian_shiti_beishu= day2_yinxian_shangyingxian/day2_yinxian_shiti
-            day2_xiayingxian_shiti_beishu=day2_yinxian_xiayingxian/day2_yinxian_shiti
-
-            day2_xia_shang_yingxian_beishu=day2_yinxian_xiayingxian / day2_yinxian_shangyingxian
-
-
 
             # 5 第一天阳线的最高价要搞过 近期所有收盘价和开盘价
 
@@ -154,9 +135,6 @@ def isAn_JianLongZaiTian2_model(data,stockcode):
                     # print row
                 if(day1_high < row['close']):
                     key_5=0
-
-            if(day2_xia_shang_yingxian_beishu>=1.5):
-                key_6=1
 
         #
         # if(stockcode=='002594.SZ'):
@@ -174,18 +152,15 @@ def isAn_JianLongZaiTian2_model(data,stockcode):
 
 
 
-        if(key_1==1 and key_2 ==1 and key_3 ==1 and key_5==1and key_6==1):
+        if(key_1==1 and key_2 ==1 and key_3 ==1  and key_5==1):
         # if( key_2 ==1 and key_3 ==1 and key_4 ==1):
             info = ''
 
             info = info + "--阳线大小="  + str(day1_yangxian_shitidaxiao)
             info = info + "--小阴线大小="  + str(day2_yinxian_shitidaxiao)
-            # info = info + "--小阴线振幅="  + str(yinxian_zhenfu)
-            # info = info + "--小阴线上下影线倍数="  + str(day2_yinxian_beishu)
-            # info = info + "--小阴线上影线实体倍数="  + str(day2_shangyingxian_shiti_beishu)
-            # info = info + "--小阴线下影线实体倍数="  + str(day2_xiayingxian_shiti_beishu)
-            info = info + "--小阴线下影线上影线倍数="  + str(day2_xia_shang_yingxian_beishu)
-            info = info + "--见龙在田--"  + str(riqi)
+            info = info + "--小阴线振幅="  + str(yinxian_zhenfu)
+            info = info + "--小阴线上下影线倍数="  + str(day2_yinxian_beishu)
+            info = info + "--见龙在田2--"  + str(riqi)
             # print info
             writeLog_to_txt(info, stockcode)
             path = '见龙在田2.txt'
@@ -213,38 +188,6 @@ def test_isAn_JianLongZaiTian2_laoshi():
     data7_1 = df1.iloc[0:30]  # 前7行
     isAn_JianLongZaiTian2_model(data7_1,'002594.SZ')
 
-    # 案例 4比亚迪 2
-    # df1 = ts.pro_bar(ts_code='002594.SZ',adj='qfq', start_date='20200206', end_date='20210610')
-    # data7_1 = df1.iloc[0:30]  # 前7行
-    # isAn_JianLongZaiTian2_model(data7_1,'002594.SZ')
-
-
-def test_ziji_caixiang():
-    # 案例 1比亚迪 1
-    df1 = ts.pro_bar(ts_code='002594.SZ',adj='qfq', start_date='20200206', end_date='20210607')
-    data7_1 = df1.iloc[0:30]  # 前7行
-    isAn_JianLongZaiTian2_model(data7_1,'002594.SZ')
-
-    # # 案例 2 603799 华友钴业
-    # df1 = ts.pro_bar(ts_code='603799.SH',adj='qfq', start_date='20210206', end_date='20210706')
-    # data7_1 = df1.iloc[0:30]  # 前7行
-    # isAn_JianLongZaiTian2_model(data7_1,'603799.SH')
-
-    # 案例 3 000789 万年青
-    df1 = ts.pro_bar(ts_code='000789.SZ',adj='qfq', start_date='20210206', end_date='20210908')
-    data7_1 = df1.iloc[0:30]  # 前7行
-    isAn_JianLongZaiTian2_model(data7_1,'000789.SZ')
-
-    # 案例 4 000809铁岭新城
-    df1 = ts.pro_bar(ts_code='000809.SZ',adj='qfq', start_date='20210206', end_date='20211008')
-    data7_1 = df1.iloc[0:30]  # 前7行
-    isAn_JianLongZaiTian2_model(data7_1,'000809.SZ')
-
-    # 案例 5 600096云天化
-    df1 = ts.pro_bar(ts_code='600096.SH',adj='qfq', start_date='20210206', end_date='20210909')
-    data7_1 = df1.iloc[0:30]  # 前7行
-    isAn_JianLongZaiTian2_model(data7_1,'600096.SH')
-
 
 
 
@@ -252,7 +195,7 @@ def test_ziji_caixiang():
 '''
 测试自己的案例
 '''
-def test_isAn_JianLongZaiTian_ziji():
+def test_isAn_JianLongZaiTian2_ziji():
     #自己的 案例
     df1 = ts.pro_bar(ts_code='002507.SZ',adj='qfq', start_date='20210206', end_date='20211008')
     data7_1 = df1.iloc[0:6]  # 前7行
@@ -278,7 +221,6 @@ def test_Befor_data():
 
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
-    # get_all_JianLongZaiTian(localpath1)
+    get_all_JianLongZaiTian2(localpath1)
     # test_isAn_JianLongZaiTian2_laoshi()
-    # test_ziji_caixiang()
-    test_Befor_data()
+    # test_Befor_data()

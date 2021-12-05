@@ -18,7 +18,7 @@ from stock.settings import BASE_DIR
 '''
 
 def getall7start_data():
-    path = BASE_DIR + '/jishu_stock/bQiXingLuoChangKong/7startdata.csv'
+    path = BASE_DIR + '/jishu_stock/rQiXingLuoChangKong/7startdata.csv'
 
     # print "ssss"
     print path

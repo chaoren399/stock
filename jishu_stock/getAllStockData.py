@@ -4,10 +4,10 @@ import datetime
 
 import tushare as ts
 import sys
-
+import pandas as pd
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, writeLog_to_txt_path_getcodename
 from stock.settings import BASE_DIR
-import pandas as pd
+
 import time
 reload(sys)
 

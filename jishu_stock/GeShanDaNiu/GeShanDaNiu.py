@@ -6,7 +6,7 @@ import exceptions
 import tushare as ts
 import pandas as pd
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, print1, isYinXian, isYangXian, \
-    writeLog_to_txt_path_getcodename
+    writeLog_to_txt_path_getcodename, is_small_to_big
 from jishu_stock.z_tool.is5_13_34_ShangZhang import is5_13_34_XiangShang
 from stock.settings import BASE_DIR
 from jishu_stock.z_tool.ShiTiDaXiao import getShiTiDaXiao
@@ -27,6 +27,9 @@ https://www.yuque.com/chaoren399/eozlgk/xokvyg/
 ④ 后3个交易日的收盘价比中阳线的开盘价高，并且成交量都比中阳线的成交量低
 
 需要 5 个数据
+2021年11月28日 发现问题了, 
+找近 1 年(250 个交易日)的 最低点, 然后,  再判断 中阳线与最低点距离多少天. 
+
 GeShanDaNiu
 
 '''
@@ -69,8 +72,9 @@ def isAn_GeShanDaNiu_model(data,stockcode):
         data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
         # print1(data1)
-        data2=data[len_data-5-22:len_data-5]
+        data2=data[0:len_data-5]
         data2 = data2.reset_index(drop=True)  # 重新建立索引 ,
+
 
         # 设置两个 key
         key_1=0; #明显的中阳线（和近期阴线比较，阳线实体要较大）
@@ -78,9 +82,10 @@ def isAn_GeShanDaNiu_model(data,stockcode):
         key_3=0;  #后3个交易日的收盘价比中阳线的开盘价高，
         key_4=0; # 后3个交易日并且成交量都比中阳线的成交量低
 
-        key_5=0; # 5-13-34 都是上涨的
+        key_5=0; #  不能超过 6 个月, 120天.
 
-        key_6=0; # 上涨初期, 阳线的收盘价 高于近 1 个月的 22 交易数据的 最高值
+
+
 
 
         day1_amount=0
@@ -116,7 +121,9 @@ def isAn_GeShanDaNiu_model(data,stockcode):
         if(is_day2_yangxian==1 and  day2_yangxian_shiti >1.6) :  #明显的中阳线（和近期阴线比较，阳线实体要较大）
             key_1=1
 
-        if(day2_amount > day1_amount): #成交量比前一个交易日明显放量
+        day2_day_amount_beishu=round(day2_amount /day1_amount,2)
+        # if(day2_amount > day1_amount): #成交量比前一个交易日明显放量
+        if(day2_day_amount_beishu>=2 ): #成交量比前一个交易日明显放量
             key_2=1
         #后3个交易日的收盘价比中阳线的开盘价高，
         if(day3_close > day2_open and day4_close > day2_open and day5_close > day2_open):
@@ -126,20 +133,27 @@ def isAn_GeShanDaNiu_model(data,stockcode):
         if(day3_amount < day2_amount and day4_amount < day2_amount and day5_amount < day2_amount):
             key_4=1
 
-        key_6 = 1;  # 上涨初期, 阳线的收盘价 高于近 1 个月的 22 交易数据的 最高值
-        for index, row in data2.iterrows():
-            high= row['high']
-            if(high > day2_close):
-                key_6=0
+        # 找到 data2 的最低点, 判断最低点 距离中阳线的位置
+        # for index, row in data2.iterrows():
+
+
         # print1(key_1)
         # print1(key_2)
         # print1(key_3)
         # print1(key_4)
-        if(key_1==1 and  key_2 ==1 and key_3==1 and key_4==1 and key_6==1):
-            count3=is5_13_34_XiangShang(data1,0)
-            if(count3>2):
+        # print1(day2_day_amount_beishu)
+        #
+        # print1(day2_close)
+
+        if(key_1==1 and  key_2 ==1 and key_3==1 and key_4==1 ):
+
+            if(1):
                 info=''
-                info=info+'5-13-34 有 '+str(count3)+'个上升-'
+
+                info=info+'明显放量= '+str(day2_day_amount_beishu) +'倍--'
+                info=info+'中阳线实体= '+str(day2_yangxian_shiti)
+
+
                 info = info + "-----隔山打牛 放量中阳线 捕捉涨停 " + ' ----' + stockcode + ' ----' + str(riqi)
                 # print info
                 writeLog_to_txt(info, stockcode)
@@ -155,29 +169,35 @@ def isAn_GeShanDaNiu_model(data,stockcode):
                 writeLog_to_txt_path_getcodename(info, path, stockcode)
 
 
+
 '''
 测试老师的案例
 '''
 def test_isAn_GeShanDaNiu_laoshi():
-    # 案例 1
-    df1 = ts.pro_bar(ts_code='002010.SZ',adj='qfq', start_date='20210206', end_date='20210607',ma=[5, 13, 34])
-    data7_1 = df1.iloc[0:30]  # 前7行
+    # 案例 1  传化智联 6个月
+    df1 = ts.pro_bar(ts_code='002010.SZ',adj='qfq', start_date='20190206', end_date='20210607',ma=[5, 13, 34,144,169])
+    data7_1 = df1.iloc[0:250]  # 前7行
     isAn_GeShanDaNiu_model(data7_1,'002010.SZ')
 
-    # 案例 2 600171
-    df1 = ts.pro_bar(ts_code='600171.SH',adj='qfq', start_date='20210206', end_date='20210524',ma=[5, 13, 34])
-    data7_1 = df1.iloc[0:30]  # 前7行
+    # 案例 2 600171 上海贝岭 6个月
+    df1 = ts.pro_bar(ts_code='600171.SH',adj='qfq', start_date='20200206', end_date='20210524',ma=[5, 13, 34,144,169])
+    data7_1 = df1.iloc[0:250]  # 前7行
     isAn_GeShanDaNiu_model(data7_1,'600171.SH')
 
-    # 案例 3 000429  案例 3 和4 出现的日期不一样  放量中阳线 捕捉涨停  ----000429.SZ ----20210208--粤高速A**000429.SZ
-    df1 = ts.pro_bar(ts_code='000429.SZ',adj='qfq', start_date='20200206', end_date='20210219 ',ma=[5, 13, 34])
-    data7_1 = df1.iloc[0:30]  # 前7行
+    # 案例 3 000429  2个月 案例 3 和4 出现的日期不一样  放量中阳线 捕捉涨停  ----000429.SZ ----20210208--粤高速A**000429.SZ
+    df1 = ts.pro_bar(ts_code='000429.SZ',adj='qfq', start_date='20200206', end_date='20210219 ',ma=[5, 13, 34,144,169])
+    data7_1 = df1.iloc[0:250]  # 前7行
     isAn_GeShanDaNiu_model(data7_1,'000429.SZ')
 
-    # 案例 4 000429   案例 3 和4 出现的日期不一样  -----000429.SZ ----20210129--粤高速A**000429.SZ
-    df1 = ts.pro_bar(ts_code='000429.SZ',adj='qfq', start_date='20200206', end_date='20210204',ma=[5, 13, 34])
-    data7_1 = df1.iloc[0:30]  # 前7行
+    # 案例 4 000429  2个月  案例 3 和4 出现的日期不一样  -----000429.SZ ----20210129--粤高速A**000429.SZ
+    df1 = ts.pro_bar(ts_code='000429.SZ',adj='qfq', start_date='20200206', end_date='20210204',ma=[5, 13, 34,144,169])
+    data7_1 = df1.iloc[0:250]  # 前7行
     isAn_GeShanDaNiu_model(data7_1,'000429.SZ')
+
+    #300069 金利华电 2个月
+    df1 = ts.pro_bar(ts_code='300069.SZ',adj='qfq', start_date='20200206', end_date='20210518',ma=[5, 13, 34,144,169])
+    data7_1 = df1.iloc[0:250]  # 前7行
+    isAn_GeShanDaNiu_model(data7_1,'300069.SZ')
 
 '''
 测试自己的案例
@@ -208,6 +228,6 @@ def test_Befor_data():
 
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
-    # get_all_GeShanDaNiu(localpath1)
-    test_isAn_GeShanDaNiu_laoshi()
+    get_all_GeShanDaNiu(localpath1)
+    # test_isAn_GeShanDaNiu_laoshi()
     # test_Befor_data()

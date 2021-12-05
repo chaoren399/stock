@@ -47,6 +47,8 @@ https://www.yuque.com/chaoren399/eozlgk/xwhd4i
  2021年10月21日 更新 
  小阴线实体最好小于 1.6 , 成功概率会大, 联创电子 实体1.92 失败 
  
+ 课程案例:
+ https://xueqiu.com/3476656801/204534570
  
  
 '''
@@ -214,7 +216,9 @@ def isAn_YiJianShuangDiao_model(data,stockcode):
                 info =info+ '2个阴线高开(极少见)'
             else:
                 info =info+'没有阴线高开-----'
-            if (key_4==2 and is5_13_34_XiangShang(data,0)>2):
+            # if (key_4==2 and is5_13_34_XiangShang(data,0)>2):
+            # if (is5_13_34_XiangShang(data,0)>2):
+            if (1):
 
                 info = info+'-中阳线=' + str(yangxian_shiti) + ',' +'小阴线1=' + str(yinxian_shiti1) + ',' + '小阴线2=' + str(yinxian_shiti2)
 
@@ -338,10 +342,10 @@ def test_Befor_data():
 
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
-    # get_all_YiJianShuangDiao(localpath1)
+    get_all_YiJianShuangDiao(localpath1)
     # test_isAn_YiJianShuangDiao_laoshi()#测试老师举例 5个成功案例 其中一个 阴线实体为0,一个阴线实体大于 1.6  总共 3 个成功
     # test_isAn_YiJianShuangDiao_laoshi_shibai_anli()#测试老师举例讲解学生 失败案例
 
     # test_isAn_YiJianShuangDiao_ziji()
-    test_Befor_data() #测试 8 月份所有数据
+    # test_Befor_data() #测试 8 月份所有数据
     # linshi()

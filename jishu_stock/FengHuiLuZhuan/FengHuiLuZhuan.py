@@ -8,7 +8,7 @@ import pandas as pd
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, print1, \
     writeLog_to_txt_path_getcodename
 from jishu_stock.z_tool.isZhangTingBan import isZhangTingBan
-from stock.settings import BASE_DIR
+
 
 import pandas as pd
 
@@ -33,6 +33,9 @@ https://www.yuque.com/chaoren399/eozlgk/cgc8qt
 
 '''
 
+infolists=[]
+chengongs=[]
+modelname='峰回路转'
 def get_all_FengHuiLuZhuan(localpath1):
     info1=  '--峰回路转 -超短线 3 天涨停 start--   '
     writeLog_to_txt_nocode(info1)
@@ -51,11 +54,11 @@ def get_all_FengHuiLuZhuan(localpath1):
         len1 = len(data6_1)
         isAn_FengHuiLuZhuan_model(data6_1, stock_code)
 
-
+    return infolists
 
 
 '''
-#2 单独一个函数 判断 6 个数据是不是符合模型
+#2 单独一个函数 判断 6 个数据是不是符合模型  24行
 '''
 def isAn_FengHuiLuZhuan_model(data,stockcode):
     if (data is None or data.empty):
@@ -72,7 +75,7 @@ def isAn_FengHuiLuZhuan_model(data,stockcode):
         data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
 
 
-        data2= data[0:len_data-2]
+        data2= data[len_data-2-22:len_data-2]
         data2 = data2.reset_index(drop=True)  # 重新建立索引 ,
         # print1(data2)
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
@@ -124,6 +127,7 @@ def isAn_FengHuiLuZhuan_model(data,stockcode):
 
             path = '峰回路转.txt'
             writeLog_to_txt_path_getcodename(info, path, stockcode)
+
 
 
 

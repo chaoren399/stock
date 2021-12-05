@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
 import collections
+import csv
 import datetime
 import time
 
@@ -32,6 +33,19 @@ def test_getallstockdata_isLongZhan_YuYe():
 
 '''
 
+
+
+'''
+获取所有的股票信息, 为了便于 回测,返回 所有股票的代码数组.
+'''
+def get_all_codes_from_tool():
+    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    data = pd.read_csv(path, dtype={'code': str})
+    stock_codes = []
+    for index, row in data.iterrows():
+        stock_code = row['ts_code']
+        stock_codes.append(stock_code)
+    return stock_codes
 
 '''
 判断一行是不是 阴线, 返回 1 是阴线, 返回0 是阳线
@@ -143,6 +157,7 @@ def jiagezhongshu_writeLog_to_txt_path_getcodename(info ,path,code):
 可以指定路径, 并且 得到股票名字的 
 '''
 def writeLog_to_txt_path_getcodename(info ,path,code):
+    modename= path.split('.')[0]
     info = info + '--' + get_Stock_Name(code)
 
     if (isInQiangShi_gupiaochi(code) == 1):
@@ -156,18 +171,46 @@ def writeLog_to_txt_path_getcodename(info ,path,code):
     info = info + '**' + str(code)
     # print info
 
+
     path = BASE_DIR + '/jishu_stock/zJieGuo/huizong/' + path
     with open(path, "a") as f:
         f.write(info + '' + "\n")
+    #----
+
+    with open(path1, 'a') as csvfile:
+        fieldnames = ['first_name', 'last_name']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        # writer = csv.DictWriter(csvfile)
+        #
+        # writer.writeheader()#将表头名称写入csv文件
+        writer.writerow({'first_name': modename, 'last_name': info})
+        # writer.writerow({modename, info})
+
+'''
+因为 优化程序速度后, 写入的结果排序紊乱, 所以 写了一个单独的程序,专门处理这个问题.
+
+把 CSV 文件 按照 key 排序
+
+'''
+def csv_paixu_path1_zhuanyong():
+    df = pd.read_csv(path1)
+    df = df.sort_values('first_name', ascending=False)
+    print df
+    df.to_csv(path1, index=False)
+
 
 def writeLog_to_txt_path(info ,path):
     with open(path, "a") as f:
         f.write(info + '' + "\n")
 
 
-#  下边的  writeLog_to_txt  writeLog_to_txt_nocode 两个函数用用一路径
-path = BASE_DIR + '/jishu_stock/zJieGuo/11月/' + datetime.datetime.now().strftime(
+#  下边的  writeLog_to_txt  writeLog_to_txt_nocode
+#  两个函数用用一路径 每月只需改动这一个就可以
+path = BASE_DIR + '/jishu_stock/zJieGuo/12月/' + datetime.datetime.now().strftime(
         '%Y-%m-%d') + '.txt'
+path1 = BASE_DIR + '/jishu_stock/zJieGuo/12月/' + datetime.datetime.now().strftime(
+        '%Y-%m-%d') + '.csv'
+
 '''
 固定路径的写入 带 code 的, 每个输出都有的
 '''
@@ -262,6 +305,9 @@ def getMax_High_fromDataFrame(data):
 
 '''
 获取 之前 -30 , 1 ,2 3,天之前的日期
+
+之前的是 负数
+之后的是 正数
 '20210813'
 '''
 def getRiQi_Befor_Ater_Days(date,numdays):
@@ -418,6 +464,7 @@ if __name__ == '__main__':
     # print get_Stock_Name('603040.SH')
     # stoc_code_zhuanhuan()
     # get_houzhui_code('000661')
-    get_2stockcode()
+    # get_2stockcode()
+    csv_paixu_path1_zhuanyong()
 
 
