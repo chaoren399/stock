@@ -19,8 +19,8 @@ https://tushare.pro/register?reg=456282
 '''
 def getAll_jiagezhongshu_WeekKdata(localpath1):
     print '价格中枢 专用  日K 转换为 周K'
-    # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
+    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
     count = 0
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
@@ -52,9 +52,10 @@ def cover_day_K_to_Week_K(df,outpath):
         return 0
     # print  df['trade_date']
     df['trade_date'] = pd.to_datetime(df['trade_date'], format='%Y%m%d', errors='coerce')
-
+    # print  df['trade_date']
     df = df.sort_values(by='trade_date', axis=0, ascending=True)  # 按照日期 从新到旧 排序
     # print df
+    # print df.iloc[0:2]  # 1 年有 52 周
     # 将 date 设定为 index
     df.set_index('trade_date', inplace=True)
 
@@ -74,11 +75,21 @@ def cover_day_K_to_Week_K(df,outpath):
 
 
     df_week = df_week.dropna(how='any', axis=0)#删除 列数据为空的 的行
-    df_week.sort_index(axis=1, ascending=False)
+
+    df_week = df_week.reset_index(drop=False)  # 重新建立索引 ,
+
+    # print1(df_week.iloc[0:2])  # 1 年有 52 周
+
+
+    #处理日期 YYYYMMDD  把 2018-01-07  转化为  20180107
+    df_week['trade_date'] = df_week['trade_date'].astype(str).replace('-', '')
+
+    df_week['trade_date']= df_week['trade_date'].apply(lambda x: x.replace('-', ''))
+
 
     df_week = df_week.sort_values(by='trade_date', axis=0, ascending=False)  # 按照日期 从新到旧 排序
+    # print1(df_week.iloc[0:2])  # 1 年有 52 周
 
-    # print1(len(df_week))
     df_week.to_csv(outpath)
 
     return 1
@@ -108,7 +119,24 @@ def test_000001():
 
     cover_day_K_to_Week_K(df, outpath)
 
+def get_one_stocke_weekdata():
+    stock_code='000663.SZ'
+    localpath1 = '/jishu_stock/stockdata/data1/'
+    stockdata_path1 = BASE_DIR + localpath1 + stock_code + ".csv"
+    localpath2 = '/jishu_stock/stockdata/data2020/'  #
+    stockdata_path2 = BASE_DIR + localpath2 + stock_code + ".csv"
 
+    df1 = pd.read_csv(stockdata_path1, index_col=0)
+    df = pd.read_csv(stockdata_path2, index_col=0)
+    df = df.append(df1, sort=True)  # 合并 2020 年之前的数据
+    # print df.iloc[0:2]  # 1 年有 52 周
+    # print1(len(df))
+    if (df.empty):
+        return
+    outpath = BASE_DIR + '/jishu_stock/stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+    print '--' + stock_code
+
+    cover_day_K_to_Week_K(df, outpath)
 
 if __name__ == '__main__':
     starttime = datetime.datetime.now()
@@ -116,6 +144,7 @@ if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
     getAll_jiagezhongshu_WeekKdata(localpath1)
     # test_000001() #测试一个股票转化为 周 K
+    # get_one_stocke_weekdata()
 
 
 

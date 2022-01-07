@@ -24,7 +24,7 @@ def cover_day_K_to_Month_K(df,outpath):
 
     # 将 date 设定为 index
     df.set_index('trade_date', inplace=True)
-    print df
+    # print df
 
     # 获取月k
     df_month = pd.DataFrame()
@@ -73,7 +73,8 @@ def getAllMonth_Kdata(localpath1):
         outpath= BASE_DIR + '/jishu_stock/stockdata/MONTH_DATA_K/' + stock_code +'_Month'+ ".csv"
         cover_day_K_to_Month_K(df,outpath)
         count = count+1
-        print count
+        # print count
+        print stock_code +'--'+str(count)
 
 '''
 测试一个股票转化为 月 K 
@@ -128,9 +129,9 @@ if __name__ == '__main__':
 
     # test1()
     localpath1 = '/jishu_stock/stockdata/data1/'
-    # getAllMonth_Kdata(localpath1)
+    getAllMonth_Kdata(localpath1)
     # test_cover_day_K_to_Month_K()
-    test_getTushare_Month_k()
+    # test_getTushare_Month_k()
 
 
     endtime = datetime.datetime.now()

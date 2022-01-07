@@ -178,7 +178,7 @@ def isAn_JGZS_KanZhangYinXian1_model(data,stockcode):
             # print info
             # writeLog_to_txt(info, stockcode)
 
-            path = BASE_DIR + '/jishu_stock/zJieGuo/JiaGeZhongShu/' + datetime.datetime.now().strftime(
+            path = BASE_DIR + '/jishu_stock/sJieGuo/JiaGeZhongShu/' + datetime.datetime.now().strftime(
                 '%Y-%m-%d') + '.txt'
 
             jiagezhongshu_writeLog_to_txt_path_getcodename(info, path, stockcode)
@@ -254,8 +254,8 @@ def test_Befor_data():
 
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
-    get_all_JGZS_KanZhangYinXian1(localpath1)
+    # get_all_JGZS_KanZhangYinXian1(localpath1)
     # test_isAn_JGZS_KanZhangYinXian1_laoshi()  #
     # test_ziaxian_zhuan_Week()
     # test_isAn_JGZS_KanZhangYinXian1_ziji()
-    # test_Befor_data()
+    test_Befor_data()

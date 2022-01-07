@@ -30,6 +30,13 @@ def isZhangTingBan(row):
     return 0;
 
 
+'''
+判断是还不是一字板
+'''
+def isYiZiBan(row):
+    if(row['open']==row['close'] and row['high']==row['low']):
+        return 1
+    return 0
 
 if __name__ == '__main__':
     import datetime

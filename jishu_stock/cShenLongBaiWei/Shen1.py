@@ -6,6 +6,7 @@ import exceptions
 import tushare as ts
 import pandas as pd
 from jishu_stock.Tool_jishu_stock import *
+from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
 from jishu_stock.z_tool.isZhangTingBan import isZhangTingBan
 from stock.settings import BASE_DIR
 from jishu_stock.z_tool.ShiTiDaXiao import *
@@ -26,7 +27,8 @@ Shen1
 思路: 循环40 天的数组, 找到涨停板, 然后 从涨停板 截取后边的数据,  必须大于 7 天, 然后最后一天必须是放量突破,
 在找到最后 6 天的数据, 判断是还不是在箱体内运行.
 '''
-
+chengongs=[]
+modelname='神1'
 def get_all_Shen1(localpath1):
     info1=  '--神 1 pro start--   '
     writeLog_to_txt_nocode(info1)
@@ -38,7 +40,7 @@ def get_all_Shen1(localpath1):
         stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
         df = pd.read_csv(stockdata_path, index_col=0)
 
-        data6_1 = df.iloc[0:40]  # 前6行
+        data6_1 = df.iloc[0:62]  # 前6行
         # data6_1 = df.iloc[20:32]  # 前6行
         len1 = len(data6_1)
         isAn_Shen1_model(data6_1, stock_code)
@@ -55,14 +57,21 @@ def isAn_Shen1_model(data,stockcode):
     len_data = len(data)
     if (len_data == 0):
         print str(stockcode) + '--data --is null'
-    if(len_data >= 40):
+    if(len_data >= 62):
         data = data.sort_values(by='trade_date', axis=0, ascending=True)  # 按照日期 从旧到新 排序
         data = data.reset_index(drop=True)  # 重新建立索引 ,默认为false，索引列（被设置为索引的列）被还原为普通列，并将索引重置为整数索引，否则直接丢弃索引列。
         # print data
-        data1= data[0:len_data]
+        data1= data[len_data-40:len_data]
         data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
-        riqi = data1.ix[len_data-1]['trade_date']  # 阳线的日期
+        lendata1=len(data1)
+        riqi = data1.ix[lendata1-1]['trade_date']  # 阳线的日期
+        zhangtingban_riqi=0
+        mairuriqi=0
+        zhisundian=0
         # print1(data1)
+
+        data3 = data[len_data - 40 - 22 :len_data - 40 ]
+        data3 = data3.reset_index(drop=True)  # 重新建立索引 ,
 
         #思路: 循环40 天的数组, 找到涨停板, 然后 从涨停板 截取后边的数据,  必须大于 7 天, 然后最后一天必须是放量突破,
         #在找到最后 6 天的数据, 判断是还不是在箱体内运行.
@@ -73,6 +82,8 @@ def isAn_Shen1_model(data,stockcode):
         key_3=1;#2, 6 天的数据在箱体内运行.
         key_4=1;#3, 所有数据 收盘价和开盘价 不能低于 涨停板的 开盘价
 
+        key_6 = 1;  # 前 20 个交易日 不能有涨停板
+
         #1 找到涨停板 以后的数据
 
         count=0
@@ -81,18 +92,22 @@ def isAn_Shen1_model(data,stockcode):
         zhangtingban_riqi=0
         for index,row in data1.iterrows():
             count=count+1
-            if(isZhangTingBan(row)==1):
+            if(isZhangTingBan(row)==1): # 涨停板
                 zhangtingban_open_price=row['open']
                 zhangtingban_close_price=row['close']
                 zhangtingban_riqi=row['trade_date']
+                zhisundian=zhangtingban_open_price
                 break
 
 
         lendata1=len(data1)
         # print1(lendata1)
-        data2=data1[count:lendata1]
+        data2=data1[count:lendata1]  # 涨停板后的数据
         data2 = data2.reset_index(drop=True)  # 重新建立索引 ,
         # print1(data2)
+
+
+
         lendata2 = len(data2)  # lendata2 必须大于 5 天的数据
 
         if(lendata2 > 5):
@@ -119,6 +134,7 @@ def isAn_Shen1_model(data,stockcode):
                 if(index==0):
                     day1_amount_data2_1=row['amount']
                 if(index==1):
+                    mairuriqi=row['trade_date']
                     day2_amount_data2_1=row['amount']
                     if(isYangXian(row)==1 and row['close'] > zhangtingban_close_price):
                         key_1=1
@@ -139,6 +155,10 @@ def isAn_Shen1_model(data,stockcode):
                 close = row['close']
                 if(open < zhangtingban_open_price or close < zhangtingban_open_price):
                     key_4=0
+        #key_6=0; # 前 20 个交易日 不能有涨停板
+        for index,row in data3.iterrows():
+            if(isZhangTingBan(row)==1):
+                key_6=0
 
 
         if(0):
@@ -150,56 +170,64 @@ def isAn_Shen1_model(data,stockcode):
             print1(zhangtingban_open_price)
             print1(zhangtingban_riqi)
             print data2_3
-        if(key_1==1 and  key_2 ==1 and key_3==1and key_4==1):
+        if(key_1==1 and  key_2 ==1 and key_3==1and key_4==1 and key_6==1):
+        # if(key_1==1 and  key_2 ==1 and key_3==1and key_4==1):
         # if(key_1==1  and key_3==1and key_4==1):
             info = ''
 
-            info = info + "-----神 1 成功了"  + str(riqi)
+            info = info + "--神 1 成功了--"  +"涨停板日期:"+str(zhangtingban_riqi)+'--'+str(riqi)
             # print info
             writeLog_to_txt(info, stockcode)
-            path = '神1-plus.txt'
+            path = '神1.txt'
             writeLog_to_txt_path_getcodename(info, path, stockcode)
+
+            chenggong_code = {'stockcode': stockcode, 'mairuriqi': mairuriqi, 'zhisundian': zhisundian}
+            chengongs.append(chenggong_code)
 
 
 '''
 测试老师的案例 5个 
+https://xueqiu.com/3476656801/206376922
+
 '''
 def test_isAn_Shen1_laoshi():
-    # 测试案例 1 渤海租赁
+    # 测试案例 1 渤海租赁   一周的 K 线没有在箱体内运行
     df1 = ts.pro_bar(ts_code='000415.SZ', adj='qfq',start_date='20190403', end_date='20210723')
-    data7_1 = df1.iloc[0:40]  # 前4行
+    data7_1 = df1.iloc[0:62]  # 前4行
     isAn_Shen1_model(data7_1, '000415.SZ')
     # 测试案例 2 大立科技
     df2 = ts.pro_bar(ts_code='002214.SZ', start_date='20190403', end_date='20210723')
-    data7_2 = df2.iloc[0:40]  # 前4行
+    data7_2 = df2.iloc[0:62]  # 前4行
     isAn_Shen1_model(data7_2, '002214.SZ')
     # 测试案例 3 飞亚达
     df3 = ts.pro_bar(ts_code='000026.SZ', start_date='20190403', end_date='20200616')
-    data7_3 = df3.iloc[0:40]  # 前4行
+    data7_3 = df3.iloc[0:62]  # 前4行
     isAn_Shen1_model(data7_3, '000026.SZ')
     # 复杂盘面  1 000038深大通
     df5 = ts.pro_bar(ts_code='000038.SZ', start_date='20190403', end_date='20200403')
-    data7_5 = df5.iloc[0:40]  # 前4行
+    data7_5 = df5.iloc[0:62]  # 前4行
     isAn_Shen1_model(data7_5, '000038.SZ')
     # 复杂盘面  2  000400 许继电气, 20191118 以后买入 但是 有一个破了箱体 所以程序跑不出来,
     # 然后但是 如果我每天测试一次, 就可以 在 2019 1113 可以检测出来,所以程序非常好
     df6 = ts.pro_bar(ts_code='000400.SZ', start_date='20190403', end_date='20191113')
-    data7_6 = df6.iloc[0:40]  # 前4行
+    data7_6 = df6.iloc[0:62]  # 前4行
     isAn_Shen1_model(data7_6, '000400.SZ')
 
 def testlinshi():
-    df4 = ts.pro_bar(ts_code='002665.SZ', start_date='20190403', end_date='20210902')
-    data7_4 = df4.iloc[0:40]  # 前4行
-    isAn_Shen1_model(data7_4, '002665.SZ')
+    df1 = ts.pro_bar(ts_code='000415.SZ', adj='qfq',start_date='20190403', end_date='20210723')
+    data7_1 = df1.iloc[0:62]  # 前4行
+    isAn_Shen1_model(data7_1, '000415.SZ')
 '''
 测试学员朋友找到的案例
 '''
 def test_xueyuan():
     #605277      新亚电子    成功
     # 这是个成功的神1  为什么程序没跑出来, 所以我要改进我的 程序
-    df4 = ts.pro_bar(ts_code='605277.SH', start_date='20190403', end_date='20210826')
-    data7_4 = df4.iloc[0:40]  # 前4行
-    isAn_Shen1_model(data7_4, '605277.SH')
+    #神1	600337	美克家居	2021年12月23日
+
+    df4 = ts.pro_bar(ts_code='600337.SH', start_date='20190403', end_date='20211221')
+    data7_4 = df4.iloc[0:62]  # 前4行
+    isAn_Shen1_model(data7_4, '600337.SH')
 
 '''
 测试自己的案例
@@ -207,7 +235,7 @@ def test_xueyuan():
 def test_isAn_DaYou_ziji():
     #自己的 案例
     df1 = ts.pro_bar(ts_code='002507.SZ',adj='qfq', start_date='20210206', end_date='20211008')
-    data7_1 = df1.iloc[0:40]  # 前7行
+    data7_1 = df1.iloc[0:62]  # 前7行
     isAn_Shen1_model(data7_1,'002507.SZ')
 
 
@@ -223,16 +251,33 @@ def test_Befor_data():
         stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
         df = pd.read_csv(stockdata_path, index_col=0)
         data7_4 = df.iloc[22:42]  # 前10个交易日
+        data7_4 = df.iloc[22:22+62+22]  # 前1个个月
+
+        data7_4 = df.iloc[22*3:22*3+62+22]  # 前2个月
+        # data7_4 = df.iloc[22:22+62+120]  # 半年
+        # data7_4 = df.iloc[22:22+62+250]  # 前1年
         len_1=len(data7_4)
-        for i in range(0, len_1 - 3 + 1):
+        for i in range(0, len_1 - 62 + 1):
             # print "i" + str(i )+ "j"+str(i+3)
-            isAn_Shen1_model(data7_4[i:i + 3], stock_code)
+            isAn_Shen1_model(data7_4[i:i + 62], stock_code)
 
-
+    # jisuan_all_shouyilv(chengongs, modelname, 1.05)
+    # jisuan_all_shouyilv(chengongs, modelname, 1.10)
+    # jisuan_all_shouyilv(chengongs, modelname, 1.15)
+    jisuan_all_shouyilv(chengongs, modelname, 1.20)
+    jisuan_all_shouyilv(chengongs, modelname, 1.30)
 
 if __name__ == '__main__':
+    from  time import  *
+    starttime = time()
+
     localpath1 = '/jishu_stock/stockdata/data1/'
-    get_all_Shen1(localpath1)
+    # get_all_Shen1(localpath1)
     # test_isAn_Shen1_laoshi()
+    test_Befor_data()
     # testlinshi()
     # test_xueyuan()
+
+
+    endtime = time()
+    print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"

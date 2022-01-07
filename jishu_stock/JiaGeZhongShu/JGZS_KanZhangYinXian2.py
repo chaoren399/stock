@@ -159,7 +159,7 @@ def isAn_JGZS_KanZhangYinXian2_model(data,stockcode):
 
             info = info + "--价格中枢看涨阴线2--"  + str(riqi)
 
-            path = BASE_DIR + '/jishu_stock/zJieGuo/JiaGeZhongShu/' + datetime.datetime.now().strftime(
+            path = BASE_DIR + '/jishu_stock/sJieGuo/JiaGeZhongShu/' + datetime.datetime.now().strftime(
                 '%Y-%m-%d') + '.txt'
 
             jiagezhongshu_writeLog_to_txt_path_getcodename(info, path, stockcode)
@@ -242,8 +242,8 @@ def test_Befor_data():
 
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
-    get_all_JGZS_KanZhangYinXian2(localpath1)
+    # get_all_JGZS_KanZhangYinXian2(localpath1)
     # test_isAn_JGZS_KanZhangYinXian2_laoshi()  #
     # test_ziaxian_zhuan_Week()
     # test_isAn_JGZS_KanZhangYinXian2_ziji()
-    # test_Befor_data()
+    test_Befor_data()

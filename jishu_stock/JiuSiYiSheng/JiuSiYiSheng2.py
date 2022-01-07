@@ -62,7 +62,7 @@ def isAn_JiuSiYiSheng_2_model(data,stockcode):
         data1 = data[len_data-4:len_data]
         data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
         # print data1
-        data2= data[0:len_data-4]
+        data2= data[len_data-4-64:len_data-4]
         data2 = data2.reset_index(drop=True)  #  前 20 个数据重新建立索引 ,
         # print data2
         data3 = data[len_data - 14:len_data-4] # 10 个数据
@@ -250,7 +250,7 @@ def test_Befor_data():
 
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
-    get_all_JiuSiYiSheng_2(localpath1)
-    # test_isAn_JiuSiYiSheng_2_model_laoshi()
+    # get_all_JiuSiYiSheng_2(localpath1)
+    test_isAn_JiuSiYiSheng_2_model_laoshi()
     # test_isAn_JiuSiYiSheng_2_model_ziji()
     # test_Befor_data()

@@ -9,6 +9,7 @@ import pandas as pd
 from jishu_stock.JiaGeZhongShu.jiagezhognshu_Get_Week_K_data import getAll_jiagezhongshu_WeekKdata
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, print1, isYinXian, isYangXian, \
     jiagezhongshu_writeLog_to_txt_path_getcodename, writeLog_to_txt_path_getcodename
+from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
 from stock.settings import BASE_DIR
 from jishu_stock.z_tool.ShiTiDaXiao import *
 import pandas as pd
@@ -36,8 +37,11 @@ https://www.yuque.com/chaoren399/eozlgk/nzv2b4/
 JGZS_KanZhangZuoZhang
 '''
 
+chengongs=[]
+modelname='价格中枢-看涨做涨'
+
 def get_all_JGZS_KanZhangZuoZhang(localpath1):
-    info1=  '--上涨初期 价格中枢-看涨做涨 start--   '
+    info1=  '--上涨初期 价格中枢-看涨做涨 start-- '
     writeLog_to_txt_nocode(info1)
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path, dtype={'code': str})
@@ -75,6 +79,8 @@ def isAn_JGZS_KanZhangZuoZhang_model(data,stockcode):
 
         data1= data[len_data-2:len_data]
         data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
+        mairuriqi = 0
+        zhisundian = 0
         # print1(data1)
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
 
@@ -110,12 +116,14 @@ def isAn_JGZS_KanZhangZuoZhang_model(data,stockcode):
                 week1_xiayingxian=row['open']-row['low']
                 week1_shangyingxian=row['high']-row['close']
                 week1_shiti=getShiTiDaXiao(row)
+                zhisundian=row['low']
 
 
 
             if(index==1 and isYangXian(row)==1):
                 count=count+1
                 week2_open=row['open']
+                mairuriqi=row['trade_date']
 
 
          # 0第一周第 2 周都是 阳线
@@ -180,13 +188,16 @@ def isAn_JGZS_KanZhangZuoZhang_model(data,stockcode):
             # print info
             # writeLog_to_txt(info, stockcode)
 
-            path = BASE_DIR + '/jishu_stock/zJieGuo/JiaGeZhongShu/' + datetime.datetime.now().strftime(
+            path = BASE_DIR + '/jishu_stock/sJieGuo/JiaGeZhongShu/' + datetime.datetime.now().strftime(
                 '%Y-%m-%d') + '.txt'
 
             jiagezhongshu_writeLog_to_txt_path_getcodename(info, path, stockcode)
 
             path = '价格中枢看涨做涨.txt'
             writeLog_to_txt_path_getcodename(info, path, stockcode)
+
+            chenggong_code = {'stockcode': stockcode, 'mairuriqi': mairuriqi, 'zhisundian': zhisundian}
+            chengongs.append(chenggong_code)
 
 
 '''
@@ -240,8 +251,8 @@ def test_Befor_data():
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
         stock_code = row['ts_code']
-
-        stockdata_path = BASE_DIR + '/jishu_stock/stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+        stockdata_path = BASE_DIR + '/jishu_stock/stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+        # stockdata_path = BASE_DIR + '/jishu_stock/stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
         df = pd.read_csv(stockdata_path, index_col=0)
             # print df
         if (df.empty):
@@ -249,16 +260,35 @@ def test_Befor_data():
 
         df = df.reset_index(drop=False)  # 重新建立索引 ,
         data7_4 = df.iloc[8:10]  # 1 年有 52 周
+        data7_4 = df.iloc[8:8+2+4]  # 上个与的
 
         len_1=len(data7_4)
         for i in range(0, len_1 - 2 + 1):
             # print "i" + str(i )+ "j"+str(i+3)
             isAn_JGZS_KanZhangZuoZhang_model(data7_4[i:i + 2], stock_code)
 
+    from jishu_stock.aShengLv.HuiCeTool import wirteList_to_txt
+    from jishu_stock.aShengLv.HuiCeTool import getList_from_txt
+    from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
+    wirteList_to_txt(chengongs)
+    # chengongs1 = getList_from_txt()
+    jisuan_all_shouyilv(chengongs, modelname, 1.03)
+    jisuan_all_shouyilv(chengongs, modelname, 1.05)
+    jisuan_all_shouyilv(chengongs, modelname, 1.07)
+    jisuan_all_shouyilv(chengongs, modelname, 1.10)
+    jisuan_all_shouyilv(chengongs, modelname, 1.15)
 
 if __name__ == '__main__':
+    from  time import  *
+    starttime = time()
+
     localpath1 = '/jishu_stock/stockdata/data1/'
-    get_all_JGZS_KanZhangZuoZhang(localpath1)
-    # test_isAn_JGZS_KanZhangZuoZhang_laoshi() #测试老师的案例
+    # get_all_JGZS_KanZhangZuoZhang(localpath1)
+    test_isAn_JGZS_KanZhangZuoZhang_laoshi() #测试老师的案例
     # test_isAn_JGZS_KanZhangZuoZhang_ziji()
-    # test_Befor_data()
+    test_Befor_data()
+    # jisuan_all_shouyilv(chengongs, modelname, 1.03)
+
+
+    endtime = time()
+    print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"

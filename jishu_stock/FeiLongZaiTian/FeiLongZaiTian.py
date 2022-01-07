@@ -7,6 +7,7 @@ import tushare as ts
 import pandas as pd
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, print1, isYangXian, \
     writeLog_to_txt_path_getcodename
+from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
 from jishu_stock.z_tool.isZhangTingBan import isZhangTingBan
 from stock.settings import BASE_DIR
 import pandas as pd
@@ -32,7 +33,8 @@ https://www.yuque.com/chaoren399/eozlgk/
 再判断 阳线 收盘价高过小 K 线实体
 
 '''
-
+chengongs=[]
+modelname='飞龙在天'
 def get_all_FeiLongZaiTian(localpath1):
     info1=  '--飞龙在天, 超短线 start--   '
     writeLog_to_txt_nocode(info1)
@@ -68,6 +70,8 @@ def isAn_FeiLongZaiTian_model(data,stockcode):
         data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
         # print1(data1)
+        mairuriqi=0
+        zhisundian=0
 
         # 设置两个 key
         key_1=0; # 先判断是不是涨停板,
@@ -76,17 +80,23 @@ def isAn_FeiLongZaiTian_model(data,stockcode):
         key_4=0 #小 K 线成交量放大
         key_5=0;#再判断 阳线 收盘价高过小 K 线实体
 
+        key_6=0;#连续涨停 或者 1 字板不做
+
         day2_open=0
         day2_close=0
         day3_close=0
         day1_high=0
         day2_low=0
         xiao_K_shiti=0
+        count=0
         for index, row in data1.iterrows():
+            if(isZhangTingBan(row)==1):
+                count=count+1 # 排除 3 个连续涨停板
             if(index==0 and isZhangTingBan(row)==1): #先判断是不是涨停板
                 key_1=1
                 day1_high=row['high']
                 day1_amount=row['amount']
+                zhisundian=row['close']
 
             if(key_1==1):  #
                 if(index==1): #判断是不是 小 K
@@ -102,20 +112,33 @@ def isAn_FeiLongZaiTian_model(data,stockcode):
                     if(day2_amount > day1_amount): #小 K 线成交量放大
                         key_4=1
 
+                    if (isZhangTingBan(row)==1):
+                        key_6=key_6+1
+
                 if(index==2  and isYangXian_FeiLongZaiTian(row)==1) : # 阳线 收盘价高过小 K 线实体
                     day3_close=row['close']
+                    mairuriqi=row['trade_date']
+
+                    if (isZhangTingBan(row) == 1):
+                        key_6 = key_6 + 1
                 if(day3_close > day2_open and day3_close > day2_close):
                     key_5=1
                         # print1(day3_close)
                         # print1(day2_close)
                         # print1(day2_open)
+
+                #      key_6=0;#连续涨停 或者 1 字板不做 key_6!=2
+
         # print1(key_1)
         # print1(key_2)
         # print1(key_3)
         # print1(key_4)
         # print1(key_5)
         # print1(xiao_K_shiti)
-        if(key_1==1 and  key_2 ==1 and key_3==1 and key_4==1 and key_5==1):
+
+
+        if(key_1==1 and  key_2 ==1 and key_3==1 and key_4==1 and key_5==1 and key_6!=2 ):
+        # if(key_1==1 and  key_2 ==1 and key_3==1 and key_4==1 and key_5==1  ):
             info = ''
             info=info+'xiao_K_shiti='+str(xiao_K_shiti)
 
@@ -125,6 +148,10 @@ def isAn_FeiLongZaiTian_model(data,stockcode):
 
             path = '飞龙在天.txt'
             writeLog_to_txt_path_getcodename(info, path, stockcode)
+
+            chenggong_code={'stockcode':stockcode,'mairuriqi':mairuriqi,'zhisundian':zhisundian}
+            chengongs.append(chenggong_code)
+
 
 
 '''
@@ -200,16 +227,30 @@ def test_Befor_data():
         df = pd.read_csv(stockdata_path, index_col=0)
         data7_4 = df.iloc[22:42]  # 前10个交易日
         data7_4 = df.iloc[0:22]  # 前10个交易日
+        data7_4 = df.iloc[22:22+3+10]  # 1 个月
+        # data7_4 = df.iloc[22:22+3+22]  # 1 个月
         len_1=len(data7_4)
         for i in range(0, len_1 - 3 + 1):
             # print "i" + str(i )+ "j"+str(i+3)
             isAn_FeiLongZaiTian_model(data7_4[i:i + 3], stock_code)
 
+    jisuan_all_shouyilv(chengongs, modelname, 1.05)
+    jisuan_all_shouyilv(chengongs, modelname, 1.07)
+    jisuan_all_shouyilv(chengongs, modelname, 1.10)
+    jisuan_all_shouyilv(chengongs, modelname, 1.15)
+    jisuan_all_shouyilv(chengongs, modelname, 1.20)
+    jisuan_all_shouyilv(chengongs, modelname, 1.30)
 
 if __name__ == '__main__':
+    from  time import  *
+    starttime = time()
+
     localpath1 = '/jishu_stock/stockdata/data1/'
     # test_isAn_FeiLongZaiTian_laoshi()
-    get_all_FeiLongZaiTian(localpath1)
-    # test_Befor_data()
+    # get_all_FeiLongZaiTian(localpath1)
+    test_Befor_data()
     # test_isAn_FeiLongZaiTian_ziji()
     # test_xueyuan_anli()
+
+    endtime = time()
+    print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"

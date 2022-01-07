@@ -13,7 +13,7 @@ import time
 reload(sys)
 from threading import Thread
 from time import sleep
-
+from time import *
 starttime = datetime.datetime.now()
 today = starttime.strftime('%Y%m%d')
 
@@ -24,6 +24,9 @@ localpath = '/jishu_stock/stockdata/data1/' #数据存放路径
 ts.set_token('731d2ea0abcf1f14d59ec7215d6ec520e09a439fccd2772c43a906be')
 
 def get_all_codes():
+
+    starttime = time()
+
     df1 = ts.pro_bar(ts_code='000001.SZ', adj='qfq', start_date='20210801', end_date=end_date)
     if (df1.empty):
         print '--df1.empty--' + str('000001.SZ')
@@ -36,7 +39,7 @@ def get_all_codes():
         info = '下载数据开始=' + str(df1.ix[0]['trade_date'])
         writeLog_to_txt_path_getcodename(info, path, stockcode)
 
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
+    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
 
 
     data = pd.read_csv(path, dtype={'code': str})
@@ -67,7 +70,14 @@ def get_all_codes():
     #join()只有在你需要等待线程完成时候才是有用的。
     t1.join()
     t2.join()
-    print '我来了'
+    print 't2.join() 我来了'
+
+    endtime = time()
+
+    info=''
+    info = info+'-------------------------------------------'
+
+    print info+ "get_all_codes 下载数据总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟" +info
 
 
 def download_onestock_token1(stock_code):

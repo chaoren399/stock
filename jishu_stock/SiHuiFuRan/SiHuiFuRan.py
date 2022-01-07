@@ -6,6 +6,7 @@ import exceptions
 import tushare as ts
 import pandas as pd
 from jishu_stock.Tool_jishu_stock import *
+from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
 from jishu_stock.z_tool.isXiongShiMoQi import  hasXiongShiMoQi
 from stock.settings import BASE_DIR
 from jishu_stock.z_tool.ShiTiDaXiao import *
@@ -38,6 +39,9 @@ https://www.yuque.com/chaoren399/eozlgk/meu5lk
 SiHuiFuRan
 
 '''
+
+chengongs=[]
+modelname='死灰复燃'
 
 def get_all_SiHuiFuRan(localpath1):
     info1=  '--死灰复燃 要看出现的位置2start--   '
@@ -75,9 +79,11 @@ def isAn_SiHuiFuRan_model(data,stockcode):
         data1= data[len_data-4:len_data]
         data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
         riqi = data1.ix[0]['trade_date']  # 最低价的日期
+        mairuriqi = 0
+        zhisundian = 0
         # print1(data1)
 
-        data2= data[0:len_data-4]
+        data2= data[len_data-4-60:len_data-4]
         data2 = data2.reset_index(drop=True)  # 重新建立索引 ,
 
         # 首先判断是不是最低值
@@ -88,6 +94,8 @@ def isAn_SiHuiFuRan_model(data,stockcode):
                 day0_low=row['low']
 
         if(day0_low == getMin_low_fromDataFrame(data)):
+
+            zhisundian=day0_low
 
             # 设置两个 key
             key_1=0; #1第一天小阳线止跌(最低价不能创新低)
@@ -117,6 +125,7 @@ def isAn_SiHuiFuRan_model(data,stockcode):
                     count=count+1
                     day3_zhongyangxian_shiti=getShiTiDaXiao(row)
                     day3_zhongyangxian_close=row['close']
+                    mairuriqi=row['trade_date']
             if(count==3):
                 # 1第一天小阳线止跌(最低价不能创新低)
                 if(day1_xiaoyangxian_shiti<1.6 and day1_xiaoyangxian_low >= day0_low):
@@ -134,16 +143,11 @@ def isAn_SiHuiFuRan_model(data,stockcode):
 
 
 
-
-
-
-
-
             #
             # print1(key_1)
             # print1(key_2)
             # print1(key_3)
-            # # print1(key_4)
+            # print1(key_4)
             # print1(day1_xiaoyangxian_shiti)
             # print1(day2_xiaoyinxian_shiti)
             # print1(day3_zhongyangxian_shiti)
@@ -161,6 +165,9 @@ def isAn_SiHuiFuRan_model(data,stockcode):
                 writeLog_to_txt(info, stockcode)
                 path = '死灰复燃.txt'
                 writeLog_to_txt_path_getcodename(info, path, stockcode)
+
+                chenggong_code = {'stockcode': stockcode, 'mairuriqi': mairuriqi, 'zhisundian': zhisundian}
+                chengongs.append(chenggong_code)
 
 
 
@@ -214,16 +221,35 @@ def test_Befor_data():
         stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
         df = pd.read_csv(stockdata_path, index_col=0)
         data7_4 = df.iloc[22:98]  # 前128个交易日
+        data7_4 = df.iloc[22:22+106+22]  # 前1 个月
+        data7_4 = df.iloc[22:22+106+120]  # 前1 个月
         # data7_4 = df.iloc[44:120]  # 前128个交易日
         len_1=len(data7_4)
-        for i in range(0, len_1 - 66 + 1):
+        for i in range(0, len_1 - 106 + 1):
             # print "i" + str(i )+ "j"+str(i+3)
-            isAn_SiHuiFuRan_model(data7_4[i:i + 66], stock_code)
+            isAn_SiHuiFuRan_model(data7_4[i:i + 106], stock_code)
 
-
+    from jishu_stock.aShengLv.HuiCeTool import wirteList_to_txt
+    from jishu_stock.aShengLv.HuiCeTool import getList_from_txt
+    from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
+    wirteList_to_txt(chengongs)
+    # chengongs1 = getList_from_txt()
+    jisuan_all_shouyilv(chengongs, modelname, 1.05)
+    jisuan_all_shouyilv(chengongs, modelname, 1.07)
+    jisuan_all_shouyilv(chengongs, modelname, 1.10)
+    jisuan_all_shouyilv(chengongs, modelname, 1.15)
+    jisuan_all_shouyilv(chengongs, modelname, 1.20)
+    jisuan_all_shouyilv(chengongs, modelname, 1.30)
 
 if __name__ == '__main__':
+
+    from  time import  *
+    starttime = time()
+
     localpath1 = '/jishu_stock/stockdata/data1/'
-    get_all_SiHuiFuRan(localpath1)
+    # get_all_SiHuiFuRan(localpath1)
     # test_isAn_SiHuiFuRan_laoshi()
-    # test_Befor_data()
+    test_Befor_data()
+    # jisuan_all_shouyilv(chengongs, modelname, 1.07)
+    endtime = time()
+    print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"

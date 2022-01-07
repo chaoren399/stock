@@ -2,6 +2,13 @@
 # -*- coding: utf8 -*-
 import datetime
 import exceptions
+import sys
+
+from jishu_stock.aShengLv.HuiCeTool import wirteList_to_txt, getList_from_txt
+from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
+
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 import tushare as ts
 import pandas as pd
@@ -29,6 +36,8 @@ https://www.yuque.com/chaoren399/eozlgk/rhqy9u/
 5日均线 明显上升 ,获取 5 天的数据
 
 '''
+chengongs=[]
+modelname='雾里看花'
 
 def get_all_WuLiKanHua(localpath1):
     info1=  '--雾里看花, 特殊的十字星 start--   '
@@ -53,6 +62,8 @@ def get_all_WuLiKanHua(localpath1):
 
 '''
 #2 单独一个函数 判断 6 个数据是不是符合模型
+
+数据长度 132
 '''
 def isAn_WuLiKanHua_model(data,stockcode):
     if (data is None or data.empty):
@@ -69,8 +80,11 @@ def isAn_WuLiKanHua_model(data,stockcode):
         data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
         # print1(data1)
+        mairuriqi=data1.ix[0]['trade_date']  # 阳线的日期
 
-        data2 = data[0: len_data]
+        data2 = data[len_data-132: len_data]
+        data2 = data2.reset_index(drop=True)  # 重新建立索引 ,
+
         data3=data[len_data-5:len_data]
         data3 = data3.reset_index(drop=True)  # 重新建立索引 ,
 
@@ -120,6 +134,7 @@ def isAn_WuLiKanHua_model(data,stockcode):
                 day2_high=row['high']
                 day2_low=row['low']
                 yangxian_shiti=getShiTiDaXiao(row)
+                mairuriqi=row['trade_date']
 
         count=0
         if(key_1==1 and key_2==1):
@@ -145,7 +160,7 @@ def isAn_WuLiKanHua_model(data,stockcode):
             # print1(riqi)
             days_chazhi = get_date1_date2_days(min_row_riqi, riqi)  # 出水芙蓉与最低值相差几天
             # print days_chazhi
-            if (int(days_chazhi) < 32 and int(days_chazhi) > 7):
+            if (int(days_chazhi) < 22 and int(days_chazhi) > 7):  # 小于 22 天 测试信息 https://xueqiu.com/3476656801/205225364
                 key_4 = 1
 
              # 5日均线 明显上升 ,获取 5 天的数据
@@ -184,7 +199,8 @@ def isAn_WuLiKanHua_model(data,stockcode):
             path = '雾里看花.txt'
             writeLog_to_txt_path_getcodename(info, path, stockcode)
 
-
+            chenggong_code={'stockcode':stockcode,'mairuriqi':mairuriqi,'zhisundian':day1_low}
+            chengongs.append(chenggong_code)
 
 
 '''
@@ -213,12 +229,12 @@ def test_isAn_WuLiKanHua_ziji():
 
     #自己的 案例-阳线=3.36-----雾里看花 ----20211025--沪电股份**002463.SZ
     df1 = ts.pro_bar(ts_code='002463.SZ',adj='qfq', start_date='20210206', end_date='20211026')
-    data7_1 = df1.iloc[0:6]  # 前7行
+    data7_1 = df1.iloc[0:132]  # 前7行
     isAn_WuLiKanHua_model(data7_1,'002463.SZ')
 
 def test_xueyuan_anli():
     df1 = ts.pro_bar(ts_code='603383.SH', adj='qfq', start_date='20210206', end_date='20211021',ma=[5, 13, 34])
-    data7_1 = df1.iloc[0:7]  # 前7行
+    data7_1 = df1.iloc[0:132]  # 前7行
     isAn_WuLiKanHua_model(data7_1, '603383.SH')
 
 '''
@@ -235,17 +251,32 @@ def test_Befor_data():
         df = pd.read_csv(stockdata_path, index_col=0)
 
 
-        data7_4 = df.iloc[22:42]  # 前10个交易日
+
+        data7_4 = df.iloc[22:22+132+20]  # 前10个交易日
+        data7_4 = df.iloc[22:22+132+22]  # 1 个月
         len_1=len(data7_4)
 
-        for i in range(0, len_1 - 2 + 1):
+        for i in range(0, len_1 - 132 + 1):
             # print "i" + str(i )+ "j"+str(i+3)
-            isAn_WuLiKanHua_model(data7_4[i:i + 2], stock_code)
+            isAn_WuLiKanHua_model(data7_4[i:i + 132], stock_code)
 
+    jisuan_all_shouyilv(chengongs, modelname, 1.03)
+    jisuan_all_shouyilv(chengongs, modelname, 1.05)
+    jisuan_all_shouyilv(chengongs, modelname, 1.10)
 
+def test_shouyi_chengongs():
+    chengongs1 = getList_from_txt()
+    jisuan_all_shouyilv(chengongs1, modelname, 1.02)
 if __name__ == '__main__':
+    from time import *
+
+    starttime = time()
     localpath1 = '/jishu_stock/stockdata/data1/'
-    get_all_WuLiKanHua(localpath1)
+    # get_all_WuLiKanHua(localpath1)
     # test_isAn_WuLiKanHua_laoshi()
     # test_xueyuan_anli()
     # test_isAn_WuLiKanHua_ziji()
+    # test_Befor_data()
+    test_shouyi_chengongs()
+    endtime = time()
+    print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"

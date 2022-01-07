@@ -5,6 +5,9 @@ import csv
 import datetime
 import time
 
+from jishu_stock.z_tool.MyPath import getweekdata_path_with_stockcode
+from jishu_stock.z_tool.PyDateTool import getMonthNumber
+from jishu_stock.z_tool.duoxiancheng.ModelCode import get_modelcode
 from stock.settings import BASE_DIR
 import pandas as pd
 import tushare as ts
@@ -172,19 +175,24 @@ def writeLog_to_txt_path_getcodename(info ,path,code):
     # print info
 
 
-    path = BASE_DIR + '/jishu_stock/zJieGuo/huizong/' + path
+    path = BASE_DIR + '/jishu_stock/sJieGuo/huizong/' + path
     with open(path, "a") as f:
         f.write(info + '' + "\n")
     #----
 
     with open(path1, 'a') as csvfile:
-        fieldnames = ['first_name', 'last_name']
+        fieldnames = ['modecode','modename', 'info']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         # writer = csv.DictWriter(csvfile)
         #
         # writer.writeheader()#将表头名称写入csv文件
-        writer.writerow({'first_name': modename, 'last_name': info})
+        modecode = get_modelcode(modename)
+        writer.writerow({'modecode': modecode, 'modename': modename, 'info': info})
+
         # writer.writerow({modename, info})
+
+
+
 
 '''
 因为 优化程序速度后, 写入的结果排序紊乱, 所以 写了一个单独的程序,专门处理这个问题.
@@ -193,8 +201,11 @@ def writeLog_to_txt_path_getcodename(info ,path,code):
 
 '''
 def csv_paixu_path1_zhuanyong():
-    df = pd.read_csv(path1)
-    df = df.sort_values('first_name', ascending=False)
+    df = pd.read_csv(path1, sep=',', header=None, engine='python')
+
+    df.columns = ['modecode', 'modename','info']
+
+    df = df.sort_values('modecode', ascending=True)
     print df
     df.to_csv(path1, index=False)
 
@@ -206,16 +217,19 @@ def writeLog_to_txt_path(info ,path):
 
 #  下边的  writeLog_to_txt  writeLog_to_txt_nocode
 #  两个函数用用一路径 每月只需改动这一个就可以
-path = BASE_DIR + '/jishu_stock/zJieGuo/12月/' + datetime.datetime.now().strftime(
+yuefen = str( getMonthNumber())
+
+path = BASE_DIR + '/jishu_stock/sJieGuo/'+yuefen+'月/' + datetime.datetime.now().strftime(
         '%Y-%m-%d') + '.txt'
-path1 = BASE_DIR + '/jishu_stock/zJieGuo/12月/' + datetime.datetime.now().strftime(
+
+path1 = BASE_DIR + '/jishu_stock/sJieGuo/'+yuefen+'月/' + datetime.datetime.now().strftime(
         '%Y-%m-%d') + '.csv'
 
 '''
 固定路径的写入 带 code 的, 每个输出都有的
 '''
 def writeLog_to_txt(info,code):
-    # path = BASE_DIR + '/jishu_stock/zJieGuo/10月/' + datetime.datetime.now().strftime(
+    # path = BASE_DIR + '/jishu_stock/sJieGuo/10月/' + datetime.datetime.now().strftime(
     #     '%Y-%m-%d') + '.txt'
 
     info = info + '--' + get_Stock_Name(code)
@@ -233,14 +247,14 @@ def writeLog_to_txt(info,code):
     # info= info+'--'+get_Stock_Name(code)
     print info
 
-    with open(path, "a") as f:
-        f.write(info + '' + "\n")
+    # with open(path, "a") as f:
+    #     f.write(info + '' + "\n")  # 2021年12月07日 修改后,这个生成的问题件就没用了. 可以注销了
 
 '''
 固定路径的写入
 '''
 def writeLog_to_txt_nocode(info):
-    # path = BASE_DIR + '/jishu_stock/zJieGuo/10月/' + datetime.datetime.now().strftime(
+    # path = BASE_DIR + '/jishu_stock/sJieGuo/10月/' + datetime.datetime.now().strftime(
     #     '%Y-%m-%d') + '.txt'
 
     qianzhui ='---------------------------------------'
@@ -309,19 +323,22 @@ def getMax_High_fromDataFrame(data):
 之前的是 负数
 之后的是 正数
 '20210813'
+
+getRiQi_Befor_Ater_Days('20210813',-3)
 '''
 def getRiQi_Befor_Ater_Days(date,numdays):
-    day1riqi = str(date)
-    # print day1riqi
-    cur_day = datetime.datetime(int(day1riqi[0:4]), int(day1riqi[4:6]), int(day1riqi[6:8]))
-    result_date = cur_day + datetime.timedelta(days=numdays)
-    try:
-        result_date = result_date.strftime('%Y%m%d')
-    except Exception as e:
-        print e
+    if(date):
+        day1riqi = str(date)
+        # print day1riqi
+        cur_day = datetime.datetime(int(day1riqi[0:4]), int(day1riqi[4:6]), int(day1riqi[6:8]))
+        result_date = cur_day + datetime.timedelta(days=numdays)
+        try:
+            result_date = result_date.strftime('%Y%m%d')
+        except Exception as e:
+            print e
 
 
-    return result_date
+        return result_date
 
 '''
 获取 之前 30 天之前的日期
@@ -390,8 +407,8 @@ def isShangZhang_QuShi(data):
 给出 股票代码 得到 股票的名字
 '''
 def  get_Stock_Name(code):
-    # path = path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
+    # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path)
     for index, row in data.iterrows():
         if (row['ts_code'] == code):
@@ -465,6 +482,6 @@ if __name__ == '__main__':
     # stoc_code_zhuanhuan()
     # get_houzhui_code('000661')
     # get_2stockcode()
-    csv_paixu_path1_zhuanyong()
-
+    # csv_paixu_path1_zhuanyong()
+    print getRiQi_Befor_Ater_Days('20210813', 3)
 

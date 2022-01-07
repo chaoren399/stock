@@ -6,6 +6,7 @@ import pandas as pd
 
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, print1, isYangXian, \
     writeLog_to_txt_path_getcodename
+from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
 from jishu_stock.z_tool.ShiTiDaXiao import getShiTiDaXiao
 from jishu_stock.z_tool.isZhangTingBan import isZhangTingBan
 from stock.settings import BASE_DIR
@@ -32,7 +33,8 @@ https://www.yuque.com/chaoren399/eozlgk/xkdffs
 
 '''
 
-
+chengongs=[]
+modelname='神3'
 
 def get_all_ShenLongBaiWei3(localpath1):
     info1=''
@@ -59,6 +61,7 @@ def get_all_ShenLongBaiWei3(localpath1):
                 # 1 得到 第一个 7 交易日数据
                 # iloc只能用数字索引，不能用索引名
             data7_1 = df.iloc[0:3]  # 前10个交易日
+            data7_1 = df.iloc[0:30]  # 前10个交易日
 
             # print data7_1
             # 2 单独一个函数 判断是不是符合  神龙摆尾
@@ -71,32 +74,43 @@ def isAnShenLongBaiwei3_model(data,stockcode):
     len_data = len(data)
     if (len_data == 0):
         print str(stockcode) + '--data --is null'
-    if(len_data ==3):
+    if(len_data >=25):
         data = data.sort_values(by='trade_date', axis=0, ascending=True)  # 按照日期 从旧到新 排序
         data = data.reset_index(drop=True)  # 重新建立索引 ,
+
+        data1= data[len_data-3:len_data]
+        data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
+
+        riqi = data1.ix[0]['trade_date']  # 阳线的日期
+        mairuriqi = data1.ix[0]['trade_date']  # 阳线的日期
+
+        data2 = data[len_data - 3-22:len_data-3]
+        data2 = data2.reset_index(drop=True)  # 重新建立索引 ,
+
         # print data
         # 设置两个 key
         key_1=0; #先判断是不是 涨停板
-
         key_2=0; # 第二日放量 且振幅 5% 以上
-
         key_3=0; # 第二日放量
         key_4=0; # 小实体阳线 缩量
-
         key_5=0; # 第 3 日必须是小实体阳线 的小实体
-        riqi = data.ix[0]['trade_date']  # 阳线的日期
+
+        key_6=1; # 前 20 个交易日 不能有涨停板
+
+
 
         #振幅公式：(当日最高点的价格-当日最低点的价格)/昨天收盘价×100%
         day1_close=0
         zhenfu=0
         day3_shiti=0
-        for index,row in data.iterrows():
+        zhisundian=0
+        for index,row in data1.iterrows():
             if(index==0 and isZhangTingBan(row)==1): #涨停板
                 key_1=1
                 day1_close=row['close']
                 day1_amount=row['amount']
-
                 # print1(day1_close)
+                zhisundian=row['open']
             if(index==1 and isYangXian(row) == 1 and key_1==1):
 
                 day2_high=row['high']
@@ -110,6 +124,7 @@ def isAnShenLongBaiwei3_model(data,stockcode):
             if(index==2 and isYangXian(row)==1  and key_3==1):
                 day3_amount=row['amount']
                 day3_shiti=getShiTiDaXiao(row)
+                mairuriqi=row['trade_date']
                 if(day3_amount< day2_amount): # 第 3 天 缩量
                     key_4=1
 
@@ -118,13 +133,21 @@ def isAnShenLongBaiwei3_model(data,stockcode):
 
         if(day3_shiti < 2): #判断 第 3日阳线是不是小实体
             key_5=1
+
+        #key_6=0; # 前 20 个交易日 不能有涨停板
+        for index,row in data2.iterrows():
+            if(isZhangTingBan(row)==1):
+                key_6=0
+
+
         # print1(key_1)
         # print1(key_2)
         # print1(key_3)
         # print1(key_4)
         # print1(key_5)
         # print1(day3_shiti)
-        if (key_1 == 1  and key_2==1and key_3==1 and key_4==1 and key_5==1 ):
+        if (key_1 == 1  and key_2==1and key_3==1 and key_4==1 and key_5==1 and key_6==1):
+        # if (key_1 == 1  and key_2==1and key_3==1 and key_4==1 and key_5==1 ):
             info=''
             info=info+ 'day3_shiti='+str(day3_shiti)
             info = info+ "--------- 神3---------"   +  '--涨停板日期:'+ str(riqi)
@@ -133,9 +156,10 @@ def isAnShenLongBaiwei3_model(data,stockcode):
             path = '神3.txt'
             writeLog_to_txt_path_getcodename(info, path, stockcode)
 
+            chenggong_code={'stockcode':stockcode,'mairuriqi':mairuriqi,'zhisundian':zhisundian}
+            chengongs.append(chenggong_code)
+
             return 1
-
-
 
     return 0;
 
@@ -145,29 +169,26 @@ def isAnShenLongBaiwei3_model(data,stockcode):
 '''
 def test_isAn_ShenLongBaiWei2_laoshi():
 
-
-
-    # 案例 1
-
-    df1 = ts.pro_bar(ts_code='603888.SH',adj='qfq', start_date='20210206', end_date='20210511')
-    data7_1 = df1.iloc[0:3]  # 前7行
+     # 案例 1
+    df1 = ts.pro_bar(ts_code='603888.SH',adj='qfq', start_date='20210106', end_date='20210511')
+    data7_1 = df1.iloc[0:30]  # 前7行
     isAnShenLongBaiwei3_model(data7_1,'603888.SH')
 
     # 案例 2
-    df1 = ts.pro_bar(ts_code='600088.SH',adj='qfq', start_date='20210206', end_date='20210324')
-    data7_1 = df1.iloc[0:3]  # 前7行
+    df1 = ts.pro_bar(ts_code='600088.SH',adj='qfq', start_date='20210106', end_date='20210324')
+    data7_1 = df1.iloc[0:30]  # 前7行
     isAnShenLongBaiwei3_model(data7_1,'600088.SH')
 
     #002389
 
     # 案例 3
     df1 = ts.pro_bar(ts_code='002389.SZ',adj='qfq', start_date='20210206', end_date='20210804')
-    data7_1 = df1.iloc[0:3]  # 前7行
+    data7_1 = df1.iloc[0:30]  # 前7行
     isAnShenLongBaiwei3_model(data7_1,'002389.SZ')
 
     # 案例 4茂硕电源 002660 大家当案例去观察
     df1 = ts.pro_bar(ts_code='002660.SZ',adj='qfq', start_date='20210206', end_date='20210605')
-    data7_1 = df1.iloc[0:3]  # 前7行
+    data7_1 = df1.iloc[0:30]  # 前7行
     isAnShenLongBaiwei3_model(data7_1,'002660.SZ')
 
 '''
@@ -176,30 +197,30 @@ def test_isAn_ShenLongBaiWei2_laoshi():
 def test_isAn_ShenLongBaiWei3_ziji():
     # 自己实战 案例 002900 悦心健康
     df1 = ts.pro_bar(ts_code='002900.SZ', adj='qfq', start_date='20210206', end_date='20211014')
-    data7_1 = df1.iloc[0:3]  # 前7行
+    data7_1 = df1.iloc[0:30]  # 前7行
     print data7_1
     isAnShenLongBaiwei3_model(data7_1,'002900.SZ')
 
     #自己实战 案例 002162 悦心健康
     df1 = ts.pro_bar(ts_code='002162.SZ', adj='qfq', start_date='20210206', end_date='20211014')
-    data7_1 = df1.iloc[0:3]  # 前7行
+    data7_1 = df1.iloc[0:30]  # 前7行
     print data7_1
     isAnShenLongBaiwei3_model(data7_1,'002162.SZ')
 
     #自己实战 案例 603313 梦百合
     df1 = ts.pro_bar(ts_code='603313.SH', adj='qfq', start_date='20210206', end_date='20211012')
-    data7_1 = df1.iloc[0:3]  # 前7行
+    data7_1 = df1.iloc[0:30]  # 前7行
     print data7_1
     isAnShenLongBaiwei3_model(data7_1,'603313.SH')
 
     #自己实战 案例 603536 惠发食品 止损, 第3日实体太大
     df1 = ts.pro_bar(ts_code='603536.SH', adj='qfq', start_date='20210206', end_date='20211008')
-    data7_1 = df1.iloc[0:3]  # 前7行
+    data7_1 = df1.iloc[0:30]  # 前7行
     print data7_1
     isAnShenLongBaiwei3_model(data7_1,'603536.SH')
     #自己实战 案例 600359 新农开发   止损, 第3日实体太大
     df1 = ts.pro_bar(ts_code='600359.SH', adj='qfq', start_date='20210206', end_date='20211012')
-    data7_1 = df1.iloc[0:3]  # 前7行
+    data7_1 = df1.iloc[0:30]  # 前7行
     print data7_1
     isAnShenLongBaiwei3_model(data7_1,'600359.SH')
 
@@ -227,17 +248,34 @@ def test_Befor_data():
         df = pd.read_csv(stockdata_path, index_col=0)
 
 
-        data7_4 = df.iloc[22:44]  # 前10个交易日
+
+        data7_4 = df.iloc[22:22+25+22]  # 前1个个月
+        # data7_4 = df.iloc[22:22+25+120]  # 半年
+        # data7_4 = df.iloc[22:22+25+250]  # 前1年
         len_1=len(data7_4)
 
-        for i in range(0, len_1 - 3 + 1):
+        for i in range(0, len_1 - 25 + 1):
             # print "i" + str(i )+ "j"+str(i+3)
-            isAnShenLongBaiwei3_model(data7_4[i:i + 3], stock_code)
+            isAnShenLongBaiwei3_model(data7_4[i:i + 25], stock_code)
+
+
+    jisuan_all_shouyilv(chengongs, modelname, 1.05)
+    jisuan_all_shouyilv(chengongs, modelname, 1.10)
+    jisuan_all_shouyilv(chengongs, modelname, 1.15)
+    jisuan_all_shouyilv(chengongs, modelname, 1.20)
 
 if __name__ == '__main__':
+    from  time import  *
+    starttime = time()
 
     localpath1 = '/jishu_stock/stockdata/data1/'
+    # get_all_ShenLongBaiWei3(localpath1)
     # test_isAn_ShenLongBaiWei2_laoshi()
-    get_all_ShenLongBaiWei3(localpath1)
-    # test_Befor_data()
+
+    test_Befor_data()
     # test_isAn_ShenLongBaiWei3_ziji()
+
+
+
+    endtime = time()
+    print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"

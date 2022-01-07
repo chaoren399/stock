@@ -11,6 +11,8 @@ from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
 from stock.settings import BASE_DIR
 from jishu_stock.z_tool.ShiTiDaXiao import *
 from jishu_stock.z_tool.isXiongShiMoQi import  hasXiongShiMoQi
+
+from jishu_stock.z_tool.isZhangTingBan import isZhangTingBan
 import pandas as pd
 # 显示所有列
 pd.set_option('display.max_columns', None)
@@ -67,6 +69,8 @@ def isAn_LingBoWeiBu_model(data,stockcode):
         data1= data[len_data-2:len_data]
         data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
+        mairuriqi = 0
+        zhisundian = 0
         print1(data1)
 
         # 设置两个 key
@@ -78,13 +82,13 @@ def isAn_LingBoWeiBu_model(data,stockcode):
         if(key_1==1 and  key_2 ==1):
             info = ''
 
-            info = info + "-----缺口理论, 凌波微步  成功了"  + str(riqi)
+            info = info + "--缺口理论, 凌波微步  成功了--"  + str(riqi)
             # print info
             writeLog_to_txt(info, stockcode)
-            path = '----Plus.txt'
+            path = modelname + '.txt'
             writeLog_to_txt_path_getcodename(info, path, stockcode)
 
-            chenggong_code={'stockcode':stockcode,'mairuriqi':day3_riqi,'zhiyingdian':day2_shizixing_low}
+            chenggong_code={'stockcode':stockcode,'mairuriqi':mairuriqi,'zhisundian':zhisundian}
             # print1(day2_shizixing_low)
             chengongs.append(chenggong_code)
 
@@ -96,7 +100,6 @@ def test_isAn_ShenLongBaiWei2_laoshi():
     # 案例 1
     df1 = ts.pro_bar(ts_code='000408.SZ',adj='qfq', start_date='20210206', end_date='20210518')
     data7_1 = df1.iloc[0:30]  # 前7行
-    # print data7_1
     isAn_FanKeWeiZhu_model(data7_1,'002174.SZ')
 
     # 案例 2
@@ -122,21 +125,36 @@ def test_Befor_data():
         stock_code = row['ts_code']
         stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
         df = pd.read_csv(stockdata_path, index_col=0)
-        data7_4 = df.iloc[22:42]  # 前10个交易日
+        data7_4 = df.iloc[22:22 + 132 + 5]  # 前1个月个交易日
+        data7_4 = df.iloc[22:22 + 132 + 22]  # 1 个月
+        # data7_4 = df.iloc[22:22+132+120]  # 半年
+        # data7_4 = df.iloc[22:22+132+250]  # 1年
+
         len_1=len(data7_4)
         for i in range(0, len_1 - 3 + 1):
             # print "i" + str(i )+ "j"+str(i+3)
             isAn_FeiLongZaiTian_model(data7_4[i:i + 3], stock_code)
 
+    from jishu_stock.aShengLv.HuiCeTool import wirteList_to_txt
+    from jishu_stock.aShengLv.HuiCeTool import getList_from_txt
+    from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
+    wirteList_to_txt(chengongs)
+    # chengongs1 = getList_from_txt()
+    jisuan_all_shouyilv(chengongs, modelname, 1.03)
+    jisuan_all_shouyilv(chengongs, modelname, 1.05)
+    jisuan_all_shouyilv(chengongs, modelname, 1.07)
+    jisuan_all_shouyilv(chengongs, modelname, 1.10)
+    jisuan_all_shouyilv(chengongs, modelname, 1.15)
 
 
 if __name__ == '__main__':
+    from  time import  *
     starttime = time()
+
+
     localpath1 = '/jishu_stock/stockdata/data1/'
     get_all_LingBoWeiBu(localpath1)
 
-    jisuan_all_shouyilv(chengongs, modelname, 1.05)
-    jisuan_all_shouyilv(chengongs, modelname, 1.10)
 
     endtime = time()
-    print "总共运行时长:"+str(round((endtime - starttime) / 60 ,2))+"分钟"
+    print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"

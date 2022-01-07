@@ -24,10 +24,11 @@ def getAllStockData(start_date , end_date, localpath):
     writeLog_to_txt_nocode(info)
 
     print "下载 更新数据  start 每天 4:10 分更新了"
-    ts.set_token('731d2ea0abcf1f14d59ec7215d6ec520e09a439fccd2772c43a906be')
-
+    # ts.set_token('731d2ea0abcf1f14d59ec7215d6ec520e09a439fccd2772c43a906be')
+    mytoken='731d2ea0abcf1f14d59ec7215d6ec520e09a439fccd2772c43a906be'
     # 查询当前所有正常上市交易的股票列表
-    pro = ts.pro_api()
+    pro = ts.pro_api(mytoken,timeout=60)
+
 # 打印最新的数据
     if(end_date >='20210101'):
         df1 = ts.pro_bar(ts_code='000001.SZ',adj='qfq', start_date='20210801', end_date=end_date)
@@ -35,13 +36,14 @@ def getAllStockData(start_date , end_date, localpath):
             print '--df1.empty--' + str('000001.SZ')
             return 0
         if(len(df1)>0):
-            print df1[0:2]
+            print df1[0:2]x
             writeLog_to_txt_nocode(df1.ix[0]['trade_date'])
             path = '00_测试定时任务.txt'
             stockcode = '000001.SZ'
             info='下载数据开始='+str(df1.ix[0]['trade_date'])
             writeLog_to_txt_path_getcodename(info, path, stockcode)
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
+    # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
+    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
     # print "ssss"
     print path
     data = pd.read_csv(path, dtype={'code': str})
@@ -71,7 +73,9 @@ def getAllStockData(start_date , end_date, localpath):
             if ('ST' not in name):
                 # 下载股票信息 近一个月的
                 # time.sleep(0.005)  # //睡觉
-                time.sleep(0.03)  # //睡觉2021
+                # time.sleep(0.03)  # //睡觉2021
+                sleep(0.03)  # //睡觉2021
+
                 # time.sleep(0.01)  # //睡觉 2015
                 #  2021年08月16日 增加 ma5 ma13 ma 34
                 df = ts.pro_bar(ts_code=stock_code,adj='qfq', start_date=start_date, end_date=end_date, ma=[5, 13, 34,144,169,75])
@@ -122,6 +126,8 @@ def get_all_2015_2018_data():
 '''
 def get_all_2021_to_now_data(localpath):
     print '得到 从 20210101 开始到现在的日线数据'
+    # today = starttime.strftime('%Y%m%d')
+    starttime = datetime.datetime.now()
     today = starttime.strftime('%Y%m%d')
     getAllStockData(start_date = '20210101',end_date = today,localpath=localpath)
 
@@ -165,7 +171,8 @@ def test_002923():
     df.to_csv(stockdata_path + stock_code + ".csv")
 
 if __name__ == '__main__':
-    starttime = datetime.datetime.now()
+    from  time import  *
+    starttime = time()
 
 
     localpath= '/jishu_stock/stockdata/data1/'
@@ -178,6 +185,5 @@ if __name__ == '__main__':
     # test_002923()
     # test_get_all_2015_2018_data()
 
-    endtime = datetime.datetime.now()
-    print  "总共运行时长:"
-    print (endtime - starttime).seconds / 60
+    endtime = time()
+    print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"

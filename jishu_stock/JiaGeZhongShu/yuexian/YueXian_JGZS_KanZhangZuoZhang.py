@@ -179,7 +179,7 @@ def isAn_YueXian_JGZS_KanZhangZuoZhang_model(data,stockcode):
             # print info
             # writeLog_to_txt(info, stockcode)
 
-            path = BASE_DIR + '/jishu_stock/zJieGuo/JiaGeZhongShu/' + datetime.datetime.now().strftime(
+            path = BASE_DIR + '/jishu_stock/sJieGuo/JiaGeZhongShu/' + datetime.datetime.now().strftime(
                 '%Y-%m-%d') + '.txt'
 
             jiagezhongshu_writeLog_to_txt_path_getcodename(info, path, stockcode)

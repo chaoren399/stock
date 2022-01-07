@@ -1,18 +1,22 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
-import datetime
-import exceptions
-
 import tushare as ts
-import pandas as pd
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, print1, isYinXian, isYangXian, \
     writeLog_to_txt_path_getcodename
 from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
+from jishu_stock.aShengLv.huice.ShengLv_10_5 import jisuan_all_shouyilv_10_5
+
 from jishu_stock.z_tool.PyDateTool import get_date1_date2_days
 from jishu_stock.z_tool.ShiTiDaXiao import getShiTiDaXiao
 from jishu_stock.z_tool.getMin_Max import getMin_fromDataFrame
-from stock.settings import BASE_DIR
 import pandas as pd
+import sys
+
+from stock.settings import BASE_DIR
+
+reload(sys)
+sys.setdefaultencoding('utf8')
+
 # 显示所有列
 pd.set_option('display.max_columns', None)
 # 显示所有行
@@ -79,10 +83,12 @@ def isAn_ChuShuiFuRong_model(data,stockcode):
         data1= data[len_data-2:len_data]
         data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
-        mairuriqi = data1.ix[0]['trade_date']  # 阳线的日期
+        mairuriqi = 0
+        zhisundian = 0
         # print1(data1)
 
-        data2= data[0: len_data]
+        data2= data[len_data-132: len_data]
+        data2 = data2.reset_index(drop=True)  # 重新建立索引 ,
 
         # 设置两个 key
         key_1=0;  #首先是 判断是不是 阴阳组合
@@ -113,6 +119,7 @@ def isAn_ChuShuiFuRong_model(data,stockcode):
                 day1_low = row['low']
                 day1_open= row['open']
                 day1_shiti=getShiTiDaXiao(row)
+                zhisundian=day1_low
             if(index==1 and isYangXian(row)==1):
                 count = count + 1
                 day2_high=row['high']
@@ -131,18 +138,13 @@ def isAn_ChuShuiFuRong_model(data,stockcode):
 
 
         if(key_1==1 and key_2==1):
-            # print1(data2)
             min_row = getMin_fromDataFrame(data2)
             if(min_row is  None):
                 print 'min_row  is None'
-            # print min_row
-            # print min_row['open']
             min_row_riqi =  min_row['trade_date']
-
-            # print1(min_row_riqi)
             days_chahzi=get_date1_date2_days(min_row_riqi,riqi) # 出水芙蓉与最低值相差几天
-
-            if(int(days_chahzi) < 44 and int(days_chahzi) > 3 ):
+            if(int(days_chahzi) < 22 and int(days_chahzi) > 3 ): # 这里改成 22天比较合适
+            # if(int(days_chahzi) < 44 and int(days_chahzi) > 3 ): # 这里改成 22天比较合适
                 key_4=1
 
         # print1(key_1)
@@ -163,8 +165,7 @@ def isAn_ChuShuiFuRong_model(data,stockcode):
             path = '出水芙蓉.txt'
             writeLog_to_txt_path_getcodename(info, path, stockcode)
 
-            chenggong_code={'stockcode':stockcode,'mairuriqi':mairuriqi,'zhiyingdian':day1_low}
-            # print1(day2_shizixing_low)
+            chenggong_code={'stockcode':stockcode,'mairuriqi':mairuriqi,'zhisundian':zhisundian}
             chengongs.append(chenggong_code)
 
 
@@ -196,10 +197,44 @@ def test_isAn_ChuShuiFuRong_laoshi():
 def test_isAn_ChuShuiFuRong_ziji():
     # 阴线实体=0.05-----出水芙蓉 主力底部强势洗盘 ----20211022--至正股份--强势股票**603991.SH
 #144-169不满足上涨-----起爆均线3----20211201--卫光生物**002880.SZ 为什么 出水芙蓉没检测到
-    #自己的 案例
-    df1 = ts.pro_bar(ts_code='002880.SZ',adj='qfq', start_date='20210206', end_date='20211129')
+    #自己的 案例 000516
+
+    df1 = ts.pro_bar(ts_code='000516.SZ',adj='qfq', start_date='20210206', end_date='20211209')
     data7_1 = df1.iloc[0:136]  # 前7行
-    isAn_ChuShuiFuRong_model(data7_1,'002880.SZ')
+    isAn_ChuShuiFuRong_model(data7_1,'000516.SZ')
+
+'''
+用出水芙蓉 实盘的 3 个案例, 来测试 计算胜率ShengLv.py 的函数是不是准确:
+
+'''
+def test_shenglv_zhunquexing():
+    #603355
+
+    # 002753老于中信	成功，出水芙蓉起爆向上	002753	永东股份	2021年11月24日
+    df1 = ts.pro_bar(ts_code='002753.SZ',adj='qfq', start_date='20210206', end_date='20211123')
+    data7_1 = df1.iloc[0:136]  # 前7行
+    isAn_ChuShuiFuRong_model(data7_1,'002753.SZ')
+
+    #老于中信	成功，出水芙蓉起爆向上	002068	黑猫股份	2021年11月26日
+    #
+    df1 = ts.pro_bar(ts_code='002068.SZ',adj='qfq', start_date='20210206', end_date='20211125')
+    data7_1 = df1.iloc[0:136]  # 前7行
+    isAn_ChuShuiFuRong_model(data7_1,'002068.SZ')
+
+    #失败案例
+
+
+    #p老于中信	出水芙蓉	002424	贵州百灵	2021年11月12日
+    df1 = ts.pro_bar(ts_code='002424.SZ', adj='qfq', start_date='20210206', end_date='20211111')
+    data7_1 = df1.iloc[0:136]  # 前7行
+    isAn_ChuShuiFuRong_model(data7_1, '002424.SZ')
+
+    #持仓中的案例出水芙蓉+起爆均线 涨停板 	002298	中电兴发	2021年11月19日
+    df1 = ts.pro_bar(ts_code='002298.SZ', adj='qfq', start_date='20210206', end_date='20211117')
+    data7_1 = df1.iloc[0:136]  # 前7行
+    isAn_ChuShuiFuRong_model(data7_1, '002298.SZ')
+
+
 
 '''
 回测 8 月份的数据
@@ -216,7 +251,10 @@ def test_Befor_data():
 
 
         data7_4 = df.iloc[22:42]  # 前10个交易日
-        data7_4 = df.iloc[22:22+132+22]  # 前1个月个交易日
+        data7_4 = df.iloc[22:22+132+5]  #前1个月个交易日
+        # data7_4 = df.iloc[22:22+132+22]  #1 个月
+        # data7_4 = df.iloc[22:22+132+120]  # 半年
+        # data7_4 = df.iloc[22:22+132+250]  # 1年
         len_1=len(data7_4)
 
         for i in range(0, len_1 - 132 + 1):
@@ -224,12 +262,35 @@ def test_Befor_data():
             isAn_ChuShuiFuRong_model(data7_4[i:i + 132], stock_code)
 
 
+
+    from jishu_stock.aShengLv.HuiCeTool import wirteList_to_txt
+    from jishu_stock.aShengLv.HuiCeTool import getList_from_txt
+    from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
+    wirteList_to_txt(chengongs)
+    # chengongs1 = getList_from_txt()
+    # jisuan_all_shouyilv(chengongs, modelname, 1.03)
+    # jisuan_all_shouyilv(chengongs, modelname, 1.05)
+    # jisuan_all_shouyilv(chengongs, modelname, 1.07)
+    jisuan_all_shouyilv(chengongs, modelname, 1.10)
+    # jisuan_all_shouyilv(chengongs, modelname, 1.15)
+
+    jisuan_all_shouyilv_10_5(chengongs, modelname, 1.10, 0.95)
+    jisuan_all_shouyilv_10_5(chengongs, modelname, 1.10, 0.90)
+
+
+
+
 if __name__ == '__main__':
+    from  time import  *
+    starttime = time()
+
     localpath1 = '/jishu_stock/stockdata/data1/'
     # get_all_ChuShuiFuRong(localpath1)
     # test_isAn_ChuShuiFuRong_laoshi()
     # test_isAn_ChuShuiFuRong_ziji()
     test_Befor_data()
+    # test_shenglv_zhunquexing()
+    # jisuan_all_shouyilv(chengongs, modelname, 1.05)
 
-    jisuan_all_shouyilv(chengongs, modelname, 1.05)
-    jisuan_all_shouyilv(chengongs, modelname, 1.10)
+    endtime = time()
+    print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"

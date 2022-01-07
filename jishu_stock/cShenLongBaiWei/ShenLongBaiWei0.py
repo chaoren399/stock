@@ -76,7 +76,7 @@ def isAn_ShenLongBaiWei0_model(data,stockcode):
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
         # print1(data1)
 
-        data2=data[0:len_data-3]
+        data2=data[len_data-3-130:len_data-3]
 
         # 设置两个 key
         key_1=0; #  小十字星
@@ -211,7 +211,7 @@ def test_Befor_data():
 
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
-    # test_isAn_ShenLongBaiWei2_laoshi()
+    test_isAn_ShenLongBaiWei2_laoshi()
     # test_isAn_ShenLongBaiWei0_ziji()
 
-    get_all_isShenLongBaiWei0(localpath1)
+    # get_all_isShenLongBaiWei0(localpath1)

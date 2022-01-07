@@ -128,7 +128,7 @@ def is_G8M2_XiaYingXian_YangXian_model(data, stockcode):
         # print info
         # writeLog_to_txt(info, stockcode)
 
-        path = BASE_DIR + '/jishu_stock/zJieGuo/G8/' + 'G8M2下影线-阳线-' + datetime.datetime.now().strftime(
+        path = BASE_DIR + '/jishu_stock/sJieGuo/G8/' + 'G8M2下影线-阳线-' + datetime.datetime.now().strftime(
             '%Y-%m-%d') + '.txt'
 
         jiagezhongshu_writeLog_to_txt_path_getcodename(info, path, stockcode)

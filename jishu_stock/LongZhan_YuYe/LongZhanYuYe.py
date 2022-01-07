@@ -7,6 +7,7 @@ import tushare as ts
 import pandas as pd
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, print1, isYinXian, isYangXian, \
     writeLog_to_txt_path_getcodename
+from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
 from jishu_stock.z_tool.ShiTiDaXiao import getShiTiDaXiao
 from jishu_stock.z_tool.isZhangTingBan import isZhangTingBan
 from stock.settings import BASE_DIR
@@ -36,7 +37,8 @@ https://www.yuque.com/chaoren399/eozlgk/hafzse
 从之前的 10 个里边 成功可以做到 0.9
 
 '''
-
+chengongs=[]
+modelname='龙战于野'
 def get_all_LongZhanYuYe(localpath1):
     info1=  '--龙战于野 start--   '
     writeLog_to_txt_nocode(info1)
@@ -60,6 +62,7 @@ def get_all_LongZhanYuYe(localpath1):
 
 '''
 #2 单独一个函数 判断 6 个数据是不是符合模型
+数据长度 6: 
 '''
 def isAn_LongZhanYuYe_model(data,stockcode):
     if (data is None or data.empty):
@@ -68,19 +71,24 @@ def isAn_LongZhanYuYe_model(data,stockcode):
     len_data = len(data)
     if (len_data == 0):
         print str(stockcode) + '--data --is null'
-    if(len_data >= 6):
+    if(len_data >= 25):
         data = data.sort_values(by='trade_date', axis=0, ascending=True)  # 按照日期 从旧到新 排序
         data = data.reset_index(drop=True)  # 重新建立索引 ,
 
         data1= data[len_data-3:len_data]
         data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
+        mairuriqi=0
         # print1(data1)
+        data2 = data[len_data - 3-22:len_data-3]
+        data2 = data2.reset_index(drop=True)  # 重新建立索引 ,
 
         # 设置两个 key
         key_1=0; #是不是涨停板
         key_2=0; #次日大阴线
         key_3=0; #阳线收盘价 高过阴线开盘价
+
+        key_4=1; #前 22 天不能出现涨停
 
         day2_open=0
         day3_close=0
@@ -88,6 +96,7 @@ def isAn_LongZhanYuYe_model(data,stockcode):
         for index,row in data1.iterrows():
             if(index==0 and isZhangTingBan(row)==1):
                 key_1=1
+                zhisundian=row['open']
             if(key_1==1):
                 if(index==1 and isYinXian(row)==1): #次日大阴线
                     day2_open = row['open']
@@ -97,21 +106,33 @@ def isAn_LongZhanYuYe_model(data,stockcode):
                         key_2=1
                 if(index==2 and isYangXian(row)==1):
                     day3_close=row['close']
+                    mairuriqi=row['trade_date']
                     if(day3_close > day2_open):
                         key_3=1
+        # key_4 = 0;  # 前 22 天不能出现涨停
+        for index,row in data2.iterrows():
+            if(isZhangTingBan(row)==1):
+                key_4=0
         # print1(key_1)
         # print1(key_2)
         # print1(key_3)
+        # print1(key_4)
         # print1(day2_shiti)
+        # if(key_1==1 and  key_2 ==1and key_3==1 and key_4==1):
         if(key_1==1 and  key_2 ==1and key_3==1):
             info = ''
             info= info+ '阴线实体大于3.6最好:'+str(day2_shiti)
+            if(key_4==0):
+                info= info+ '--前边有涨停板--'
 
             info = info + "-----龙战于野----"  + str(riqi)
             # print info
             writeLog_to_txt(info, stockcode)
             path = '龙战于野.txt'
             writeLog_to_txt_path_getcodename(info, path, stockcode)
+
+            chenggong_code={'stockcode':stockcode,'mairuriqi':mairuriqi,'zhisundian':zhisundian}
+            chengongs.append(chenggong_code)
 
 
 
@@ -172,16 +193,25 @@ def test_Befor_data():
 
         # data7_4 = df.iloc[22:42]  # 前10个交易日
         data7_4 = df.iloc[10:42]  # 前10个交易日
+        # data7_4 = df.iloc[22:22+250]  # 1年的数据
         len_1=len(data7_4)
 
         for i in range(0, len_1 - 6 + 1):
             # print "i" + str(i )+ "j"+str(i+3)
             isAn_LongZhanYuYe_model(data7_4[i:i + 6], stock_code)
-
+    jisuan_all_shouyilv(chengongs, modelname, 1.05)
+    jisuan_all_shouyilv(chengongs, modelname, 1.10)
+    jisuan_all_shouyilv(chengongs, modelname, 1.15)
 
 if __name__ == '__main__':
+    from  time import  *
+    starttime = time()
+
     localpath1 = '/jishu_stock/stockdata/data1/'
     # get_all_LongZhanYuYe(localpath1)
-    test_Befor_data()
-    # test_isAn_LongZhanYuYe_laoshi()
+    # test_Befor_data()
+    test_isAn_LongZhanYuYe_laoshi()
     # test_isAn_LongZhanYuYe_ziji()
+
+    endtime = time()
+    print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"

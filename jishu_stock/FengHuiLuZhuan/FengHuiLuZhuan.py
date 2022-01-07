@@ -7,12 +7,15 @@ import tushare as ts
 import pandas as pd
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, print1, \
     writeLog_to_txt_path_getcodename
+from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
 from jishu_stock.z_tool.isZhangTingBan import isZhangTingBan
 
 
 import pandas as pd
 
 # 显示所有列
+from stock.settings import BASE_DIR
+
 pd.set_option('display.max_columns', None)
 # 显示所有行
 pd.set_option('display.max_rows', None)
@@ -79,7 +82,8 @@ def isAn_FengHuiLuZhuan_model(data,stockcode):
         data2 = data2.reset_index(drop=True)  # 重新建立索引 ,
         # print1(data2)
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
-
+        mairuriqi=0
+        zhisundian=0
 
         # 设置两个 key
         key_1=0; # 涨停板 并且 放量
@@ -100,6 +104,7 @@ def isAn_FengHuiLuZhuan_model(data,stockcode):
             if(index==1 and isZhangTingBan(row)==1):
                 day2_amount=row['amount']
                 day2_close=row['close']
+                zhisundian=row['open']
                 riqi=row['trade_date']
                 if(day2_amount > day1_amount):
                     key_1=1
@@ -107,6 +112,7 @@ def isAn_FengHuiLuZhuan_model(data,stockcode):
             #第二天阴线阳线都行，要求其收盘价低于涨停板收盘价，并且比前一天缩量；
                 day3_close=row['close']
                 day3_amount=row['amount']
+                mairuriqi = row['trade_date']
                 if(day3_close < day2_close and day3_amount < day2_amount) :
                     key_2=1
 
@@ -128,7 +134,8 @@ def isAn_FengHuiLuZhuan_model(data,stockcode):
             path = '峰回路转.txt'
             writeLog_to_txt_path_getcodename(info, path, stockcode)
 
-
+            chenggong_code={'stockcode':stockcode,'mairuriqi':mairuriqi,'zhisundian':zhisundian}
+            chengongs.append(chenggong_code)
 
 
 
@@ -180,16 +187,29 @@ def test_Befor_data():
 
 
         data7_4 = df.iloc[23:56]  # 前10个交易日
+        data7_4 = df.iloc[22:22+24+22]  # 前 1 个月
         len_1=len(data7_4)
 
         for i in range(0, len_1 - 24 + 1):
             # print "i" + str(i )+ "j"+str(i+3)
             isAn_FengHuiLuZhuan_model(data7_4[i:i + 24], stock_code)
-
+    jisuan_all_shouyilv(chengongs, modelname, 1.05)
+    jisuan_all_shouyilv(chengongs, modelname, 1.07)
+    jisuan_all_shouyilv(chengongs, modelname, 1.10)
+    jisuan_all_shouyilv(chengongs, modelname, 1.15)
+    jisuan_all_shouyilv(chengongs, modelname, 1.20)
+    jisuan_all_shouyilv(chengongs, modelname, 1.30)
 
 if __name__ == '__main__':
+    from  time import  *
+    starttime = time()
+
     localpath1 = '/jishu_stock/stockdata/data1/'
     # get_all_FengHuiLuZhuan(localpath1)
-    test_isAn_FengHuiLuZhuan_laoshi()
-    # test_Befor_data()
+    # test_isAn_FengHuiLuZhuan_laoshi()
+    test_Befor_data()
     # test_xueyuan_anli()
+
+
+    endtime = time()
+    print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"

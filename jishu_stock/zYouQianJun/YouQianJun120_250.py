@@ -5,7 +5,8 @@ import exceptions
 
 import tushare as ts
 import pandas as pd
-from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, print1
+from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, print1, \
+    writeLog_to_txt_path_getcodename
 from jishu_stock.zYouQianJun.get_120_250_data import getStockCode_to_SHSZ
 from stock.settings import BASE_DIR
 
@@ -85,6 +86,9 @@ def is_150_250_jincha_mode(data,stockcode):
             info = "-----有钱君-120-250 均线交易法 成功了 ----" + str(riqi)
             # print info
             writeLog_to_txt(info, stockcode)
+
+            path = '有钱君.txt'
+            writeLog_to_txt_path_getcodename(info, path, stockcode)
 
 
 

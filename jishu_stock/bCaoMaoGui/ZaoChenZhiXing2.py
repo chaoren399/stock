@@ -224,7 +224,7 @@ def isAn_ZaoChenZhiXing2_model(data,stockcode):
             writeLog_to_txt_path_getcodename(info, path, stockcode)
 
             # get_shouyi(stockcode, day3_riqi, day2_shizixing_low)
-            chenggong_code={'stockcode':stockcode,'mairuriqi':day3_riqi,'zhiyingdian':day2_shizixing_low}
+            chenggong_code={'stockcode':stockcode,'mairuriqi':day3_riqi,'zhisundian':day2_shizixing_low}
             # print1(day2_shizixing_low)
             chengongs.append(chenggong_code)
 
@@ -347,8 +347,11 @@ def test_Befor_data():
     t2.join()
 
 
+    jisuan_all_shouyilv(chengongs, modelname, 1.03)
     jisuan_all_shouyilv(chengongs, modelname, 1.05)
+    jisuan_all_shouyilv(chengongs, modelname, 1.07)
     jisuan_all_shouyilv(chengongs, modelname, 1.10)
+    jisuan_all_shouyilv(chengongs, modelname, 1.15)
 
 '''
 回测 多只 股票数据
@@ -366,9 +369,9 @@ def huice_one_stock(stock_code):
     stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
     df = pd.read_csv(stockdata_path, index_col=0)
     data7_4 = df.iloc[22:32]  # 前10个交易日
-    # data7_4 = df.iloc[22:22+22+6]  # 前10个交易日
+    data7_4 = df.iloc[22:22+6+22]  # 前1 个月 个交易日
+    # data7_4 = df.iloc[22:22+6+120]  # 半年的
     # data7_4 = df.iloc[22:22+250+6]  # 去年 1 年的
-    # data7_4 = df.iloc[10:22]  # 前10个交易日
     len_1 = len(data7_4)
     for i in range(0, len_1 - 6 + 1):
         # print "i" + str(i )+ "j"+str(i+3)

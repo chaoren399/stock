@@ -83,7 +83,8 @@ def isAn_KanDieZuoZhang_model(data,stockcode):
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
         # print1(data1)
 
-        data2=data[0: len_data-2]
+        data2=data[len_data-2-130: len_data-2]
+        data2 = data2.reset_index(drop=True)  # 重新建立索引 ,
         # print1(data2)
 
         # 设置两个 key

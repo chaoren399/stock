@@ -7,6 +7,7 @@ import tushare as ts
 import pandas as pd
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, print1, isYangXian, isYinXian, \
     writeLog_to_txt_path_getcodename, getMin_low_fromDataFrame
+from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
 from jishu_stock.z_tool.ShiTiDaXiao import getShiTiDaXiao
 from jishu_stock.z_tool.isXiongShiMoQi import hasXiongShiMoQi
 from stock.settings import BASE_DIR
@@ -34,9 +35,11 @@ https://www.yuque.com/chaoren399/eozlgk/bl5cum
 
 柳暗花明 底部强势上涨  , 每天标记 ,后期出现 比如出水芙蓉等模型可以加仓
 '''
+chengongs=[]
+modelname='柳暗花明'
 
 def get_all_LiuAnHuaMing2(localpath1):
-    info1=  '--柳暗花明2 底部反转模型  每天标记 ,后期出现 比如出水芙蓉等模型可以加仓--   '
+    info1=  '--柳暗花明 底部反转模型  每天标记 ,后期出现 比如出水芙蓉等模型可以加仓--   '
     writeLog_to_txt_nocode(info1)
 
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
@@ -72,8 +75,10 @@ def isAn_LiuAnHuaMing2_model(data,stockcode):
         data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
         # print1( data1)
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
+        mairuriqi = 0
+        zhisundian = 0
 
-        data2 = data[0:len_data - 2] #
+        data2 = data[len_data - 2-130:len_data - 2] #
         data2 = data2.reset_index(drop=True)  # 重新建立索引 ,
 
         data3 = data[len_data-10:len_data - 1]  #
@@ -100,6 +105,7 @@ def isAn_LiuAnHuaMing2_model(data,stockcode):
                 count=count+1
                 day2_yangxian_close=row['close']
                 day2_yangxianshiti=getShiTiDaXiao(row)
+                mairuriqi=row['trade_date']
         if(count==2):
             # 1判断是不是止跌沿线,
             if(day2_yangxian_close >= day1_yinxian_open):
@@ -111,6 +117,7 @@ def isAn_LiuAnHuaMing2_model(data,stockcode):
             # 3 判断近期的最低点是不是 昨天 B
 
             befor_mini= getMin_low_fromDataFrame(data2)
+            zhisundian= befor_mini
             if(befor_mini > day1_yinxian_low):
                 key_3=1
 
@@ -127,12 +134,15 @@ def isAn_LiuAnHuaMing2_model(data,stockcode):
         if(key_1==1 and  key_2 ==1 and key_3==1 and key_4==1):
             info=''
             info = info+'阳线实体='+str(day2_yangxianshiti)
-            info = info+ "-----柳暗花明2 底部反转 ----"  + str(riqi)
+            info = info+ "-----柳暗花明 底部反转 ----"  + str(riqi)
             # print info
             writeLog_to_txt(info, stockcode)
 
-            path = '柳暗花明2.txt'
+            path = '柳暗花明.txt'
             writeLog_to_txt_path_getcodename(info, path, stockcode)
+
+            chenggong_code={'stockcode':stockcode,'mairuriqi':mairuriqi,'zhisundian':zhisundian}
+            chengongs.append(chenggong_code)
 
 
 
@@ -198,15 +208,36 @@ def test_Befor_data():
 
 
         data7_4 = df.iloc[22:168]  # 前10个交易日
+        # data7_4 = df.iloc[22:22+136+22]  # 1个月
+        data7_4 = df.iloc[22:22+136+120]  # 半年
+        # data7_4 = df.iloc[22:22+136+250]  # 1年
         len_1=len(data7_4)
 
         for i in range(0, len_1 - 136 + 1):
             # print "i" + str(i )+ "j"+str(i+3)
             isAn_LiuAnHuaMing2_model(data7_4[i:i + 136], stock_code)
 
+    from jishu_stock.aShengLv.HuiCeTool import wirteList_to_txt
+    from jishu_stock.aShengLv.HuiCeTool import getList_from_txt
+    from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
+    wirteList_to_txt(chengongs)
+    # chengongs1 = getList_from_txt()
+    jisuan_all_shouyilv(chengongs, modelname, 1.03)
+    jisuan_all_shouyilv(chengongs, modelname, 1.05)
+    jisuan_all_shouyilv(chengongs, modelname, 1.07)
+    jisuan_all_shouyilv(chengongs, modelname, 1.10)
+    jisuan_all_shouyilv(chengongs, modelname, 1.15)
+
 
 if __name__ == '__main__':
+    from  time import  *
+    starttime = time()
+
     localpath1 = '/jishu_stock/stockdata/data1/'
     # test_isAn_LiuAnHuaMing2_laoshi()
-    get_all_LiuAnHuaMing2(localpath1)
-    # test_Befor_data()
+    # get_all_LiuAnHuaMing2(localpath1)
+    test_Befor_data()
+    # jisuan_all_shouyilv(chengongs, modelname, 1.03)
+
+    endtime = time()
+    print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"

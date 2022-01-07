@@ -7,8 +7,10 @@ import tushare as ts
 import pandas as pd
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, print1, isYangXian, is_big_to_small, \
     is_small_to_big, isYinXian, writeLog_to_txt_path_getcodename
+from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
 from jishu_stock.z_tool.ShiTiDaXiao import getShiTiDaXiao
-from jishu_stock.z_tool.is5_13_34_ShangZhang import is5_13_34_XiangShang
+from jishu_stock.z_tool.getMin_Max import getMin_fromDataFrame
+from jishu_stock.z_tool.is5_13_34_ShangZhang import is5_13_34_XiangShang, is5_10_20_XiangShang_dayou
 from stock.settings import BASE_DIR
 
 import pandas as pd
@@ -27,7 +29,8 @@ https://www.yuque.com/chaoren399/eozlgk/exwpcp
 群里交流后 一定是 4 个阳, 之前不能有 5 阳,也就是 需要 7 天的数据, 第一天的必须阴, 然后 4 个阳
 
 '''
-
+chengongs=[]
+modelname='大有'
 def get_all_DaYou(localpath1):
     info1=  '--大有  上涨初期洗盘模型 start--   '
     writeLog_to_txt_nocode(info1)
@@ -59,16 +62,25 @@ def isAn_DaYou_model(data,stockcode):
     len_data = len(data)
     if (len_data == 0):
         print str(stockcode) + '--data --is null'
-    if(len_data == 7):
+    if(len_data >= 7):
         data = data.sort_values(by='trade_date', axis=0, ascending=True)  # 按照日期 从旧到新 排序
         data = data.reset_index(drop=True)  # 重新建立索引 ,
 
-        data1 = data[0:1]  # 阳线之前的数据
-        data = data[1:len_data]  # 用来判断第一天是不是收阳
-        data = data.reset_index(drop=True)  # 重新建立索引 ,
 
-        # print1( data)
-        riqi = data.ix[5]['trade_date']  # 阳线的日期
+        data1 = data[len_data-6:len_data]  # 用来判断第一天是不是收阳
+        data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
+        riqi = data1.ix[5]['trade_date']  # 阳线的日期
+        mairuriqi = 0
+        zhisundian = 0
+
+        data2 = data[len_data-6-1:len_data-6]  # 阳线之前的数据
+        data2 = data2.reset_index(drop=True)  # 重新建立索引 ,
+
+        data3 = data[len_data-6-1:len_data]  # 阳线之前的数据
+        data3 = data3.reset_index(drop=True)  # 重新建立索引 ,
+
+        # print1( data1)
+
 
         # 设置两个 key
         key_1=0; # 是不是满足  4 个阳 1 个阴 1 个阳
@@ -92,17 +104,17 @@ def isAn_DaYou_model(data,stockcode):
         yangxian_shiti3=0
         yangxian_shiti4=0
         yangxian_shiti5=0
-        for index,row in data.iterrows():
-            if(index==0 and isYangXian(row)==1):
+        for index,row in data1.iterrows():
+            if(index==0 and isYangXian(row)==1):#阳线 第 1天
                 count=count+1
                 yangxian_shiti1 = getShiTiDaXiao(row)
-            if(index==1 and isYangXian(row)==1):
+            if(index==1 and isYangXian(row)==1):#阳线 第 2天
                 count=count+1
                 yangxian_shiti2 = getShiTiDaXiao(row)
-            if(index==2 and isYangXian(row)==1):
+            if(index==2 and isYangXian(row)==1):#阳线 第 3天
                 count=count+1
                 yangxian_shiti3 = getShiTiDaXiao(row)
-            if(index==3 and isYangXian(row)==1):
+            if(index==3 and isYangXian(row)==1):#阳线 第 4天
                 count=count+1
                 yangxian_shiti4 = getShiTiDaXiao(row)
             if(index==4 and isYinXian(row)==1): # 阴线
@@ -111,18 +123,19 @@ def isAn_DaYou_model(data,stockcode):
             if(index==5 and isYangXian(row)==1): #阳线 第 6 天
                 count=count+1
                 yangxian_shiti5=getShiTiDaXiao(row)
+                mairuriqi=row['trade_date']
 
         if(count==6):
             key_1=1
         if(key_1==1):
-            day6_close = data.ix[5]['close']
-            for index, row in data.iterrows():
+            day6_close = data1.ix[5]['close']
+            for index, row in data1.iterrows():
                 if(index <5 and row['close'] >  day6_close  ):
                     key_2=0
                 if(index <5 and row['open'] > day6_close  ):
                     key_2=0
 
-        for index,row in data1.iterrows(): #4 连阳之前必须是阴线的.
+        for index,row in data2.iterrows(): #4 连阳之前必须是阴线的.
             if(index==0 and isYinXian(row)==1):
                 key_3=1
 
@@ -137,13 +150,15 @@ def isAn_DaYou_model(data,stockcode):
         # print1(key_3)
         # if(key_1==1 and  key_2 ==1 and key_3==1 and key_4==1):
 
+        zhisundian = getMin_fromDataFrame(data1)['low']
 
         if(key_1==1 and  key_2 ==1 and key_3==1 ):
 
-            count3=is5_13_34_XiangShang(data,0)
+            count3=is5_13_34_XiangShang(data3,0)
             info=''
             # if(count3==3):
-            if(1):
+            if(is5_10_20_XiangShang_dayou(data1, 0)==1):
+            # if(1):
 
                 info=info+'5-13-34 有 '+str(count3)+'个上升-'
 
@@ -157,14 +172,15 @@ def isAn_DaYou_model(data,stockcode):
                 # info=info+'-' + str(yangxian_shiti4)
                 # info = info+'-' + str(yangxian_shiti5) + ',' +'阴线=' + str(yinxian_shiti)
 
-
-
                 info = info+"-----大有,上涨初期,洗盘模型,下跌后横盘半年以上 ---- " + str(riqi)
                 # print info
                 writeLog_to_txt(info, stockcode)
 
                 path = '大有.txt'
                 writeLog_to_txt_path_getcodename(info, path, stockcode)
+
+                chenggong_code = {'stockcode': stockcode, 'mairuriqi': mairuriqi, 'zhisundian': zhisundian}
+                chengongs.append(chenggong_code)
 
 
 
@@ -247,6 +263,8 @@ def test_Befor_data():
 
 
         data7_4 = df.iloc[22:42]  #  上个月的数据
+        data7_4 = df.iloc[22:22+7+22]  #  上个月的数据
+        data7_4 = df.iloc[22:22+7+120]  #  半年的数据
         len_1=len(data7_4)
 
         for i in range(0, len_1 - 7 + 1):
@@ -254,10 +272,32 @@ def test_Befor_data():
             isAn_DaYou_model(data7_4[i:i + 7], stock_code)
 
 
+    from jishu_stock.aShengLv.HuiCeTool import wirteList_to_txt
+    from jishu_stock.aShengLv.HuiCeTool import getList_from_txt
+    from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
+    wirteList_to_txt(chengongs)
+    # chengongs1 = getList_from_txt()
+    jisuan_all_shouyilv(chengongs, modelname, 1.05)
+    jisuan_all_shouyilv(chengongs, modelname, 1.07)
+    jisuan_all_shouyilv(chengongs, modelname, 1.10)
+    jisuan_all_shouyilv(chengongs, modelname, 1.15)
+    jisuan_all_shouyilv(chengongs, modelname, 1.20)
+    jisuan_all_shouyilv(chengongs, modelname, 1.30)
+
 if __name__ == '__main__':
+
+    from  time import  *
+    starttime = time()
+
+
     localpath1 = '/jishu_stock/stockdata/data1/'
     # get_all_DaYou(localpath1)
     # test_isAn_DaYou_laoshi()#测试老师案例
-    test_isAn_DaYou_ziji()
-    # test_Befor_data()
+    # test_isAn_DaYou_ziji()
+    test_Befor_data()
     # ceshi_xueyuan_anli()
+
+    # jisuan_all_shouyilv(chengongs, modelname, 1.10)
+
+    endtime = time()
+    print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"

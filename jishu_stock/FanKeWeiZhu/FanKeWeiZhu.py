@@ -7,6 +7,7 @@ import tushare as ts
 import pandas as pd
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, print1, isYangXian, is_big_to_small, \
     writeLog_to_txt_path_getcodename
+from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
 from stock.settings import BASE_DIR
 
 import pandas as pd
@@ -39,6 +40,9 @@ https://www.yuque.com/chaoren399/eozlgk/ysft12/
 
 
 '''
+
+chengongs=[]
+modelname='反客为主'
 
 def get_all_FanKeWeiZhu(localpath1):
     info1=  '--反客为主 找 刚起来 不超过 3 个月的 强庄主力仅用一天的强势洗盘 start--   '
@@ -81,6 +85,8 @@ def isAn_FanKeWeiZhu_model(data,stockcode):
         data1= data[len_data-2:len_data]
         data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
+        mairuriqi = 0
+        zhisundian = 0
         # print1(data1)
 
         # 设置两个 key
@@ -107,12 +113,15 @@ def isAn_FanKeWeiZhu_model(data,stockcode):
                 day1_open=row['open']
                 day1_close=row['close']
                 chazhi1 = format(((row['close'] - row['open']) / row['open']) * 100 ,'.2f') # (开盘价-收盘价)÷开盘价＜0.5%
+
+                zhisundian=row['low']
             if(index==1 and isYangXian(row)==1):
                 count1 = count1 + 1
                 day2_open = row['open']
                 day2_close = row['close']
                 chazhi2 = format(((row['close'] - row['open']) / row['open']) * 100,'.2f')  # (开盘价-收盘价)÷开盘价＜0.5%
                 yangxian_pct_chg=row['pct_chg']
+                mairuriqi=row['trade_date']
         # format(float(a) / float(b), '.2f'))
         if(count1==2):
             key_1=1
@@ -162,6 +171,9 @@ def isAn_FanKeWeiZhu_model(data,stockcode):
 
                     path = '反客为主.txt'
                     writeLog_to_txt_path_getcodename(info, path, stockcode)
+
+                    chenggong_code = {'stockcode': stockcode, 'mairuriqi': mairuriqi, 'zhisundian': zhisundian}
+                    chengongs.append(chenggong_code)
 
 #10 周均线是不是向上
 def is10_60Week_XiangShang(stock_code, riqi):
@@ -272,16 +284,37 @@ def test_Befor_data():
 
 
         data7_4 = df.iloc[22:27]  # 前10个交易日
+        data7_4 = df.iloc[22:22+2+22]  # 前10个交易日
         len_1=len(data7_4)
 
         for i in range(0, len_1 - 2 + 1):
             # print "i" + str(i )+ "j"+str(i+3)
             isAn_FanKeWeiZhu_model(data7_4[i:i + 2], stock_code)
 
+    from jishu_stock.aShengLv.HuiCeTool import wirteList_to_txt
+    from jishu_stock.aShengLv.HuiCeTool import getList_from_txt
+    from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
+    wirteList_to_txt(chengongs)
+    # chengongs1 = getList_from_txt()
+    jisuan_all_shouyilv(chengongs, modelname, 1.05)
+    jisuan_all_shouyilv(chengongs, modelname, 1.07)
+    jisuan_all_shouyilv(chengongs, modelname, 1.10)
+    jisuan_all_shouyilv(chengongs, modelname, 1.15)
+    jisuan_all_shouyilv(chengongs, modelname, 1.20)
+    jisuan_all_shouyilv(chengongs, modelname, 1.30)
 
 if __name__ == '__main__':
+
+    from  time import  *
+    starttime = time()
+
     localpath1 = '/jishu_stock/stockdata/data1/'
-    get_all_FanKeWeiZhu(localpath1)
+    # get_all_FanKeWeiZhu(localpath1)
     # test_isAn_FanKeWeiZhu_laoshi()
-    # test_Befor_data()
+    test_Befor_data()
     # test_isAn_FanKeWeiZhu_ziji()
+
+    # jisuan_all_shouyilv(chengongs, modelname, 1.10)
+
+    endtime = time()
+    print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"

@@ -34,3 +34,13 @@ df = ts.pro_bar(ts_code='300541.SZ', adj='qfq', freq='W', start_date='20170101',
 7. 程序 改进计划, 已经改进:
 
 YiYiDaiLao3.py
+
+
+8. 计算程序运行时间
+
+    from  time import  *
+    starttime = time()
+
+
+    endtime = time()
+    print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"

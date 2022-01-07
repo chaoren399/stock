@@ -22,7 +22,8 @@ def getMonth_K_Data(start_date , end_date, localpath):
     ts.set_token('731d2ea0abcf1f14d59ec7215d6ec520e09a439fccd2772c43a906be')
     # 查询当前所有正常上市交易的股票列表
     pro = ts.pro_api()
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
+    # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
+    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
     print path
     data = pd.read_csv(path, dtype={'code': str})
     start_date = start_date
@@ -62,6 +63,16 @@ def test_getTushare_Month_k():
 
 
 
+    print df
+
+
+def get_one_stock_monthdata():
+    stock_code='000663.SZ'
+    pro = ts.pro_api()
+    df = pro.monthly(ts_code=stock_code, start_date='20150101', end_date=today,
+                     fields='ts_code,trade_date,open,high,low,close,vol,amount')
+    stockdata_path = BASE_DIR + '/jishu_stock/stockdata/MONTH_DATA_K/' + stock_code + '_Month' + ".csv"
+    df.to_csv(stockdata_path)
 
 if __name__ == '__main__':
     import datetime
@@ -72,7 +83,8 @@ if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
 
     today = starttime.strftime('%Y%m%d')
-    getMonth_K_Data(start_date = '20150101',end_date = today,localpath=localpath1)
+    # getMonth_K_Data(start_date = '20150101',end_date = today,localpath=localpath1)
+    get_one_stock_monthdata()
 
     # test_getTushare_Month_k()
 

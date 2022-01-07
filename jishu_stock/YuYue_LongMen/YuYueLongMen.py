@@ -37,8 +37,8 @@ from stock.settings import BASE_DIR
 
 def getallstockdata_isYuYueLongMen_fromLocal():
     print '------start 鱼跃龙门  佛系翻倍---'
-    # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
+    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
 
     count = 0
     data = pd.read_csv(path, dtype={'code': str})
@@ -53,13 +53,8 @@ def getallstockdata_isYuYueLongMen_fromLocal():
             # print df
             if (df.empty):
                 continue
-
-            # df=df.iloc[0:5]  # 只找最近 1 个月的
-
-
-
             is_YuYueLongMen_model(df, stock_code)
-            count = count + 1
+
 
 '''
 
@@ -117,12 +112,13 @@ def is_YuYueLongMen_model(data, stock_code):
         if(key_isxiangjiang_2015_2018==1 and key_is_shangzhang_5==1):
             info = stock_code + "-----鱼跃龙门  佛系翻倍-----------"
 
-            path = BASE_DIR + '/jishu_stock/zJieGuo/YuYueLongM/' + 'Yu' + datetime.datetime.now().strftime(
+            path = BASE_DIR + '/jishu_stock/sJieGuo/YuYueLongM/' + 'Yu' + datetime.datetime.now().strftime(
                 '%Y-%m-%d') + '.txt'
             if (isInQiangShi_gupiaochi(stock_code)):
                 info = info + '--强势股票--'
             info = info + '--' + get_Stock_Name(stock_code)
             print info
+            #/Users/mac/PycharmProjects/gitproject/stock/jishu_stock/sJieGuo/YuYueLongM
             with open(path, "a") as f:
                 f.write(info + '' + "\n")
 
@@ -163,6 +159,8 @@ def test_is_YuYueLongMen_model():
     df = pd.read_csv(stockdata_path, index_col=0)
     # print df[0:3]
     is_YuYueLongMen_model(df, stock_code)
+
+
 if __name__ == '__main__':
     starttime = datetime.datetime.now()
     localpath = '/jishu_stock/stockdata/data1/'

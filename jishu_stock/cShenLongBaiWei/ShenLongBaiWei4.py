@@ -6,6 +6,9 @@ import pandas as pd
 
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, getRiQi_Befor_Ater_Days, print1, \
     writeLog_to_txt_path_getcodename
+from jishu_stock.aShengLv.HuiCeTool import wirteList_to_txt
+from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
+from jishu_stock.aShengLv.huice.ShengLv_10_5 import jisuan_all_shouyilv_10_5
 from stock.settings import BASE_DIR
 
 
@@ -32,7 +35,8 @@ https://www.yuque.com/chaoren399/eozlgk/fkbnbi
 
 '''
 
-
+chengongs=[]
+modelname='神4'
 def get_all_ShenLongBaiWei4(localpath1):
     info1= "神龙摆尾4  下跌横盘缓慢上涨 66 且 3 个月内最大值  start "
     writeLog_to_txt_nocode(info1)
@@ -81,7 +85,9 @@ def  isAn_ShenLongBaiwei4_model_pro(dataframe_df,stock_code):
 
         day1_pct_chg=dataframe_df.ix[0]['pct_chg'] # 第一天的 涨幅
         riqi_0 =dataframe_df.ix[0]['trade_date']
-        riqi ='2021090100'
+        mairuriqi=riqi_0
+        zhisundian=0
+        # riqi ='20210901'
         key_0=0 #  第一天的 涨幅 不能是 涨停板
         key_1 = 1#  确定 条件 最新一天的值是不是放量, 并且是最近的最大值.
         key_2 = 0  #  5%阳线 前一天的成交量  确定条件 5% 放量
@@ -104,8 +110,10 @@ def  isAn_ShenLongBaiwei4_model_pro(dataframe_df,stock_code):
                     return
 
             if(index==1):
+
                 if( row['amount'] > day1_amount):
                     key_1=0
+
 
                     return
 
@@ -124,6 +132,7 @@ def  isAn_ShenLongBaiwei4_model_pro(dataframe_df,stock_code):
             # if (count > 1 and count <9):  # 然后往循环找 9 个值, 判断有没有 大于 5% 的值
             if (count >= 4 and count <=9):  # 然后往循环找 9 个值, 判断有没有 大于 5% 的值
                 pct_chg = row1['pct_chg']
+                zhisundian= row1['open']
 
                 if (pct_chg >= 3.9 and pct_chg < 7.5):  # 5% 左右
                     riqi=row1['trade_date']
@@ -134,6 +143,7 @@ def  isAn_ShenLongBaiwei4_model_pro(dataframe_df,stock_code):
                     data1_day2_amount= data1.ix[count]['amount']
                     if(row1['amount'] < day1_amount): #  第 2 个放量 要比第一个 5%中阳线 要大
                         key_3=1
+
                         # print row1['amount']
                         # print day1_amount
                         # print data1_day2_amount
@@ -148,6 +158,12 @@ def  isAn_ShenLongBaiwei4_model_pro(dataframe_df,stock_code):
         # key3=0
         # riqi_0 - riqi >3
         # print key_2
+        # print1(key_0)
+        # print1(key_1)
+        # print1(key_2)
+        # print1(key_3)
+        # print1(key_4)
+
         if(key_0==1 and key_1==1 and key_2==1 and key_3==1):
 
             #第 4 步: 判断 5% 阳线是不是近期最大值 非常关键:
@@ -163,6 +179,9 @@ def  isAn_ShenLongBaiwei4_model_pro(dataframe_df,stock_code):
 
                 path = '神4.txt'
                 writeLog_to_txt_path_getcodename(info, path, stock_code)
+
+                chenggong_code = {'stockcode': stock_code, 'mairuriqi': mairuriqi, 'zhisundian': zhisundian}
+                chengongs.append(chenggong_code)
 
 '''
 判断 前 66 天 的最高价 是不是 低于 某个值
@@ -198,20 +217,22 @@ def test_isAn_ShenLongBaiwei4_model_form_ts():
     # 查询当前所有正常上市交易的股票列表
     pro = ts.pro_api()
     df1 = ts.pro_bar(ts_code='600114.SH', start_date='20210617', end_date='20210720')
+    data7_1 = df1.iloc[0:20]  # 前10个交易日
+    isAn_ShenLongBaiwei4_model_pro(data7_1, '600114.SH')
 
     df2 = ts.pro_bar(ts_code='000504.SZ', start_date='20210317', end_date='20210510')
-    df3 = ts.pro_bar(ts_code='600054.SH', start_date='20210117', end_date='20210218')
-    df4 = ts.pro_bar(ts_code='600085.SH', start_date='20210417', end_date='20210514')
-
-    data7_1 = df1.iloc[0:20]  # 前10个交易日
     data7_2 = df2.iloc[0:20]  # 前10个交易日
-    data7_3 = df3.iloc[0:20]  # 前10个交易日
-    data7_4 = df4.iloc[0:20]  # 前10个交易日
-    # print data7_1
-    isAn_ShenLongBaiwei4_model_pro(data7_1, '600085.SH')
     isAn_ShenLongBaiwei4_model_pro(data7_2, '000504.SZ')
+
+    df3 = ts.pro_bar(ts_code='600054.SH', start_date='20210117', end_date='20210218')
+    data7_3 = df3.iloc[0:20]  # 前10个交易日
     isAn_ShenLongBaiwei4_model_pro(data7_3, '600054.SH')
+
+    df4 = ts.pro_bar(ts_code='600085.SH', start_date='20210417', end_date='20210514')
+    data7_4 = df4.iloc[0:20]  # 前10个交易日
     isAn_ShenLongBaiwei4_model_pro(data7_4, '600085.SH')
+
+
 
 
 
@@ -230,6 +251,13 @@ def test_isAn_ShenLongBaiwei4_model():
     isAn_ShenLongBaiwei4_model_pro(data7_1,stock_code)
 
 
+
+def test_ziji():
+    #002275
+
+    df4 = ts.pro_bar(ts_code='002275.SZ', start_date='20210417', end_date='20211209')
+    data7_4 = df4.iloc[0:20]  # 前10个交易日
+    isAn_ShenLongBaiwei4_model_pro(data7_4, '002275.SZ')
 '''
 回测 8 月份的数据
 '''
@@ -245,16 +273,31 @@ def test_Befor_data():
 
 
         data7_4 = df.iloc[22:42]  # 前10个交易日
+        # data7_4 = df.iloc[22:22+20+5]  # 前10个交易日
+        data7_4 = df.iloc[22:22+20+22]  # 1 个月
+        # data7_4 = df.iloc[22:22+20+120]  #半年
+
         len_1=len(data7_4)
 
         for i in range(0, len_1 - 20 + 1):
             # print "i" + str(i )+ "j"+str(i+3)
             isAn_ShenLongBaiwei4_model_pro(data7_4[i:i + 20], stock_code)
 
-if __name__ == '__main__':
-    import datetime
+    wirteList_to_txt(chengongs)
 
-    starttime = datetime.datetime.now()
+    # jisuan_all_shouyilv(chengongs, modelname, 1.05)
+    # jisuan_all_shouyilv(chengongs, modelname, 1.07)
+    jisuan_all_shouyilv(chengongs, modelname, 1.10)
+    # jisuan_all_shouyilv(chengongs, modelname, 1.15)
+    jisuan_all_shouyilv(chengongs, modelname, 1.20)
+    # jisuan_all_shouyilv(chengongs, modelname, 1.30)
+
+    jisuan_all_shouyilv_10_5(chengongs, modelname, 1.10, 0.95)
+    jisuan_all_shouyilv_10_5(chengongs, modelname, 1.20, 0.90)
+
+if __name__ == '__main__':
+    from  time import  *
+    starttime = time()
 
     # getallstockdata_isShenLongBaiWei('20210701', '20210805')
     # anstock_isShenLongBaiWei_model('000539.SZ','20210701', '20210805')
@@ -264,3 +307,8 @@ if __name__ == '__main__':
     # test_isAn_ShenLongBaiwei4_model()
     # test_is_max_in_20days()
     test_Befor_data()
+    # test_ziji()
+    # jisuan_all_shouyilv(chengongs, modelname, 1.05)
+
+    endtime = time()
+    print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"

@@ -61,6 +61,8 @@ def isAn_KangLongYouHui_GeGu_model(data,stockcode):
         data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
         riqi = data1.ix[3]['trade_date']  # 阳线的日期
         # print1(data1)
+        data2 = data[len_data-4-60:len_data-4]
+        data2 = data2.reset_index(drop=True)  # 重新建立索引 ,
 
 
         # 设置两个 key
@@ -122,7 +124,7 @@ def isAn_KangLongYouHui_GeGu_model(data,stockcode):
                     key_5=1
 
           # 近 3 个月 是下跌
-        data2=data[0:len_data-4]
+
         min_low= data1.ix[0]['low']
         for index, row in data2.iterrows():
             if(row['low'] < min_low):
@@ -215,6 +217,6 @@ def test_Befor_data():
 
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
-    # test_isAn_KangLongYouHui_GeGu_laoshi()
-    get_all_KangLongYouHui_GeGu(localpath1)
+    test_isAn_KangLongYouHui_GeGu_laoshi()
+    # get_all_KangLongYouHui_GeGu(localpath1)
     # test_Befor_data()

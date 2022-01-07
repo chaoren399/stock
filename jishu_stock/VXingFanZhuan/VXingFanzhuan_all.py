@@ -6,6 +6,7 @@ import pandas as pd
 
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, print1, \
     writeLog_to_txt_path_getcodename
+from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
 from stock.settings import BASE_DIR
 import pandas as pd
 
@@ -28,9 +29,11 @@ https://www.yuque.com/chaoren399/eozlgk/kcmgi6
             
 
 '''
-
+chengongs=[]
+modelname='V型反转'
+zhisundian=0 #这里的变量是个意外, 因为程序是最早写, 没有按照 模板来
 def getallstockdata_isV_fromLocal(localpath1):
-    info1=  'V 型 反转 start'
+    info1=  'V型反转start'
     writeLog_to_txt_nocode(info1)
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
     # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
@@ -75,6 +78,20 @@ def isAnV_model(data,stock_code):
 
     # data = data.reset_index(drop=True)  # 重新建立索引 ,
     # print data
+
+    if (data is None or data.empty):
+        print '--df.empty--' + str(stock_code)
+        return 0
+    len_data = len(data)
+    if (len_data == 0):
+        print str(stock_code) + '--data --is null'
+    if(len_data >=1):
+        data = data.sort_values(by='trade_date', axis=0, ascending=True)  # 按照日期 从旧到新 排序
+        data = data.reset_index(drop=True)  # 重新建立索引 ,
+
+        data1 = data[len_data - 1:len_data]
+        data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
+
     qianzhui_code= stock_code[0:2]
     zhangfuMax = 9 # 涨幅 是不是大于 这个
     if(qianzhui_code =='00' or qianzhui_code =='60'):
@@ -84,7 +101,7 @@ def isAnV_model(data,stock_code):
     count =0;
 
 
-    for index, row in data.iterrows():
+    for index, row in data1.iterrows():
 
         # print index
         pct_chg = row['pct_chg']
@@ -93,6 +110,7 @@ def isAnV_model(data,stock_code):
 
         if(pct_chg > zhangfuMax):  # 涨停板
             riqi  = str(row['trade_date'])
+            zhisundian= row['low']
             # print stock_code + "  " + str(pct_chg) + "--------- 涨停板---------" +str(riqi)
             # 得到涨停板后 获取 这只股票之前的 20 天数据
             # 计算最低价, 如果最低价 的日期 与 涨停板的日期 相减 < 3 那么 ,就可以看看了.
@@ -103,6 +121,7 @@ def isAnV_model(data,stock_code):
 '''
  # 得到涨停板后 获取 这只股票之前的 20 天数据
 # 计算最低价, 如果最低价 的日期 与 涨停板的日期 相减 < 3 那么 ,就可以看看了.
+参数 date  : 涨停板日期
 '''
 def isXiaDieZhangting(stock_code,date):
 
@@ -148,7 +167,8 @@ def isXiaDieZhangting(stock_code,date):
         path = 'V型反转.txt'
         writeLog_to_txt_path_getcodename(info, path, stock_code)
 
-    #     print("ok1")
+        chenggong_code = {'stockcode': stock_code, 'mairuriqi': date, 'zhisundian': zhisundian}
+        chengongs.append(chenggong_code)
 
 
 '''
@@ -198,6 +218,8 @@ def test_V_anli_laoshi():
     # 单独一个函数 判断是不是符合 V型反转
     isAnV_model(data7_1, '002153.SZ')
 
+    jisuan_all_shouyilv(chengongs, modelname, 1.03)
+
 
 def test_V_anli_ziji():
     # df = ts.pro_bar(ts_code='002093.SZ', adj='qfq', start_date='20200101', end_date='20210819')
@@ -227,6 +249,8 @@ def test_Befor_data():
         # data6_1 = df.iloc[0:4]  # 前4行
         data6_1 = df.iloc[0:1]  # 前4行
         data6_1 = df.iloc[22:44]  # 前4行
+        # data6_1 = df.iloc[22:22+20+22]  # 1 个月
+        data6_1 = df.iloc[22:22+20+120]  #半年
 
         len_1=len(data6_1)
 
@@ -234,12 +258,21 @@ def test_Befor_data():
             # print "i" + str(i )+ "j"+str(i+3)
             isAnV_model(data6_1[i:i + 1], stock_code)
 
+    jisuan_all_shouyilv(chengongs, modelname, 1.03)
+    jisuan_all_shouyilv(chengongs, modelname, 1.05)
+    jisuan_all_shouyilv(chengongs, modelname, 1.10)
+    jisuan_all_shouyilv(chengongs, modelname, 1.15)
 
 if __name__ == '__main__':
+    from  time import  *
+    starttime = time()
 
     localpath1 = '/jishu_stock/stockdata/data1/'
-    getallstockdata_isV_fromLocal(localpath1)
+    # getallstockdata_isV_fromLocal(localpath1)
 
     # test_V_anli_laoshi()
-    # test_Befor_data()
+    test_Befor_data()
     # test_V_anli_ziji()
+
+    endtime = time()
+    print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"

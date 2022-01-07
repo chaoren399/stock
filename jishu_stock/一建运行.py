@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
-import datetime
+
 
 from jishu_stock.ChuShuiFuRong.ChuShuiFuRong import get_all_ChuShuiFuRong
 from jishu_stock.DaYou.DaYou import get_all_DaYou
@@ -30,12 +30,11 @@ from jishu_stock.SCS.SCS1 import get_all_SCS_1
 from jishu_stock.SiHuiFuRan.SiHuiFuRan import get_all_SiHuiFuRan
 from jishu_stock.Tool_jishu_stock import get_2stockcode, dingshi_ceshi
 from jishu_stock.WuLiKanHua.WuLiKanHua import get_all_WuLiKanHua
-from jishu_stock.YiYiDaiLao.YiYiDaiLao2 import get_all_YiYiDaiLao2
+from jishu_stock.YiYiDaiLao.YiYiDaiLao0 import get_all_YiYiDaiLao2
 from jishu_stock.YouJingWuXian.YouJingWuXian1 import get_all_YouJingWuXian1
 from jishu_stock.YouJingWuXian.YouJingWuXian2 import get_all_YouJingWuXian2_1
 from jishu_stock.bCaoMaoGui.YiYangChuanDuoJun import get_all_YiYangChuanDuoJun
 from jishu_stock.bCaoMaoGui.ZaoChenZhiXing import get_all_ZaoChenZhiXing
-from jishu_stock.agetdata.test_2_token import get_all_codes_k_data
 from jishu_stock.bCaoMaoGui.ZaoChenZhiXing2 import get_all_ZaoChenZhiXing2
 from jishu_stock.cShenLongBaiWei.Shen1 import get_all_Shen1
 from jishu_stock.cShenLongBaiWei.ShenLongBaiWei1 import  getall_ShenLongBaiWei1
@@ -47,8 +46,9 @@ from jishu_stock.VXingFanZhuan.VXingFanzhuan_all import getallstockdata_isV_from
 from jishu_stock.QingTingDianShui_QueKou.QueKou_QingTingDianShui import get_all_QingTingDianShui
 from jishu_stock.LingBoWeiBu.LingBoWeiBu import get_all_LingBoWeiBu
 from jishu_stock.JiuSiYiSheng.JiuSiYiSheng2 import get_all_JiuSiYiSheng_2
-from jishu_stock.YiYiDaiLao.YiYiDaiLao3 import get_all_YiYiDaiLao
+from jishu_stock.YiYiDaiLao.yiyidailaoAll.YiYiDaiLao0 import get_all_YiYiDaiLao
 from jishu_stock.YiJIanShuangDiao.YiJianShuangDiao import get_all_YiJianShuangDiao
+from jishu_stock.getAllStockData import getAllStockData
 from jishu_stock.zYouQianJun.YouQianJun120_250 import get_all_120_250
 
 '''
@@ -71,13 +71,16 @@ def jiagezhognshu_yijianyunxing():
 def yijianyunxing():
     # 日线 操作
     localpath1 = '/jishu_stock/stockdata/data1/'
-    today = starttime.strftime('%Y%m%d')
-    dingshi_ceshi()
 
-    # getAllStockData(start_date='20200701', end_date=today, localpath=localpath1) #这个时间 提供一年的得到 MA34
-    get_all_codes_k_data()
-    endtime = time()
-    print "总共运行时长:"+str(round((endtime - starttime) / 60 ,2))+"分钟"
+    dingshi_ceshi()
+    # today = starttime.strftime('%Y%m%d')
+    from datetime import datetime
+    starttime = datetime.now()
+    today = starttime.strftime('%Y%m%d')
+
+    getAllStockData(start_date='20200701', end_date=today, localpath=localpath1) #这个时间 提供一年的得到 MA34
+    # get_all_codes_k_data()
+
 
     #一阳穿多均
     get_all_YiYangChuanDuoJun(localpath1)

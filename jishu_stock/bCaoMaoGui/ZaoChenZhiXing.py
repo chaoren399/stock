@@ -179,7 +179,7 @@ def isAn_ZaoChenZhiXing_model(data,stockcode):
             writeLog_to_txt_path_getcodename(info, path, stockcode)
 
             #回测专用
-            chenggong_code={'stockcode':stockcode,'mairuriqi':day3_riqi,'zhiyingdian':day2_shizixing_low}
+            chenggong_code={'stockcode':stockcode,'mairuriqi':day3_riqi,'zhisundian':day2_shizixing_low}
             chengongs.append(chenggong_code)
 
 
@@ -281,12 +281,18 @@ def test_Befor_data():
         stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
         df = pd.read_csv(stockdata_path, index_col=0)
         data7_4 = df.iloc[22:42]  # 前10个交易日
-        # data7_4 = df.iloc[22:22+250+6]  # 去年 1 年的
+        data7_4 = df.iloc[22:22+6+22]  # 1 个月
+        # data7_4 = df.iloc[22:22+6+120]  # 半年
+        # data7_4 = df.iloc[22:22+6+250]  # 去年 1 年的
         len_1=len(data7_4)
         for i in range(0, len_1 - 6 + 1):
             # print "i" + str(i )+ "j"+str(i+3)
             isAn_ZaoChenZhiXing_model(data7_4[i:i + 6], stock_code)
-
+    jisuan_all_shouyilv(chengongs, modelname, 1.03)
+    jisuan_all_shouyilv(chengongs, modelname, 1.05)
+    jisuan_all_shouyilv(chengongs, modelname, 1.07)
+    jisuan_all_shouyilv(chengongs, modelname, 1.10)
+    jisuan_all_shouyilv(chengongs, modelname, 1.15)
 
 
 if __name__ == '__main__':
@@ -297,5 +303,3 @@ if __name__ == '__main__':
     # test_shizixing_da()
     test_Befor_data()
     # test_isAn_ZaoChenZhiXing_ziji()
-    jisuan_all_shouyilv(chengongs, modelname, 1.05)
-    jisuan_all_shouyilv(chengongs, modelname, 1.10)

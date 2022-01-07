@@ -1,7 +1,35 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
 # for i in range(1, 10)
-from datetime import datetime
+from datetime import datetime, date
+
+
+
+# 处理日期 YYYYMMDD  把 2018-01-07  转化为  20180107
+# df_week['trade_date'] = df_week['trade_date'].astype(str).replace('-', '')
+
+'''
+得到当天的日期
+%Y%m%d
+'''
+def getDayNumberYMD():
+    starttime = datetime.now()
+    today = starttime.strftime('%Y%m%d')
+    return today
+
+
+'''
+得到当天的日期
+'''
+def getDayNumberY_M_D():
+   return datetime.datetime.now().strftime('%Y-%m-%d')
+
+'''
+得到当前的月份
+'''
+def getMonthNumber():
+
+    return datetime.now().month
 
 
 ''''

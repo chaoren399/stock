@@ -49,6 +49,10 @@ KanDieZuoZhang
 案例 3 600006 东风汽车   上影线比实体长1倍=1.90909090909  
 '''
 
+chengongs=[]
+modelname='价格中枢看跌做涨'
+
+
 def get_all_jiagezhongshu_KanDieZuoZhang(localpath1):
     info1=  '--价格中枢 看跌做涨 start--   '
     writeLog_to_txt_nocode(info1)
@@ -94,6 +98,8 @@ def isAn_KanDieZuoZhang_model(data,stockcode):
         data1= data[len_data-2:len_data]
         data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
+        mairuriqi = 0
+        zhisundian = 0
         # print1(data1)
 
         # 第 1 周
@@ -138,10 +144,13 @@ def isAn_KanDieZuoZhang_model(data,stockcode):
 
                 week2_high=row['high']
                 week2_low=row['low']
+
                 #阳线 最好低开 这周价格围绕上一周的开盘价小幅波动；
                 if(week2_low <week1_close and week2_high > week1_close):
                     if(week2_open <=week1_close ): #最好低开（即开盘价低于上一周的收盘价）
                         key_6=1
+
+                mairuriqi=row['trade_date']#trade_date
 
 
 
@@ -188,10 +197,11 @@ def isAn_KanDieZuoZhang_model(data,stockcode):
 
         if(key_1==1 and  key_2 ==1 and key_3==1 and key_4==1 and key_5==1 and key_6==1):
             row = getMin_fromDataFrame(data)
+            zhisundian=row['low']
 
             min_date = row['trade_date']
-            min_date=riqi_geshi_zhuanhua1(min_date)
-            riqi=riqi_geshi_zhuanhua1(riqi)
+            # min_date=riqi_geshi_zhuanhua1(min_date)
+            # riqi=riqi_geshi_zhuanhua1(riqi)
             # print1(min_date)
             # print1(riqi)
             days = get_date1_date2_days(min_date, riqi)
@@ -205,15 +215,18 @@ def isAn_KanDieZuoZhang_model(data,stockcode):
                 # info=info+'-上影线长度='+str(week1_shangyingxian_changdu)#week1_shangyingxian_changdu > week1_quanbu_changdu
                 # info=info+'-全部长度='+str(week1_quanbu_changdu)#week1_shangyingxian_changdu > week1_quanbu_changdu
                 info=info+'-与最小值相差'+str(days/7)+'周'
-                info=info+'-上影线比实体长1倍大于2最好='+str(shangyingxian_bi_shiti)
+                # info=info+'-上影线比实体长1倍大于2最好='+str(shangyingxian_bi_shiti)
                 info = info + "-----价格中枢 看跌做涨  成功了" + ' ----' + stockcode + ' ----' + str(riqi)
 
-                path = BASE_DIR + '/jishu_stock/zJieGuo/JiaGeZhongShu/' + datetime.datetime.now().strftime(
+                path = BASE_DIR + '/jishu_stock/sJieGuo/JiaGeZhongShu/' + datetime.datetime.now().strftime(
                     '%Y-%m-%d') + '.txt'
 
                 jiagezhongshu_writeLog_to_txt_path_getcodename(info, path, stockcode)
                 path = '价格中枢看跌做涨.txt'
                 writeLog_to_txt_path_getcodename(info, path, stockcode)
+
+                chenggong_code = {'stockcode': stockcode, 'mairuriqi': mairuriqi, 'zhisundian': zhisundian}
+                chengongs.append(chenggong_code)
 
 
 
@@ -284,13 +297,26 @@ def test_Befor_data():
             # print "i" + str(i )+ "j"+str(i+3)
             isAn_KanDieZuoZhang_model(data7_4[i:i + 100], stock_code)
 
+    from jishu_stock.aShengLv.HuiCeTool import wirteList_to_txt
+    from jishu_stock.aShengLv.HuiCeTool import getList_from_txt
+    from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
+    wirteList_to_txt(chengongs)
+    # chengongs1 = getList_from_txt()
+    # jisuan_all_shouyilv(chengongs, modelname, 1.03)
+    # jisuan_all_shouyilv(chengongs, modelname, 1.05)
+    # jisuan_all_shouyilv(chengongs, modelname, 1.07)
+    jisuan_all_shouyilv(chengongs, modelname, 1.10)
+    jisuan_all_shouyilv(chengongs, modelname, 1.15)
+    jisuan_all_shouyilv(chengongs, modelname, 1.20)
+    jisuan_all_shouyilv(chengongs, modelname, 1.30)
+
 
 
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
     # getAll_jiagezhongshu_WeekKdata(localpath1) #每周运行钱需要先下载数据
-    get_all_jiagezhongshu_KanDieZuoZhang(localpath1)
+    # get_all_jiagezhongshu_KanDieZuoZhang(localpath1)
 
     # test_isAn_KanDieZuoZhang_laoshi()
-    # test_Befor_data()
+    test_Befor_data()
     # test_isAn_KanDieZuoZhang_ziji()

@@ -40,6 +40,7 @@ def get_all_QiBaoJunXian1(localpath1):
         df = pd.read_csv(stockdata_path, index_col=0)
 
         data6_1 = df.iloc[0:2]  # 前6行
+        data6_1 = df.iloc[0:30]  # 前6行
         # data6_1 = df.iloc[20:32]  # 前6行
         len1 = len(data6_1)
         isAn_QiBaoJunXian1_model(data6_1, stock_code)

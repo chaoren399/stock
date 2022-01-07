@@ -7,6 +7,7 @@ import tushare as ts
 import pandas as pd
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, isYangXian, print1, \
     getRiQi_Befor_Ater_Days, getMin_low_fromDataFrame, writeLog_to_txt_path_getcodename
+from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
 from jishu_stock.z_tool.isZhangTingBan import isZhangTingBan
 from stock.settings import BASE_DIR
 
@@ -32,7 +33,8 @@ https://www.yuque.com/chaoren399/eozlgk/ul1oun
 
 
 '''
-
+chengongs=[]
+modelname='神2'
 def get_all_ShenLongBaiWei2(localpath1):
     info1=  '--神龙摆尾 2   start--   '
     writeLog_to_txt_nocode(info1)
@@ -79,16 +81,16 @@ def isAn_ShenLongBaiWei2_model(data,stockcode):
         # print data
         riqi = data.ix[0]['trade_date']  # 阳线的日期
         riqi1=data.ix[0]['trade_date']  # 涨停板阳线的日期 下边会更新
+        mairuriqi=0
 
         # 设置两个 key
         key_1=0; # 1. 拿出 30 天数据, 先判断当天day1是不是 30 个数据的最高点,而且是阳线
-
         key_2=0;#满足条件一以后, 找涨停板 day2,  day1和 day2 之间的必须大于 等于 5 天. 取出 day1 和 day2的数组 A
-
         key_3 =1; # 3. 数组 A 内的最低价必须大于 涨停板 day2的收盘价, 否则失败
-
         key_4=0 # 4 .  5日均量线 下穿 10 日均量线
         key_5=0 # 5. 判断涨停板 之前的 1 个月是横盘 ,方法,找到涨停板前 22 个交易日的 最小值a, 之前 的 60 天数据的最小值不能小于 a
+
+
 
         #第一步:  1. 拿出 30 天数据, 先判断当天day1是不是 30 个数据的最高点,而且是阳线
 
@@ -98,6 +100,7 @@ def isAn_ShenLongBaiWei2_model(data,stockcode):
             if(index==0 and isYangXian(row) ==1):
                 key_1=1
                 day1_close=row['close']
+                mairuriqi=row['trade_date']
             close= row['close']
             if(close > day1_close):
                 key_1=0
@@ -116,9 +119,11 @@ def isAn_ShenLongBaiWei2_model(data,stockcode):
                 if(isZhangTingBan(row)==1): # 把第一天为涨停板的 过滤掉  如果是涨停板
                     day2_zhangtingban_close=row['close']
                     riqi1= row['trade_date']
+                    zhisundian=row['open']
                     break
             if((len_data -count) >=5 ):
                 key_2=1
+
 
             # 第 3 步 3. 数组 A 内的最低价必须大于 涨停板 day2的收盘价, 否则失败
             data2=data[0:(len_data -count)]
@@ -154,6 +159,9 @@ def isAn_ShenLongBaiWei2_model(data,stockcode):
 
                 path = '神2.txt'
                 writeLog_to_txt_path_getcodename(info, path, stockcode)
+
+                chenggong_code = {'stockcode': stockcode, 'mairuriqi': mairuriqi, 'zhisundian': zhisundian}
+                chengongs.append(chenggong_code)
 
 
 '''
@@ -230,28 +238,35 @@ def test_isAn_ShenLongBaiWei2_laoshi():
 
     # 案例 1 游族网络 002174.SZ
     # -----神龙摆尾 2  成功了 ------涨停板日期20210323 ----20210406--游族网络
-    # df = ts.pro_bar(ts_code='002174.SZ',adj='qfq', start_date='20210106', end_date='20210406')
-
+    df = ts.pro_bar(ts_code='002174.SZ',adj='qfq', start_date='20210106', end_date='20210406')
+    df['amount_5'] = df['amount'].rolling(5).mean()
+    df['amount_10'] = df['amount'].rolling(10).mean()
+    df = df.dropna(how='any', axis=0)  # 删除 列数据为空的 的行
+    df = df.sort_values(by='trade_date', axis=0, ascending=False)  # 按照日期 从新到旧 排序
+    data7_2 = df.iloc[0:30]  # 前7行
+    isAn_ShenLongBaiWei2_model(data7_2, '002174.SZ')
 
     # 案例 2 长安汽车 000625.SZ
     # -----神龙摆尾 2  成功了 ------涨停板日期20210416 ----20210511--长安汽车--强势股票
 
     df = ts.pro_bar(ts_code='000625.SZ', adj='qfq', start_date='20210206', end_date='20210511')
-
+    df['amount_5'] = df['amount'].rolling(5).mean()
+    df['amount_10'] = df['amount'].rolling(10).mean()
+    df = df.dropna(how='any', axis=0)  # 删除 列数据为空的 的行
+    df = df.sort_values(by='trade_date', axis=0, ascending=False)  # 按照日期 从新到旧 排序
+    data7_2 = df.iloc[0:30]  # 前7行
+    isAn_ShenLongBaiWei2_model(data7_2, '000625.SZ')
 
     # 案例 3 华侨城A 获取的数据开盘价等不准确有问题, 所以测试失败
 
-    # df = ts.pro_bar(ts_code='000069.SZ', start_date='20210106', end_date='20210303')
+    df = ts.pro_bar(ts_code='000069.SZ', start_date='20210106', end_date='20210303')
     df = df.sort_values(by='trade_date', axis=0, ascending=True)  # 按照日期 从旧到新 排序
     df['amount_5'] = df['amount'].rolling(5).mean()
     df['amount_10'] = df['amount'].rolling(10).mean()
     df = df.dropna(how='any', axis=0)  # 删除 列数据为空的 的行
     df = df.sort_values(by='trade_date', axis=0, ascending=False)  # 按照日期 从新到旧 排序
-
-    # print1(df)
     data7_2 = df.iloc[0:30]  # 前7行
-    # print data7_2
-    isAn_ShenLongBaiWei2_model(data7_2, '000625.SZ')
+    isAn_ShenLongBaiWei2_model(data7_2, '000069.SZ')
 
 
 
@@ -280,21 +295,35 @@ def test_Befor_data():
 
         # data7_4 = df.iloc[0:30]  # 前10个交易日
         data7_4 = df.iloc[22:60]  # 前10个交易日
+        data7_4 = df.iloc[22:22+30+22]  # 前10个交易日
         len_1=len(data7_4)
         # print1(stock_code)
 
-        for i in range(0, len_1 - 20 + 1):
+        for i in range(0, len_1 - 30 + 1):
             # print "i" + str(i )+ "j"+str(i+3)
             isAn_ShenLongBaiWei2_model(data7_4[i:i + 30], stock_code)
 
-
+    jisuan_all_shouyilv(chengongs, modelname, 1.05)
+    jisuan_all_shouyilv(chengongs, modelname, 1.07)
+    jisuan_all_shouyilv(chengongs, modelname, 1.10)
+    jisuan_all_shouyilv(chengongs, modelname, 1.15)
+    jisuan_all_shouyilv(chengongs, modelname, 1.20)
+    jisuan_all_shouyilv(chengongs, modelname, 1.30)
 
 
 if __name__ == '__main__':
+
+    from  time import  *
+    starttime = time()
     localpath1 = '/jishu_stock/stockdata/data1/'
     # test_isAn_ShenLongBaiWei2_laoshi()
-    # test_Befor_data()
-    # test_isAn_ShenLongBaiWei2_ziji()
+    test_Befor_data()
 
-    get_all_ShenLongBaiWei2(localpath1)
+
+    # get_all_ShenLongBaiWei2(localpath1)
+    # jisuan_all_shouyilv(chengongs, modelname, 1.10)
+
+
+    endtime = time()
+    print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"
 

@@ -7,6 +7,7 @@ import tushare as ts
 import pandas as pd
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, print1, isYinXian, isYangXian, \
     writeLog_to_txt_path_getcodename, is_small_to_big
+from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
 from jishu_stock.z_tool.is5_13_34_ShangZhang import is5_13_34_XiangShang
 from stock.settings import BASE_DIR
 from jishu_stock.z_tool.ShiTiDaXiao import getShiTiDaXiao
@@ -33,7 +34,8 @@ https://www.yuque.com/chaoren399/eozlgk/xokvyg/
 GeShanDaNiu
 
 '''
-
+chengongs=[]
+modelname='隔山打牛'
 def get_all_GeShanDaNiu(localpath1):
     info1=  '--隔山打牛 放量中阳线 捕捉涨停 start--   '
     writeLog_to_txt_nocode(info1)
@@ -71,8 +73,12 @@ def isAn_GeShanDaNiu_model(data,stockcode):
         data1= data[len_data-5:len_data]
         data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
+        mairuriqi = 0
+        zhisundian = 0
+
         # print1(data1)
-        data2=data[0:len_data-5]
+        mairuriqi = data1.ix[0]['trade_date']  # 阳线的日期
+        data2=data[len_data-5-30:len_data-5]
         data2 = data2.reset_index(drop=True)  # 重新建立索引 ,
 
 
@@ -107,6 +113,8 @@ def isAn_GeShanDaNiu_model(data,stockcode):
                 is_day2_yangxian=isYangXian(row)
                 day2_open=row['open']
                 day2_close=row['close']
+                zhisundian=day2_open
+                riqi=row['trade_date']
 
             if(index==2):
                 day3_close=row['close']
@@ -117,6 +125,7 @@ def isAn_GeShanDaNiu_model(data,stockcode):
             if(index==4):
                 day5_close=row['close']
                 day5_amount=row['amount']
+                mairuriqi=row['trade_date']
 
         if(is_day2_yangxian==1 and  day2_yangxian_shiti >1.6) :  #明显的中阳线（和近期阴线比较，阳线实体要较大）
             key_1=1
@@ -167,6 +176,9 @@ def isAn_GeShanDaNiu_model(data,stockcode):
 
                 # print path
                 writeLog_to_txt_path_getcodename(info, path, stockcode)
+
+                chenggong_code = {'stockcode': stockcode, 'mairuriqi': mairuriqi, 'zhisundian': zhisundian}
+                chengongs.append(chenggong_code)
 
 
 
@@ -219,15 +231,34 @@ def test_Befor_data():
         stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
         df = pd.read_csv(stockdata_path, index_col=0)
         data7_4 = df.iloc[22:60]  # 前10个交易日
+        data7_4 = df.iloc[22:22+35+22]  # 前1个月
         len_1=len(data7_4)
         for i in range(0, len_1 - 35 + 1):
             # print "i" + str(i )+ "j"+str(i+3)
             isAn_GeShanDaNiu_model(data7_4[i:i + 35], stock_code)
 
-
+    from jishu_stock.aShengLv.HuiCeTool import wirteList_to_txt
+    from jishu_stock.aShengLv.HuiCeTool import getList_from_txt
+    from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
+    wirteList_to_txt(chengongs)
+    # chengongs1 = getList_from_txt()
+    jisuan_all_shouyilv(chengongs, modelname, 1.05)
+    # jisuan_all_shouyilv(chengongs, modelname, 1.07)
+    jisuan_all_shouyilv(chengongs, modelname, 1.10)
+    jisuan_all_shouyilv(chengongs, modelname, 1.15)
+    jisuan_all_shouyilv(chengongs, modelname, 1.20)
+    jisuan_all_shouyilv(chengongs, modelname, 1.30)
 
 if __name__ == '__main__':
+
+    from  time import  *
+    starttime = time()
+
     localpath1 = '/jishu_stock/stockdata/data1/'
-    get_all_GeShanDaNiu(localpath1)
+    # get_all_GeShanDaNiu(localpath1)
     # test_isAn_GeShanDaNiu_laoshi()
-    # test_Befor_data()
+    test_Befor_data()
+    # jisuan_all_shouyilv(chengongs, modelname, 1.10)
+
+    endtime = time()
+    print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"

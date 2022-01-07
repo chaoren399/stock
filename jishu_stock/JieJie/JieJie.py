@@ -6,6 +6,7 @@ import exceptions
 import tushare as ts
 import pandas as pd
 from jishu_stock.Tool_jishu_stock import *
+from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
 from stock.settings import BASE_DIR
 from jishu_stock.z_tool.ShiTiDaXiao import *
 import pandas as pd
@@ -25,7 +26,8 @@ K线下跌到均线附近
 形成 [壁]
 JieJie
 '''
-
+chengongs=[]
+modelname='结界'
 def get_all_JieJie(localpath1):
     info1=  '--结界 start--   '
     writeLog_to_txt_nocode(info1)
@@ -63,9 +65,12 @@ def isAn_JieJie_model(data,stockcode):
         data1 = data1.reset_index(drop=False)  # 重新建立索引 ,
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
         # print1(data1)
+        mairuriqi = 0
+        zhisundian = 0
 
-        data2 = data[0:len_data-1]
+        data2 = data[len_data-1-4:len_data-1]
         data2 = data2.reset_index(drop=False)  # 重新建立索引 ,
+        # print1(data2)
 
         # 设置两个 key
         key_1=0; # 1下影线 穿过 75 日均线
@@ -80,6 +85,8 @@ def isAn_JieJie_model(data,stockcode):
             if(index==0):
                 day1_yingxian_xia= row['low']
                 day1_75=row['ma75']
+                mairuriqi=row['trade_date']
+                zhisundian=row['low']
                 #r如果是阳线
                 if(isYangXian(row)==1):
                     day1_yingxian_shang = row['open']
@@ -109,6 +116,7 @@ def isAn_JieJie_model(data,stockcode):
             # 3 75 日均线必须向上
             if(is_small_to_big(ma75s)==1):
                 key_3=1
+            # print1(ma75s)
 
 
         # print1(key_1)
@@ -116,6 +124,7 @@ def isAn_JieJie_model(data,stockcode):
         # print1(key_3)
         # print1(day1_yingxian_shang)
         # print1(day1_yingxian_xia)
+
 
         if(key_1==1 and  key_2 ==1 and key_3==1):
             info = ''
@@ -126,11 +135,14 @@ def isAn_JieJie_model(data,stockcode):
             path = '结界.txt'
             writeLog_to_txt_path_getcodename(info, path, stockcode)
 
+            chenggong_code={'stockcode':stockcode,'mairuriqi':mairuriqi,'zhisundian':zhisundian}
+            chengongs.append(chenggong_code)
+
 
 '''
 测试老师的案例
 '''
-def test_isAn_ShenLongBaiWei2_laoshi():
+def test_isAn_JieJie_laoshi():
     # 案例 1 捷成股份 300182
     df1 = ts.pro_bar(ts_code='300182.SZ',adj='qfq', start_date='20200206', end_date='20210517', ma=[75])
     data7_1 = df1.iloc[0:5]  # 前7行
@@ -171,15 +183,36 @@ def test_Befor_data():
         stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
         df = pd.read_csv(stockdata_path, index_col=0)
         data7_4 = df.iloc[22:29]  # 前10个交易日
+        data7_4 = df.iloc[22:22+5+22]  # 前1 个月的
         len_1=len(data7_4)
         for i in range(0, len_1 - 5 + 1):
             # print "i" + str(i )+ "j"+str(i+3)
             isAn_JieJie_model(data7_4[i:i + 5], stock_code)
 
-
+    from jishu_stock.aShengLv.HuiCeTool import wirteList_to_txt
+    from jishu_stock.aShengLv.HuiCeTool import getList_from_txt
+    from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
+    wirteList_to_txt(chengongs)
+    # chengongs1 = getList_from_txt()
+    jisuan_all_shouyilv(chengongs, modelname, 1.05)
+    jisuan_all_shouyilv(chengongs, modelname, 1.07)
+    jisuan_all_shouyilv(chengongs, modelname, 1.10)
+    jisuan_all_shouyilv(chengongs, modelname, 1.15)
+    jisuan_all_shouyilv(chengongs, modelname, 1.20)
+    jisuan_all_shouyilv(chengongs, modelname, 1.30)
 
 if __name__ == '__main__':
+
+    from  time import  *
+    starttime = time()
     localpath1 = '/jishu_stock/stockdata/data1/'
-    get_all_JieJie(localpath1)
-    # test_isAn_ShenLongBaiWei2_laoshi()
-    # test_Befor_data()
+    # get_all_JieJie(localpath1)
+
+    test_Befor_data()
+    # test_isAn_JieJie_laoshi()
+
+    jisuan_all_shouyilv(chengongs, modelname, 1.10)
+
+
+    endtime = time()
+    print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"

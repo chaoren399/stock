@@ -6,6 +6,8 @@ import exceptions
 import tushare as ts
 import pandas as pd
 from jishu_stock.Tool_jishu_stock import *
+from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
+from jishu_stock.aShengLv.huice.ShengLv_10_5 import jisuan_all_shouyilv_10_5
 from stock.settings import BASE_DIR
 from jishu_stock.z_tool.ShiTiDaXiao import *
 import pandas as pd
@@ -37,7 +39,8 @@ JianLongZaiTian1
 创建日期: 2021年11月06日
 更新日期: 还没有测出好的结果, 目前只有 2 个案例,没有办法执行
 '''
-
+chengongs=[]
+modelname='见龙在田'
 def get_all_JianLongZaiTian1(localpath1):
     info1=  '--见龙在田 start--   '
     writeLog_to_txt_nocode(info1)
@@ -74,6 +77,8 @@ def isAn_JianLongZaiTian1_model(data,stockcode):
         data1 = data1.reset_index(drop=False)  # 重新建立索引 ,
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
         # print1(data1)
+        mairuriqi=0
+        zhisundian=0
 
         data2 = data[len_data-18:len_data-3]
         data2 = data2.reset_index(drop=False)  # 重新建立索引 ,
@@ -85,6 +90,8 @@ def isAn_JianLongZaiTian1_model(data,stockcode):
         key_4=0; # 4再加一个中阳线高过所有价
 
         key_5=1; # 5 第一天阳线的最高价要搞过 近期所有收盘价和开盘价
+
+
 
 
 
@@ -119,10 +126,12 @@ def isAn_JianLongZaiTian1_model(data,stockcode):
                 day2_low=row['low']
 
                 day2_amount = row['amount']
+                zhisundian=day2_low
 
             if(index==2 and isYangXian(row)==1):
                 count=count+1
                 day3_close=row['close']
+                mairuriqi=row['trade_date']
 
         if(count==3):
 
@@ -174,19 +183,25 @@ def isAn_JianLongZaiTian1_model(data,stockcode):
 
 
 
-        if(key_1==1 and key_2 ==1 and key_3 ==1 and key_4 ==1 and key_5==1):
+        # if(key_1==1 and key_2 ==1 and key_3 ==1 and key_4 ==1 and key_5==1):
+        if(key_1==1  and key_3 ==1 and key_4 ==1 and key_5==1):
         # if( key_2 ==1 and key_3 ==1 and key_4 ==1):
             info = ''
+            if(key_2==1):
+                info = info + "--阴线缩量--"
 
-            info = info + "--阳线大小="  + str(day1_yangxian_shitidaxiao)
-            info = info + "--小阴线大小="  + str(day2_yinxian_shitidaxiao)
-            info = info + "--小阴线振幅="  + str(yinxian_zhenfu)
-            info = info + "--小阴线上下影线倍数="  + str(day2_yinxian_beishu)
-            info = info + "--见龙在田--"  + str(riqi)
+            # info = info + "--阳线大小="  + str(day1_yangxian_shitidaxiao)
+            # info = info + "--小阴线大小="  + str(day2_yinxian_shitidaxiao)
+            # info = info + "--小阴线振幅="  + str(yinxian_zhenfu)
+            # info = info + "--小阴线上下影线倍数="  + str(day2_yinxian_beishu)
+            info = info + "--见龙在田1--"  + str(riqi)
             # print info
             writeLog_to_txt(info, stockcode)
             path = '见龙在田1.txt'
             writeLog_to_txt_path_getcodename(info, path, stockcode)
+
+            chenggong_code = {'stockcode': stockcode, 'mairuriqi': mairuriqi, 'zhisundian': zhisundian}
+            chengongs.append(chenggong_code)
 
 
 '''
@@ -234,16 +249,33 @@ def test_Befor_data():
         stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
         df = pd.read_csv(stockdata_path, index_col=0)
         data7_4 = df.iloc[22:42]  # 前10个交易日
+        data7_4 = df.iloc[22:22+30+22]  # 1 月
+        # data7_4 = df.iloc[22:22+30+120]  # 半年
+        # data7_4 = df.iloc[22:22+30+250]  # 1 年
         len_1=len(data7_4)
-        for i in range(0, len_1 - 13 + 1):
+        for i in range(0, len_1 - 30 + 1):
             # print "i" + str(i )+ "j"+str(i+3)
-            isAn_JianLongZaiTian1_model(data7_4[i:i + 13], stock_code)
+            isAn_JianLongZaiTian1_model(data7_4[i:i + 30], stock_code)
 
+    # jisuan_all_shouyilv(chengongs, modelname, 1.03)
+    # jisuan_all_shouyilv(chengongs, modelname, 1.05)
+    # jisuan_all_shouyilv(chengongs, modelname, 1.07)
+    jisuan_all_shouyilv(chengongs, modelname, 1.10)
+    # jisuan_all_shouyilv(chengongs, modelname, 1.15)
+
+    jisuan_all_shouyilv_10_5(chengongs, modelname, 1.10, 0.95)
+    jisuan_all_shouyilv_10_5(chengongs, modelname, 1.05, 0.95)
 
 
 if __name__ == '__main__':
+    from  time import  *
+    starttime = time()
+
     localpath1 = '/jishu_stock/stockdata/data1/'
     # get_all_JianLongZaiTian1(localpath1)
     # test_isAn_JianLongZaiTian1_laoshi()
-    # test_Befor_data()
-    test_isAn_JianLongZaiTian1_ziji()
+    test_Befor_data()
+    # test_isAn_JianLongZaiTian1_ziji()
+
+    endtime = time()
+    print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"

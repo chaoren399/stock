@@ -7,7 +7,9 @@ import tushare as ts
 import pandas as pd
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, print1, isYangXian, is_big_to_small, \
     writeLog_to_txt_path_getcodename, isYinXian
+from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
 from jishu_stock.z_tool.ShiTiDaXiao import getShiTiDaXiao
+from jishu_stock.z_tool.is5_13_34_ShangZhang import is5_10_20_XiangShang_fankeweizhu
 from stock.settings import BASE_DIR
 
 import pandas as pd
@@ -47,7 +49,8 @@ https://www.yuque.com/chaoren399/eozlgk/ysft12/
 
 
 '''
-
+chengongs=[]
+modelname='反客为主Plus'
 def get_all_FanKeWeiZhu_Plus(localpath1):
     info1=  '--反客为主Plus找刚起来不超过3个月的 强庄主力仅用一天的强势洗盘 --   '
     writeLog_to_txt_nocode(info1)
@@ -89,11 +92,17 @@ def isAn_FanKeWeiZhu_Plus_model(data,stockcode):
         data1= data[len_data-2:len_data]
         data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
+        mairuriqi=0
+        zhisundian=0
         # print1(data1)
 
         data0= data[len_data-3:len_data-2]
         data0 = data0.reset_index(drop=True)  # 重新建立索引 ,
         # print1(data0)
+
+
+        data2 = data[len_data - 3:len_data]
+        data2 = data2.reset_index(drop=True)  # 重新建立索引 ,
 
         # 设置两个 key
         key_1=0; # 先判断 阴阳
@@ -130,6 +139,7 @@ def isAn_FanKeWeiZhu_Plus_model(data,stockcode):
                 yinxian_pct_chg= round(row['pct_chg'],2)
                 day1_high=row['high']
                 day1_low=row['low']
+                zhisundian=day1_low
             if(index==1 and isYangXian(row)==1):
                 count1 = count1 + 1
                 day2_open = row['open']
@@ -137,6 +147,7 @@ def isAn_FanKeWeiZhu_Plus_model(data,stockcode):
 
                 yangxian_pct_chg=row['pct_chg']
                 yangxian_daxiao=getShiTiDaXiao(row)
+                mairuriqi=row['trade_date']
         # format(float(a) / float(b), '.2f'))
         if(count1==2):
             key_1=1
@@ -169,20 +180,22 @@ def isAn_FanKeWeiZhu_Plus_model(data,stockcode):
         # print1(key_4)
         # print1(key_6)
         # print1(yangxian_pct_chg)
-        if(key_1==1 and  key_2 ==1 and key_3==1 and key_4==1 and key_6==1):
+        # if(key_1==1 and  key_2 ==1 and key_3==1 and key_4==1 and key_6==1):
+        if(key_1==1 and  key_2 ==1 and key_3==1 and key_4==1 ):
             # 10 周均线是不是向上
 
             if(is10_60Week_XiangShang(stockcode, riqi) ==2):
                key_5=1
 
 
-            if(key_5==1):
+            if (is5_10_20_XiangShang_fankeweizhu(data2, 0) == 1):
+            # if(key_5==1):
             # if(1):
                     info =''
-                    info=info+'--阴线涨幅='+str(yinxian_pct_chg)
-                    info=info+'--阴线振幅='+str(yinxian_zhenfu)
-                    info=info+'--阳线涨幅='+str(yangxian_pct_chg)
-                    info=info+'--阳线大小='+str(yangxian_daxiao)
+                    # info=info+'--阴线涨幅='+str(yinxian_pct_chg)
+                    # info=info+'--阴线振幅='+str(yinxian_zhenfu)
+                    # info=info+'--阳线涨幅='+str(yangxian_pct_chg)
+                    # info=info+'--阳线大小='+str(yangxian_daxiao)
                     if(key_5==1):
                         info=info+"10-60周向上"
                     else:
@@ -194,6 +207,9 @@ def isAn_FanKeWeiZhu_Plus_model(data,stockcode):
 
                     path = '反客为主Plus.txt'
                     writeLog_to_txt_path_getcodename(info, path, stockcode)
+
+                    chenggong_code={'stockcode':stockcode,'mairuriqi':mairuriqi,'zhisundian':zhisundian}
+                    chengongs.append(chenggong_code)
 
 #10 周均线是不是向上
 def is10_60Week_XiangShang(stock_code, riqi):
@@ -245,26 +261,26 @@ def is10_60Week_XiangShang(stock_code, riqi):
 def test_isAn_FanKeWeiZhu_Plus_laoshi_10yue():
 
     # 案例 1 道森股份**603800.SH
-    df1 = ts.pro_bar(ts_code='603800.SH',adj='qfq', start_date='20210206', end_date='20210729')
+    df1 = ts.pro_bar(ts_code='603800.SH',adj='qfq', start_date='20210206', end_date='20210729',ma=[5, 13, 34,10,20])
     data7_1 = df1.iloc[0:30]  # 前7行
     # print data7_1
     isAn_FanKeWeiZhu_Plus_model(data7_1,'603800.SH')
 
-    # 案例 2 中国巨石 600176
+    # 案例 2 中国巨石 600176  有死叉, 不符合太阳花 模型
 
-    df1 = ts.pro_bar(ts_code='600176.SH',adj='qfq', start_date='20210206', end_date='20210901')
+    df1 = ts.pro_bar(ts_code='600176.SH',adj='qfq', start_date='20210206', end_date='20210901',ma=[5, 13, 34,10,20])
     data7_1 = df1.iloc[0:30]  # 前7行
     # print data7_1
     isAn_FanKeWeiZhu_Plus_model(data7_1,'600176.SH')
 
     #案例 3  300061  创业板的 涨幅 振幅要乘 2 的 所以测试无效
-    df1 = ts.pro_bar(ts_code='300061.SZ',adj='qfq', start_date='20210206', end_date='20210429')
+    df1 = ts.pro_bar(ts_code='300061.SZ',adj='qfq', start_date='20210206', end_date='20210429',ma=[5, 13, 34,10,20])
     data7_1 = df1.iloc[0:30]  # 前7行
     # print data7_1
     isAn_FanKeWeiZhu_Plus_model(data7_1,'300061.SZ')
     #------
     # 案例 1 藏格控股--强势股票**000408.SZ
-    df1 = ts.pro_bar(ts_code='000408.SZ',adj='qfq', start_date='20210206', end_date='20210518')
+    df1 = ts.pro_bar(ts_code='000408.SZ',adj='qfq', start_date='20210206', end_date='20210518',ma=[5, 13, 34,10,20])
     data7_1 = df1.iloc[0:30]  # 前7行
     # print data7_1
     isAn_FanKeWeiZhu_Plus_model(data7_1,'000408.SZ')
@@ -274,32 +290,32 @@ def test_isAn_FanKeWeiZhu_Plus_laoshi_10yue():
 '''
 def test_isAn_FanKeWeiZhu_Plus_laoshi_6yue():
     # 案例 1 藏格控股--强势股票**000408.SZ
-    df1 = ts.pro_bar(ts_code='000408.SZ',adj='qfq', start_date='20210206', end_date='20210518')
+    df1 = ts.pro_bar(ts_code='000408.SZ',adj='qfq', start_date='20210206', end_date='20210518',ma=[5, 13, 34,10,20])
     data7_1 = df1.iloc[0:30]  # 前7行
     # print data7_1
     isAn_FanKeWeiZhu_Plus_model(data7_1,'000408.SZ')
 
     # 案例 2  新华锦**600735.SH
-    df1 = ts.pro_bar(ts_code='600735.SH',adj='qfq', start_date='20210206', end_date='20210510')
+    df1 = ts.pro_bar(ts_code='600735.SH',adj='qfq', start_date='20210206', end_date='20210510',ma=[5, 13, 34,10,20])
     data7_1 = df1.iloc[0:30]  # 前7行
     # print data7_1
     isAn_FanKeWeiZhu_Plus_model(data7_1,'600735.SH')
 
     # 案例 3
-    df1 = ts.pro_bar(ts_code='600735.SH',adj='qfq', start_date='20210206', end_date='20210510')
+    df1 = ts.pro_bar(ts_code='600735.SH',adj='qfq', start_date='20210206', end_date='20210510',ma=[5, 13, 34,10,20])
     data7_1 = df1.iloc[0:30]  # 前7行
     # print data7_1
     isAn_FanKeWeiZhu_Plus_model(data7_1,'600735.SH')
 
     # 案例 4 西藏珠峰--强势股票**600338.SH
 
-    df1 = ts.pro_bar(ts_code='600338.SH', adj='qfq', start_date='20210206', end_date='20210512')
+    df1 = ts.pro_bar(ts_code='600338.SH', adj='qfq', start_date='20210206', end_date='20210512',ma=[5, 13, 34,10,20])
     data7_1 = df1.iloc[0:30]  # 前7行
     # print data7_1
     isAn_FanKeWeiZhu_Plus_model(data7_1, '600338.SH')
 
     # 案例 5
-    df1 = ts.pro_bar(ts_code='300001.SZ', adj='qfq', start_date='20190206', end_date='20201223')
+    df1 = ts.pro_bar(ts_code='300001.SZ', adj='qfq', start_date='20190206', end_date='20201223',ma=[5, 13, 34,10,20])
     data7_1 = df1.iloc[0:30]  # 前7行
     # print data7_1
     isAn_FanKeWeiZhu_Plus_model(data7_1, '300001.SZ')
@@ -335,17 +351,28 @@ def test_Befor_data():
 
 
         data7_4 = df.iloc[22:27]  # 前10个交易日
+        data7_4 = df.iloc[22:22+3+22]  # 前 1 个月
+        data7_4 = df.iloc[22+22:22+22+3+22]  # 前 2 个月
         len_1=len(data7_4)
 
         for i in range(0, len_1 - 3 + 1):
             # print "i" + str(i )+ "j"+str(i+3)
             isAn_FanKeWeiZhu_Plus_model(data7_4[i:i + 3], stock_code)
-
+    jisuan_all_shouyilv(chengongs, modelname, 1.03)
+    jisuan_all_shouyilv(chengongs, modelname, 1.05)
+    jisuan_all_shouyilv(chengongs, modelname, 1.07)
+    jisuan_all_shouyilv(chengongs, modelname, 1.10)
 
 if __name__ == '__main__':
+    from  time import  *
+    starttime = time()
+
     localpath1 = '/jishu_stock/stockdata/data1/'
-    get_all_FanKeWeiZhu_Plus(localpath1)
+    # get_all_FanKeWeiZhu_Plus(localpath1)
     # test_isAn_FanKeWeiZhu_Plus_laoshi_10yue()
     # test_isAn_FanKeWeiZhu_Plus_laoshi_6yue()
-    # test_Befor_data()
+    test_Befor_data()
     # test_isAn_FanKeWeiZhu_Plus_ziji()
+
+    endtime = time()
+    print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"
