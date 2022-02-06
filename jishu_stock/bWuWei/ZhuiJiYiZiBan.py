@@ -104,6 +104,7 @@ def isAn_ZhuiJiYiZiBan_model(data,stockcode):
             for i in range(0, len_data2 - 3 + 1):
                 # print "i" + str(i )+ "j"+str(i+3)
                 has_3_yiziban = is_3_YiZiBan(data2[i:i + 3])
+                # has_3_yiziban = isZhangTingBan(data2[i:i + 3])
                 riqi1 = data2.ix[i]['trade_date']  # 阳线的日期
 
                 if(has_3_yiziban==1):
@@ -127,18 +128,21 @@ def isAn_ZhuiJiYiZiBan_model(data,stockcode):
             chengongs.append(chenggong_code)
 
 '''
-    #判断是还不是连续的 3 个一字板
+    #判断是还不是连续的 3 个一字板 
+    
+    2022年01月11日 更改为 3 个涨停板, 肉眼来判断
 '''
 def is_3_YiZiBan(data):
     data = data.reset_index(drop=True)  # 重新建立索引 ,
     #判断是还不是连续的 3 个一字板
     count=0
     for index, row in data.iterrows():
-        if(index==0 and isYiZiBan(row)==1):
+        # if(index==0 and isYiZiBan(row)==1):
+        if(index==0 and isZhangTingBan(row)==1):
             count=count+1
-        if(index==1 and isYiZiBan(row)==1):
+        if(index==1 and isZhangTingBan(row)==1):
             count=count+1
-        if(index==2 and isYiZiBan(row)==1):
+        if(index==2 and isZhangTingBan(row)==1):
             count=count+1
     if(count==3):
         return 1
@@ -216,9 +220,9 @@ if __name__ == '__main__':
 
 
     localpath1 = '/jishu_stock/stockdata/data1/'
-    # get_all_ZhuiJiYiZiBan(localpath1)
+    get_all_ZhuiJiYiZiBan(localpath1)
     # test_isAn_ZhuiJiYiZiBan_laoshi()
-    test_Befor_data()
+    # test_Befor_data()
 
 
     endtime = time()

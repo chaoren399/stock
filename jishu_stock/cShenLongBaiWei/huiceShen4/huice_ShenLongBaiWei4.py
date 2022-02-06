@@ -73,7 +73,7 @@ def get_all_ShenLongBaiWei4(localpath1):
 def  isAn_ShenLongBaiwei4_model_pro(dataframe_df,stock_code):
 
     #这次数据是最新日期为 0 倒序排列的
-
+    print dataframe_df
     len_df= len(dataframe_df)
     if(len_df>10):
         dataframe_df = dataframe_df.reset_index(drop=True)  # 重新建立索引 ,
@@ -160,11 +160,11 @@ def  isAn_ShenLongBaiwei4_model_pro(dataframe_df,stock_code):
         # key3=0
         # riqi_0 - riqi >3
         # print key_2
-        # print1(key_0)
-        # print1(key_1)
-        # print1(key_2)
-        # print1(key_3)
-        # print1(key_4)
+        print1(key_0)
+        print1(key_1)
+        print1(key_2)
+        print1(key_3)
+        print1(key_4)
 
         if(key_0==1 and key_1==1 and key_2==1 and key_3==1):
 
@@ -257,8 +257,10 @@ def test_isAn_ShenLongBaiwei4_model():
 def test_ziji():
     #002275
 
-    df4 = ts.pro_bar(ts_code='002275.SZ', start_date='20210417', end_date='20211209')
-    data7_4 = df4.iloc[0:20]  # 前10个交易日
+
+    df = ts.pro_bar(ts_code='601216.SH', start_date='20200608', end_date='20200715')
+    data7_4 = df.iloc[0:20]  # 前10个交易日
+
     isAn_ShenLongBaiwei4_model_pro(data7_4, '002275.SZ')
 '''
 回测 8 月份的数据
@@ -337,8 +339,8 @@ if __name__ == '__main__':
     # test_isAn_ShenLongBaiwei4_model()
     # test_is_max_in_20days()
     # test_Befor_data()
-    test_onestock_olddata()
-    # test_ziji()
+    # test_onestock_olddata()
+    test_ziji()
     # jisuan_all_shouyilv(chengongs, modelname, 1.05)
 
     endtime = time()

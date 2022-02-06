@@ -154,13 +154,13 @@ def isAn_DaYou_model(data,stockcode):
 
         if(key_1==1 and  key_2 ==1 and key_3==1 ):
 
-            count3=is5_13_34_XiangShang(data3,0)
+
             info=''
             # if(count3==3):
-            if(is5_10_20_XiangShang_dayou(data1, 0)==1):
+            if(1):
             # if(1):
 
-                info=info+'5-13-34 有 '+str(count3)+'个上升-'
+
 
                 if( key_4==1):
                     info=info+'实体满足小于3.5'
@@ -197,18 +197,22 @@ def test_isAn_DaYou_laoshi():
 
 
     # 案例 1
-    df1 = ts.pro_bar(ts_code='000070.SZ',adj='qfq', start_date='20210206', end_date='20210610',ma=[5, 13, 34])
+    df1 = ts.pro_bar(ts_code='000070.SZ',adj='qfq', start_date='20210206', end_date='20210610',ma=[5, 13, 34,10,20])
     data7_1 = df1.iloc[0:7]  # 前7行
     isAn_DaYou_model(data7_1,'000070.SZ')
     # 案例 2
-    df1 = ts.pro_bar(ts_code='600200.SH',adj='qfq', start_date='20200206', end_date='20210331',ma=[5, 13, 34])
+    df1 = ts.pro_bar(ts_code='600200.SH',adj='qfq', start_date='20200206', end_date='20210331',ma=[5, 13, 34,10,20])
     data7_1 = df1.iloc[0:7]  # 前7行
     isAn_DaYou_model(data7_1,'600200.SH')
     # 案例 3
-    df1 = ts.pro_bar(ts_code='300007.SZ',adj='qfq', start_date='20210206', end_date='20210531',ma=[5, 13, 34])
+    df1 = ts.pro_bar(ts_code='300007.SZ',adj='qfq', start_date='20210206', end_date='20210531',ma=[5, 13, 34,10,20])
     data7_1 = df1.iloc[0:7]  # 前7行
     isAn_DaYou_model(data7_1,'300007.SZ')
-
+    # 2022年02月04日  新增
+    # 案例 4
+    df1 = ts.pro_bar(ts_code='000014.SZ',adj='qfq', start_date='20210206', end_date='20211215',ma=[5,13, 34,10,20])
+    data7_1 = df1.iloc[0:7]  # 前7行
+    isAn_DaYou_model(data7_1,'000014.SZ')
 
 
 
@@ -292,9 +296,9 @@ if __name__ == '__main__':
 
     localpath1 = '/jishu_stock/stockdata/data1/'
     # get_all_DaYou(localpath1)
-    # test_isAn_DaYou_laoshi()#测试老师案例
+    test_isAn_DaYou_laoshi()#测试老师案例
     # test_isAn_DaYou_ziji()
-    test_Befor_data()
+    # test_Befor_data()
     # ceshi_xueyuan_anli()
 
     # jisuan_all_shouyilv(chengongs, modelname, 1.10)

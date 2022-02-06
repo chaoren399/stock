@@ -27,7 +27,7 @@ def G8M2_yijianyunxing():
 if __name__ == '__main__':
     starttime = datetime.datetime.now()
 
-    JGZS_yijianyunxing()
+    G8M2_yijianyunxing()
 
 
     endtime = datetime.datetime.now()

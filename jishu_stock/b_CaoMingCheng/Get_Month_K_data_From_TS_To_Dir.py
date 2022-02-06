@@ -7,14 +7,11 @@ import pandas as pd
 from stock.settings import BASE_DIR
 
 '''
-萧先生实战
-
-https://www.jb51.net/article/213955.htm
-日K 转换为 月K
-每月 运行一次, 本次运行时间 2021年09月11日
-2021年11月12日
+单独 拿到月线数据的换手率,
 
 https://tushare.pro/document/2?doc_id=145
+
+从 tushare 下载 月线数据, 包含
 '''
 
 def getMonth_K_Data(start_date , end_date, localpath):
@@ -74,6 +71,13 @@ def get_one_stock_monthdata():
     stockdata_path = BASE_DIR + '/jishu_stock/stockdata/MONTH_DATA_K/' + stock_code + '_Month' + ".csv"
     df.to_csv(stockdata_path)
 
+def test():
+    pro = ts.pro_api()
+
+    df = pro.monthly(ts_code='000001.SZ', start_date='20180101', end_date='20181101',
+                     fields='ts_code,trade_date,open,high,low,close,vol,amount,turnover_rate')
+    print df
+
 if __name__ == '__main__':
     import datetime
     starttime = datetime.datetime.now()
@@ -84,9 +88,10 @@ if __name__ == '__main__':
 
     today = starttime.strftime('%Y%m%d')
     # getMonth_K_Data(start_date = '20150101',end_date = today,localpath=localpath1)
-    get_one_stock_monthdata()
+    # get_one_stock_monthdata()
 
     # test_getTushare_Month_k()
+    test()
 
     endtime = datetime.datetime.now()
     print  "总共运行时长:"

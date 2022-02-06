@@ -270,6 +270,22 @@ def test_isAn_ShenLongBaiWei2_laoshi():
 
 
 
+'''
+测试老师的案例
+'''
+def test_isAn_ShenLongBaiWei2_ziji():
+
+
+    # 案例 1 002605
+
+    df = ts.pro_bar(ts_code='002605.SZ',adj='qfq', start_date='20210106', end_date='20211231')
+    df['amount_5'] = df['amount'].rolling(5).mean()
+    df['amount_10'] = df['amount'].rolling(10).mean()
+    df = df.dropna(how='any', axis=0)  # 删除 列数据为空的 的行
+    df = df.sort_values(by='trade_date', axis=0, ascending=False)  # 按照日期 从新到旧 排序
+    data7_2 = df.iloc[0:30]  # 前7行
+    isAn_ShenLongBaiWei2_model(data7_2, '002605.SZ')
+
 
 
 
@@ -317,7 +333,8 @@ if __name__ == '__main__':
     starttime = time()
     localpath1 = '/jishu_stock/stockdata/data1/'
     # test_isAn_ShenLongBaiWei2_laoshi()
-    test_Befor_data()
+    test_isAn_ShenLongBaiWei2_ziji()
+    # test_Befor_data()
 
 
     # get_all_ShenLongBaiWei2(localpath1)

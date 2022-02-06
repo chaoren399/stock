@@ -20,19 +20,32 @@ pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
 
 ''''
-阴错阳差   主力模型-上涨趋势中的中继
+底部缺口2-1
 
-https://www.yuque.com/chaoren399/eozlgk/os1gps
+https://www.yuque.com/chaoren399/eozlgk/
 
-YinCuoYangCha
+
+思路:  2-1 先 找到 4 个 K 线, 计算第一天的最大值, 其余 3 个 K 先要大于这个值, 这就是缺口
+然后判断是不是 第 3 天是阴线, 第 4 天是阳线
+
+
+底部缺口②
+价格筑底后缓慢上涨
+出现上缺口
+次日(小阴线
+之后阳线收盘价高于阴线开盘价
+买入
+以缺口下沿止损.
+
+DiBuQueKou2_1
 
 
 '''
 chengongs=[]
-modelname='阴错阳差'
+modelname='底部缺口2-1'
 
-def get_all_YinCuoYangCha(localpath1):
-    info1=  '--阴错阳差  start--   '
+def get_all_DiBuQueKou2_1(localpath1):
+    info1=  '--底部缺口2-1 start--   '
     writeLog_to_txt_nocode(info1)
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path, dtype={'code': str})
@@ -45,25 +58,25 @@ def get_all_YinCuoYangCha(localpath1):
         data6_1 = df.iloc[0:30]  # 前6行
         # data6_1 = df.iloc[20:32]  # 前6行
         len1 = len(data6_1)
-        isAn_YinCuoYangCha_model(data6_1, stock_code)
+        isAn_DiBuQueKou2_1_model(data6_1, stock_code)
 
 
 
 '''
 #2 单独一个函数 判断 6 个数据是不是符合模型
 '''
-def isAn_YinCuoYangCha_model(data,stockcode):
+def isAn_DiBuQueKou2_1_model(data,stockcode):
     if (data is None or data.empty):
         print '--df.empty--' + str(stockcode)
         return 0
     len_data = len(data)
     if (len_data == 0):
         print str(stockcode) + '--data --is null'
-    if(len_data >= 3):
+    if(len_data >= 4):
         data = data.sort_values(by='trade_date', axis=0, ascending=True)  # 按照日期 从旧到新 排序
         data = data.reset_index(drop=True)  # 重新建立索引 ,默认为false，索引列（被设置为索引的列）被还原为普通列，并将索引重置为整数索引，否则直接丢弃索引列。
 
-        data1= data[len_data-3:len_data]
+        data1= data[len_data-4:len_data]
         data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
         mairuriqi = 0
@@ -71,40 +84,52 @@ def isAn_YinCuoYangCha_model(data,stockcode):
         # print1(data1)
 
         # 设置两个 key
-        key_1=0; # 阴线开盘价 等于第 2 天阳线开盘价
-        # key_2=0;
+        key_1=0; # 缺口 前3 天的大于 第一天的最大值
+        key_2=0; #第 3 天阴线,
+        key_3=0 # 第 4 天 阳线
+        key_4=0; # 第 4 天阳线的收盘价 高于 阴线的 开盘价
 
-        count = 0
-        day1_open=0
-        day2_open=0
-        for index ,row in data1.iterrows():
-            if(index==0 and isYinXian(row)==1):
-                count=count+1
-                day1_open= row['open']
-                zhisundian=row['low']
-            if(index==1 and isYangXian(row)==1):
-                count=count+1
-                day2_open= row['open']
-            if(index==2 and isYangXian(row)==1):
-                count=count+1
+
+        count=0
+        day3_yinxian_open=0
+        day4_yang_close=0
+        for index , row in data1.iterrows():
+            daylow = row['low']
+            if(index==0):
+                day1_high= row['high']
+                zhisundian= day1_high
+            if(index==1):
+                if(daylow > day1_high):
+                    count=count+1
+            if(index==2):
+
+                if(daylow > day1_high):
+                    count=count+1
+                if (isYinXian(row) == 1):  #第 3 天阴线,
+                    key_2=1
+                    day3_yinxian_open= row['open']
+
+            if(index==3):
+                if(daylow > day1_high):
+                    count=count+1
+                if(isYangXian(row)==1): #第 4 天 阳线
+                    key_3=1
+                    day4_yang_close= row['close']
                 mairuriqi=row['trade_date']
 
         if(count==3):
-            if(day1_open == day2_open ):
-                key_1=1
-            openchazhi= round(abs( day1_open - day2_open),2)
-            # print1(openchazhi)
-            if(openchazhi ==  0.01):  # 附加的, 主要想过滤更多的股票看看是不是 洗盘阶段
-                key_1 = 1
-
+            key_1=1
+            if(key_2==1 and key_3==1):
+                if(day4_yang_close > day3_yinxian_open):
+                    key_4=1
 
         # print1(key_1)
         # print1(key_2)
-
-        if(key_1==1 ):
+        # print1(key_3)
+        if(key_1==1 and  key_2 ==1 and key_3==1 and key_4==1):
             info = ''
 
-            info = info + "--阴错阳差  成功了--"  + str(riqi)
+            info = info + "--底部缺口2-1--"  + str(riqi)
             # print info
             writeLog_to_txt(info, stockcode)
             path = modelname + '.txt'
@@ -118,36 +143,24 @@ def isAn_YinCuoYangCha_model(data,stockcode):
 '''
 测试老师的案例
 '''
-def test_isAn_YinCuoYangCha_laoshi():
-    # 案例 1 600202
-    df1 = ts.pro_bar(ts_code='600202.SH',adj='qfq', start_date='20210206', end_date='20210826')
+def test_isAn_DiBuQueKou2_1_laoshi():
+    # 案例 1 300031
+    df1 = ts.pro_bar(ts_code='300031.SZ',adj='qfq', start_date='20210206', end_date='20210901')
     data7_1 = df1.iloc[0:30]  # 前7行
-    isAn_YinCuoYangCha_model(data7_1,'600202.SH')
+    isAn_DiBuQueKou2_1_model(data7_1,'300031.SZ')
 
-    # 案例 2  000056  20211019
+    # 案例 2
 
-    df1 = ts.pro_bar(ts_code='000056.SZ',adj='qfq', start_date='20210206', end_date='20211019')
-    data7_1 = df1.iloc[0:6]  # 前7行
-    isAn_YinCuoYangCha_model(data7_1,'000056.SZ')
-
-    # 案例 3  600128
-    df1 = ts.pro_bar(ts_code='600128.SH',adj='qfq', start_date='20210206', end_date='20211201')
-    data7_1 = df1.iloc[0:30]  # 前7行
-    isAn_YinCuoYangCha_model(data7_1,'600128.SH')
-
-    # 案例 4 300497
-    df1 = ts.pro_bar(ts_code='300497.SZ', adj='qfq', start_date='20210206', end_date='20210824')
-    data7_1 = df1.iloc[0:6]  # 前7行
-    isAn_YinCuoYangCha_model(data7_1, '300497.SZ')
+    # 案例 3
 
 '''
 测试自己的案例
 '''
-def test_isAn_YinCuoYangCha_ziji():
+def test_isAn_DiBuQueKou2_1_ziji():
     #自己的 案例
     df1 = ts.pro_bar(ts_code='002507.SZ',adj='qfq', start_date='20210206', end_date='20211008')
     data7_1 = df1.iloc[0:6]  # 前7行
-    isAn_YinCuoYangCha_model(data7_1,'002507.SZ')
+    isAn_DiBuQueKou2_1_model(data7_1,'002507.SZ')
 
 '''
 回测 8 月份的数据
@@ -159,16 +172,17 @@ def test_Befor_data():
         stock_code = row['ts_code']
         stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
         df = pd.read_csv(stockdata_path, index_col=0)
-        n=3
-        data7_4 = df.iloc[22:22 + n + 5]  # 前1个月个交易日
-        data7_4 = df.iloc[22:22 + n + 22]  # 1 个月
-        # data7_4 = df.iloc[22:22+132+120]  # 半年
-        # data7_4 = df.iloc[22:22+132+250]  # 1年
 
-        len_1=len(data7_4)
+        n = 4  # 模型需要最低的数据
+        # data7_4 = df.iloc[22:22 + n + 5]  # 前1个月个交易日
+        data7_4 = df.iloc[22:22 + n + 22]  # 1 个月
+        # data7_4 = df.iloc[22:22 + n + 120]  # 半年
+        # data7_4 = df.iloc[22:22+n+250]  # 1年
+
+        len_1 = len(data7_4)
         for i in range(0, len_1 - n + 1):
             # print "i" + str(i )+ "j"+str(i+3)
-            isAn_YinCuoYangCha_model(data7_4[i:i + n], stock_code)
+            isAn_DiBuQueKou2_1_model(data7_4[i:i + n], stock_code)
 
     from jishu_stock.aShengLv.HuiCeTool import wirteList_to_txt
     from jishu_stock.aShengLv.HuiCeTool import getList_from_txt
@@ -188,9 +202,9 @@ if __name__ == '__main__':
 
 
     localpath1 = '/jishu_stock/stockdata/data1/'
-    get_all_YinCuoYangCha(localpath1)
-    # test_isAn_YinCuoYangCha_laoshi()
-    # test_Befor_data()
+    # get_all_DiBuQueKou2_1(localpath1)
+    # test_isAn_DiBuQueKou2_1_laoshi()
+    test_Befor_data()
 
 
     endtime = time()

@@ -34,8 +34,11 @@ def isZhangTingBan(row):
 判断是还不是一字板
 '''
 def isYiZiBan(row):
-    if(row['open']==row['close'] and row['high']==row['low']):
+    # if(row['open']==row['close'] and row['high']==row['low']):
+    #     return 1
+    if(row['open']==row['close'] ):
         return 1
+
     return 0
 
 if __name__ == '__main__':

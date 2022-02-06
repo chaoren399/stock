@@ -125,24 +125,26 @@ def test_Befor_data():
         stock_code = row['ts_code']
         stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
         df = pd.read_csv(stockdata_path, index_col=0)
-        data7_4 = df.iloc[22:22 + 132 + 5]  # 前1个月个交易日
-        data7_4 = df.iloc[22:22 + 132 + 22]  # 1 个月
-        # data7_4 = df.iloc[22:22+132+120]  # 半年
-        # data7_4 = df.iloc[22:22+132+250]  # 1年
 
-        len_1=len(data7_4)
-        for i in range(0, len_1 - 3 + 1):
+        n = 5  # 模型需要最低的数据
+        # data7_4 = df.iloc[22:22 + n + 5]  # 前1个月个交易日
+        data7_4 = df.iloc[22:22 + n + 22]  # 1 个月
+        # data7_4 = df.iloc[22:22 + n + 120]  # 半年
+        # data7_4 = df.iloc[22:22+n+250]  # 1年
+
+        len_1 = len(data7_4)
+        for i in range(0, len_1 - n + 1):
             # print "i" + str(i )+ "j"+str(i+3)
-            isAn_FeiLongZaiTian_model(data7_4[i:i + 3], stock_code)
+            isAn_ChengJie1_model(data7_4[i:i + n], stock_code)
 
     from jishu_stock.aShengLv.HuiCeTool import wirteList_to_txt
     from jishu_stock.aShengLv.HuiCeTool import getList_from_txt
     from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
     wirteList_to_txt(chengongs)
     # chengongs1 = getList_from_txt()
-    jisuan_all_shouyilv(chengongs, modelname, 1.03)
+    # jisuan_all_shouyilv(chengongs, modelname, 1.03)
     jisuan_all_shouyilv(chengongs, modelname, 1.05)
-    jisuan_all_shouyilv(chengongs, modelname, 1.07)
+    # jisuan_all_shouyilv(chengongs, modelname, 1.07)
     jisuan_all_shouyilv(chengongs, modelname, 1.10)
     jisuan_all_shouyilv(chengongs, modelname, 1.15)
 

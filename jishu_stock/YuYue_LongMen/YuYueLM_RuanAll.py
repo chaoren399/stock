@@ -20,7 +20,7 @@ def YuYueLM_yijianyunxing():
     localpath1 = '/jishu_stock/stockdata/data1/'
 
     # 1下载数据
-    # getAllMonth_Kdata(localpath1)
+    getAllMonth_Kdata(localpath1)
 
     #2  获取 鱼跃龙门 模型 1
     getallstockdata_isYuYueLongMen_fromLocal()

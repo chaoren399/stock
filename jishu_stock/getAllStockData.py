@@ -36,7 +36,7 @@ def getAllStockData(start_date , end_date, localpath):
             print '--df1.empty--' + str('000001.SZ')
             return 0
         if(len(df1)>0):
-            print df1[0:2]x
+            print df1[0:2]
             writeLog_to_txt_nocode(df1.ix[0]['trade_date'])
             path = '00_测试定时任务.txt'
             stockcode = '000001.SZ'
