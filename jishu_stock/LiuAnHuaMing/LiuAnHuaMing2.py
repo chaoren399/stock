@@ -235,8 +235,8 @@ if __name__ == '__main__':
 
     localpath1 = '/jishu_stock/stockdata/data1/'
     # test_isAn_LiuAnHuaMing2_laoshi()
-    # get_all_LiuAnHuaMing2(localpath1)
-    test_Befor_data()
+    get_all_LiuAnHuaMing2(localpath1)
+    # test_Befor_data()
     # jisuan_all_shouyilv(chengongs, modelname, 1.03)
 
     endtime = time()

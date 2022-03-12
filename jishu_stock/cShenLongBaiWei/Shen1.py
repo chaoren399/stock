@@ -120,10 +120,12 @@ def isAn_Shen1_model(data,stockcode):
             data2_1=data2[lendata2-2:lendata2] # 倒数 2 个数据(1)最后一个阳线放量,
             data2_1 = data2_1.reset_index(drop=True)  # 重新建立索引 ,
             # print1(data2_1)
-            data2_2=data2[lendata2-6:lendata2-1] #  (2)倒数第2到 到 6 天的数据
+
+            # 2022年03月12日  皖通科技**002331.SZ 更改为  6 变为 4 ,后期可以考虑更改
+            data2_2=data2[lendata2-4:lendata2-1] #  (2)倒数第2到 到 6 天的数据
             data2_2 = data2_2.reset_index(drop=False)  # 重新建立索引 ,
             # print data2_2
-            data2_3=data2[0:lendata2-6] #(3)倒数第6到 涨停板的数据, 不能跌破涨停板开盘价
+            data2_3=data2[0:lendata2-4] #(3)倒数第6到 涨停板的数据, 不能跌破涨停板开盘价
             data2_3 = data2_3.reset_index(drop=False)  # 重新建立索引 ,
 
             # 1, 最新一天放量突破
@@ -169,7 +171,7 @@ def isAn_Shen1_model(data,stockcode):
             print1(zhangtingban_close_price)
             print1(zhangtingban_open_price)
             print1(zhangtingban_riqi)
-            print data2_3
+            # print data2_3
         if(key_1==1 and  key_2 ==1 and key_3==1and key_4==1 and key_6==1):
         # if(key_1==1 and  key_2 ==1 and key_3==1and key_4==1):
         # if(key_1==1  and key_3==1and key_4==1):
@@ -217,6 +219,11 @@ def testlinshi():
     df1 = ts.pro_bar(ts_code='000415.SZ', adj='qfq',start_date='20190403', end_date='20210723')
     data7_1 = df1.iloc[0:62]  # 前4行
     isAn_Shen1_model(data7_1, '000415.SZ')
+
+       # -中间值=8.23--大于7个--换手率=80.3--流通市值=32.0亿--皖通科技**002331.SZ  神1 5 天改为 4天
+    df1 = ts.pro_bar(ts_code='002331.SZ', adj='qfq',start_date='20190403', end_date='20220312')
+    data7_1 = df1.iloc[0:62]  # 前4行
+    isAn_Shen1_model(data7_1, '002331.SZ')
 '''
 测试学员朋友找到的案例
 '''
@@ -272,9 +279,9 @@ if __name__ == '__main__':
     starttime = time()
 
     localpath1 = '/jishu_stock/stockdata/data1/'
-    # get_all_Shen1(localpath1)
+    get_all_Shen1(localpath1)
     # test_isAn_Shen1_laoshi()
-    test_Befor_data()
+    # test_Befor_data()
     # testlinshi()
     # test_xueyuan()
 

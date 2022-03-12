@@ -198,7 +198,7 @@ def test_Befor_data():
 
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
-    # get_all_jiusiyisheng1(localpath1)
+    get_all_jiusiyisheng1(localpath1)
     # test_isAn_jiusiyisheng1_laoshi()
     # test_isAn_jiusiyisheng1_ziji()
     # test_Befor_data()

@@ -20,22 +20,20 @@ pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
 
 ''''
-缺口理论, 凌波微步
-https://www.yuque.com/chaoren399/kb/ayfh2g
+想法: 过滤当天 创新高的个股 市值在 100 亿以下,的小盘股, 然后收阳线涨幅在 6%以上. 
+然后实盘几个案例. 加深印象.
 
-价格筑底 后  要有几天的横盘, 1-2 周吧, 3 天也可以
+https://www.yuque.com/chaoren399/eozlgk/crt2n4
 
-1, 找到 6 日的数据 
+23-（2）筹码突破-案例讲解
 
-2 ,第一天 ,第 2 天是 缺口, 且第 2 天是阳线  第 3,4,5,6 天中  最小值 大于 第一天的 最大值
-
-
+ChouMaTuPo
 '''
 chengongs=[]
-modelname='早晨之星2'
+modelname='筹码突破'
 
-def get_all_LingBoWeiBu(localpath1):
-    info1=  '--缺口理论, 凌波微步 start--   '
+def get_all_ChouMaTuPo(localpath1):
+    info1=  '--筹码突破 start--   '
     writeLog_to_txt_nocode(info1)
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path, dtype={'code': str})
@@ -48,14 +46,14 @@ def get_all_LingBoWeiBu(localpath1):
         data6_1 = df.iloc[0:30]  # 前6行
         # data6_1 = df.iloc[20:32]  # 前6行
         len1 = len(data6_1)
-        isAn_LingBoWeiBu_model(data6_1, stock_code)
+        isAn_ChouMaTuPo_model(data6_1, stock_code)
 
 
 
 '''
 #2 单独一个函数 判断 6 个数据是不是符合模型
 '''
-def isAn_LingBoWeiBu_model(data,stockcode):
+def isAn_ChouMaTuPo_model(data,stockcode):
     if (data is None or data.empty):
         print '--df.empty--' + str(stockcode)
         return 0
@@ -82,7 +80,7 @@ def isAn_LingBoWeiBu_model(data,stockcode):
         if(key_1==1 and  key_2 ==1):
             info = ''
 
-            info = info + "--缺口理论, 凌波微步  成功了--"  + str(riqi)
+            info = info + "--筹码突破  成功了--"  + str(riqi)
             # print info
             writeLog_to_txt(info, stockcode)
             path = modelname + '.txt'
@@ -96,11 +94,11 @@ def isAn_LingBoWeiBu_model(data,stockcode):
 '''
 测试老师的案例
 '''
-def test_isAn_ShenLongBaiWei2_laoshi():
+def test_isAn_ChouMaTuPo_laoshi():
     # 案例 1
     df1 = ts.pro_bar(ts_code='000408.SZ',adj='qfq', start_date='20210206', end_date='20210518')
     data7_1 = df1.iloc[0:30]  # 前7行
-    isAn_FanKeWeiZhu_model(data7_1,'002174.SZ')
+    isAn_ChouMaTuPo_model(data7_1,'002174.SZ')
 
     # 案例 2
 
@@ -109,11 +107,11 @@ def test_isAn_ShenLongBaiWei2_laoshi():
 '''
 测试自己的案例
 '''
-def test_isAn_DaYou_ziji():
+def test_isAn_ChouMaTuPo_ziji():
     #自己的 案例
     df1 = ts.pro_bar(ts_code='002507.SZ',adj='qfq', start_date='20210206', end_date='20211008')
     data7_1 = df1.iloc[0:6]  # 前7行
-    isAn_DaYou_model(data7_1,'002507.SZ')
+    isAn_ChouMaTuPo_model(data7_1,'002507.SZ')
 
 '''
 回测 8 月份的数据
@@ -135,7 +133,7 @@ def test_Befor_data():
         len_1 = len(data7_4)
         for i in range(0, len_1 - n + 1):
             # print "i" + str(i )+ "j"+str(i+3)
-            isAn_ChengJie1_model(data7_4[i:i + n], stock_code)
+            isAn_ChouMaTuPo_model(data7_4[i:i + n], stock_code)
 
     from jishu_stock.aShengLv.HuiCeTool import wirteList_to_txt
     from jishu_stock.aShengLv.HuiCeTool import getList_from_txt
@@ -155,7 +153,7 @@ if __name__ == '__main__':
 
 
     localpath1 = '/jishu_stock/stockdata/data1/'
-    get_all_LingBoWeiBu(localpath1)
+    get_all_ChouMaTuPo(localpath1)
 
 
     endtime = time()

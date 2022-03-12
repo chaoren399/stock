@@ -19,7 +19,7 @@ def getDayNumberYMD():
 
 
 '''
-得到当天的日期
+得到当天的日期 %Y-%m-%d
 '''
 def getDayNumberY_M_D():
    return datetime.datetime.now().strftime('%Y-%m-%d')

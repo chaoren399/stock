@@ -16,7 +16,11 @@ pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
 from jishu_stock.z_tool.ShiTiDaXiao import  getShiTiDaXiao
 ''''
-飞龙在天2, 超短线  第 3 天盯收盘价 高过小 K 线实体买入
+飞龙在天2, 超短线  
+
+第 3 天盯收盘价 
+
+高过小 K 线实体买入
 https://www.yuque.com/chaoren399/eozlgk/
 
 1. 涨停板

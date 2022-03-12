@@ -269,14 +269,14 @@ def test_Befor_data():
     from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
     wirteList_to_txt(chengongs)
     # chengongs1 = getList_from_txt()
-    # jisuan_all_shouyilv(chengongs, modelname, 1.03)
+    jisuan_all_shouyilv(chengongs, modelname, 1.03)
     jisuan_all_shouyilv(chengongs, modelname, 1.05)
     # jisuan_all_shouyilv(chengongs, modelname, 1.07)
     jisuan_all_shouyilv(chengongs, modelname, 1.10)
     # jisuan_all_shouyilv(chengongs, modelname, 1.15)
 
-    jisuan_all_shouyilv_10_5(chengongs, modelname, 1.10, 0.95)
-    jisuan_all_shouyilv_10_5(chengongs, modelname, 1.05, 0.95)
+    # jisuan_all_shouyilv_10_5(chengongs, modelname, 1.10, 0.95)
+    # jisuan_all_shouyilv_10_5(chengongs, modelname, 1.05, 0.95)
 
 
 if __name__ == '__main__':

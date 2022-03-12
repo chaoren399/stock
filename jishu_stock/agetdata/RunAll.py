@@ -33,18 +33,26 @@ from jishu_stock.WuLiKanHua.WuLiKanHua import isAn_WuLiKanHua_model
 from jishu_stock.YiYiDaiLao.YiYiDaiLao0 import isAn_YiYiDaiLao2_model
 from jishu_stock.YinCuoYangCha.YinCuoYangCha import isAn_YinCuoYangCha_model
 from jishu_stock.YouJingWuXian.YouJingWuXian1 import isAn_YouJingWuXian1_model
-from jishu_stock.YouJingWuXian.YouJingWuXian2 import isAn_YouJingWuXian2_1_model
+from jishu_stock.YouJingWuXian.YouJingWuXian2_1 import isAn_YouJingWuXian2_1_model
+from jishu_stock.YouJingWuXian.YouJingWuXian2_2 import isAn_YouJingWuXian2_2_model
+from jishu_stock.YouJingWuXian.YouJingWuXian2_3 import isAn_YouJingWuXian2_3_model
 from jishu_stock.agetdata.getdata_2theard import get_all_codes
 from jishu_stock.agetdata.test_ziji_model.ZTB_XiaoYinXian_TiaoKong import isAn_ZTB_YinXian_TiaoKong_model
 from jishu_stock.bCaoMaoGui.NXingFanZhuan import isAn_NXingFanZhuan_model
 from jishu_stock.bCaoMaoGui.TaXingDi import isAn_TaXingDi_model
 from jishu_stock.bCaoMaoGui.ZaoChenZhiXing import isAn_ZaoChenZhiXing_model
+from jishu_stock.bChanKe.ChouMaTuPo import isAn_ChouMaTuPo_model
+from jishu_stock.bChanKe.JianCangPoZhan import isAn_JianCangPoZhan_model
+from jishu_stock.bChanKe.quekou.DaoXingQueKou import isAn_DaoXingQueKou_model
 from jishu_stock.bWuWei.DuiLiang1 import isAn_DuiLiang1_model
 from jishu_stock.bWuWei.FanBao1 import isAn_FanBao1_model
+from jishu_stock.bWuWei.VOLYinJinYangSheng import isAn_VOLYinJinYangSheng_model
 from jishu_stock.bWuWei.Wu_LianYang import isAn_5LianYang_model
 from jishu_stock.bWuWei.XiaoYangJianCang import isAn_XiaoYangJianCang_model
 from jishu_stock.bWuWei.Yang4_1ZhangTB import isAn_4Yang1ZTB_model
 from jishu_stock.bWuWei.ZhuiJiYiZiBan import isAn_ZhuiJiYiZiBan_model
+from jishu_stock.b_xiaogujiang.DuanXianQiangZhuangGu import isAn_DuanXianQiangZhuangGu_model
+from jishu_stock.b_xiaogujiang.DuanXianQiangZhuangGu2 import isAn_DuanXianQiangZhuangGu2_model
 from jishu_stock.cShenLongBaiWei.Shen1 import isAn_Shen1_model
 from jishu_stock.cShenLongBaiWei.ShenLongBaiWei0 import isAn_ShenLongBaiWei0_model
 from jishu_stock.cShenLongBaiWei.ShenLongBaiWei2 import get_all_ShenLongBaiWei2
@@ -58,10 +66,12 @@ from jishu_stock.JiuSiYiSheng.JiuSiYiSheng2 import isAn_JiuSiYiSheng_2_model
 from jishu_stock.YiYiDaiLao.yiyidailaoAll.YiYiDaiLao0 import isAn_YiYiDaiLao_model
 from jishu_stock.YiJIanShuangDiao.YiJianShuangDiao import isAn_YiJianShuangDiao_model
 from jishu_stock.cShenLongBaiWei.Shen1_Pro import isAn_Shen1_Pro_model
+from jishu_stock.cShenLongBaiWei.ShenLongBaiWei4_1 import get_all_ShenLongBaiWei4_1
 from jishu_stock.zYouQianJun.YouQianJun120_250 import get_all_120_250
 
 
 from stock.settings import BASE_DIR
+
 
 '''
 G8M2 一键运行
@@ -98,16 +108,18 @@ def yijianyunxing():
         data6_1 = df.iloc[0:136]  # 前6行
         # data6_1 = df.iloc[2:136]  # 前6行
         task1(data6_1, stock_code)
-        task2(data6_1, stock_code)
-        task3(data6_1, stock_code)
+        # task2(data6_1, stock_code)
+        # task3(data6_1, stock_code)
+        task6(data6_1, stock_code) # 有惊无险的 专用方法
+
 
     endtime = time()
     print "task1,2,3 总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"
-    task4()
+    task4_teshu()
     csv_paixu_path1_zhuanyong()
 
     #根据股票代码 获取 当天是不是价格中枢
-    GetToday_JGZS()
+    # GetToday_JGZS()
 
 
 
@@ -116,44 +128,27 @@ def yijianyunxing():
 """
 def task1(data6_1,stock_code):
 
-    #5连阳,开盘价依次提高
-    isAn_5LianYang_model(data6_1, stock_code)
+    #岛型反转缺口  大盘 破 20 日均线才可以做
+    isAn_DaoXingQueKou_model(data6_1, stock_code)
 
-    # 4阳+ 1个涨停板
-    isAn_4Yang1ZTB_model(data6_1, stock_code)
+    #建仓破绽 洗盘模型
+    isAn_JianCangPoZhan_model(data6_1, stock_code)
 
-    #堆量 为了找小阳建仓
-    isAn_DuiLiang1_model(data6_1, stock_code)
-    #小阳建仓1
-    isAn_XiaoYangJianCang_model(data6_1, stock_code)
-    #反包 1 记住那一句话，该弱的不弱必强
-    isAn_FanBao1_model(data6_1, stock_code)
+    #筹码突破
+    isAn_ChouMaTuPo_model(data6_1, stock_code)
+    #短线强庄股2
+    isAn_DuanXianQiangZhuangGu2_model(data6_1, stock_code)
+    #短线强庄股
+    isAn_DuanXianQiangZhuangGu_model(data6_1, stock_code)
+
     #阴错阳差
     isAn_YinCuoYangCha_model(data6_1, stock_code)
-    #李栋 追击一字板
-    isAn_ZhuiJiYiZiBan_model (data6_1, stock_code)
-    #涨停板后 跳空的小阴线, 胜率 70%
-    isAn_ZTB_YinXian_TiaoKong_model(data6_1, stock_code)
-
-    #N型反转
-    isAn_NXingFanZhuan_model(data6_1, stock_code)
-    #塔形底
-    isAn_TaXingDi_model(data6_1, stock_code)
-    #早晨之星 十字星实体 小于 0.6
-    isAn_ZaoChenZhiXing_model(data6_1, stock_code)
 
     #见龙在田5
     isAn_JianLongZaiTian5_model(data6_1, stock_code)
 
-
-
     #出水芙蓉 主力底部强势洗盘
-    isAn_ChuShuiFuRong_model(data6_1, stock_code)
-    #起爆均线4 胜率 80%
-    isAn_QiBaoJunXian4_model(data6_1, stock_code)
-
-    #涨停板后 跳空的大阴线
-    isAn_ZTB_YinXian_TiaoKong_model(data6_1, stock_code)
+    # isAn_ChuShuiFuRong_model(data6_1, stock_code)
 
     # 1 V型 反转
     isAnV_model(data6_1, stock_code)
@@ -163,35 +158,18 @@ def task1(data6_1,stock_code):
     isAn_YiYiDaiLao_model(data6_1, stock_code)
 
 
-    # 死灰复燃
-    isAn_SiHuiFuRan_model(data6_1, stock_code)
-    # 柳暗花明 底部强势上涨  , 每天标记 ,后期出现 等模型可以加仓
-    isAn_LiuAnHuaMing2_model(data6_1, stock_code)
-
-    #起爆均线 1
-    isAn_QiBaoJunXian1_model(data6_1, stock_code)
-    #起爆均线 2
-    isAn_QiBaoJunXian2_model(data6_1, stock_code)
-    # 起爆均线 3
-    isAn_QiBaoJunXian3_model(data6_1, stock_code)
-
-
-    #雾里看花, 特殊的十字星 还没验证
-    isAn_WuLiKanHua_model(data6_1, stock_code)
-
-
 
     # 飞龙在天, 是萧先生 所有模型里边,挣钱最多, 最快的一个.  胜率最高的
-    isAn_FeiLongZaiTian_model(data6_1, stock_code)
-    #反客为主 上涨 一天强势洗盘 胜率 80%
-    isAn_FanKeWeiZhu_model(data6_1, stock_code)
+    # isAn_FeiLongZaiTian_model(data6_1, stock_code)
+    # 反客为主 上涨 一天强势洗盘 胜率 80%
+    # isAn_FanKeWeiZhu_model(data6_1, stock_code)
     #反客为主plus
-    isAn_FanKeWeiZhu_Plus_model(data6_1, stock_code)
+    # isAn_FanKeWeiZhu_Plus_model(data6_1, stock_code)
 
     # 一箭双雕 复盘 8 月份 94% 的成功率
     isAn_YiJianShuangDiao_model(data6_1, stock_code)
     #大有模型
-    isAn_DaYou_model(data6_1, stock_code)
+    # isAn_DaYou_model(data6_1, stock_code)
 
 
     #  神龙摆尾1 神1
@@ -206,16 +184,16 @@ def task1(data6_1,stock_code):
 
 
     #隔山打牛
-    isAn_GeShanDaNiu_model(data6_1, stock_code)
+    # isAn_GeShanDaNiu_model(data6_1, stock_code)
 
     # 熊市末期亢龙有悔 个股上的应用:
-    isAn_KangLongYouHui_GeGu_model(data6_1, stock_code)
+    # isAn_KangLongYouHui_GeGu_model(data6_1, stock_code)
 
 
 '''
 目前精力不放在这里的
 '''
-def task4(data6_1,stock_code):
+def task5(data6_1,stock_code):
 
     # 晓波 SCS1
     # isAn_SCS_1_model(data6_1, stock_code)
@@ -235,13 +213,74 @@ def task4(data6_1,stock_code):
 
     #一阳穿多均
     # isAn_YiYangChuanDuoJun_model(data6_1, stock_code)
+
+
+
+    #涨停板后 跳空的大阴线
+    # isAn_ZTB_YinXian_TiaoKong_model(data6_1, stock_code)
+
+    #李栋 追击一字板
+    # isAn_ZhuiJiYiZiBan_model (data6_1, stock_code)
+    #涨停板后 跳空的小阴线, 胜率 70%
+    # isAn_ZTB_YinXian_TiaoKong_model(data6_1, stock_code)
+
+    #N型反转
+    # isAn_NXingFanZhuan_model(data6_1, stock_code)
+    #塔形底
+    # isAn_TaXingDi_model(data6_1, stock_code)
+    #早晨之星 十字星实体 小于 0.6
+    # isAn_ZaoChenZhiXing_model(data6_1, stock_code)
+
+    #VOL阴尽阳生 , 回调低吸大法,抄底
+    # isAn_VOLYinJinYangSheng_model(data6_1, stock_code)
+
+    #5连阳,开盘价依次提高
+    # isAn_5LianYang_model(data6_1, stock_code)
+
+    # 4阳+ 1个涨停板
+    # isAn_4Yang1ZTB_model(data6_1, stock_code)
+
+    #堆量 为了找小阳建仓
+    # isAn_DuiLiang1_model(data6_1, stock_code)
+    #小阳建仓1
+    # isAn_XiaoYangJianCang_model(data6_1, stock_code)
+    #反包 1 记住那一句话，该弱的不弱必强
+    # isAn_FanBao1_model(data6_1, stock_code)
+
+
     print 'task4目前精力不放在这里的运行完了'
+
+'''
+有惊无险 4 个方法 + 起爆均线 4 个
+'''
+def task6(data6_1,stock_code):
+    #有惊无险1
+    isAn_YouJingWuXian1_model(data6_1,stock_code)
+    #有惊无险2-1
+    isAn_YouJingWuXian2_1_model(data6_1, stock_code)
+    # 有惊无险2-2
+    isAn_YouJingWuXian2_2_model(data6_1, stock_code)
+    # 有惊无险2-3
+    isAn_YouJingWuXian2_3_model(data6_1, stock_code)
+
+
+    #起爆均线 1
+    # isAn_QiBaoJunXian1_model(data6_1, stock_code)
+    #起爆均线 2
+    # isAn_QiBaoJunXian2_model(data6_1, stock_code)
+    # 起爆均线 3
+    # isAn_QiBaoJunXian3_model(data6_1, stock_code)
+    #起爆均线4 胜率 80%
+    # isAn_QiBaoJunXian4_model(data6_1, stock_code)
+
+
+
 '''
 明天要盯盘的任务
 '''
 def task2(data6_1,stock_code):
         # 峰回路转  当天条件挂单
-        isAn_FengHuiLuZhuan_model(data6_1, stock_code)
+        # isAn_FengHuiLuZhuan_model(data6_1, stock_code)
         # 飞龙在天2, 超短线  第 3 天盯收盘价 高过小 K 线实体买入
         # isAn_FeiLongZaiTian2_model(data6_1, stock_code)
         # 龙战于野2 找 2 天的数据, 第 3 天盯盘
@@ -249,30 +288,40 @@ def task2(data6_1,stock_code):
         # 见龙在田2  第 3 天买入
         # isAn_JianLongZaiTian2_model(data6_1, stock_code)
         # 以逸待劳2前 5 天满足模型, 第 6 天盯盘
-        isAn_YiYiDaiLao2_model(data6_1, stock_code)
+        # isAn_YiYiDaiLao2_model(data6_1, stock_code)
+
+        print 'task2'
 
 '''
-不经常用的
+抄底模型
 '''
 def task3(data6_1,stock_code):
 
     # 神龙摆尾0
-    isAn_ShenLongBaiWei0_model(data6_1, stock_code)
+    # isAn_ShenLongBaiWei0_model(data6_1, stock_code)
     #12 九死一生(1)底部强势反转
-    isAn_jiusiyisheng1_model(data6_1, stock_code)
+    # isAn_jiusiyisheng1_model(data6_1, stock_code)
     #13 九死一生(2)底部弱势反转
-    isAn_JiuSiYiSheng_2_model(data6_1, stock_code)
+    # isAn_JiuSiYiSheng_2_model(data6_1, stock_code)
 
-    #有惊无险 2-1 2021年10月25日 get_all_YouJingWuXian2_1(localpath1):
-    isAn_YouJingWuXian2_1_model(data6_1, stock_code)
-    #有惊无险 1 2021年10月25日
-    isAn_YouJingWuXian1_model(data6_1, stock_code)
+
+    # 死灰复燃
+    # isAn_SiHuiFuRan_model(data6_1, stock_code)
+    # 柳暗花明 底部强势上涨  , 每天标记 ,后期出现 等模型可以加仓
+    # isAn_LiuAnHuaMing2_model(data6_1, stock_code)
+
+    #雾里看花, 特殊的十字星 还没验证
+    # isAn_WuLiKanHua_model(data6_1, stock_code)
+
+
+
+    print 'task3'
 
 
 '''
-还没有改进的
+还没有改进的 不能用于循环的模型
 '''
-def task4():
+def task4_teshu():
     #0  上证 50 上证指数  大盘亢龙有悔
     get_all_KangLongYouHui_DaPan()
     # 神龙摆尾2
@@ -280,12 +329,13 @@ def task4():
 
     # 神龙摆尾4
     get_all_ShenLongBaiWei4(localpath1)  # 改起来有点复杂
+    get_all_ShenLongBaiWei4_1(localpath1)#成交量 改为 vol 之前的都是 amount 搞错了
 
     #否极泰来 97% 的超高胜率
-    get_all_PiJiTaiLai(localpath1)
+    # get_all_PiJiTaiLai(localpath1)
 
     # 9 蜻蜓点水  缺口理论
-    get_all_QingTingDianShui(localpath1)
+    # get_all_QingTingDianShui(localpath1)
     # 10 凌波微步  缺口理论  模板
     get_all_LingBoWeiBu(localpath1)
 
@@ -304,10 +354,10 @@ def task4():
     # getallstockdata_is_ShuangLong_Qushui_FromLocal(localpath1)
 
     # 14 有钱君-120-250 均线交易法
-    get_all_120_250()
+    # get_all_120_250()
 
     #通过分析每天的日志,得到 一只股票出现 2 次模型的 个股
-    get_2stockcode()
+    # get_2stockcode()
 
 
 

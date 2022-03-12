@@ -14,7 +14,7 @@ from stock.settings import BASE_DIR
 获取指数池的最近 1 年的 数据 tushare  ts.get_hist_data('600848', ktype='W') #获取周k线数据
 
 '''
-def getdatafrom_ts(index_code):
+def get_index_data_from_ts(index_code):
 
     enddate = str(datetime.date.today()) #获取股票池的最近 1 年的 数据
     # df =  ts.get_hist_data(index_code,start='2019-01-01',end=enddate)
@@ -40,7 +40,7 @@ def get_zhishuchi_alldata():
     for code in codes:
         time.sleep(2)  # //睡觉
         print code
-        x = getdatafrom_ts(code)
+        x = get_index_data_from_ts(code)
 
 
 if __name__ == '__main__':
@@ -50,11 +50,12 @@ if __name__ == '__main__':
     # get_zhishuchi_alldata()
     # getdatafrom_ts ('sz50')
 
+    get_zhishuchi_alldata()
 
-    fundpool_path = BASE_DIR + '/st_pool/get_index_data/指数池.csv'
-    df_1 = pd.read_csv(fundpool_path, dtype=object)
-    codes = df_1.iloc[:, 0].values
-    print len(codes)
+    # fundpool_path = BASE_DIR + '/st_pool/get_index_data/指数池.csv'
+    # df_1 = pd.read_csv(fundpool_path, dtype=object)
+    # codes = df_1.iloc[:, 0].values
+    # print len(codes)
 
 
 

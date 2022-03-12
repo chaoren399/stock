@@ -196,6 +196,12 @@ def testlinshi():
     df1 = ts.pro_bar(ts_code='000415.SZ', adj='qfq',start_date='20190403', end_date='20210723')
     data7_1 = df1.iloc[0:62]  # 前4行
     isAn_Shen1_Pro_model(data7_1, '000415.SZ')
+
+    # -中间值=8.23--大于7个--换手率=80.3--流通市值=32.0亿--皖通科技**002331.SZ  神1 5 天改为 4天
+    df1 = ts.pro_bar(ts_code='002331.SZ', adj='qfq',start_date='20190403', end_date='20220312')
+    data7_1 = df1.iloc[0:62]  # 前4行
+    isAn_Shen1_Pro_model(data7_1, '002331.SZ')
+
 '''
 测试学员朋友找到的案例
 '''
@@ -255,8 +261,8 @@ if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
     # get_all_Shen1(localpath1)
     # test_isAn_Shen1_laoshi()
-    test_Befor_data()
-    # testlinshi()
+    # test_Befor_data()
+    testlinshi()
     # test_xueyuan()
 
 

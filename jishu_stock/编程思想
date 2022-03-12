@@ -44,3 +44,19 @@ YiYiDaiLao3.py
 
     endtime = time()
     print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"
+
+9: 数据字典
+
+ pct_chg = row['pct_chg'] # 涨幅
+
+10:  周线数据
+
+如果本周三 通过接口获取 周线数据, 会得到本周的 K线数据吗? 不会的,只能后去上周的数据
+
+    #接口 1
+    df = ts.pro_bar(ts_code='600051.SH', adj='qfq', freq='W', start_date='20170101', end_date='20220304')
+    data7_1 = df.iloc[0:100]  # 1 年有 50 周
+
+    #接口2
+    data = pro.weekly(ts_code=stockcode,start_date='20200101', end_date=today,
+                     fields='ts_code,trade_date,open,high,low,close,vol,amount')

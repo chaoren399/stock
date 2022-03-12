@@ -2,17 +2,18 @@
 # -*- coding: utf8 -*-
 import datetime
 import time
-
 import tushare as ts
 import pandas as pd
 import os
 import logging
 
+from jishu_stock.z_tool.PyDateTool import getDayNumberYMD
 from stock.settings import BASE_DIR
+
+
 
 '''
 获取股票池的最近 1 年的 数据 tushare get_hist_data
-
 '''
 def getdatafrom_ts(stock_code):
 
@@ -29,7 +30,6 @@ def getdatafrom_ts(stock_code):
 
 '''
 获取股票池的5年历史数据  (一般情况不会用到.)
-
 '''
 
 #2021年07月16日  tushare 接口更新, 需要用token
@@ -66,12 +66,25 @@ def getdata(stock_pool_path):
         code = row['code'].zfill(6)
         df_1.iloc[index, 0] = code # 把 776转成 000776
         print code
-        stockdata = ts.get_realtime_quotes(row['code']) #df[['code','name','price','bid','ask','volume','amount','time']]
+        # stockdata = ts.get_realtime_quotes(row['code']) #df[['code','name','price','bid','ask','volume','amount','time']]
+
+        enddate = str(datetime.date.today())  # 获取股票池的最近 1 年的 数据
+
+        enddate=getDayNumberYMD()
+        # print enddate
+        print row['code']
+        pro = ts.pro_api()
+        # stockdata = pro.daily_basic(ts_code=row['code'], trade_date= enddate,
+        #                      fields='ts_code,close,trade_date,turnover_rate,volume_ratio,pe,pb')
+        stockdata = ts.pro_bar(ts_code=row['code'], adj='qfq', start_date='20220101', end_date=enddate)
+        # print stockdata
+
+
         # data3.trade - data3.lowprice
-        df_1.iloc[index, 7] = float(stockdata['price'][0])-  float(row['lowprice']) # 生成价值率 jiazhilv
-        df_1.iloc[index, 6] = stockdata['price'][0]
+        df_1.iloc[index, 7] = float(stockdata['close'][0])-  float(row['lowprice']) # 生成价值率 jiazhilv
+        df_1.iloc[index, 6] = stockdata['close'][0]
         # df_1.iloc[index, 7] = df_1['']
-        df_1.iloc[index, 8] = stockdata['date'][0]
+        df_1.iloc[index, 8] = stockdata['trade_date'][0]
     # print df_1
     return df_1
 
@@ -84,11 +97,11 @@ if __name__ == '__main__':
 #2
 
     path3 = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    stock_pool_path = path3 + '/get_stock_data/股票池.csv'
-    # agetdata(stock_pool_path)
+    stock_pool_path = path3 + '/get_stock_data_2019/股票池.csv'
+    getdata(stock_pool_path)
 
     # getdatafrom_ts('600848')
-    getdatafrom_ts('510300')
+    # getdatafrom_ts('510300')
     # getdatafrom_ts_5years('300014')
 
 

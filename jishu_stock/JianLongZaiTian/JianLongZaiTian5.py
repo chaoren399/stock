@@ -22,13 +22,15 @@ pd.set_option('display.max_rows', None)
 见龙在田3 判断 3个 K 线 , 一阳一阴一阳  跳空高开的理解 2021年12月17日
 https://www.yuque.com/chaoren399/eozlgk/hrz8ri/
 
-第一天阳线, 第 2 天 高开的小阴线, 第 3天阳线 收盘价高过 第 2 天的 开盘价,  (没有跳空)
+第一天阳线, 第 2 天 高开的小阴线, 第 3天阳线 收盘价高过 第 2 天的 开盘价,  (没有跳空) 跳空高开是指开盘价格高过昨日收盘价
 
 这 3 天的收盘价 和开盘价都在 5 日均线以上
 
+修改: 2022年02月21日 跳空高开理解更正: 今天的开盘价 大于昨天的最高价
 
 
-跳空高开是指开盘价格高过昨日收盘价
+
+
 JianLongZaiTian5
 
 创建日期: 2021年11月06日
@@ -88,6 +90,7 @@ def isAn_JianLongZaiTian5_model(data,stockcode):
 
         count=0
         day1_close=0
+        day1_high=0
         day2_open=0
         day3_close=0
 
@@ -95,6 +98,7 @@ def isAn_JianLongZaiTian5_model(data,stockcode):
             if(index==0 and isYangXian(row)==1):
                 count=count+1
                 day1_close=row['close']
+                day1_high=row['high']
                 zhisundian=row['low']
             if(index==1 and isYinXian(row)==1):
                 count=count+1
@@ -106,7 +110,8 @@ def isAn_JianLongZaiTian5_model(data,stockcode):
 
         if(count==3):
 
-            if(day2_open > day1_close ):
+            # if(day2_open > day1_close ): #修改: 2022年02月21日 跳空高开理解更正: 今天的开盘价 大于昨天的最高价
+            if(day2_open > day1_high ): #修改: 2022年02月21日 跳空高开理解更正: 今天的开盘价 大于昨天的最高价
                 key_1=1
             if(day3_close > day2_open):
                 key_2=1

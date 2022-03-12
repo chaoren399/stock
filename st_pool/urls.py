@@ -51,6 +51,8 @@ urlpatterns = [
     url(r'^down_index_data_from_tushare/$', view_index.down_index_data_from_tushare),
     url(r'^show_downindex_progress/$', view_index.show_downindex_progress),
 
+    url(r'^hs/$', view_index.get_SH_SZ_index_data_JiaoYiE), # 沪深2 市交易额 2022年02月06日 add
+
 
 
 ]

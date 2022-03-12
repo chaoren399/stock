@@ -31,7 +31,8 @@ https://www.yuque.com/chaoren399/eozlgk/vehqag
 
 思路: 
 找到 5 天数据 判断是还不是 高开低走,  中/大阴线,  
-YouJingWuXian1
+
+改进, 拿到最近 60 天数据, 后在来判断 2022年02月12日 修改
 
 '''
 chengongs=[]
@@ -64,7 +65,7 @@ def isAn_YouJingWuXian1_model(data,stockcode):
     len_data = len(data)
     if (len_data == 0):
         print str(stockcode) + '--data --is null'
-    if(len_data >= 5):
+    if(len_data >= 65):
         data = data.sort_values(by='trade_date', axis=0, ascending=True)  # 按照日期 从旧到新 排序
         data = data.reset_index(drop=True)  # 重新建立索引 ,
 
@@ -75,77 +76,74 @@ def isAn_YouJingWuXian1_model(data,stockcode):
         zhisundian = 0
 
 
-        data2= data[len_data-132: len_data]
+        data2= data[len_data-5-60:len_data-5]
         data2 = data2.reset_index(drop=True)  # 重新建立索引 ,
-        # print1(data2)
+
+
 
 
         # 设置两个 key
-        key_1=0; # 判断是不是 高开低走,
+        key_1=0; # 判断是不是 高开低走 的大阴线, 而且是近30 天期的最高点,
         key_2=0; # 中/大阴线,
         key_3=0 # 之后 3 天的最低价 不跌破 大阴线的最低价
-        key_4=0# 有惊无险与最低值相差几天
+        key_4=1# 大阴线的 开盘价  是近30 天期的最高点,
 
-        day1_close=0
-        day2_open=0
-        day2_yinxian_shiti=0
+
+        count=0
+        day0_open=0
+        day0_close=0
+        day1_yinxian_shiti=0
+        day1_yinxian_open=0
+        day1_yinxian_low=0
         day2_low=0
         day3_low=0
-        count=0 # 用来判断 第一天阳线,第 2 天阴线的计数
-        for index,row in data1.iterrows():
-            if(index==0 and isYangXian(row)==1):
-                day1_close=row['close']
-                count = count+1
-            if(index==1 and isYinXian(row)==1):
-                count = count + 1
-                day2_yinxian_shiti=getShiTiDaXiao(row)
-                day2_open=row['open']
-                if(day2_open > day1_close):# 判断是还不是 高开低走,
-                    key_1=1
-                day2_low=row['low']
-                zhisundian=day2_low
+        day4_low=0
+
+        for index, row in data1.iterrows():
+            if(index==0):
+                day0_open= row['open']
+                day0_close= row['close']
+            if(index==1 and isYinXian(row)==1 ): # 大阴线
+                day1_yinxian_open=row['open']
+                day1_yinxian_low=row['low']
+                count=count+1
+                day1_yinxian_shiti = getShiTiDaXiao(row)
+                zhisundian=row['low']
+                riqi=row['trade_date']
+            # 之后 3 天的最低价 不跌破 大阴线的最低价
             if(index==2):
-                day3_low=row['low']
+                day2_low = row['low']
             if(index==3):
-                day4_low=row['low']
+                day3_low = row['low']
             if(index==4):
-                day5_low=row['low']
+                day4_low = row['low']
                 mairuriqi=row['trade_date']
 
+        if(count==1):
+            if(day1_yinxian_open > day0_open and day1_yinxian_open > day0_close):
+                key_1=1 # 判断是不是 高开低走
+            if(day1_yinxian_shiti >1.6):
+                key_2=1 # 中/大阴线,
 
+            if(day2_low > day1_yinxian_low and day3_low > day1_yinxian_low and day4_low > day1_yinxian_low ):
 
-        if(day2_yinxian_shiti > 3.6 and count==2):#中/大阴线,
-            key_2=1
+                key_3=1 #之后 3 天的最低价 不跌破 大阴线的最低价
 
-        #之后 3 天的最低价 不跌破 大阴线的最低价
-
-        if( day3_low > day2_low and day4_low> day2_low and day5_low > day2_low):
-            key_3=1
-
-        #  约定 必须是上涨初期
-
-        if(key_1==1 and key_2==1):
-            min_row = getMin_fromDataFrame(data2)
-            if(min_row is  None):
-                print 'min_row  is None'
-            min_row_riqi =  min_row['trade_date']
-            days_chahzi=get_date1_date2_days(min_row_riqi,riqi) # 有惊无险与最低值相差几天
-            if(int(days_chahzi) < 30 and int(days_chahzi) > 3 ): # 这里改成 22天比较合适
-                key_4=1
-            # print1(days_chahzi)
-            # print1(min_row_riqi)
-            # print1(riqi)
-            # print  data2
+        for index,row in data2.iterrows():
+            day_open= row['open']
+            day_close= row['close']
+            if(day_open > day1_yinxian_open or day_close > day1_yinxian_open ):
+                key_4=0
 
         # print1(key_1)
         # print1(key_2)
         # print1(key_3)
         # print1(key_4)
         # print1(stockcode)
-        if(key_1==1 and  key_2 ==1 and key_3==1 ):
-        # if(key_1==1 and  key_2 ==1 and key_3==1 and key_4==1):
+        if(key_1==1 and  key_2 ==1 and key_3==1 and key_4==1 ):
+
             info = ''
-            info=info+'阴线大小='+str(day2_yinxian_shiti)
+            # info=info+'阴线大小='+str(day2_yinxian_shiti)
             info = info + "-----有惊无险1" + ' ----' + stockcode + ' ----' + str(riqi)
             # print info
             writeLog_to_txt(info, stockcode)
@@ -193,13 +191,14 @@ def test_Befor_data():
         stock_code = row['ts_code']
         stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
         df = pd.read_csv(stockdata_path, index_col=0)
+        n=65
         data7_4 = df.iloc[22:42]  # 前10个交易日
-        data7_4 = df.iloc[22:22+132+22]  # 个月
-        data7_4 = df.iloc[22:22+132+120]  # 前10个交易日
+        data7_4 = df.iloc[22:22+n+22]  # 1 个月
+        # data7_4 = df.iloc[22:22+n+120]  # 半年
         len_1=len(data7_4)
-        for i in range(0, len_1 - 132 + 1):
+        for i in range(0, len_1 - n + 1):
             # print "i" + str(i )+ "j"+str(i+3)
-            isAn_YouJingWuXian1_model(data7_4[i:i + 132], stock_code)
+            isAn_YouJingWuXian1_model(data7_4[i:i + n], stock_code)
 
 
     from jishu_stock.aShengLv.HuiCeTool import wirteList_to_txt
@@ -208,11 +207,9 @@ def test_Befor_data():
     wirteList_to_txt(chengongs)
     # chengongs1 = getList_from_txt()
     jisuan_all_shouyilv(chengongs, modelname, 1.05)
-    jisuan_all_shouyilv(chengongs, modelname, 1.07)
     jisuan_all_shouyilv(chengongs, modelname, 1.10)
     jisuan_all_shouyilv(chengongs, modelname, 1.15)
-    jisuan_all_shouyilv(chengongs, modelname, 1.20)
-    jisuan_all_shouyilv(chengongs, modelname, 1.30)
+
 if __name__ == '__main__':
 
     from  time import  *

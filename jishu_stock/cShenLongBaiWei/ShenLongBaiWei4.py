@@ -255,11 +255,11 @@ def test_isAn_ShenLongBaiwei4_model():
 
 
 def test_ziji():
-    #002275
+    #002275  三元股份 ,君正集团
 
-    df4 = ts.pro_bar(ts_code='002275.SZ', start_date='20210417', end_date='20211209')
+    df4 = ts.pro_bar(ts_code='600429.SH', start_date='20210417', end_date='20220207')
     data7_4 = df4.iloc[0:20]  # 前10个交易日
-    isAn_ShenLongBaiwei4_model_pro(data7_4, '002275.SZ')
+    isAn_ShenLongBaiwei4_model_pro(data7_4, '600429.SH')
 '''
 回测 8 月份的数据
 '''
@@ -332,13 +332,13 @@ if __name__ == '__main__':
     # getallstockdata_isShenLongBaiWei('20210701', '20210805')
     # anstock_isShenLongBaiWei_model('000539.SZ','20210701', '20210805')
     localpath1 = '/jishu_stock/stockdata/data1/'
-    # getallstockdata_isShenLongBaiWei4_fromLocal(localpath1)
+    # get_all_ShenLongBaiWei4(localpath1)
     # test_isAn_ShenLongBaiwei4_model_form_ts()
     # test_isAn_ShenLongBaiwei4_model()
     # test_is_max_in_20days()
     # test_Befor_data()
-    test_onestock_olddata()
-    # test_ziji()
+    # test_onestock_olddata()
+    test_ziji()
     # jisuan_all_shouyilv(chengongs, modelname, 1.05)
 
     endtime = time()

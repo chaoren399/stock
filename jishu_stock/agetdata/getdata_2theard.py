@@ -84,7 +84,7 @@ def download_onestock_token1(stock_code):
     # ts.set_token('731d2ea0abcf1f14d59ec7215d6ec520e09a439fccd2772c43a906be')
 
     df = ts.pro_bar(ts_code=stock_code, adj='qfq', start_date=start_date, end_date=end_date,
-                    ma=[5, 13, 34, 144, 169, 75,10,20,30,60])
+                    ma=[5, 13, 34, 144, 169, 75,10,20,30,60,120])
     stockdata_path = BASE_DIR + localpath
     print stock_code
 
