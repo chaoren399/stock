@@ -84,6 +84,14 @@ def isAn_LingBoWeiBu_model(data,stockcode):
         if(key_1==1 and  key_2 ==1):
             info = "-----缺口理论, 凌波微步  成功了 ----"  + str(riqi)
             # print info
+
+            # 统一 info管理 一个函数,每次都要执行, 并且信息 返回后,要添加到 info中,
+            # 方便后期修改,这样一改,所有的都可以执行了.
+            from jishu_stock.z_tool.InfoTool import manage_info
+            manage_info = manage_info(info, stockcode, riqi, '')
+            info = info + manage_info
+
+
             writeLog_to_txt(info, stockcode)
 
             path = '凌波微步.txt'

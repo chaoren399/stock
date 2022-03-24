@@ -1,8 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
-import datetime
-import exceptions
-from jishu_stock.Tool_jishu_stock import is_small_to_big, print1, isYangXian
+
+from jishu_stock.Tool_jishu_stock import  isYangXian
 
 '''
 获取 阳线 上影线的比例 ,跟实体的比值

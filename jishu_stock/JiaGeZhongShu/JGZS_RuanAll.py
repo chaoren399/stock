@@ -16,7 +16,7 @@ def JGZS_yijianyunxing():
     localpath1 = '/jishu_stock/stockdata/data1/'
     today = starttime.strftime('%Y%m%d')
     #先更新数据
-    getAll_jiagezhongshu_WeekKdata(localpath1)
+    # getAll_jiagezhongshu_WeekKdata(localpath1)
 
 
     #2 看涨做涨

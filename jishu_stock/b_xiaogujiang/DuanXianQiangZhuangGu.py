@@ -1,19 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
-import datetime
-import exceptions
 
-import tushare as ts
-import pandas as pd
-from time import *
 from jishu_stock.Tool_jishu_stock import *
-from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
-from jishu_stock.agetdata.liutongshizhi.LiuTongShiZhi import LTSZ_IS_Small_100YI
-from stock.settings import BASE_DIR
+from jishu_stock.bChanKe.Tool_LiuTongShiZhi import LTSZ_IS_Small_100YI
 from jishu_stock.z_tool.ShiTiDaXiao import *
-from jishu_stock.z_tool.isXiongShiMoQi import  hasXiongShiMoQi
 
-from jishu_stock.z_tool.isZhangTingBan import isZhangTingBan
 import pandas as pd
 # 显示所有列
 pd.set_option('display.max_columns', None)
@@ -137,16 +128,20 @@ def isAn_DuanXianQiangZhuangGu_model(data,stockcode):
         # print1(key_5)
 
         if(key_1==1 and  key_2 ==1 and key_3==1 and key_4==1 and key_5==1):
-            # 判断是不是 小于 100 亿
-            if(LTSZ_IS_Small_100YI(stockcode)==1):
-                key_6=1
-            # print key_6
-            if(key_6==1):
+
+
+            if(1):
 
                 info = ''
 
                 info = info + "--短线强庄股成功了--"  + str(riqi)
                 # print info
+                # 统一 info管理 一个函数,每次都要执行, 并且信息 返回后,要添加到 info中,
+                # 方便后期修改,这样一改,所有的都可以执行了.
+                from jishu_stock.z_tool.InfoTool import manage_info
+                manage_info = manage_info(info, stockcode, riqi, '')
+                info = info + manage_info
+
                 writeLog_to_txt(info, stockcode)
                 path = modelname + '.txt'
                 writeLog_to_txt_path_getcodename(info, path, stockcode)
@@ -201,7 +196,6 @@ def test_Befor_data():
             isAn_DuanXianQiangZhuangGu_model(data7_4[i:i + n], stock_code)
 
     from jishu_stock.aShengLv.HuiCeTool import wirteList_to_txt
-    from jishu_stock.aShengLv.HuiCeTool import getList_from_txt
     from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
     wirteList_to_txt(chengongs)
     # chengongs1 = getList_from_txt()

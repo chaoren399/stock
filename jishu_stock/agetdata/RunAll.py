@@ -4,6 +4,7 @@
 import pandas as pd
 
 from jishu_stock.ChuShuiFuRong.ChuShuiFuRong import isAn_ChuShuiFuRong_model
+from jishu_stock.DaPan.DaPan_HuanJing import get_DaPan_HuanJing
 from jishu_stock.DaYou.DaYou import isAn_DaYou_model
 from jishu_stock.FanKeWeiZhu.FanKeWeiZhu import isAn_FanKeWeiZhu_model
 from jishu_stock.FanKeWeiZhu.FanKeWeiZhu_Plus import isAn_FanKeWeiZhu_Plus_model
@@ -68,10 +69,10 @@ from jishu_stock.YiJIanShuangDiao.YiJianShuangDiao import isAn_YiJianShuangDiao_
 from jishu_stock.cShenLongBaiWei.Shen1_Pro import isAn_Shen1_Pro_model
 from jishu_stock.cShenLongBaiWei.ShenLongBaiWei4_1 import get_all_ShenLongBaiWei4_1
 from jishu_stock.zYouQianJun.YouQianJun120_250 import get_all_120_250
-
+from jishu_stock.z_tool.PyDateTool import getDayNumberYMD
 
 from stock.settings import BASE_DIR
-
+import tushare as ts
 
 '''
 G8M2 一键运行
@@ -91,6 +92,8 @@ def jiagezhognshu_yijianyunxing():
 周五数据延迟, 5:58 可以下载
 '''
 def yijianyunxing():
+    today = getDayNumberYMD()
+    print  '-----大盘环境------'+ get_DaPan_HuanJing(today)
     # 日线 操作
     localpath1 = '/jishu_stock/stockdata/data1/'
 
@@ -129,23 +132,23 @@ def yijianyunxing():
 def task1(data6_1,stock_code):
 
     #岛型反转缺口  大盘 破 20 日均线才可以做
-    isAn_DaoXingQueKou_model(data6_1, stock_code)
+    # isAn_DaoXingQueKou_model(data6_1, stock_code)
 
     #建仓破绽 洗盘模型
-    isAn_JianCangPoZhan_model(data6_1, stock_code)
+    # isAn_JianCangPoZhan_model(data6_1, stock_code)
 
     #筹码突破
     isAn_ChouMaTuPo_model(data6_1, stock_code)
     #短线强庄股2
-    isAn_DuanXianQiangZhuangGu2_model(data6_1, stock_code)
+    # isAn_DuanXianQiangZhuangGu2_model(data6_1, stock_code)
     #短线强庄股
-    isAn_DuanXianQiangZhuangGu_model(data6_1, stock_code)
+    # isAn_DuanXianQiangZhuangGu_model(data6_1, stock_code)
 
     #阴错阳差
-    isAn_YinCuoYangCha_model(data6_1, stock_code)
+    # isAn_YinCuoYangCha_model(data6_1, stock_code)
 
     #见龙在田5
-    isAn_JianLongZaiTian5_model(data6_1, stock_code)
+    # isAn_JianLongZaiTian5_model(data6_1, stock_code)
 
     #出水芙蓉 主力底部强势洗盘
     # isAn_ChuShuiFuRong_model(data6_1, stock_code)
@@ -365,9 +368,16 @@ def task4_teshu():
 if __name__ == '__main__':
     from  time import  *
     starttime = time()
+    ts.set_token('0c9acbe761612301ff2baaa9b3e8ec4053150ad1c1fb0e7b6d53bd5d')
+
     localpath1 = '/jishu_stock/stockdata/data1/'
 
+
+
+
     yijianyunxing()
+
+
 
 
 

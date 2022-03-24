@@ -60,3 +60,14 @@ YiYiDaiLao3.py
     #接口2
     data = pro.weekly(ts_code=stockcode,start_date='20200101', end_date=today,
                      fields='ts_code,trade_date,open,high,low,close,vol,amount')
+
+11. 输出汉字 编码 问题解决方案:
+
+    import json
+    chenggong_codeinfos = json.dumps(chenggong_codeinfos, encoding='UTF-8', ensure_ascii=False)
+
+
+
+12
+
+13

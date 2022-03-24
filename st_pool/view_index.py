@@ -5,6 +5,8 @@ import pandas as pd
 from django.http import JsonResponse
 from django.shortcuts import render
 
+from jishu_stock.DaPan.DaPan_HuanJing import get_DaPan_HuanJing
+from jishu_stock.z_tool.PyDateTool import getDayNumberYMD
 from st_pool.get_index_data.JiaoYiE.GetDayliyJiaoYiE import  get_HS_index_data
 from st_pool.get_index_data.getindexdata import get_index_data_from_ts
 from stock.settings import BASE_DIR
@@ -182,6 +184,8 @@ def show_downindex_progress(request):
 '''
 
 def get_SH_SZ_index_data_JiaoYiE(request):
+
+
     df = get_HS_index_data() # 下载数据
     df = df.sort_values(by='trade_date', axis=0, ascending=True)  # 按照日期 从旧到新 排序
     df = df.reset_index(drop=True)  # 重新建立索引 ,默认为false，索引列（被设置为索引的列）被还原为普通列，并将索引重置为整数索引，否则直接丢弃索引列。
@@ -198,7 +202,22 @@ def get_SH_SZ_index_data_JiaoYiE(request):
     lowprice=1
     fundinfo = {"name": '沪深2市交易额', "code": '0000001.SH'}
     maxmin = {"min": lowprice}
-    return render(request, 'indexui/HuShen_JiaoYiE_ui.html', {'fundinfo': json.dumps(fundinfo),'data':data,'maxmin':maxmin})
+
+    # 获取大盘信息:
+    dapan_huanjing= 'is null zzy'
+    try:
+        today = getDayNumberYMD()
+        dapan_info = get_DaPan_HuanJing(today)
+        dapan_huanjing = dapan_info
+    except:
+        print 'dapan_huanjing is null zzy '
+
+    # dapan_huanjing = {"dapan_huanjing": dapan_info}
+
+
+
+    return render(request, 'indexui/HuShen_JiaoYiE_ui.html', {'fundinfo': json.dumps(fundinfo),'data':data,'maxmin':maxmin,'dapan_huanjing':dapan_huanjing})
+    # return render(request, 'indexui/HuShen_JiaoYiE_ui.html', {'fundinfo': json.dumps(fundinfo),'data':data,'maxmin':maxmin})
 
 
 

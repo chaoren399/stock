@@ -1,9 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
-import datetime
+
 import tushare as ts
-import pandas as pd
-from stock.settings import BASE_DIR
+
 
 '''
 处理 K线的 函数,  有 实体大小, 上影线长度, 下影线长度
@@ -72,4 +71,5 @@ def test():
     print '  大阴线和大阳线的波动范围在3.6以上'
 
 if __name__ == '__main__':
-    test()
+    # test()
+    print 'sss'

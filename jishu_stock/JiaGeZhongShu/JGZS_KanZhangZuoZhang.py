@@ -51,16 +51,19 @@ def get_all_JGZS_KanZhangZuoZhang(localpath1):
 
         # stockdata_path = BASE_DIR + '/jishu_stock/stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
         stockdata_path = BASE_DIR + '/jishu_stock/stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
-        df = pd.read_csv(stockdata_path, index_col=0)
-        if (df.empty):
-            continue
 
-        df = df.reset_index(drop=False)  # 重新建立索引 ,
-        data6_1 = df.iloc[0:8]  # 前6行
-        # data6_1 = df.iloc[20:32]  # 前6行
-        len1 = len(data6_1)
-        isAn_JGZS_KanZhangZuoZhang_model(data6_1, stock_code)
+        try:
+            df = pd.read_csv(stockdata_path, index_col=0)
+            if (df.empty):
+                continue
 
+            df = df.reset_index(drop=False)  # 重新建立索引 ,
+            data6_1 = df.iloc[0:8]  # 前6行
+            # data6_1 = df.iloc[20:32]  # 前6行
+            len1 = len(data6_1)
+            isAn_JGZS_KanZhangZuoZhang_model(data6_1, stock_code)
+        except:
+            print  'stock_code is null = ' + str(stock_code)
 
 
 '''
@@ -187,6 +190,13 @@ def isAn_JGZS_KanZhangZuoZhang_model(data,stockcode):
             info = info + "--价格中枢看涨做涨--" + str(riqi)
             # print info
             # writeLog_to_txt(info, stockcode)
+
+            # 统一 info管理 一个函数,每次都要执行, 并且信息 返回后,要添加到 info中,
+            # 方便后期修改,这样一改,所有的都可以执行了.
+            from jishu_stock.z_tool.InfoTool import manage_info
+            manage_info = manage_info(info, stockcode, riqi, '')
+            info = info + manage_info
+
 
             path = BASE_DIR + '/jishu_stock/sJieGuo/JiaGeZhongShu/' + datetime.datetime.now().strftime(
                 '%Y-%m-%d') + '.txt'

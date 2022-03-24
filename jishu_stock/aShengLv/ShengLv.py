@@ -156,6 +156,12 @@ def jisuan_all_shouyilv(chenggongs, modelname, zhiying_shouyilv):
         stockcode=item['stockcode']
         mairuriqi=item['mairuriqi']
         zhisundian=item['zhisundian']
+        infoprint=''
+        try:
+            infoprint= item['info']
+        except:
+            print 'infoprint is  null  pleas  add  info '
+
         item1= get_shouyi(stockcode, mairuriqi, zhisundian,zhiying_shouyilv)
         if (index == 0):
             zuizao_riqi = item1['maichu_riqi']
@@ -178,7 +184,17 @@ def jisuan_all_shouyilv(chenggongs, modelname, zhiying_shouyilv):
                 maichu_jiage = item1['maichu_jiage']
                 # zijinzonge=zijinzonge+mairu_jiage  #资金总的金额
 
+                # print1(infoprint)
+                # str(DATA,'utf-8')
+                infoprint= infoprint
+
                 codeinfo= stockcode+'--mairu_riq:'+str(mairu_riqi) + '--maichu_riq:'+str(maichu_riqi)
+                codeinfo = codeinfo + '--' + infoprint
+                #
+
+
+
+
                 #计算 最早买入日期和 最后买入如期
                 if(mairu_riqi < zuizao_riqi):
                     zuizao_riqi = mairu_riqi
@@ -209,12 +225,21 @@ def jisuan_all_shouyilv(chenggongs, modelname, zhiying_shouyilv):
         else:  #item1 为空 , 为什么为空呢?
             datais_null=datais_null+1
 
-    # path = BASE_DIR + '/jishu_stock/sJieGuo/huice/' + datetime.datetime.now().strftime(
-        # '%Y-%m-%d') + '.txt'
+
     path = BASE_DIR + '/jishu_stock/sJieGuo/huice/' + modelname+ '.txt'
+
+    import json
+    chenggong_codeinfos = json.dumps(chenggong_codeinfos, encoding='UTF-8', ensure_ascii=False)
+    shibai_codeinfos = json.dumps(shibai_codeinfos, encoding='UTF-8', ensure_ascii=False)
+    weizhiyingsun_codeinfos = json.dumps(weizhiyingsun_codeinfos, encoding='UTF-8', ensure_ascii=False)
+    # print "b=", chenggong_codeinfos
 
     info1=''
     info1=info1+'chenggong_codeinfos'+ str(chenggong_codeinfos) +'\n'
+
+
+
+
     info1=info1+'shibai_codeinfos'+ str(shibai_codeinfos) +'\n'
     info1=info1+'weizhiyingsun_codeinfos'+ str(weizhiyingsun_codeinfos) +'\n'
     writeLog_to_txt_path(info1, path)

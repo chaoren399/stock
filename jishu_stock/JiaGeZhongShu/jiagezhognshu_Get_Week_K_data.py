@@ -30,20 +30,22 @@ def getAll_jiagezhongshu_WeekKdata(localpath1):
         stockdata_path1 = BASE_DIR + localpath1 + stock_code + ".csv"
         localpath2 = '/jishu_stock/stockdata/data2020/'   #
         stockdata_path2 = BASE_DIR + localpath2 + stock_code + ".csv"
+        try:
+            df1 = pd.read_csv(stockdata_path1, index_col=0)
+            df = pd.read_csv(stockdata_path2, index_col=0)
+            df = df.append(df1,sort=True)  # 合并 2020 年之前的数据
+            # print df
 
-        df1 = pd.read_csv(stockdata_path1, index_col=0)
-        df = pd.read_csv(stockdata_path2, index_col=0)
-        df = df.append(df1,sort=True)  # 合并 2020 年之前的数据
-        # print df
+            if (df.empty):
+                return
+            outpath= BASE_DIR + '/jishu_stock/stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code +'_Week'+ ".csv"
+            print str(count) + '--' + stock_code
 
-        if (df.empty):
-            return
-        outpath= BASE_DIR + '/jishu_stock/stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code +'_Week'+ ".csv"
-        print str(count) + '--' + stock_code
-
-        cover_day_K_to_Week_K(df,outpath)
-        count = count+1
-        # print count
+            cover_day_K_to_Week_K(df,outpath)
+            count = count+1
+            # print count
+        except:
+            print  'stock_code is null = ' + str(stock_code)
 
 
 def cover_day_K_to_Week_K(df,outpath):

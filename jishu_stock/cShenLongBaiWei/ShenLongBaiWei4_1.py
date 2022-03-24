@@ -177,6 +177,13 @@ def  isAn_ShenLongBaiwei4_1_model_pro(dataframe_df,stock_code):
             if(key_4==1):
 
                 info = "--------- 神4_1---------" + str(riqi)+'--'+str(riqi_0)
+
+                # 统一 info管理 一个函数,每次都要执行, 并且信息 返回后,要添加到 info中,
+                # 方便后期修改,这样一改,所有的都可以执行了.
+                from jishu_stock.z_tool.InfoTool import manage_info
+                manage_info = manage_info(info, stock_code, riqi, '')
+                info = info + manage_info
+
                 # print  info
                 writeLog_to_txt(info, stock_code)
 
@@ -339,7 +346,7 @@ if __name__ == '__main__':
     # test_is_max_in_20days()
     # test_Befor_data()
     # test_onestock_olddata()
-    test_ziji()
+    # test_ziji()
     # jisuan_all_shouyilv(chengongs, modelname, 1.05)
 
     endtime = time()

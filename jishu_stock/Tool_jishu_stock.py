@@ -3,9 +3,8 @@
 import collections
 import csv
 import datetime
-import time
 
-from jishu_stock.z_tool.MyPath import getweekdata_path_with_stockcode
+
 from jishu_stock.z_tool.PyDateTool import getMonthNumber
 from jishu_stock.z_tool.duoxiancheng.ModelCode import get_modelcode
 from stock.settings import BASE_DIR
@@ -225,6 +224,7 @@ path = BASE_DIR + '/jishu_stock/sJieGuo/'+yuefen+'月/' + datetime.datetime.now(
 path1 = BASE_DIR + '/jishu_stock/sJieGuo/'+yuefen+'月/' + datetime.datetime.now().strftime(
         '%Y-%m-%d') + '.csv'
 
+
 '''
 固定路径的写入 带 code 的, 每个输出都有的
 '''
@@ -407,14 +407,14 @@ def isShangZhang_QuShi(data):
 给出 股票代码 得到 股票的名字
 '''
 def  get_Stock_Name(code):
-    path = path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
-    # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    # path = path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
+    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path)
     for index, row in data.iterrows():
         if (row['ts_code'] == code):
-            return row['name']
+            return ','+ row['industry']+','+row['name']
 
-    return 'code_name is null-'+str(code)
+    return ',codename null-'
 
 
 

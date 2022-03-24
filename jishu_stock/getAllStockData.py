@@ -107,7 +107,7 @@ def testGet_one_stockData():
 '''
 2020 年到 2018 年的 所有 K 线数据
 '''
-def get_all_2020_data():
+def get_all_2018_2020_data():
     print '2020 年到 2018 年的 所有 K 线数据'
     localpath = '/jishu_stock/stockdata/data2020/'
     getAllStockData(start_date='20180101', end_date='20201231', localpath=localpath)
@@ -170,6 +170,16 @@ def test_002923():
         return 0
     df.to_csv(stockdata_path + stock_code + ".csv")
 
+
+'''
+测试程序 分开
+'''
+def test():
+    # test_002923()
+    # test_get_all_2015_2018_data()
+    # testGet_one_stockData()
+    return 0
+
 if __name__ == '__main__':
     from  time import  *
     starttime = time()
@@ -179,11 +189,12 @@ if __name__ == '__main__':
 
 
     get_all_2021_to_now_data(localpath)
-    # testGet_one_stockData()
-    # get_all_2020_data()
-    # get_all_2015_2018_data()
-    # test_002923()
-    # test_get_all_2015_2018_data()
+
+    # get_all_2018_2020_data()  # 下载 2018 -2020 年 的数据
+    # get_all_2015_2018_data()# 下载 2015-2018 的数据
+
+
+
 
     endtime = time()
     print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"

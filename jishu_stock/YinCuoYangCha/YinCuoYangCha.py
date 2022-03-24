@@ -106,6 +106,12 @@ def isAn_YinCuoYangCha_model(data,stockcode):
 
             info = info + "--阴错阳差  成功了--"  + str(riqi)
             # print info
+            # 统一 info管理 一个函数,每次都要执行, 并且信息 返回后,要添加到 info中,
+            # 方便后期修改,这样一改,所有的都可以执行了.
+            from jishu_stock.z_tool.InfoTool import manage_info
+            manage_info = manage_info(info, stockcode, riqi, '')
+            info = info + manage_info
+
             writeLog_to_txt(info, stockcode)
             path = modelname + '.txt'
             writeLog_to_txt_path_getcodename(info, path, stockcode)

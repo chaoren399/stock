@@ -1,17 +1,15 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
 import datetime
-import tushare as ts
-import sys
-import pandas as pd
-import time
-
-from time import sleep
-from time import *
 
 import tushare as ts
 
+from jishu_stock.z_tool.PyDateTool import getDayNumberYMD
 from stock.settings import BASE_DIR
+
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 '''
 
@@ -21,11 +19,14 @@ from stock.settings import BASE_DIR
 '''
 
 def get_HS_index_data():
-    starttime = datetime.datetime.now()
-    today = starttime.strftime('%Y%m%d')
+    ts.set_token('0c9acbe761612301ff2baaa9b3e8ec4053150ad1c1fb0e7b6d53bd5d')
+
+
+
+    # starttime = datetime.datetime.now()
+    today = getDayNumberYMD()
 
     start_date = '20210101'
-    end_date = today
 
     # 上证指数 000001.SH
     df1 = ts.pro_bar(ts_code='000001.SH', adj='qfq', asset='I', start_date=start_date, end_date=today)
@@ -52,4 +53,4 @@ def get_HS_index_data():
 
 
 if __name__ == '__main__':
-    get_HS_index_data()
+    print  get_HS_index_data()

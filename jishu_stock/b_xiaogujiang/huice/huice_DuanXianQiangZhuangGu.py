@@ -1,19 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
-import datetime
-import exceptions
 
-import tushare as ts
-import pandas as pd
-from time import *
 from jishu_stock.Tool_jishu_stock import *
-from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
-from jishu_stock.agetdata.liutongshizhi.LiuTongShiZhi import LTSZ_IS_Small_100YI
-from stock.settings import BASE_DIR
+from jishu_stock.bChanKe.Tool_LiuTongShiZhi import LTSZ_IS_Small_100YI
 from jishu_stock.z_tool.ShiTiDaXiao import *
-from jishu_stock.z_tool.isXiongShiMoQi import  hasXiongShiMoQi
 
-from jishu_stock.z_tool.isZhangTingBan import isZhangTingBan
 import pandas as pd
 # 显示所有列
 pd.set_option('display.max_columns', None)
@@ -202,7 +193,6 @@ def test_Befor_data():
             isAn_DuanXianQiangZhuangGu_model(data7_4[i:i + n], stock_code)
 
     from jishu_stock.aShengLv.HuiCeTool import wirteList_to_txt
-    from jishu_stock.aShengLv.HuiCeTool import getList_from_txt
     from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
     wirteList_to_txt(chengongs)
     # chengongs1 = getList_from_txt()

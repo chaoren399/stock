@@ -5,7 +5,7 @@ import time
 
 from stock.settings import BASE_DIR
 import pandas as pd
-import tushare as ts
+
 
 
 

@@ -1,9 +1,5 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
-import datetime
-import tushare as ts
-import pandas as pd
-from stock.settings import BASE_DIR
 
 
 '''

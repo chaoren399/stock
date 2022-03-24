@@ -70,7 +70,7 @@ def get_all_ShenLongBaiWei4(localpath1):
 
 
 
-def  isAn_ShenLongBaiwei4_model_pro(dataframe_df,stock_code):
+def  isAn_ShenLongBaiwei4_model_pro(dataframe_df, stockcode):
 
     #这次数据是最新日期为 0 倒序排列的
 
@@ -170,19 +170,28 @@ def  isAn_ShenLongBaiwei4_model_pro(dataframe_df,stock_code):
 
             #第 4 步: 判断 5% 阳线是不是近期最大值 非常关键:
 
-            if(is_max_in_20days(stock_code, riqi, close_price) ==1):
+            if(is_max_in_20days(stockcode, riqi, close_price) ==1):
                 key_4 =1
 
             if(key_4==1):
 
                 info = "--------- 神4---------" + str(riqi)+'--'+str(riqi_0)
+
+
                 # print  info
-                writeLog_to_txt(info, stock_code)
+
+                # 统一 info管理 一个函数,每次都要执行, 并且信息 返回后,要添加到 info中,
+                # 方便后期修改,这样一改,所有的都可以执行了.
+                from jishu_stock.z_tool.InfoTool import manage_info
+                manage_info = manage_info(info, stockcode, riqi, '')
+                info = info + manage_info
+
+                writeLog_to_txt(info, stockcode)
 
                 path = '神4.txt'
-                writeLog_to_txt_path_getcodename(info, path, stock_code)
+                writeLog_to_txt_path_getcodename(info, path, stockcode)
 
-                chenggong_code = {'stockcode': stock_code, 'mairuriqi': mairuriqi, 'zhisundian': zhisundian}
+                chenggong_code = {'stockcode': stockcode, 'mairuriqi': mairuriqi, 'zhisundian': zhisundian}
                 chengongs.append(chenggong_code)
 
 '''
@@ -332,13 +341,13 @@ if __name__ == '__main__':
     # getallstockdata_isShenLongBaiWei('20210701', '20210805')
     # anstock_isShenLongBaiWei_model('000539.SZ','20210701', '20210805')
     localpath1 = '/jishu_stock/stockdata/data1/'
-    # get_all_ShenLongBaiWei4(localpath1)
+    get_all_ShenLongBaiWei4(localpath1)
     # test_isAn_ShenLongBaiwei4_model_form_ts()
     # test_isAn_ShenLongBaiwei4_model()
     # test_is_max_in_20days()
     # test_Befor_data()
     # test_onestock_olddata()
-    test_ziji()
+    # test_ziji()
     # jisuan_all_shouyilv(chengongs, modelname, 1.05)
 
     endtime = time()

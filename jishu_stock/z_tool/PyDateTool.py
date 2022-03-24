@@ -1,8 +1,32 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
 # for i in range(1, 10)
-from datetime import datetime, date
+from datetime import datetime
 
+
+'''
+获取 之前 -30 , 1 ,2 3,天之前的日期
+
+之前的是 负数
+之后的是 正数
+'20210813'
+
+getRiQi_Befor_Ater_Days('20210813',-3)
+'''
+def get_date_Befor_Ater_Days(date,numdays):
+    if(date):
+        day1riqi = str(date)
+        # print day1riqi
+        import datetime
+        cur_day = datetime.datetime(int(day1riqi[0:4]), int(day1riqi[4:6]), int(day1riqi[6:8]))
+        result_date = cur_day + datetime.timedelta(days=numdays)
+        try:
+            result_date = result_date.strftime('%Y%m%d')
+        except Exception as e:
+            print e
+
+
+        return result_date
 
 
 # 处理日期 YYYYMMDD  把 2018-01-07  转化为  20180107
