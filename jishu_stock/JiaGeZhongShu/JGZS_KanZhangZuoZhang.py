@@ -182,20 +182,21 @@ def isAn_JGZS_KanZhangZuoZhang_model(data,stockcode):
         if(key_1==1 and  key_2 ==1 and key_3==1  and key_4==1 and key_5==1 and key_6==1 ):
         #     print1(shangyingxian_xiayingxian)
             info = ''
+            info = info + "--价格中枢看涨做涨--" + str(riqi)
             info=info+'价格中枢-实体一半=' +str(week1_zhongshu_shitiyiban)
             info=info+'--上影线是下的几倍=' +str(shangyingxian_xiayingxian)
             info=info+'--阳线实体=' +str(week1_shiti)
             info=info+'--实体是影线的几倍=' +str(shiti_yingxian_jibei)
 
-            info = info + "--价格中枢看涨做涨--" + str(riqi)
+
             # print info
             # writeLog_to_txt(info, stockcode)
 
-            # 统一 info管理 一个函数,每次都要执行, 并且信息 返回后,要添加到 info中,
-            # 方便后期修改,这样一改,所有的都可以执行了.
-            from jishu_stock.z_tool.InfoTool import manage_info
-            manage_info = manage_info(info, stockcode, riqi, '')
-            info = info + manage_info
+            # # 统一 info管理 一个函数,每次都要执行, 并且信息 返回后,要添加到 info中,
+            # # 方便后期修改,这样一改,所有的都可以执行了.
+            # from jishu_stock.z_tool.InfoTool import manage_info
+            # manage_info = manage_info(info, stockcode, riqi, '')
+            # info = info + manage_info
 
 
             path = BASE_DIR + '/jishu_stock/sJieGuo/JiaGeZhongShu/' + datetime.datetime.now().strftime(

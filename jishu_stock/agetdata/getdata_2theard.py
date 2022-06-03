@@ -37,7 +37,9 @@ def get_all_codes():
         path = '00_测试定时任务.txt'
         stockcode = '000001.SZ'
         info = '下载数据开始=' + str(df1.ix[0]['trade_date'])
-        writeLog_to_txt_path_getcodename(info, path, stockcode)
+
+        print  info
+        # writeLog_to_txt_path_getcodename(info, path, stockcode)
 
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
 
@@ -82,6 +84,8 @@ def get_all_codes():
 
 def download_onestock_token1(stock_code):
     # ts.set_token('731d2ea0abcf1f14d59ec7215d6ec520e09a439fccd2772c43a906be')
+    import time
+    time.sleep(0.1)
 
     df = ts.pro_bar(ts_code=stock_code, adj='qfq', start_date=start_date, end_date=end_date,
                     ma=[5, 13, 34, 144, 169, 75,10,20,30,60,120])

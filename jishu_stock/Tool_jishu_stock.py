@@ -160,33 +160,40 @@ def jiagezhongshu_writeLog_to_txt_path_getcodename(info ,path,code):
 '''
 def writeLog_to_txt_path_getcodename(info ,path,code):
     modename= path.split('.')[0]
-    info = info + '--' + get_Stock_Name(code)
+    info = info + get_Stock_Name(code)
 
-    if (isInQiangShi_gupiaochi(code) == 1):
-        info = info + '--强势股票'
-
-    if (is_XiaoShu_gupiaochi(code) == 1):
-        info = info + '--小树股票池'
-    if (is_YouQianJun_gupiaochi(code) == 1):
-        info = info + '--有钱君股票池'
+    # if (isInQiangShi_gupiaochi(code) == 1):
+    #     info = info + '--强势股票'
+    #
+    # if (is_XiaoShu_gupiaochi(code) == 1):
+    #     info = info + '--小树股票池'
+    # if (is_YouQianJun_gupiaochi(code) == 1):
+    #     info = info + '--有钱君股票池'
 
     info = info + '**' + str(code)
     # print info
 
 
     path = BASE_DIR + '/jishu_stock/sJieGuo/huizong/' + path
-    with open(path, "a") as f:
-        f.write(info + '' + "\n")
+    with open(path, "a") as f:  # 写入单独模型文件
+        f.write(info + '' + '\n')
+
     #----
 
-    with open(path1, 'a') as csvfile:
-        fieldnames = ['modecode','modename', 'info']
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        # writer = csv.DictWriter(csvfile)
-        #
-        # writer.writeheader()#将表头名称写入csv文件
+    # with open(path1, 'a') as csvfile:  # 写入每天有模型的文件
+    #     fieldnames = ['modecode','modename', 'info']
+    #     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    #     # writer = csv.DictWriter(csvfile)
+    #     #
+    #     # writer.writeheader()#将表头名称写入csv文件
+    #     modecode = get_modelcode(modename)
+    #     writer.writerow({'modecode': modecode, 'modename': modename, 'info': info})
+    with open(path1, "a") as f:  # 写入单独模型文件
         modecode = get_modelcode(modename)
-        writer.writerow({'modecode': modecode, 'modename': modename, 'info': info})
+        # info = modecode+','+modename+','+info
+        info = modecode+','+info
+
+        f.write(info + '' + '\n')
 
         # writer.writerow({modename, info})
 
@@ -200,13 +207,10 @@ def writeLog_to_txt_path_getcodename(info ,path,code):
 
 '''
 def csv_paixu_path1_zhuanyong():
-    df = pd.read_csv(path1, sep=',', header=None, engine='python')
-
-    df.columns = ['modecode', 'modename','info']
-
-    df = df.sort_values('modecode', ascending=True)
-    print df
-    df.to_csv(path1, index=False)
+    df = pd.read_csv(path1, sep=',', header=-1, engine='python',index_col=0) #header=-1时（可用于读取无表头CSV文件
+    df=df.sort_index(axis=0, ascending=True)
+    # print df
+    df.to_csv(path1, index=True)
 
 
 def writeLog_to_txt_path(info ,path):
@@ -232,15 +236,15 @@ def writeLog_to_txt(info,code):
     # path = BASE_DIR + '/jishu_stock/sJieGuo/10月/' + datetime.datetime.now().strftime(
     #     '%Y-%m-%d') + '.txt'
 
-    info = info + '--' + get_Stock_Name(code)
+    info = info  + get_Stock_Name(code)
 
-    if(isInQiangShi_gupiaochi(code)==1):
-        info = info +'--强势股票'
-
-    if(is_XiaoShu_gupiaochi(code)==1):
-        info = info + '--小树股票池'
-    if(is_YouQianJun_gupiaochi(code)==1):
-        info = info + '--有钱君股票池'
+    # if(isInQiangShi_gupiaochi(code)==1):
+    #     info = info +'--强势股票'
+    #
+    # if(is_XiaoShu_gupiaochi(code)==1):
+    #     info = info + '--小树股票池'
+    # if(is_YouQianJun_gupiaochi(code)==1):
+    #     info = info + '--有钱君股票池'
 
     info = info +'**'+str(code)
 
@@ -482,6 +486,7 @@ if __name__ == '__main__':
     # stoc_code_zhuanhuan()
     # get_houzhui_code('000661')
     # get_2stockcode()
-    # csv_paixu_path1_zhuanyong()
-    print getRiQi_Befor_Ater_Days('20210813', 3)
+    csv_paixu_path1_zhuanyong()
+    # print getRiQi_Befor_Ater_Days('20210813', 3)
+
 

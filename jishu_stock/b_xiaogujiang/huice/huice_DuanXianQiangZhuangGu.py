@@ -36,7 +36,8 @@ def get_all_DuanXianQiangZhuangGu(localpath1):
         stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
         df = pd.read_csv(stockdata_path, index_col=0)
 
-        data6_1 = df.iloc[0:30]  # 前6行
+        n=1
+        data6_1 = df.iloc[0+n:n+30]  # 前6行
         # data6_1 = df.iloc[20:32]  # 前6行
         len1 = len(data6_1)
         isAn_DuanXianQiangZhuangGu_model(data6_1, stock_code)
@@ -128,17 +129,20 @@ def isAn_DuanXianQiangZhuangGu_model(data,stockcode):
         # print1(key_5)
 
         if(key_1==1 and  key_2 ==1 and key_3==1 and key_4==1 and key_5==1):
-            # 判断是不是 小于 100 亿
 
-            if(LTSZ_IS_Small_100YI(stockcode)==1):
-                key_6=1
-            # print key_6
-            if(key_6==1):
+
+            if(1):
 
                 info = ''
 
                 info = info + "--短线强庄股成功了--"  + str(riqi)
                 # print info
+                # 统一 info管理 一个函数,每次都要执行, 并且信息 返回后,要添加到 info中,
+                # 方便后期修改,这样一改,所有的都可以执行了.
+                from jishu_stock.z_tool.InfoTool import manage_info
+                manage_info = manage_info(info, stockcode, riqi, '')
+                info = info + manage_info
+
                 writeLog_to_txt(info, stockcode)
                 path = modelname + '.txt'
                 writeLog_to_txt_path_getcodename(info, path, stockcode)

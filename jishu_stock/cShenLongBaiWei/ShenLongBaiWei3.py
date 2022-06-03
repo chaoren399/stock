@@ -155,7 +155,7 @@ def isAnShenLongBaiwei3_model(data,stockcode):
         # if (key_1 == 1  and key_2==1and key_3==1 and key_4==1 and key_5==1 ):
             info=''
             # info=info+ 'day3_shiti='+str(day3_shiti)
-            info = info+ "--神3--"+ '涨停日期:'+ str(riqi)
+            info = info+ "神3--"+ '涨停日期:'+ str(riqi)
             # print  info
 
             # 统一 info管理 一个函数,每次都要执行, 并且信息 返回后,要添加到 info中,
@@ -233,7 +233,8 @@ def test_Befor_data():
 
 
 
-        data7_4 = df.iloc[22:22+25+22]  # 前1个个月
+        # data7_4 = df.iloc[22:22+25+22]  # 前1个个月
+        data7_4 = df.iloc[0:22+25]  # 前1个个月
         # data7_4 = df.iloc[22:22+25+120]  # 半年
         # data7_4 = df.iloc[22:22+25+250]  # 前1年
         len_1=len(data7_4)
@@ -256,8 +257,8 @@ if __name__ == '__main__':
     # get_all_ShenLongBaiWei3(localpath1)
     # test_isAn_ShenLongBaiWei2_laoshi()
 
-    # test_Befor_data()
-    test_isAn_ShenLongBaiWei3_ziji()
+    test_Befor_data()
+    # test_isAn_ShenLongBaiWei3_ziji()
 
 
 

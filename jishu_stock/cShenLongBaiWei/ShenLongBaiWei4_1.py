@@ -61,6 +61,7 @@ def get_all_ShenLongBaiWei4_1(localpath1):
                 return
                 # 1 得到 第一个 7 交易日数据
                 # iloc只能用数字索引，不能用索引名
+
             data7_1 = df.iloc[0:20]  # 前10个交易日
             # data7_1 = df.iloc[40:60]  # 前10个交易日
             # data7_1 = df.iloc[1:21]  # 前10个交易日
@@ -176,7 +177,7 @@ def  isAn_ShenLongBaiwei4_1_model_pro(dataframe_df,stock_code):
 
             if(key_4==1):
 
-                info = "--------- 神4_1---------" + str(riqi)+'--'+str(riqi_0)
+                info = " 神4_1--" + str(riqi)+'--'+str(riqi_0)
 
                 # 统一 info管理 一个函数,每次都要执行, 并且信息 返回后,要添加到 info中,
                 # 方便后期修改,这样一改,所有的都可以执行了.
@@ -337,10 +338,10 @@ if __name__ == '__main__':
     from  time import  *
     starttime = time()
 
-    # getallstockdata_isShenLongBaiWei('20210701', '20210805')
-    # anstock_isShenLongBaiWei_model('000539.SZ','20210701', '20210805')
+
     localpath1 = '/jishu_stock/stockdata/data1/'
     get_all_ShenLongBaiWei4_1(localpath1)
+
     # test_isAn_ShenLongBaiwei4_1_model_form_ts()
     # test_isAn_ShenLongBaiwei4_1_model()
     # test_is_max_in_20days()

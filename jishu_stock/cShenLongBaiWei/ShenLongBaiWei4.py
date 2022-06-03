@@ -175,7 +175,7 @@ def  isAn_ShenLongBaiwei4_model_pro(dataframe_df, stockcode):
 
             if(key_4==1):
 
-                info = "--------- 神4---------" + str(riqi)+'--'+str(riqi_0)
+                info = " 神4--" + str(riqi)+'--'+str(riqi_0)
 
 
                 # print  info

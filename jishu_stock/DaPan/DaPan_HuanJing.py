@@ -94,25 +94,51 @@ def get_DaPan_HuanJing(enddate):
 
 
     juti_info = ''
-    if(key_1 ==1):
+    if(key_1 !=0):
         juti_info = juti_info+ '指数 站上 120日 均线 '
-    if(key_2==1):
-        juti_info = juti_info + '指数 站上 站上 20日 均线 '
-    if(key_3_1==1):
-        juti_info = juti_info + '指数 4 天成交量 都在 120vol 以上 '
-    if(key_3_2==1):
-        juti_info = juti_info + '指数 4 天内有 2-3 天 成交量 在 120vol 以上 '
-    if(key_3_3==1):
-        juti_info = juti_info + '指数 4 天内 最多只有 1 天 成交量 在 120vol 以上 '
+    if(key_2 !=0):
+        juti_info = juti_info + '指数站上20日均线 '
+    if(key_3_1 !=0):
+        juti_info = juti_info + '指数4天成交量都在120vol以上 '
+    if(key_3_2 !=0):
+        juti_info = juti_info + '指数4天内有2-3天成交量在120vol以上 '
+    if(key_3_3 !=0):
+        juti_info = juti_info + '指数4天内最多只有1天成交量在120vol以上 '
+    if(key_3_1 ==0 and key_3_2==0 and key_3_3 == 0):
+        juti_info = juti_info + '---成交量不满足要求 '
 
-    info = info + juti_info
+    info = info +'------'+ juti_info +'---' + str(enddate)
 
-    print info
+    # print info
     return info
+
+
+def test():
+    # 上证指数 000001.SH 510300
+    data = ts.pro_bar(ts_code='510300.SH', adj='qfq',asset='I', start_date='20180101', end_date='20220120',
+                    ma=[ 20, 120])
+
+    #沪深 300 指数 - 399300
+
+    # 中证 800 - 000906
+    pro = ts.pro_api()
+    df = pro.index_daily(ts_code='399906.SZ')
+    df = df.iloc[0:4]  # 前4行
+
+    # 中证 800 - 000906
+    pro = ts.pro_api()
+    df1 = pro.index_daily(ts_code='000906.SH')
+    df1 = df1.iloc[0:4]  # 前4行
+
+    print df
+    print df1
+
 
 
 
 if __name__ == '__main__':
 
+
     today = getDayNumberYMD()
-    get_DaPan_HuanJing(today)
+    print get_DaPan_HuanJing(today)
+    # test()

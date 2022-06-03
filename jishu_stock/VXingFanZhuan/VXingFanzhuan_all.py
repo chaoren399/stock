@@ -160,7 +160,7 @@ def isXiaDieZhangting(stock_code,date):
 
     # print((cur_day-min_day).days)  # 1
     if ((cur_day-min_day).days < 6):
-        info =  "--------- V型反转---------" + str(date)
+        info =  " V型反转--" + str(date)
         # print info
         # 统一 info管理 一个函数,每次都要执行, 并且信息 返回后,要添加到 info中,
         # 方便后期修改,这样一改,所有的都可以执行了.

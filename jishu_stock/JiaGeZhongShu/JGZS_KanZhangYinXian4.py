@@ -122,7 +122,8 @@ def isAn_JGZS_KanZhangYinXian4_model(data,stockcode):
             week1_xiayingxian= (week1_close - week1_low) +0.0001
 
             week1_shitidaxiao=week1_open-week1_close
-            week1_shiti_xiayingxian_beishu=week1_shitidaxiao / week1_xiayingxian
+            # week1_shiti_xiayingxian_beishu=week1_shitidaxiao / week1_xiayingxian
+            week1_shiti_xiayingxian_beishu = round(week1_shitidaxiao / week1_xiayingxian, 2)
 
             if(week1_shiti_xiayingxian_beishu >1.5):  #两个案例4.4,3.25 1.8
                 key_2=1
@@ -162,19 +163,19 @@ def isAn_JGZS_KanZhangYinXian4_model(data,stockcode):
 
         if(key_1==1 and  key_2 ==1 and key_3==1 and key_4==1 and key_5==1):
             info = ''
-
+            info = info + "--价格中枢看涨阴线4--" + str(riqi)
             info=info+'上影线最好为0='+str(week1_shangyingxian)
             info=info+'--实体下影线倍数='+str(week1_shiti_xiayingxian_beishu)
             info=info+'--阴线实体='+str(week1_shiti)
             info=info+'--阳线实体='+str(week2_shiti)
 
-            info = info + "--价格中枢看涨阴线4--"  + str(riqi)
 
-            # 统一 info管理 一个函数,每次都要执行, 并且信息 返回后,要添加到 info中,
-            # 方便后期修改,这样一改,所有的都可以执行了.
-            from jishu_stock.z_tool.InfoTool import manage_info
-            manage_info = manage_info(info, stockcode, riqi, '')
-            info = info + manage_info
+
+            # # 统一 info管理 一个函数,每次都要执行, 并且信息 返回后,要添加到 info中,
+            # # 方便后期修改,这样一改,所有的都可以执行了.
+            # from jishu_stock.z_tool.InfoTool import manage_info
+            # manage_info = manage_info(info, stockcode, riqi, '')
+            # info = info + manage_info
 
 
             path = BASE_DIR + '/jishu_stock/sJieGuo/JiaGeZhongShu/' + datetime.datetime.now().strftime(
@@ -261,8 +262,8 @@ def test_Befor_data():
 
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
-    # get_all_JGZS_KanZhangYinXian4(localpath1)
+    get_all_JGZS_KanZhangYinXian4(localpath1)
     # test_isAn_JGZS_KanZhangYinXian4_laoshi()  #
     # test_ziaxian_zhuan_Week()
     # test_isAn_JGZS_KanZhangYinXian4_ziji()
-    test_Befor_data()
+    # test_Befor_data()

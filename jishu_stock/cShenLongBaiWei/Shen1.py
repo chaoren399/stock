@@ -177,7 +177,7 @@ def isAn_Shen1_model(data,stockcode):
         # if(key_1==1  and key_3==1and key_4==1):
             info = ''
 
-            info = info + "--神 1 成功了--"  +"涨停板日期:"+str(zhangtingban_riqi)+'--'+str(riqi)
+            info = info + "神 1--"  +"涨停板日期:"+str(zhangtingban_riqi)+'--'+str(riqi)
             # print info
             # 统一 info管理 一个函数,每次都要执行, 并且信息 返回后,要添加到 info中,
             # 方便后期修改,这样一改,所有的都可以执行了.

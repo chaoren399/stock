@@ -243,8 +243,8 @@ def test_Befor_data():
         df = pd.read_csv(stockdata_path, index_col=0)
 
         n=6
-        data7_4 = df.iloc[22:42]  # 前10个交易日
-        data7_4 = df.iloc[22:22+n+22]  # 前1个个月
+        data7_4 = df.iloc[0:42]  # 前10个交易日
+        # data7_4 = df.iloc[22:22+n+22]  # 前1个个月
 
         # data7_4 = df.iloc[22*3:22*3+62+22]  # 前2个月
         # data7_4 = df.iloc[22:22+62+120]  # 半年
@@ -267,8 +267,8 @@ if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
     # get_all_Shen1(localpath1)
     # test_isAn_Shen1_laoshi()
-    # test_Befor_data()
-    testlinshi()
+    test_Befor_data()
+    # testlinshi()
     # test_xueyuan()
 
 

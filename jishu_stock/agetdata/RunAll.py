@@ -45,6 +45,7 @@ from jishu_stock.bCaoMaoGui.ZaoChenZhiXing import isAn_ZaoChenZhiXing_model
 from jishu_stock.bChanKe.ChouMaTuPo import isAn_ChouMaTuPo_model
 from jishu_stock.bChanKe.JianCangPoZhan import isAn_JianCangPoZhan_model
 from jishu_stock.bChanKe.quekou.DaoXingQueKou import isAn_DaoXingQueKou_model
+from jishu_stock.bRuoFeng.HaiDiLao import isAn_HaiDiLao_model
 from jishu_stock.bWuWei.DuiLiang1 import isAn_DuiLiang1_model
 from jishu_stock.bWuWei.FanBao1 import isAn_FanBao1_model
 from jishu_stock.bWuWei.VOLYinJinYangSheng import isAn_VOLYinJinYangSheng_model
@@ -113,7 +114,7 @@ def yijianyunxing():
         task1(data6_1, stock_code)
         # task2(data6_1, stock_code)
         # task3(data6_1, stock_code)
-        task6(data6_1, stock_code) # 有惊无险的 专用方法
+        # task6(data6_1, stock_code) # 有惊无险的 专用方法
 
 
     endtime = time()
@@ -131,6 +132,9 @@ def yijianyunxing():
 """
 def task1(data6_1,stock_code):
 
+    #海底捞
+    isAn_HaiDiLao_model(data6_1,stock_code)
+
     #岛型反转缺口  大盘 破 20 日均线才可以做
     # isAn_DaoXingQueKou_model(data6_1, stock_code)
 
@@ -142,7 +146,7 @@ def task1(data6_1,stock_code):
     #短线强庄股2
     # isAn_DuanXianQiangZhuangGu2_model(data6_1, stock_code)
     #短线强庄股
-    # isAn_DuanXianQiangZhuangGu_model(data6_1, stock_code)
+    isAn_DuanXianQiangZhuangGu_model(data6_1, stock_code)
 
     #阴错阳差
     # isAn_YinCuoYangCha_model(data6_1, stock_code)
@@ -158,7 +162,7 @@ def task1(data6_1,stock_code):
     # 8 龙战于野
     isAn_LongZhanYuYe_model(data6_1, stock_code)
     #以逸待劳
-    isAn_YiYiDaiLao_model(data6_1, stock_code)
+    # isAn_YiYiDaiLao_model(data6_1, stock_code)
 
 
 
@@ -170,7 +174,7 @@ def task1(data6_1,stock_code):
     # isAn_FanKeWeiZhu_Plus_model(data6_1, stock_code)
 
     # 一箭双雕 复盘 8 月份 94% 的成功率
-    isAn_YiJianShuangDiao_model(data6_1, stock_code)
+    # isAn_YiJianShuangDiao_model(data6_1, stock_code)
     #大有模型
     # isAn_DaYou_model(data6_1, stock_code)
 
@@ -330,7 +334,7 @@ def task4_teshu():
     # 神龙摆尾2
     get_all_ShenLongBaiWei2(localpath1)  # 改起来有点复杂
 
-    # 神龙摆尾4
+    # 神龙摆尾4 神4
     get_all_ShenLongBaiWei4(localpath1)  # 改起来有点复杂
     get_all_ShenLongBaiWei4_1(localpath1)#成交量 改为 vol 之前的都是 amount 搞错了
 
@@ -340,7 +344,7 @@ def task4_teshu():
     # 9 蜻蜓点水  缺口理论
     # get_all_QingTingDianShui(localpath1)
     # 10 凌波微步  缺口理论  模板
-    get_all_LingBoWeiBu(localpath1)
+    # get_all_LingBoWeiBu(localpath1)
 
 
     # 15 葛式八法

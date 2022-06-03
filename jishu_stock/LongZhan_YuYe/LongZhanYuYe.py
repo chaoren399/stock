@@ -121,11 +121,11 @@ def isAn_LongZhanYuYe_model(data,stockcode):
         # if(key_1==1 and  key_2 ==1and key_3==1 and key_4==1):
         if(key_1==1 and  key_2 ==1and key_3==1):
             info = ''
-            info= info+ '阴线实体大于3.6最好:'+str(day2_shiti)
+            info1= info+ '阴线实体大于3.6最好:'+str(day2_shiti)
             if(key_4==0):
-                info= info+ '--前边有涨停板--'
+                info1= info+ '--前边有涨停板--'
 
-            info = info + "-----龙战于野----"  + str(riqi)
+            info = info + "龙战于野--"  + str(riqi)
             # print info
 
             # 统一 info管理 一个函数,每次都要执行, 并且信息 返回后,要添加到 info中,

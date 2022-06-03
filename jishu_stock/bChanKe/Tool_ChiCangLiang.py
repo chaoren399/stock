@@ -25,6 +25,8 @@ a1 在 x2 内, count= count +1  ...  如果 count >=7 ,满足条件 退出 . 否
 
 '''
 def isAn_ChiCangLiang_BiaoZhun( stockcode,enddate):
+    import time
+    time.sleep(0.05)  # //睡觉
     # 2. 获取周线   我是希望通过 ts 在线获取, 这样比较方便,
     import tushare as ts
     pro = ts.pro_api()
@@ -113,7 +115,8 @@ a1 在 x2 内, count= count +1  ...  如果 count >=7 ,满足条件 退出 . 否
                         if(count > count_max):
                             count_max =count
                             zhongjianzhi_max=zhongjianzhi
-                        if (count >= 6):  # 6个满足 神1 中路股份**600818.SH
+                        # if (count >= 6):  # 6个满足 神1 中路股份**600818.SH
+                        if (count >= 7):  # 严格按照老师的条件 7 周 不然每天出来很多票
                             key_1 = 1
 
 
@@ -121,16 +124,16 @@ a1 在 x2 内, count= count +1  ...  如果 count >=7 ,满足条件 退出 . 否
 
             if (1):
                 info = ''
-                info = info + "--持仓量_周线" +'开始=' +str(riqi) +'-结束='+str(riqi1)
-                info = info + '--中间值='+str(zhongjianzhi_max)
-                info = info + '--周数='+str(count_max)
+                info = info + "-持仓量"  +str(riqi) +'-'+str(riqi1)
+                info = info + '-中间值'+str(zhongjianzhi_max)
+                info = info + '--'+str(count_max) +'周'
 
 
                 #换手率 的开始日期 要加上 5 天
                 start_date=  get_date_Befor_Ater_Days(riqi, -5)
                 end_date= riqi1
                 turnover_rate_sum= get_HuanshouLv(stockcode,start_date,end_date)
-                info = info + '--换手率,'+str(round(turnover_rate_sum,1))+'--'
+                info = info + '-换手率,'+str(round(turnover_rate_sum,1))+'-'
 
                 liutongshizhi = get_oneStock_liutongshizhi(stockcode)
                 info = info + '流通市值,'+liutongshizhi

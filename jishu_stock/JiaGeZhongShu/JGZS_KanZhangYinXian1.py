@@ -168,13 +168,14 @@ def isAn_JGZS_KanZhangYinXian1_model(data,stockcode):
 
         if(key_1==1 and  key_2 ==1 and key_3==1 and key_4==1 ):
             info = ''
+            info = info + "--价格中枢看涨阴线1--" + str(riqi)
 
             info=info+'--实体是影线的'+str(shiti_yingxian_beishu)+'倍--'
             info=info+'--上下影线'+str(shangyingxian_xiayingxian_beishu)+'倍--'
             info=info+'--阴线实体大小'+str(week1_shiti_daxiao)
             info=info+'--阳线实体大小'+str(week2_shiti_daxiao)
 
-            info = info + "--价格中枢看涨阴线1--"  + str(riqi)
+
             # print info
             # writeLog_to_txt(info, stockcode)
 
@@ -254,8 +255,8 @@ def test_Befor_data():
 
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
-    # get_all_JGZS_KanZhangYinXian1(localpath1)
+    get_all_JGZS_KanZhangYinXian1(localpath1)
     # test_isAn_JGZS_KanZhangYinXian1_laoshi()  #
     # test_ziaxian_zhuan_Week()
     # test_isAn_JGZS_KanZhangYinXian1_ziji()
-    test_Befor_data()
+    # test_Befor_data()

@@ -16,6 +16,9 @@
       </profile-state>
     </entry>
   </component>
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/jishu_stock/JiaGeZhongShu/huice_jiagezhongshu/huice_JGZS_KanZhangYinXian4.py" />
+  </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 2.7 (stock)" project-jdk-type="Python SDK" />
   <component name="PyCharmProfessionalAdvertiser">
     <option name="shown" value="true" />

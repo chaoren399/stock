@@ -46,8 +46,16 @@ YiYiDaiLao3.py
     print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"
 
 9: 数据字典
+https://tushare.pro/document/2?doc_id=27
 
  pct_chg = row['pct_chg'] # 涨幅
+
+ day2_fuguiyin_shiti = getShiTiDaXiao(row) #实体大小
+
+ vol	成交量 （手）
+amount	成交额 （千元）
+
+
 
 10:  周线数据
 
@@ -68,6 +76,20 @@ YiYiDaiLao3.py
 
 
 
-12
+12 实体大小的规则
 
-13
+小十字星 是 0.5 以下
+
+ 小阴线和小阳线的波动范围一般在0.6--1.5；
+ 中阴线和中阳线的波动范围一般在1.6-3.5；
+ 大阴线和大阳线的波动范围在3.6以上。
+
+13 指数
+
+https://tushare.pro/document/2?doc_id=95
+
+     # 上证指数 000001.SH
+
+    #沪深 300 指数 - 399300
+    pro = ts.pro_api()
+    df = pro.index_daily(ts_code='399300.SZ')

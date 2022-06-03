@@ -166,12 +166,12 @@ def isAn_ShenLongBaiWei2_Pro_model(data,stockcode):
                 # print1(key_4)
                 if(key_4==1):
                     if (is_HengPan(riqi1, stockcode) == 1): # key_5
-                        info = "--下跌横盘"
+                        info1 = "--下跌横盘"
                         key_5=1
                     else:
-                        info = "--不是横盘"
+                        info1 = "--不是横盘"
                     # print1(key_5)
-                    info = info+"-----神2pro  成功了---" + "涨停板日期"+str(riqi1)+' ----' + str(riqi)
+                    info = info+"神2pro--" + "涨停板日期"+str(riqi1)+'--' + str(riqi)
                     # print info
 
                     # 统一 info管理 一个函数,每次都要执行, 并且信息 返回后,要添加到 info中,

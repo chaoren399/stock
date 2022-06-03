@@ -36,6 +36,8 @@ def get_all_NextWeek_ChiCangLiang(localpath1):
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
+        import time
+        time.sleep(0.05)  # //睡觉
         # print row['ts_code']
         stock_code = row['ts_code']
         stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"

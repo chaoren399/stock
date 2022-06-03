@@ -96,12 +96,13 @@ def isAn_ChouMaTuPo_model(data, stockcode):
                 # 方便后期修改,这样一改,所有的都可以执行了.
                 from jishu_stock.z_tool.InfoTool import manage_info
                 manage_info = manage_info(info, stockcode, riqi, '')
-                info = info + manage_info
+                if(manage_info !=''):
 
-                # print1(manage_info)
-                writeLog_to_txt(info, stockcode)
-                path = modelname + '.txt'
-                writeLog_to_txt_path_getcodename(info, path, stockcode)
+                    info = info + manage_info
+
+                    writeLog_to_txt(info, stockcode)
+                    path = modelname + '.txt'
+                    writeLog_to_txt_path_getcodename(info, path, stockcode)
 
 
 '''
@@ -251,9 +252,9 @@ if __name__ == '__main__':
     starttime = time()
 
     localpath1 = '/jishu_stock/stockdata/data1/'
-    # get_all_ChouMaTuPo(localpath1)
+    get_all_ChouMaTuPo(localpath1)
     # test_isAn_ChouMaTuPo_laoshi()
-    test_isAn_ChouMaTuPo_ziji()
+    # test_isAn_ChouMaTuPo_ziji()
 
 
 
