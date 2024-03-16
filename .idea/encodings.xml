@@ -2,6 +2,7 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/jishu_stock/bRuoFeng/data/2022年6月3日.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/jishu_stock/bRuoFeng/data/6/2022年6月3日.csv" charset="GBK" />
     <file url="file://$PROJECT_DIR$/st_pool/get_fund_data/基金池.csv" charset="UTF-8" />
   </component>
 </project>

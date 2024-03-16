@@ -125,3 +125,7 @@
 2022-02-06 19:35:12,564 - getindexdata.py[line:30] - INFO: --sz50--done
 2022-02-06 19:35:14,760 - getindexdata.py[line:30] - INFO: --zxb--done
 2022-02-06 19:35:16,993 - getindexdata.py[line:30] - INFO: --cyb--done
+2023-11-12 21:22:31,438 - getindexdata.py[line:30] - INFO: --hs300--done
+2023-11-12 21:22:34,380 - getindexdata.py[line:30] - INFO: --sz50--done
+2023-11-12 21:22:36,939 - getindexdata.py[line:30] - INFO: --zxb--done
+2023-11-12 21:22:39,518 - getindexdata.py[line:30] - INFO: --cyb--done

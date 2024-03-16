@@ -23,7 +23,16 @@ pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
 
 ''''
+https://www.yuque.com/chaoren399/eozlgk/gmoa9p
 
+个股在底部, 换手率 小于 100%的我们必做. 换手率 超过 300%的选做. 
+
+个股上涨过一段时间的时候, 震荡平台, 换手率 小于 100% 那么说明主力 不具备出货能力, 
+主力有可能在这里加仓,或者换庄.
+'''
+
+
+'''
 找到 11 周的数据, 最后一周 放量的大阳线
 下周观察, 也就是我们做的 周线, 不看日线. 这样可以吧
 
@@ -129,8 +138,8 @@ def isAn_ChiCangLiang_BiaoZhun_11_week(stockcode, enddate):
             end_date = riqi1
             turnover_rate_sum = get_HuanshouLv(stockcode, start_date, end_date)
 
-            # if (turnover_rate_sum < 110):
-            if (turnover_rate_sum < 500):
+            if (turnover_rate_sum < 110): #换手率最好小于 100
+            # if (turnover_rate_sum < 500):
 
                 # 如果是周五就非常麻烦, 下周一下午,看看  能不能获取本周的数据. 如果不能,单独处理周五的数据.
 
@@ -181,7 +190,7 @@ def isAn_ChiCangLiang_BiaoZhun_11_week(stockcode, enddate):
                                 if (count > count_max):
                                     count_max = count
                                     zhongjianzhi_max = zhongjianzhi
-                                if (count >= 6):  # 6个满足 神1 中路股份**600818.SH
+                                if (count >= 7):  # 6个满足 神1 中路股份**600818.SH
                                     key_1 = 1
 
 

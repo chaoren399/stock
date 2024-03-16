@@ -275,10 +275,10 @@ if __name__ == '__main__':
     starttime = time()
 
     localpath1 = '/jishu_stock/stockdata/data1/'
-    # getallstockdata_isV_fromLocal(localpath1)
+    getallstockdata_isV_fromLocal(localpath1)
 
     # test_V_anli_laoshi()
-    test_Befor_data()
+    # test_Befor_data()
     # test_V_anli_ziji()
 
     endtime = time()

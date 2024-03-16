@@ -119,7 +119,7 @@ def yijianyunxing():
 
     endtime = time()
     print "task1,2,3 总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"
-    task4_teshu()
+    # task4_teshu()
     csv_paixu_path1_zhuanyong()
 
     #根据股票代码 获取 当天是不是价格中枢
@@ -133,7 +133,7 @@ def yijianyunxing():
 def task1(data6_1,stock_code):
 
     #海底捞
-    isAn_HaiDiLao_model(data6_1,stock_code)
+    # isAn_HaiDiLao_model(data6_1,stock_code)
 
     #岛型反转缺口  大盘 破 20 日均线才可以做
     # isAn_DaoXingQueKou_model(data6_1, stock_code)
@@ -142,11 +142,11 @@ def task1(data6_1,stock_code):
     # isAn_JianCangPoZhan_model(data6_1, stock_code)
 
     #筹码突破
-    isAn_ChouMaTuPo_model(data6_1, stock_code)
+    # isAn_ChouMaTuPo_model(data6_1, stock_code)
     #短线强庄股2
     # isAn_DuanXianQiangZhuangGu2_model(data6_1, stock_code)
     #短线强庄股
-    isAn_DuanXianQiangZhuangGu_model(data6_1, stock_code)
+    # isAn_DuanXianQiangZhuangGu_model(data6_1, stock_code)
 
     #阴错阳差
     # isAn_YinCuoYangCha_model(data6_1, stock_code)
@@ -160,7 +160,7 @@ def task1(data6_1,stock_code):
     # 1 V型 反转
     isAnV_model(data6_1, stock_code)
     # 8 龙战于野
-    isAn_LongZhanYuYe_model(data6_1, stock_code)
+    # isAn_LongZhanYuYe_model(data6_1, stock_code)
     #以逸待劳
     # isAn_YiYiDaiLao_model(data6_1, stock_code)
 
@@ -180,14 +180,14 @@ def task1(data6_1,stock_code):
 
 
     #  神龙摆尾1 神1
-    isAn_Shen1_model(data6_1, stock_code)
+    # isAn_Shen1_model(data6_1, stock_code)
 
     #神1  6天数据模型
-    isAn_Shen1_Pro_model(data6_1, stock_code)  #pro  济民医疗
+    # isAn_Shen1_Pro_model(data6_1, stock_code)  #pro  济民医疗
     # 神2pro 改进版, 之前的有些拿不到
-    isAn_ShenLongBaiWei2_Pro_model(data6_1, stock_code)
+    # isAn_ShenLongBaiWei2_Pro_model(data6_1, stock_code)
     #  神龙摆尾3 神3
-    isAnShenLongBaiwei3_model(data6_1, stock_code)
+    # isAnShenLongBaiwei3_model(data6_1, stock_code)
 
 
     #隔山打牛

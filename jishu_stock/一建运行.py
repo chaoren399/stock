@@ -32,12 +32,12 @@ from jishu_stock.Tool_jishu_stock import get_2stockcode, dingshi_ceshi
 from jishu_stock.WuLiKanHua.WuLiKanHua import get_all_WuLiKanHua
 from jishu_stock.YiYiDaiLao.YiYiDaiLao0 import get_all_YiYiDaiLao2
 from jishu_stock.YouJingWuXian.YouJingWuXian1 import get_all_YouJingWuXian1
-from jishu_stock.YouJingWuXian.YouJingWuXian2 import get_all_YouJingWuXian2_1
+
 from jishu_stock.bCaoMaoGui.YiYangChuanDuoJun import get_all_YiYangChuanDuoJun
 from jishu_stock.bCaoMaoGui.ZaoChenZhiXing import get_all_ZaoChenZhiXing
 from jishu_stock.bCaoMaoGui.ZaoChenZhiXing2 import get_all_ZaoChenZhiXing2
 from jishu_stock.cShenLongBaiWei.Shen1 import get_all_Shen1
-from jishu_stock.cShenLongBaiWei.ShenLongBaiWei1 import  getall_ShenLongBaiWei1
+
 from jishu_stock.cShenLongBaiWei.ShenLongBaiWei0 import get_all_isShenLongBaiWei0
 from jishu_stock.cShenLongBaiWei.ShenLongBaiWei2 import get_all_ShenLongBaiWei2
 from jishu_stock.cShenLongBaiWei.ShenLongBaiWei3 import get_all_ShenLongBaiWei3

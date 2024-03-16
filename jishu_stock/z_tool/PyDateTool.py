@@ -65,6 +65,46 @@ def riqi_geshi_zhuanhua1(s):
     ss= datetime.strptime(s, '%Y-%m-%d')  # 2019-01-20 00:00:00
     day = datetime.strftime(ss, '%Y%m%d')
     return day
+'''
+2022年06月05日 转化:
+/Users/mac/PycharmProjects/gitproject/stock/jishu_stock/bRuoFeng/zhangtingkaiban/zhangtingkaiban.py
+ate_chuli()
+
+'''
+
+'''
+输入日期 格式: 2022年06月05日
+
+处理日期 , 如果是周五,就要 +3, 其他的+1
+'''
+def date_chuli_1(date):
+    import re
+    s = date.decode('utf-8')  # 举个栗子是字符串s，为了匹配下文的unicode形式，所以需要解码
+    p = re.compile(ur'[\u4e00-\u9fa5]')  # 这里是精髓，[\u4e00-\u9fa5]是匹配所有中文的正则，因为是unicode形式，所以也要转为ur
+
+    year=int( p.split(s)[0])  # 使用re库的split切割
+    yue = int(p.split(s)[1] ) # 使用re库的split切割
+    day =int (p.split(s)[2] ) # 使用re库的split切割
+    from datetime import datetime
+    # christmas = datetime(2013, 2, 25)
+    christmas = datetime(year, yue, day)
+    date_YMD= christmas.strftime('%Y%m%d')
+
+
+    import datetime
+    # zhouji = datetime.date(year,yue, day).isoweekday()
+    zhouji = datetime.date(year,yue, day).isoweekday()
+
+    date_out=''
+    if(zhouji ==5):
+
+        date_out = get_date_Befor_Ater_Days(date_YMD, 3)
+        # print date_out
+    else:
+        date_out = get_date_Befor_Ater_Days(date_YMD, 1)
+
+    # print date_out
+    return date_out
 
 '''
 判断 2 个日期 相差 几天
