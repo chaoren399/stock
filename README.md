@@ -1,6 +1,7 @@
 # stock
 zzy 交易系统
 
+只看 看涨做涨
 
 command + d   复制一行
 
