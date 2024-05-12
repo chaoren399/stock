@@ -1,0 +1,85 @@
+chenggong_codeinfos["000605.SZ--mairu_riq:20220310--maichu_riq:20220310--", "000788.SZ--mairu_riq:20220318--maichu_riq:20220318--", "002061.SZ--mairu_riq:20220223--maichu_riq:20220322--", "002205.SZ--mairu_riq:20220312--maichu_riq:20220331--", "002205.SZ--mairu_riq:20220311--maichu_riq:20220311--", "002735.SZ--mairu_riq:20220222--maichu_riq:20220225--", "002757.SZ--mairu_riq:20220302--maichu_riq:20220308--", "002757.SZ--mairu_riq:20220301--maichu_riq:20220309--", "002774.SZ--mairu_riq:20220317--maichu_riq:20220321--", "600026.SH--mairu_riq:20220304--maichu_riq:20220413--", "600113.SH--mairu_riq:20220225--maichu_riq:20220225--", "600113.SH--mairu_riq:20220224--maichu_riq:20220224--", "600113.SH--mairu_riq:20220218--maichu_riq:20220223--", "600125.SH--mairu_riq:20220303--maichu_riq:20220303--", "600125.SH--mairu_riq:20220226--maichu_riq:20220303--", "600156.SH--mairu_riq:20220316--maichu_riq:20220324--", "600512.SH--mairu_riq:20220222--maichu_riq:20220412--", "600769.SH--mairu_riq:20220225--maichu_riq:20220304--", "601069.SH--mairu_riq:20220226--maichu_riq:20220228--", "601101.SH--mairu_riq:20220305--maichu_riq:20220414--", "603214.SH--mairu_riq:20220305--maichu_riq:20220307--", "603321.SH--mairu_riq:20220224--maichu_riq:20220316--", "603321.SH--mairu_riq:20220223--maichu_riq:20220314--", "603330.SH--mairu_riq:20220312--maichu_riq:20220324--", "603332.SH--mairu_riq:20220318--maichu_riq:20220323--", "603617.SH--mairu_riq:20220318--maichu_riq:20220328--", "603767.SH--mairu_riq:20220224--maichu_riq:20220224--", "603955.SH--mairu_riq:20220302--maichu_riq:20220304--"]
+shibai_codeinfos["000096.SZ--mairu_riq:20220304--maichu_riq:20220315--", "000633.SZ--mairu_riq:20220309--maichu_riq:20220411--", "000737.SZ--mairu_riq:20220223--maichu_riq:20220314--", "000779.SZ--mairu_riq:20220223--maichu_riq:20220315--", "002205.SZ--mairu_riq:20220322--maichu_riq:20220328--", "002578.SZ--mairu_riq:20220224--maichu_riq:20220315--", "002809.SZ--mairu_riq:20220319--maichu_riq:20220413--", "600125.SH--mairu_riq:20220304--maichu_riq:20220314--", "600295.SH--mairu_riq:20220305--maichu_riq:20220315--", "600665.SH--mairu_riq:20220223--maichu_riq:20220315--", "603767.SH--mairu_riq:20220225--maichu_riq:20220308--", "603810.SH--mairu_riq:20220224--maichu_riq:20220308--"]
+weizhiyingsun_codeinfos["600769.SH--mairu_riq:20220315--maichu_riq:20220422--", "600769.SH--mairu_riq:20220312--maichu_riq:20220422--"]
+
+
+神4_1--回测盈利信息 目标止盈率:1.05----日期间隔:20220218--20220318
+总的盈利:751.0元
+成功次数:28
+失败次数:12
+持仓中的:2
+所有符合模型的个数:42 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:42
+平均持仓天数:9.92874109264
+所需资金总额:12.53万元
+胜率:0.7
+
+chenggong_codeinfos["000605.SZ--mairu_riq:20220310--maichu_riq:20220311--", "000788.SZ--mairu_riq:20220318--maichu_riq:20220321--", "002061.SZ--mairu_riq:20220223--maichu_riq:20220322--", "002205.SZ--mairu_riq:20220312--maichu_riq:20220401--", "002735.SZ--mairu_riq:20220222--maichu_riq:20220228--", "002757.SZ--mairu_riq:20220302--maichu_riq:20220309--", "600026.SH--mairu_riq:20220304--maichu_riq:20220414--", "600113.SH--mairu_riq:20220225--maichu_riq:20220225--", "600113.SH--mairu_riq:20220224--maichu_riq:20220225--", "600113.SH--mairu_riq:20220218--maichu_riq:20220224--", "600156.SH--mairu_riq:20220316--maichu_riq:20220325--", "600769.SH--mairu_riq:20220225--maichu_riq:20220310--", "603214.SH--mairu_riq:20220305--maichu_riq:20220307--", "603321.SH--mairu_riq:20220224--maichu_riq:20220321--", "603321.SH--mairu_riq:20220223--maichu_riq:20220321--"]
+shibai_codeinfos["000096.SZ--mairu_riq:20220304--maichu_riq:20220315--", "000633.SZ--mairu_riq:20220309--maichu_riq:20220411--", "000737.SZ--mairu_riq:20220223--maichu_riq:20220314--", "000779.SZ--mairu_riq:20220223--maichu_riq:20220315--", "002205.SZ--mairu_riq:20220322--maichu_riq:20220328--", "002205.SZ--mairu_riq:20220311--maichu_riq:20220315--", "002578.SZ--mairu_riq:20220224--maichu_riq:20220315--", "002757.SZ--mairu_riq:20220301--maichu_riq:20220407--", "002774.SZ--mairu_riq:20220317--maichu_riq:20220407--", "002809.SZ--mairu_riq:20220319--maichu_riq:20220413--", "600125.SH--mairu_riq:20220304--maichu_riq:20220314--", "600125.SH--mairu_riq:20220303--maichu_riq:20220314--", "600125.SH--mairu_riq:20220226--maichu_riq:20220314--", "600295.SH--mairu_riq:20220305--maichu_riq:20220315--", "600665.SH--mairu_riq:20220223--maichu_riq:20220315--", "603330.SH--mairu_riq:20220312--maichu_riq:20220411--", "603767.SH--mairu_riq:20220225--maichu_riq:20220308--", "603767.SH--mairu_riq:20220224--maichu_riq:20220311--", "603810.SH--mairu_riq:20220224--maichu_riq:20220308--"]
+weizhiyingsun_codeinfos["600512.SH--mairu_riq:20220222--maichu_riq:20220422--", "600769.SH--mairu_riq:20220315--maichu_riq:20220422--", "600769.SH--mairu_riq:20220312--maichu_riq:20220422--", "601069.SH--mairu_riq:20220226--maichu_riq:20220422--", "601101.SH--mairu_riq:20220305--maichu_riq:20220422--", "603332.SH--mairu_riq:20220318--maichu_riq:20220422--", "603617.SH--mairu_riq:20220318--maichu_riq:20220422--", "603955.SH--mairu_riq:20220302--maichu_riq:20220422--"]
+
+
+神4_1--回测盈利信息 目标止盈率:1.1----日期间隔:20220218--20220302
+总的盈利:-1821.0元
+成功次数:15
+失败次数:19
+持仓中的:8
+所有符合模型的个数:42 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:42
+平均持仓天数:14.893111639
+所需资金总额:12.53万元
+胜率:0.441
+
+chenggong_codeinfos["002205.SZ--mairu_riq:20220312--maichu_riq:20220406--", "600113.SH--mairu_riq:20220225--maichu_riq:20220228--", "600113.SH--mairu_riq:20220224--maichu_riq:20220228--", "600113.SH--mairu_riq:20220218--maichu_riq:20220225--", "600156.SH--mairu_riq:20220316--maichu_riq:20220325--", "600769.SH--mairu_riq:20220225--maichu_riq:20220311--", "603321.SH--mairu_riq:20220223--maichu_riq:20220322--"]
+shibai_codeinfos["000096.SZ--mairu_riq:20220304--maichu_riq:20220315--", "000605.SZ--mairu_riq:20220310--maichu_riq:20220315--", "000633.SZ--mairu_riq:20220309--maichu_riq:20220411--", "000737.SZ--mairu_riq:20220223--maichu_riq:20220314--", "000779.SZ--mairu_riq:20220223--maichu_riq:20220315--", "002061.SZ--mairu_riq:20220223--maichu_riq:20220421--", "002205.SZ--mairu_riq:20220322--maichu_riq:20220328--", "002205.SZ--mairu_riq:20220311--maichu_riq:20220315--", "002578.SZ--mairu_riq:20220224--maichu_riq:20220315--", "002735.SZ--mairu_riq:20220222--maichu_riq:20220418--", "002757.SZ--mairu_riq:20220302--maichu_riq:20220408--", "002757.SZ--mairu_riq:20220301--maichu_riq:20220407--", "002774.SZ--mairu_riq:20220317--maichu_riq:20220407--", "002809.SZ--mairu_riq:20220319--maichu_riq:20220413--", "600125.SH--mairu_riq:20220304--maichu_riq:20220314--", "600125.SH--mairu_riq:20220303--maichu_riq:20220314--", "600125.SH--mairu_riq:20220226--maichu_riq:20220314--", "600295.SH--mairu_riq:20220305--maichu_riq:20220315--", "600665.SH--mairu_riq:20220223--maichu_riq:20220315--", "603214.SH--mairu_riq:20220305--maichu_riq:20220311--", "603321.SH--mairu_riq:20220224--maichu_riq:20220421--", "603330.SH--mairu_riq:20220312--maichu_riq:20220411--", "603767.SH--mairu_riq:20220225--maichu_riq:20220308--", "603767.SH--mairu_riq:20220224--maichu_riq:20220311--", "603810.SH--mairu_riq:20220224--maichu_riq:20220308--"]
+weizhiyingsun_codeinfos["000788.SZ--mairu_riq:20220318--maichu_riq:20220422--", "600026.SH--mairu_riq:20220304--maichu_riq:20220422--", "600512.SH--mairu_riq:20220222--maichu_riq:20220422--", "600769.SH--mairu_riq:20220315--maichu_riq:20220422--", "600769.SH--mairu_riq:20220312--maichu_riq:20220422--", "601069.SH--mairu_riq:20220226--maichu_riq:20220422--", "601101.SH--mairu_riq:20220305--maichu_riq:20220422--", "603332.SH--mairu_riq:20220318--maichu_riq:20220422--", "603617.SH--mairu_riq:20220318--maichu_riq:20220422--", "603955.SH--mairu_riq:20220302--maichu_riq:20220422--"]
+
+
+神4_1--回测盈利信息 目标止盈率:1.2----日期间隔:20220218--20220302
+总的盈利:-5383.0元
+成功次数:7
+失败次数:25
+持仓中的:10
+所有符合模型的个数:42 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:42
+平均持仓天数:18.0760095012
+所需资金总额:12.53万元
+胜率:0.219
+
+chenggong_codeinfos['000605.SZ--mairu_riq:20220310--maichu_riq:20220311', '000788.SZ--mairu_riq:20220318--maichu_riq:20220321', '002205.SZ--mairu_riq:20220311--maichu_riq:20220322', '002735.SZ--mairu_riq:20220222--maichu_riq:20220228', '002757.SZ--mairu_riq:20220302--maichu_riq:20220309', '600113.SH--mairu_riq:20220225--maichu_riq:20220225', '600113.SH--mairu_riq:20220224--maichu_riq:20220225', '600113.SH--mairu_riq:20220218--maichu_riq:20220224', '600156.SH--mairu_riq:20220316--maichu_riq:20220325', '603214.SH--mairu_riq:20220305--maichu_riq:20220307', '603321.SH--mairu_riq:20220223--maichu_riq:20220321']
+shibai_codeinfos['000096.SZ--mairu_riq:20220304--maichu_riq:20220307', '000633.SZ--mairu_riq:20220309--maichu_riq:20220314', '000737.SZ--mairu_riq:20220223--maichu_riq:20220224', '000779.SZ--mairu_riq:20220223--maichu_riq:20220224', '002061.SZ--mairu_riq:20220223--maichu_riq:20220224', '002205.SZ--mairu_riq:20220322--maichu_riq:20220323', '002205.SZ--mairu_riq:20220312--maichu_riq:20220315', '002578.SZ--mairu_riq:20220224--maichu_riq:20220314', '002757.SZ--mairu_riq:20220301--maichu_riq:20220304', '002774.SZ--mairu_riq:20220317--maichu_riq:20220328', '002809.SZ--mairu_riq:20220319--maichu_riq:20220408', '600026.SH--mairu_riq:20220304--maichu_riq:20220308', '600125.SH--mairu_riq:20220304--maichu_riq:20220307', '600125.SH--mairu_riq:20220303--maichu_riq:20220308', '600125.SH--mairu_riq:20220226--maichu_riq:20220308', '600295.SH--mairu_riq:20220305--maichu_riq:20220309', '600512.SH--mairu_riq:20220222--maichu_riq:20220223', '600665.SH--mairu_riq:20220223--maichu_riq:20220224', '600769.SH--mairu_riq:20220315--maichu_riq:20220316', '600769.SH--mairu_riq:20220312--maichu_riq:20220315', '600769.SH--mairu_riq:20220225--maichu_riq:20220301', '601069.SH--mairu_riq:20220226--maichu_riq:20220304', '601101.SH--mairu_riq:20220305--maichu_riq:20220308', '603321.SH--mairu_riq:20220224--maichu_riq:20220308', '603330.SH--mairu_riq:20220312--maichu_riq:20220321', '603617.SH--mairu_riq:20220318--maichu_riq:20220415', '603767.SH--mairu_riq:20220225--maichu_riq:20220228', '603767.SH--mairu_riq:20220224--maichu_riq:20220303', '603810.SH--mairu_riq:20220224--maichu_riq:20220308', '603955.SH--mairu_riq:20220302--maichu_riq:20220308']
+weizhiyingsun_codeinfos['603332.SH--mairu_riq:20220318--maichu_riq:20220422']
+
+
+神4_1--10-5--回测盈利信息 目标止盈率:1.1--止损:0.95----日期间隔:20220218--20220318
+总的盈利:-1088.0元
+成功次数:11
+失败次数:30
+持仓中的:1
+所有符合模型的个数:42 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:42
+平均持仓天数:5.46318289786
+所需资金总额:8.48万元
+胜率:0.268
+
+chenggong_codeinfos['000605.SZ--mairu_riq:20220310--maichu_riq:20220411', '002205.SZ--mairu_riq:20220312--maichu_riq:20220406', '002205.SZ--mairu_riq:20220311--maichu_riq:20220401', '600113.SH--mairu_riq:20220225--maichu_riq:20220228', '600113.SH--mairu_riq:20220224--maichu_riq:20220228', '600113.SH--mairu_riq:20220218--maichu_riq:20220225', '600156.SH--mairu_riq:20220316--maichu_riq:20220325', '600769.SH--mairu_riq:20220225--maichu_riq:20220311', '603321.SH--mairu_riq:20220223--maichu_riq:20220322']
+shibai_codeinfos['000096.SZ--mairu_riq:20220304--maichu_riq:20220308', '000633.SZ--mairu_riq:20220309--maichu_riq:20220411', '000737.SZ--mairu_riq:20220223--maichu_riq:20220309', '000779.SZ--mairu_riq:20220223--maichu_riq:20220224', '000788.SZ--mairu_riq:20220318--maichu_riq:20220325', '002061.SZ--mairu_riq:20220223--maichu_riq:20220224', '002205.SZ--mairu_riq:20220322--maichu_riq:20220324', '002578.SZ--mairu_riq:20220224--maichu_riq:20220315', '002735.SZ--mairu_riq:20220222--maichu_riq:20220411', '002757.SZ--mairu_riq:20220302--maichu_riq:20220321', '002757.SZ--mairu_riq:20220301--maichu_riq:20220318', '002774.SZ--mairu_riq:20220317--maichu_riq:20220401', '002809.SZ--mairu_riq:20220319--maichu_riq:20220413', '600026.SH--mairu_riq:20220304--maichu_riq:20220309', '600125.SH--mairu_riq:20220304--maichu_riq:20220308', '600125.SH--mairu_riq:20220303--maichu_riq:20220311', '600125.SH--mairu_riq:20220226--maichu_riq:20220314', '600295.SH--mairu_riq:20220305--maichu_riq:20220309', '600512.SH--mairu_riq:20220222--maichu_riq:20220224', '600665.SH--mairu_riq:20220223--maichu_riq:20220309', '600769.SH--mairu_riq:20220315--maichu_riq:20220316', '600769.SH--mairu_riq:20220312--maichu_riq:20220316', '601069.SH--mairu_riq:20220226--maichu_riq:20220314', '601101.SH--mairu_riq:20220305--maichu_riq:20220314', '603214.SH--mairu_riq:20220305--maichu_riq:20220311', '603321.SH--mairu_riq:20220224--maichu_riq:20220421', '603330.SH--mairu_riq:20220312--maichu_riq:20220411', '603767.SH--mairu_riq:20220225--maichu_riq:20220303', '603767.SH--mairu_riq:20220224--maichu_riq:20220304', '603810.SH--mairu_riq:20220224--maichu_riq:20220309', '603955.SH--mairu_riq:20220302--maichu_riq:20220314']
+weizhiyingsun_codeinfos['603332.SH--mairu_riq:20220318--maichu_riq:20220422', '603617.SH--mairu_riq:20220318--maichu_riq:20220422']
+
+
+神4_1--10-5--回测盈利信息 目标止盈率:1.2--止损:0.9----日期间隔:20220218--20220318
+总的盈利:-2949.0元
+成功次数:9
+失败次数:31
+持仓中的:2
+所有符合模型的个数:42 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:42
+平均持仓天数:10.9501187648
+所需资金总额:8.48万元
+胜率:0.225
+

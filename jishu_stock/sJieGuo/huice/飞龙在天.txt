@@ -1,0 +1,663 @@
+chenggong_codeinfos['000883.SZ--mairu_riq:20210327--maichu_riq:20210327', '600744.SH--mairu_riq:20210317--maichu_riq:20210317', '600569.SH--mairu_riq:20210410--maichu_riq:20210410', '603080.SH--mairu_riq:20210331--maichu_riq:20210331']
+shibai_codeinfos[]
+weizhiyingsun_codeinfos[]
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.07----日期间隔:20210317--20210410
+总的盈利:4.45
+成功次数:4
+失败次数:0
+持仓中的:0
+所有符合模型的个数:4 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:4
+平均持仓天数:2.19512195122
+所需资金总额:30.27
+胜率:0.998
+
+chenggong_codeinfos['000883.SZ--mairu_riq:20210327--maichu_riq:20210327']
+shibai_codeinfos[]
+weizhiyingsun_codeinfos[]
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.07----日期间隔:20210327--20210327
+总的盈利:0.84
+成功次数:1
+失败次数:0
+持仓中的:0
+所有符合模型的个数:1 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:1
+平均持仓天数:1.81818181818
+所需资金总额:5.01
+胜率:0.99
+
+chenggong_codeinfos['000883.SZ--mairu_riq:20210327--maichu_riq:20210327', '600744.SH--mairu_riq:20210317--maichu_riq:20210317', '600569.SH--mairu_riq:20210410--maichu_riq:20210410', '603080.SH--mairu_riq:20210331--maichu_riq:20210331']
+shibai_codeinfos[]
+weizhiyingsun_codeinfos[]
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.07----日期间隔:20210317--20210410
+总的盈利:4.45
+成功次数:4
+失败次数:0
+持仓中的:0
+所有符合模型的个数:4 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:4
+平均持仓天数:2.19512195122
+所需资金总额:30.27
+胜率:0.998
+
+chenggong_codeinfos['000883.SZ--mairu_riq:20210327--maichu_riq:20210327', '600744.SH--mairu_riq:20210317--maichu_riq:20210317', '600569.SH--mairu_riq:20210410--maichu_riq:20210410', '603080.SH--mairu_riq:20210331--maichu_riq:20210331']
+shibai_codeinfos[]
+weizhiyingsun_codeinfos[]
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.07----日期间隔:20210317--20210410
+总的盈利:4.45
+成功次数:4
+失败次数:0
+持仓中的:0
+所有符合模型的个数:4 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:4
+平均持仓天数:2.19512195122
+所需资金总额:30.27
+胜率:0.998
+
+chenggong_codeinfos[]
+shibai_codeinfos[]
+weizhiyingsun_codeinfos[]
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.05----日期间隔:0--0
+总的盈利:0
+成功次数:0
+失败次数:0
+持仓中的:0
+所有符合模型的个数:0 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:0
+平均持仓天数:0.0
+所需资金总额:0
+胜率:0.0
+
+chenggong_codeinfos[]
+shibai_codeinfos[]
+weizhiyingsun_codeinfos[]
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.07----日期间隔:0--0
+总的盈利:0
+成功次数:0
+失败次数:0
+持仓中的:0
+所有符合模型的个数:0 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:0
+平均持仓天数:0.0
+所需资金总额:0
+胜率:0.0
+
+chenggong_codeinfos[]
+shibai_codeinfos[]
+weizhiyingsun_codeinfos[]
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.1----日期间隔:0--0
+总的盈利:0
+成功次数:0
+失败次数:0
+持仓中的:0
+所有符合模型的个数:0 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:0
+平均持仓天数:0.0
+所需资金总额:0
+胜率:0.0
+
+chenggong_codeinfos[]
+shibai_codeinfos[]
+weizhiyingsun_codeinfos[]
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.15----日期间隔:0--0
+总的盈利:0
+成功次数:0
+失败次数:0
+持仓中的:0
+所有符合模型的个数:0 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:0
+平均持仓天数:0.0
+所需资金总额:0
+胜率:0.0
+
+chenggong_codeinfos[]
+shibai_codeinfos[]
+weizhiyingsun_codeinfos[]
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.2----日期间隔:0--0
+总的盈利:0
+成功次数:0
+失败次数:0
+持仓中的:0
+所有符合模型的个数:0 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:0
+平均持仓天数:0.0
+所需资金总额:0
+胜率:0.0
+
+chenggong_codeinfos[]
+shibai_codeinfos[]
+weizhiyingsun_codeinfos[]
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.3----日期间隔:0--0
+总的盈利:0
+成功次数:0
+失败次数:0
+持仓中的:0
+所有符合模型的个数:0 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:0
+平均持仓天数:0.0
+所需资金总额:0
+胜率:0.0
+
+chenggong_codeinfos[]
+shibai_codeinfos[]
+weizhiyingsun_codeinfos[]
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.07----日期间隔:0--0
+总的盈利:0
+成功次数:0
+失败次数:0
+持仓中的:0
+所有符合模型的个数:0 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:0
+平均持仓天数:0.0
+所需资金总额:0
+胜率:0.0
+
+chenggong_codeinfos['000963.SZ--mairu_riq:20211013--maichu_riq:20211013', '002046.SZ--mairu_riq:20211019--maichu_riq:20211019', '002096.SZ--mairu_riq:20211109--maichu_riq:20211109', '002096.SZ--mairu_riq:20211106--maichu_riq:20211106', '002483.SZ--mairu_riq:20211109--maichu_riq:20211109', '002598.SZ--mairu_riq:20211109--maichu_riq:20211109', '002957.SZ--mairu_riq:20211104--maichu_riq:20211104', '600327.SH--mairu_riq:20211030--maichu_riq:20211030', '600522.SH--mairu_riq:20211104--maichu_riq:20211104', '600875.SH--mairu_riq:20211028--maichu_riq:20211028', '600995.SH--mairu_riq:20211028--maichu_riq:20211028', '600995.SH--mairu_riq:20211026--maichu_riq:20211026', '600995.SH--mairu_riq:20211023--maichu_riq:20211023', '600995.SH--mairu_riq:20211022--maichu_riq:20211022', '601226.SH--mairu_riq:20211109--maichu_riq:20211109', '603178.SH--mairu_riq:20211109--maichu_riq:20211109', '603258.SH--mairu_riq:20211103--maichu_riq:20211103', '603920.SH--mairu_riq:20211104--maichu_riq:20211104']
+shibai_codeinfos['002384.SZ--mairu_riq:20211109--maichu_riq:20211109', '600218.SH--mairu_riq:20211028--maichu_riq:20211028', '600566.SH--mairu_riq:20211104--maichu_riq:20211104', '600661.SH--mairu_riq:20211019--maichu_riq:20211019', '601666.SH--mairu_riq:20211001--maichu_riq:20211001', '603045.SH--mairu_riq:20211022--maichu_riq:20211022']
+weizhiyingsun_codeinfos['600995.SH--mairu_riq:20211029--maichu_riq:20211029']
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.05----日期间隔:20211001--20211109
+总的盈利:9.2
+成功次数:18
+失败次数:6
+持仓中的:1
+所有符合模型的个数:25 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:25
+平均持仓天数:6.21513944223
+所需资金总额:417.89
+胜率:0.75
+
+chenggong_codeinfos['000963.SZ--mairu_riq:20211013--maichu_riq:20211013', '002046.SZ--mairu_riq:20211019--maichu_riq:20211019', '002096.SZ--mairu_riq:20211109--maichu_riq:20211109', '002096.SZ--mairu_riq:20211106--maichu_riq:20211106', '002483.SZ--mairu_riq:20211109--maichu_riq:20211109', '002957.SZ--mairu_riq:20211104--maichu_riq:20211104', '600522.SH--mairu_riq:20211104--maichu_riq:20211104', '600875.SH--mairu_riq:20211028--maichu_riq:20211028', '600995.SH--mairu_riq:20211028--maichu_riq:20211028', '600995.SH--mairu_riq:20211026--maichu_riq:20211026', '600995.SH--mairu_riq:20211023--maichu_riq:20211023', '600995.SH--mairu_riq:20211022--maichu_riq:20211022', '601226.SH--mairu_riq:20211109--maichu_riq:20211109', '603178.SH--mairu_riq:20211109--maichu_riq:20211109', '603258.SH--mairu_riq:20211103--maichu_riq:20211103', '603920.SH--mairu_riq:20211104--maichu_riq:20211104']
+shibai_codeinfos['002384.SZ--mairu_riq:20211109--maichu_riq:20211109', '002598.SZ--mairu_riq:20211109--maichu_riq:20211109', '600218.SH--mairu_riq:20211028--maichu_riq:20211028', '600566.SH--mairu_riq:20211104--maichu_riq:20211104', '600661.SH--mairu_riq:20211019--maichu_riq:20211019', '601666.SH--mairu_riq:20211001--maichu_riq:20211001', '603045.SH--mairu_riq:20211022--maichu_riq:20211022']
+weizhiyingsun_codeinfos['600327.SH--mairu_riq:20211030--maichu_riq:20211030', '600995.SH--mairu_riq:20211029--maichu_riq:20211029']
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.07----日期间隔:20211001--20211109
+总的盈利:8.9
+成功次数:16
+失败次数:7
+持仓中的:2
+所有符合模型的个数:25 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:25
+平均持仓天数:7.37051792829
+所需资金总额:417.89
+胜率:0.695
+
+chenggong_codeinfos['002046.SZ--mairu_riq:20211019--maichu_riq:20211019', '002096.SZ--mairu_riq:20211109--maichu_riq:20211109', '002096.SZ--mairu_riq:20211106--maichu_riq:20211106', '002483.SZ--mairu_riq:20211109--maichu_riq:20211109', '002957.SZ--mairu_riq:20211104--maichu_riq:20211104', '600522.SH--mairu_riq:20211104--maichu_riq:20211104', '600875.SH--mairu_riq:20211028--maichu_riq:20211028', '600995.SH--mairu_riq:20211028--maichu_riq:20211028', '600995.SH--mairu_riq:20211026--maichu_riq:20211026', '600995.SH--mairu_riq:20211023--maichu_riq:20211023', '600995.SH--mairu_riq:20211022--maichu_riq:20211022', '601226.SH--mairu_riq:20211109--maichu_riq:20211109', '603178.SH--mairu_riq:20211109--maichu_riq:20211109', '603258.SH--mairu_riq:20211103--maichu_riq:20211103', '603920.SH--mairu_riq:20211104--maichu_riq:20211104']
+shibai_codeinfos['002384.SZ--mairu_riq:20211109--maichu_riq:20211109', '002598.SZ--mairu_riq:20211109--maichu_riq:20211109', '600218.SH--mairu_riq:20211028--maichu_riq:20211028', '600566.SH--mairu_riq:20211104--maichu_riq:20211104', '600661.SH--mairu_riq:20211019--maichu_riq:20211019', '601666.SH--mairu_riq:20211001--maichu_riq:20211001', '603045.SH--mairu_riq:20211022--maichu_riq:20211022']
+weizhiyingsun_codeinfos['000963.SZ--mairu_riq:20211013--maichu_riq:20211013', '600327.SH--mairu_riq:20211030--maichu_riq:20211030', '600995.SH--mairu_riq:20211029--maichu_riq:20211029']
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.1----日期间隔:20211001--20211109
+总的盈利:14.6
+成功次数:15
+失败次数:7
+持仓中的:3
+所有符合模型的个数:25 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:25
+平均持仓天数:8.84462151394
+所需资金总额:417.89
+胜率:0.682
+
+chenggong_codeinfos['002096.SZ--mairu_riq:20211109--maichu_riq:20211109', '002096.SZ--mairu_riq:20211106--maichu_riq:20211106', '002483.SZ--mairu_riq:20211109--maichu_riq:20211109', '002957.SZ--mairu_riq:20211104--maichu_riq:20211104', '600522.SH--mairu_riq:20211104--maichu_riq:20211104', '600995.SH--mairu_riq:20211026--maichu_riq:20211026', '600995.SH--mairu_riq:20211023--maichu_riq:20211023', '600995.SH--mairu_riq:20211022--maichu_riq:20211022', '601226.SH--mairu_riq:20211109--maichu_riq:20211109', '603178.SH--mairu_riq:20211109--maichu_riq:20211109', '603258.SH--mairu_riq:20211103--maichu_riq:20211103', '603920.SH--mairu_riq:20211104--maichu_riq:20211104']
+shibai_codeinfos['002046.SZ--mairu_riq:20211019--maichu_riq:20211019', '002384.SZ--mairu_riq:20211109--maichu_riq:20211109', '002598.SZ--mairu_riq:20211109--maichu_riq:20211109', '600218.SH--mairu_riq:20211028--maichu_riq:20211028', '600566.SH--mairu_riq:20211104--maichu_riq:20211104', '600661.SH--mairu_riq:20211019--maichu_riq:20211019', '600875.SH--mairu_riq:20211028--maichu_riq:20211028', '601666.SH--mairu_riq:20211001--maichu_riq:20211001', '603045.SH--mairu_riq:20211022--maichu_riq:20211022']
+weizhiyingsun_codeinfos['000963.SZ--mairu_riq:20211013--maichu_riq:20211013', '600327.SH--mairu_riq:20211030--maichu_riq:20211030', '600995.SH--mairu_riq:20211029--maichu_riq:20211029', '600995.SH--mairu_riq:20211028--maichu_riq:20211028']
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.15----日期间隔:20211001--20211109
+总的盈利:13.97
+成功次数:12
+失败次数:9
+持仓中的:4
+所有符合模型的个数:25 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:25
+平均持仓天数:11.9123505976
+所需资金总额:417.89
+胜率:0.571
+
+chenggong_codeinfos['002096.SZ--mairu_riq:20211109--maichu_riq:20211109', '002096.SZ--mairu_riq:20211106--maichu_riq:20211106', '002483.SZ--mairu_riq:20211109--maichu_riq:20211109', '002957.SZ--mairu_riq:20211104--maichu_riq:20211104', '600522.SH--mairu_riq:20211104--maichu_riq:20211104', '600995.SH--mairu_riq:20211026--maichu_riq:20211026', '600995.SH--mairu_riq:20211023--maichu_riq:20211023', '600995.SH--mairu_riq:20211022--maichu_riq:20211022', '601226.SH--mairu_riq:20211109--maichu_riq:20211109', '603178.SH--mairu_riq:20211109--maichu_riq:20211109', '603258.SH--mairu_riq:20211103--maichu_riq:20211103']
+shibai_codeinfos['002046.SZ--mairu_riq:20211019--maichu_riq:20211019', '002384.SZ--mairu_riq:20211109--maichu_riq:20211109', '002598.SZ--mairu_riq:20211109--maichu_riq:20211109', '600218.SH--mairu_riq:20211028--maichu_riq:20211028', '600566.SH--mairu_riq:20211104--maichu_riq:20211104', '600661.SH--mairu_riq:20211019--maichu_riq:20211019', '600875.SH--mairu_riq:20211028--maichu_riq:20211028', '601666.SH--mairu_riq:20211001--maichu_riq:20211001', '603045.SH--mairu_riq:20211022--maichu_riq:20211022']
+weizhiyingsun_codeinfos['000963.SZ--mairu_riq:20211013--maichu_riq:20211013', '600327.SH--mairu_riq:20211030--maichu_riq:20211030', '600995.SH--mairu_riq:20211029--maichu_riq:20211029', '600995.SH--mairu_riq:20211028--maichu_riq:20211028', '603920.SH--mairu_riq:20211104--maichu_riq:20211104']
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.2----日期间隔:20211001--20211109
+总的盈利:17.78
+成功次数:11
+失败次数:9
+持仓中的:5
+所有符合模型的个数:25 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:25
+平均持仓天数:12.6693227092
+所需资金总额:417.89
+胜率:0.55
+
+chenggong_codeinfos['002096.SZ--mairu_riq:20211106--maichu_riq:20211106', '600522.SH--mairu_riq:20211104--maichu_riq:20211104', '600995.SH--mairu_riq:20211026--maichu_riq:20211026', '600995.SH--mairu_riq:20211023--maichu_riq:20211023', '600995.SH--mairu_riq:20211022--maichu_riq:20211022', '603178.SH--mairu_riq:20211109--maichu_riq:20211109']
+shibai_codeinfos['002046.SZ--mairu_riq:20211019--maichu_riq:20211019', '002384.SZ--mairu_riq:20211109--maichu_riq:20211109', '002598.SZ--mairu_riq:20211109--maichu_riq:20211109', '600218.SH--mairu_riq:20211028--maichu_riq:20211028', '600566.SH--mairu_riq:20211104--maichu_riq:20211104', '600661.SH--mairu_riq:20211019--maichu_riq:20211019', '600875.SH--mairu_riq:20211028--maichu_riq:20211028', '601666.SH--mairu_riq:20211001--maichu_riq:20211001', '603045.SH--mairu_riq:20211022--maichu_riq:20211022']
+weizhiyingsun_codeinfos['000963.SZ--mairu_riq:20211013--maichu_riq:20211013', '002096.SZ--mairu_riq:20211109--maichu_riq:20211109', '002483.SZ--mairu_riq:20211109--maichu_riq:20211109', '002957.SZ--mairu_riq:20211104--maichu_riq:20211104', '600327.SH--mairu_riq:20211030--maichu_riq:20211030', '600995.SH--mairu_riq:20211029--maichu_riq:20211029', '600995.SH--mairu_riq:20211028--maichu_riq:20211028', '601226.SH--mairu_riq:20211109--maichu_riq:20211109', '603258.SH--mairu_riq:20211103--maichu_riq:20211103', '603920.SH--mairu_riq:20211104--maichu_riq:20211104']
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.3----日期间隔:20211001--20211109
+总的盈利:10.18
+成功次数:6
+失败次数:9
+持仓中的:10
+所有符合模型的个数:25 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:25
+平均持仓天数:15.4581673307
+所需资金总额:417.89
+胜率:0.4
+
+chenggong_codeinfos['000546.SZ--mairu_riq:20211111--maichu_riq:20211111', '002006.SZ--mairu_riq:20211118--maichu_riq:20211118', '002096.SZ--mairu_riq:20211109--maichu_riq:20211109', '002096.SZ--mairu_riq:20211106--maichu_riq:20211106', '002309.SZ--mairu_riq:20211116--maichu_riq:20211116', '002483.SZ--mairu_riq:20211109--maichu_riq:20211109', '002598.SZ--mairu_riq:20211109--maichu_riq:20211109', '002957.SZ--mairu_riq:20211104--maichu_riq:20211104', '600327.SH--mairu_riq:20211030--maichu_riq:20211030', '600522.SH--mairu_riq:20211104--maichu_riq:20211104', '600875.SH--mairu_riq:20211028--maichu_riq:20211028', '600995.SH--mairu_riq:20211028--maichu_riq:20211028', '600995.SH--mairu_riq:20211026--maichu_riq:20211026', '600995.SH--mairu_riq:20211023--maichu_riq:20211023', '600995.SH--mairu_riq:20211022--maichu_riq:20211022', '601226.SH--mairu_riq:20211109--maichu_riq:20211109', '603178.SH--mairu_riq:20211109--maichu_riq:20211109', '603258.SH--mairu_riq:20211103--maichu_riq:20211103', '603286.SH--mairu_riq:20211118--maichu_riq:20211118', '603360.SH--mairu_riq:20211117--maichu_riq:20211117', '603386.SH--mairu_riq:20211110--maichu_riq:20211110', '603920.SH--mairu_riq:20211104--maichu_riq:20211104']
+shibai_codeinfos['002045.SZ--mairu_riq:20211110--maichu_riq:20211110', '002096.SZ--mairu_riq:20211111--maichu_riq:20211111', '002384.SZ--mairu_riq:20211109--maichu_riq:20211109', '600218.SH--mairu_riq:20211028--maichu_riq:20211028', '600285.SH--mairu_riq:20211118--maichu_riq:20211118', '600566.SH--mairu_riq:20211104--maichu_riq:20211104', '603045.SH--mairu_riq:20211022--maichu_riq:20211022']
+weizhiyingsun_codeinfos['002395.SZ--mairu_riq:20211112--maichu_riq:20211112', '002540.SZ--mairu_riq:20211113--maichu_riq:20211113', '600995.SH--mairu_riq:20211029--maichu_riq:20211029']
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.05----日期间隔:20211022--20211118
+总的盈利:1996.0元
+成功次数:22
+失败次数:7
+持仓中的:3
+所有符合模型的个数:32 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:32
+平均持仓天数:7.66355140187
+所需资金总额:6.61万元
+胜率:0.758
+
+chenggong_codeinfos['000546.SZ--mairu_riq:20211111--maichu_riq:20211111', '002006.SZ--mairu_riq:20211118--maichu_riq:20211118', '002096.SZ--mairu_riq:20211109--maichu_riq:20211109', '002096.SZ--mairu_riq:20211106--maichu_riq:20211106', '002309.SZ--mairu_riq:20211116--maichu_riq:20211116', '002483.SZ--mairu_riq:20211109--maichu_riq:20211109', '002957.SZ--mairu_riq:20211104--maichu_riq:20211104', '600522.SH--mairu_riq:20211104--maichu_riq:20211104', '600875.SH--mairu_riq:20211028--maichu_riq:20211028', '600995.SH--mairu_riq:20211028--maichu_riq:20211028', '600995.SH--mairu_riq:20211026--maichu_riq:20211026', '600995.SH--mairu_riq:20211023--maichu_riq:20211023', '600995.SH--mairu_riq:20211022--maichu_riq:20211022', '601226.SH--mairu_riq:20211109--maichu_riq:20211109', '603178.SH--mairu_riq:20211109--maichu_riq:20211109', '603258.SH--mairu_riq:20211103--maichu_riq:20211103', '603286.SH--mairu_riq:20211118--maichu_riq:20211118', '603360.SH--mairu_riq:20211117--maichu_riq:20211117', '603386.SH--mairu_riq:20211110--maichu_riq:20211110', '603920.SH--mairu_riq:20211104--maichu_riq:20211104']
+shibai_codeinfos['002045.SZ--mairu_riq:20211110--maichu_riq:20211110', '002096.SZ--mairu_riq:20211111--maichu_riq:20211111', '002384.SZ--mairu_riq:20211109--maichu_riq:20211109', '002598.SZ--mairu_riq:20211109--maichu_riq:20211109', '600218.SH--mairu_riq:20211028--maichu_riq:20211028', '600285.SH--mairu_riq:20211118--maichu_riq:20211118', '600566.SH--mairu_riq:20211104--maichu_riq:20211104', '603045.SH--mairu_riq:20211022--maichu_riq:20211022']
+weizhiyingsun_codeinfos['002395.SZ--mairu_riq:20211112--maichu_riq:20211112', '002540.SZ--mairu_riq:20211113--maichu_riq:20211113', '600327.SH--mairu_riq:20211030--maichu_riq:20211030', '600995.SH--mairu_riq:20211029--maichu_riq:20211029']
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.07----日期间隔:20211022--20211118
+总的盈利:1978.0元
+成功次数:20
+失败次数:8
+持仓中的:4
+所有符合模型的个数:32 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:32
+平均持仓天数:8.8785046729
+所需资金总额:6.61万元
+胜率:0.714
+
+chenggong_codeinfos['000546.SZ--mairu_riq:20211111--maichu_riq:20211111', '002006.SZ--mairu_riq:20211118--maichu_riq:20211118', '002096.SZ--mairu_riq:20211109--maichu_riq:20211109', '002096.SZ--mairu_riq:20211106--maichu_riq:20211106', '002483.SZ--mairu_riq:20211109--maichu_riq:20211109', '002957.SZ--mairu_riq:20211104--maichu_riq:20211104', '600522.SH--mairu_riq:20211104--maichu_riq:20211104', '600875.SH--mairu_riq:20211028--maichu_riq:20211028', '600995.SH--mairu_riq:20211028--maichu_riq:20211028', '600995.SH--mairu_riq:20211026--maichu_riq:20211026', '600995.SH--mairu_riq:20211023--maichu_riq:20211023', '600995.SH--mairu_riq:20211022--maichu_riq:20211022', '601226.SH--mairu_riq:20211109--maichu_riq:20211109', '603178.SH--mairu_riq:20211109--maichu_riq:20211109', '603258.SH--mairu_riq:20211103--maichu_riq:20211103', '603286.SH--mairu_riq:20211118--maichu_riq:20211118', '603386.SH--mairu_riq:20211110--maichu_riq:20211110', '603920.SH--mairu_riq:20211104--maichu_riq:20211104']
+shibai_codeinfos['002045.SZ--mairu_riq:20211110--maichu_riq:20211110', '002096.SZ--mairu_riq:20211111--maichu_riq:20211111', '002384.SZ--mairu_riq:20211109--maichu_riq:20211109', '002598.SZ--mairu_riq:20211109--maichu_riq:20211109', '600218.SH--mairu_riq:20211028--maichu_riq:20211028', '600285.SH--mairu_riq:20211118--maichu_riq:20211118', '600566.SH--mairu_riq:20211104--maichu_riq:20211104', '603045.SH--mairu_riq:20211022--maichu_riq:20211022']
+weizhiyingsun_codeinfos['002309.SZ--mairu_riq:20211116--maichu_riq:20211116', '002395.SZ--mairu_riq:20211112--maichu_riq:20211112', '002540.SZ--mairu_riq:20211113--maichu_riq:20211113', '600327.SH--mairu_riq:20211030--maichu_riq:20211030', '600995.SH--mairu_riq:20211029--maichu_riq:20211029', '603360.SH--mairu_riq:20211117--maichu_riq:20211117']
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.1----日期间隔:20211022--20211118
+总的盈利:2755.0元
+成功次数:18
+失败次数:8
+持仓中的:6
+所有符合模型的个数:32 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:32
+平均持仓天数:10.2492211838
+所需资金总额:6.61万元
+胜率:0.692
+
+chenggong_codeinfos['000546.SZ--mairu_riq:20211111--maichu_riq:20211111', '002006.SZ--mairu_riq:20211118--maichu_riq:20211118', '002096.SZ--mairu_riq:20211109--maichu_riq:20211109', '002096.SZ--mairu_riq:20211106--maichu_riq:20211106', '002483.SZ--mairu_riq:20211109--maichu_riq:20211109', '002957.SZ--mairu_riq:20211104--maichu_riq:20211104', '600522.SH--mairu_riq:20211104--maichu_riq:20211104', '600995.SH--mairu_riq:20211026--maichu_riq:20211026', '600995.SH--mairu_riq:20211023--maichu_riq:20211023', '600995.SH--mairu_riq:20211022--maichu_riq:20211022', '601226.SH--mairu_riq:20211109--maichu_riq:20211109', '603178.SH--mairu_riq:20211109--maichu_riq:20211109', '603258.SH--mairu_riq:20211103--maichu_riq:20211103', '603286.SH--mairu_riq:20211118--maichu_riq:20211118', '603920.SH--mairu_riq:20211104--maichu_riq:20211104']
+shibai_codeinfos['002045.SZ--mairu_riq:20211110--maichu_riq:20211110', '002096.SZ--mairu_riq:20211111--maichu_riq:20211111', '002384.SZ--mairu_riq:20211109--maichu_riq:20211109', '002598.SZ--mairu_riq:20211109--maichu_riq:20211109', '600218.SH--mairu_riq:20211028--maichu_riq:20211028', '600285.SH--mairu_riq:20211118--maichu_riq:20211118', '600566.SH--mairu_riq:20211104--maichu_riq:20211104', '600875.SH--mairu_riq:20211028--maichu_riq:20211028', '603045.SH--mairu_riq:20211022--maichu_riq:20211022', '603386.SH--mairu_riq:20211110--maichu_riq:20211110']
+weizhiyingsun_codeinfos['002309.SZ--mairu_riq:20211116--maichu_riq:20211116', '002395.SZ--mairu_riq:20211112--maichu_riq:20211112', '002540.SZ--mairu_riq:20211113--maichu_riq:20211113', '600327.SH--mairu_riq:20211030--maichu_riq:20211030', '600995.SH--mairu_riq:20211029--maichu_riq:20211029', '600995.SH--mairu_riq:20211028--maichu_riq:20211028', '603360.SH--mairu_riq:20211117--maichu_riq:20211117']
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.15----日期间隔:20211022--20211118
+总的盈利:3268.0元
+成功次数:15
+失败次数:10
+持仓中的:7
+所有符合模型的个数:32 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:32
+平均持仓天数:13.8629283489
+所需资金总额:6.61万元
+胜率:0.6
+
+chenggong_codeinfos['000546.SZ--mairu_riq:20211111--maichu_riq:20211111', '002006.SZ--mairu_riq:20211118--maichu_riq:20211118', '002096.SZ--mairu_riq:20211109--maichu_riq:20211109', '002096.SZ--mairu_riq:20211106--maichu_riq:20211106', '002483.SZ--mairu_riq:20211109--maichu_riq:20211109', '002957.SZ--mairu_riq:20211104--maichu_riq:20211104', '600522.SH--mairu_riq:20211104--maichu_riq:20211104', '600995.SH--mairu_riq:20211026--maichu_riq:20211026', '600995.SH--mairu_riq:20211023--maichu_riq:20211023', '600995.SH--mairu_riq:20211022--maichu_riq:20211022', '601226.SH--mairu_riq:20211109--maichu_riq:20211109', '603178.SH--mairu_riq:20211109--maichu_riq:20211109', '603258.SH--mairu_riq:20211103--maichu_riq:20211103', '603286.SH--mairu_riq:20211118--maichu_riq:20211118']
+shibai_codeinfos['002045.SZ--mairu_riq:20211110--maichu_riq:20211110', '002096.SZ--mairu_riq:20211111--maichu_riq:20211111', '002384.SZ--mairu_riq:20211109--maichu_riq:20211109', '002598.SZ--mairu_riq:20211109--maichu_riq:20211109', '600218.SH--mairu_riq:20211028--maichu_riq:20211028', '600285.SH--mairu_riq:20211118--maichu_riq:20211118', '600566.SH--mairu_riq:20211104--maichu_riq:20211104', '600875.SH--mairu_riq:20211028--maichu_riq:20211028', '603045.SH--mairu_riq:20211022--maichu_riq:20211022', '603386.SH--mairu_riq:20211110--maichu_riq:20211110']
+weizhiyingsun_codeinfos['002309.SZ--mairu_riq:20211116--maichu_riq:20211116', '002395.SZ--mairu_riq:20211112--maichu_riq:20211112', '002540.SZ--mairu_riq:20211113--maichu_riq:20211113', '600327.SH--mairu_riq:20211030--maichu_riq:20211030', '600995.SH--mairu_riq:20211029--maichu_riq:20211029', '600995.SH--mairu_riq:20211028--maichu_riq:20211028', '603360.SH--mairu_riq:20211117--maichu_riq:20211117', '603920.SH--mairu_riq:20211104--maichu_riq:20211104']
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.2----日期间隔:20211022--20211118
+总的盈利:3953.0元
+成功次数:14
+失败次数:10
+持仓中的:8
+所有符合模型的个数:32 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:32
+平均持仓天数:14.7352024922
+所需资金总额:6.61万元
+胜率:0.583
+
+chenggong_codeinfos['002006.SZ--mairu_riq:20211118--maichu_riq:20211118', '002096.SZ--mairu_riq:20211106--maichu_riq:20211106', '600522.SH--mairu_riq:20211104--maichu_riq:20211104', '600995.SH--mairu_riq:20211026--maichu_riq:20211026', '600995.SH--mairu_riq:20211023--maichu_riq:20211023', '600995.SH--mairu_riq:20211022--maichu_riq:20211022', '601226.SH--mairu_riq:20211109--maichu_riq:20211109', '603178.SH--mairu_riq:20211109--maichu_riq:20211109']
+shibai_codeinfos['002045.SZ--mairu_riq:20211110--maichu_riq:20211110', '002096.SZ--mairu_riq:20211111--maichu_riq:20211111', '002384.SZ--mairu_riq:20211109--maichu_riq:20211109', '002598.SZ--mairu_riq:20211109--maichu_riq:20211109', '600218.SH--mairu_riq:20211028--maichu_riq:20211028', '600285.SH--mairu_riq:20211118--maichu_riq:20211118', '600566.SH--mairu_riq:20211104--maichu_riq:20211104', '600875.SH--mairu_riq:20211028--maichu_riq:20211028', '603045.SH--mairu_riq:20211022--maichu_riq:20211022', '603386.SH--mairu_riq:20211110--maichu_riq:20211110']
+weizhiyingsun_codeinfos['000546.SZ--mairu_riq:20211111--maichu_riq:20211111', '002096.SZ--mairu_riq:20211109--maichu_riq:20211109', '002309.SZ--mairu_riq:20211116--maichu_riq:20211116', '002395.SZ--mairu_riq:20211112--maichu_riq:20211112', '002483.SZ--mairu_riq:20211109--maichu_riq:20211109', '002540.SZ--mairu_riq:20211113--maichu_riq:20211113', '002957.SZ--mairu_riq:20211104--maichu_riq:20211104', '600327.SH--mairu_riq:20211030--maichu_riq:20211030', '600995.SH--mairu_riq:20211029--maichu_riq:20211029', '600995.SH--mairu_riq:20211028--maichu_riq:20211028', '603258.SH--mairu_riq:20211103--maichu_riq:20211103', '603286.SH--mairu_riq:20211118--maichu_riq:20211118', '603360.SH--mairu_riq:20211117--maichu_riq:20211117', '603920.SH--mairu_riq:20211104--maichu_riq:20211104']
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.3----日期间隔:20211022--20211118
+总的盈利:2896.0元
+成功次数:8
+失败次数:10
+持仓中的:14
+所有符合模型的个数:32 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:32
+平均持仓天数:19.1900311526
+所需资金总额:6.61万元
+胜率:0.444
+
+chenggong_codeinfos['000546.SZ--mairu_riq:20211111--maichu_riq:20211111', '002006.SZ--mairu_riq:20211118--maichu_riq:20211122', '002096.SZ--mairu_riq:20211109--maichu_riq:20211110', '002096.SZ--mairu_riq:20211106--maichu_riq:20211109', '002309.SZ--mairu_riq:20211116--maichu_riq:20211122', '002432.SZ--mairu_riq:20211120--maichu_riq:20211123', '002483.SZ--mairu_riq:20211109--maichu_riq:20211116', '002598.SZ--mairu_riq:20211109--maichu_riq:20211111', '600338.SH--mairu_riq:20211120--maichu_riq:20211126', '601226.SH--mairu_riq:20211109--maichu_riq:20211112', '603178.SH--mairu_riq:20211109--maichu_riq:20211109', '603286.SH--mairu_riq:20211118--maichu_riq:20211122', '603360.SH--mairu_riq:20211117--maichu_riq:20211129', '603386.SH--mairu_riq:20211110--maichu_riq:20211112']
+shibai_codeinfos['002045.SZ--mairu_riq:20211110--maichu_riq:20211202', '002096.SZ--mairu_riq:20211111--maichu_riq:20211126', '002384.SZ--mairu_riq:20211109--maichu_riq:20211202', '002515.SZ--mairu_riq:20211120--maichu_riq:20211220', '002540.SZ--mairu_riq:20211113--maichu_riq:20211220', '600285.SH--mairu_riq:20211118--maichu_riq:20211118']
+weizhiyingsun_codeinfos['002395.SZ--mairu_riq:20211112--maichu_riq:20211221']
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.05----日期间隔:20211106--20211117
+总的盈利:944.0元
+成功次数:14
+失败次数:6
+持仓中的:1
+所有符合模型的个数:21 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:21
+平均持仓天数:8.15165876777
+所需资金总额:4.56万元
+胜率:0.7
+
+chenggong_codeinfos['000546.SZ--mairu_riq:20211111--maichu_riq:20211111', '002006.SZ--mairu_riq:20211118--maichu_riq:20211122', '002096.SZ--mairu_riq:20211109--maichu_riq:20211110', '002096.SZ--mairu_riq:20211106--maichu_riq:20211109', '002309.SZ--mairu_riq:20211116--maichu_riq:20211123', '002432.SZ--mairu_riq:20211120--maichu_riq:20211123', '002483.SZ--mairu_riq:20211109--maichu_riq:20211116', '600338.SH--mairu_riq:20211120--maichu_riq:20211129', '601226.SH--mairu_riq:20211109--maichu_riq:20211115', '603178.SH--mairu_riq:20211109--maichu_riq:20211109', '603286.SH--mairu_riq:20211118--maichu_riq:20211123', '603360.SH--mairu_riq:20211117--maichu_riq:20211129', '603386.SH--mairu_riq:20211110--maichu_riq:20211112']
+shibai_codeinfos['002045.SZ--mairu_riq:20211110--maichu_riq:20211202', '002096.SZ--mairu_riq:20211111--maichu_riq:20211126', '002384.SZ--mairu_riq:20211109--maichu_riq:20211202', '002515.SZ--mairu_riq:20211120--maichu_riq:20211220', '002540.SZ--mairu_riq:20211113--maichu_riq:20211220', '002598.SZ--mairu_riq:20211109--maichu_riq:20211116', '600285.SH--mairu_riq:20211118--maichu_riq:20211118']
+weizhiyingsun_codeinfos['002395.SZ--mairu_riq:20211112--maichu_riq:20211221']
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.07----日期间隔:20211106--20211117
+总的盈利:1194.0元
+成功次数:13
+失败次数:7
+持仓中的:1
+所有符合模型的个数:21 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:21
+平均持仓天数:8.48341232227
+所需资金总额:4.56万元
+胜率:0.65
+
+chenggong_codeinfos['000546.SZ--mairu_riq:20211111--maichu_riq:20211112', '002006.SZ--mairu_riq:20211118--maichu_riq:20211123', '002096.SZ--mairu_riq:20211109--maichu_riq:20211111', '002096.SZ--mairu_riq:20211106--maichu_riq:20211109', '002432.SZ--mairu_riq:20211120--maichu_riq:20211123', '002483.SZ--mairu_riq:20211109--maichu_riq:20211116', '600338.SH--mairu_riq:20211120--maichu_riq:20211129', '601226.SH--mairu_riq:20211109--maichu_riq:20211115', '603178.SH--mairu_riq:20211109--maichu_riq:20211109', '603286.SH--mairu_riq:20211118--maichu_riq:20211123', '603386.SH--mairu_riq:20211110--maichu_riq:20211112']
+shibai_codeinfos['002045.SZ--mairu_riq:20211110--maichu_riq:20211202', '002096.SZ--mairu_riq:20211111--maichu_riq:20211126', '002384.SZ--mairu_riq:20211109--maichu_riq:20211202', '002515.SZ--mairu_riq:20211120--maichu_riq:20211220', '002540.SZ--mairu_riq:20211113--maichu_riq:20211220', '002598.SZ--mairu_riq:20211109--maichu_riq:20211116', '600285.SH--mairu_riq:20211118--maichu_riq:20211118']
+weizhiyingsun_codeinfos['002309.SZ--mairu_riq:20211116--maichu_riq:20211221', '002395.SZ--mairu_riq:20211112--maichu_riq:20211221', '603360.SH--mairu_riq:20211117--maichu_riq:20211221']
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.1----日期间隔:20211106--20211117
+总的盈利:1249.0元
+成功次数:11
+失败次数:7
+持仓中的:3
+所有符合模型的个数:21 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:21
+平均持仓天数:10.3317535545
+所需资金总额:4.56万元
+胜率:0.611
+
+chenggong_codeinfos['000546.SZ--mairu_riq:20211111--maichu_riq:20211129', '002006.SZ--mairu_riq:20211118--maichu_riq:20211129', '002096.SZ--mairu_riq:20211109--maichu_riq:20211111', '002096.SZ--mairu_riq:20211106--maichu_riq:20211110', '002432.SZ--mairu_riq:20211120--maichu_riq:20211124', '002483.SZ--mairu_riq:20211109--maichu_riq:20211119', '601226.SH--mairu_riq:20211109--maichu_riq:20211206', '603178.SH--mairu_riq:20211109--maichu_riq:20211111', '603286.SH--mairu_riq:20211118--maichu_riq:20211124']
+shibai_codeinfos['002045.SZ--mairu_riq:20211110--maichu_riq:20211202', '002096.SZ--mairu_riq:20211111--maichu_riq:20211126', '002384.SZ--mairu_riq:20211109--maichu_riq:20211202', '002515.SZ--mairu_riq:20211120--maichu_riq:20211220', '002540.SZ--mairu_riq:20211113--maichu_riq:20211220', '002598.SZ--mairu_riq:20211109--maichu_riq:20211116', '600285.SH--mairu_riq:20211118--maichu_riq:20211118', '603386.SH--mairu_riq:20211110--maichu_riq:20211217']
+weizhiyingsun_codeinfos['002309.SZ--mairu_riq:20211116--maichu_riq:20211221', '002395.SZ--mairu_riq:20211112--maichu_riq:20211221', '600338.SH--mairu_riq:20211120--maichu_riq:20211221', '603360.SH--mairu_riq:20211117--maichu_riq:20211221']
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.15----日期间隔:20211106--20211110
+总的盈利:1606.0元
+成功次数:9
+失败次数:8
+持仓中的:4
+所有符合模型的个数:21 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:21
+平均持仓天数:14.0758293839
+所需资金总额:4.56万元
+胜率:0.529
+
+chenggong_codeinfos['000546.SZ--mairu_riq:20211111--maichu_riq:20211130', '002006.SZ--mairu_riq:20211118--maichu_riq:20211129', '002096.SZ--mairu_riq:20211109--maichu_riq:20211111', '002096.SZ--mairu_riq:20211106--maichu_riq:20211110', '002432.SZ--mairu_riq:20211120--maichu_riq:20211124', '002483.SZ--mairu_riq:20211109--maichu_riq:20211119', '601226.SH--mairu_riq:20211109--maichu_riq:20211207', '603178.SH--mairu_riq:20211109--maichu_riq:20211117', '603286.SH--mairu_riq:20211118--maichu_riq:20211124']
+shibai_codeinfos['002045.SZ--mairu_riq:20211110--maichu_riq:20211202', '002096.SZ--mairu_riq:20211111--maichu_riq:20211126', '002384.SZ--mairu_riq:20211109--maichu_riq:20211202', '002515.SZ--mairu_riq:20211120--maichu_riq:20211220', '002540.SZ--mairu_riq:20211113--maichu_riq:20211220', '002598.SZ--mairu_riq:20211109--maichu_riq:20211116', '600285.SH--mairu_riq:20211118--maichu_riq:20211118', '603386.SH--mairu_riq:20211110--maichu_riq:20211217']
+weizhiyingsun_codeinfos['002309.SZ--mairu_riq:20211116--maichu_riq:20211221', '002395.SZ--mairu_riq:20211112--maichu_riq:20211221', '600338.SH--mairu_riq:20211120--maichu_riq:20211221', '603360.SH--mairu_riq:20211117--maichu_riq:20211221']
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.2----日期间隔:20211106--20211110
+总的盈利:2014.0元
+成功次数:9
+失败次数:8
+持仓中的:4
+所有符合模型的个数:21 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:21
+平均持仓天数:14.3601895735
+所需资金总额:4.56万元
+胜率:0.529
+
+chenggong_codeinfos['002006.SZ--mairu_riq:20211118--maichu_riq:20211201', '002096.SZ--mairu_riq:20211106--maichu_riq:20211111', '002432.SZ--mairu_riq:20211120--maichu_riq:20211125', '601226.SH--mairu_riq:20211109--maichu_riq:20211217', '603178.SH--mairu_riq:20211109--maichu_riq:20211123']
+shibai_codeinfos['002045.SZ--mairu_riq:20211110--maichu_riq:20211202', '002096.SZ--mairu_riq:20211111--maichu_riq:20211126', '002384.SZ--mairu_riq:20211109--maichu_riq:20211202', '002515.SZ--mairu_riq:20211120--maichu_riq:20211220', '002540.SZ--mairu_riq:20211113--maichu_riq:20211220', '002598.SZ--mairu_riq:20211109--maichu_riq:20211116', '600285.SH--mairu_riq:20211118--maichu_riq:20211118', '603386.SH--mairu_riq:20211110--maichu_riq:20211217']
+weizhiyingsun_codeinfos['000546.SZ--mairu_riq:20211111--maichu_riq:20211221', '002096.SZ--mairu_riq:20211109--maichu_riq:20211221', '002309.SZ--mairu_riq:20211116--maichu_riq:20211221', '002395.SZ--mairu_riq:20211112--maichu_riq:20211221', '002483.SZ--mairu_riq:20211109--maichu_riq:20211221', '600338.SH--mairu_riq:20211120--maichu_riq:20211221', '603286.SH--mairu_riq:20211118--maichu_riq:20211221', '603360.SH--mairu_riq:20211117--maichu_riq:20211221']
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.3----日期间隔:20211106--20211221
+总的盈利:1278.0元
+成功次数:5
+失败次数:8
+持仓中的:8
+所有符合模型的个数:21 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:21
+平均持仓天数:19.0995260664
+所需资金总额:4.56万元
+胜率:0.384
+
+chenggong_codeinfos['002006.SZ--mairu_riq:20211118--maichu_riq:20211122', '002483.SZ--mairu_riq:20211109--maichu_riq:20211116', '002598.SZ--mairu_riq:20211109--maichu_riq:20211111', '600338.SH--mairu_riq:20211120--maichu_riq:20211126', '601226.SH--mairu_riq:20211109--maichu_riq:20211112', '603178.SH--mairu_riq:20211109--maichu_riq:20211109', '603286.SH--mairu_riq:20211118--maichu_riq:20211122', '603360.SH--mairu_riq:20211117--maichu_riq:20211129']
+shibai_codeinfos['002045.SZ--mairu_riq:20211110--maichu_riq:20211202', '002384.SZ--mairu_riq:20211109--maichu_riq:20211202', '002515.SZ--mairu_riq:20211120--maichu_riq:20211220', '002540.SZ--mairu_riq:20211113--maichu_riq:20211220', '600285.SH--mairu_riq:20211118--maichu_riq:20211118']
+weizhiyingsun_codeinfos[]
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.05----日期间隔:20211109--20211117
+总的盈利:349.0元
+成功次数:8
+失败次数:5
+持仓中的:0
+所有符合模型的个数:13 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:13
+平均持仓天数:8.93129770992
+所需资金总额:2.86万元
+胜率:0.615
+
+chenggong_codeinfos['002006.SZ--mairu_riq:20211118--maichu_riq:20211122', '002483.SZ--mairu_riq:20211109--maichu_riq:20211116', '600338.SH--mairu_riq:20211120--maichu_riq:20211129', '601226.SH--mairu_riq:20211109--maichu_riq:20211115', '603178.SH--mairu_riq:20211109--maichu_riq:20211109', '603286.SH--mairu_riq:20211118--maichu_riq:20211123', '603360.SH--mairu_riq:20211117--maichu_riq:20211129']
+shibai_codeinfos['002045.SZ--mairu_riq:20211110--maichu_riq:20211202', '002384.SZ--mairu_riq:20211109--maichu_riq:20211202', '002515.SZ--mairu_riq:20211120--maichu_riq:20211220', '002540.SZ--mairu_riq:20211113--maichu_riq:20211220', '002598.SZ--mairu_riq:20211109--maichu_riq:20211116', '600285.SH--mairu_riq:20211118--maichu_riq:20211118']
+weizhiyingsun_codeinfos[]
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.07----日期间隔:20211109--20211117
+总的盈利:559.0元
+成功次数:7
+失败次数:6
+持仓中的:0
+所有符合模型的个数:13 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:13
+平均持仓天数:9.3893129771
+所需资金总额:2.86万元
+胜率:0.538
+
+chenggong_codeinfos['002006.SZ--mairu_riq:20211118--maichu_riq:20211123', '002483.SZ--mairu_riq:20211109--maichu_riq:20211116', '600338.SH--mairu_riq:20211120--maichu_riq:20211129', '601226.SH--mairu_riq:20211109--maichu_riq:20211115', '603178.SH--mairu_riq:20211109--maichu_riq:20211109', '603286.SH--mairu_riq:20211118--maichu_riq:20211123']
+shibai_codeinfos['002045.SZ--mairu_riq:20211110--maichu_riq:20211202', '002384.SZ--mairu_riq:20211109--maichu_riq:20211202', '002515.SZ--mairu_riq:20211120--maichu_riq:20211220', '002540.SZ--mairu_riq:20211113--maichu_riq:20211220', '002598.SZ--mairu_riq:20211109--maichu_riq:20211116', '600285.SH--mairu_riq:20211118--maichu_riq:20211118']
+weizhiyingsun_codeinfos['603360.SH--mairu_riq:20211117--maichu_riq:20211221']
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.1----日期间隔:20211109--20211117
+总的盈利:579.0元
+成功次数:6
+失败次数:6
+持仓中的:1
+所有符合模型的个数:13 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:13
+平均持仓天数:10.6870229008
+所需资金总额:2.86万元
+胜率:0.5
+
+chenggong_codeinfos['002006.SZ--mairu_riq:20211118--maichu_riq:20211129', '002483.SZ--mairu_riq:20211109--maichu_riq:20211119', '601226.SH--mairu_riq:20211109--maichu_riq:20211206', '603178.SH--mairu_riq:20211109--maichu_riq:20211111', '603286.SH--mairu_riq:20211118--maichu_riq:20211124']
+shibai_codeinfos['002045.SZ--mairu_riq:20211110--maichu_riq:20211202', '002384.SZ--mairu_riq:20211109--maichu_riq:20211202', '002515.SZ--mairu_riq:20211120--maichu_riq:20211220', '002540.SZ--mairu_riq:20211113--maichu_riq:20211220', '002598.SZ--mairu_riq:20211109--maichu_riq:20211116', '600285.SH--mairu_riq:20211118--maichu_riq:20211118']
+weizhiyingsun_codeinfos['600338.SH--mairu_riq:20211120--maichu_riq:20211221', '603360.SH--mairu_riq:20211117--maichu_riq:20211221']
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.15----日期间隔:20211109--20211117
+总的盈利:926.0元
+成功次数:5
+失败次数:6
+持仓中的:2
+所有符合模型的个数:13 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:13
+平均持仓天数:13.8167938931
+所需资金总额:2.86万元
+胜率:0.454
+
+chenggong_codeinfos['002006.SZ--mairu_riq:20211118--maichu_riq:20211129', '002483.SZ--mairu_riq:20211109--maichu_riq:20211119', '601226.SH--mairu_riq:20211109--maichu_riq:20211207', '603178.SH--mairu_riq:20211109--maichu_riq:20211117', '603286.SH--mairu_riq:20211118--maichu_riq:20211124']
+shibai_codeinfos['002045.SZ--mairu_riq:20211110--maichu_riq:20211202', '002384.SZ--mairu_riq:20211109--maichu_riq:20211202', '002515.SZ--mairu_riq:20211120--maichu_riq:20211220', '002540.SZ--mairu_riq:20211113--maichu_riq:20211220', '002598.SZ--mairu_riq:20211109--maichu_riq:20211116', '600285.SH--mairu_riq:20211118--maichu_riq:20211118']
+weizhiyingsun_codeinfos['600338.SH--mairu_riq:20211120--maichu_riq:20211221', '603360.SH--mairu_riq:20211117--maichu_riq:20211221']
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.2----日期间隔:20211109--20211117
+总的盈利:1128.0元
+成功次数:5
+失败次数:6
+持仓中的:2
+所有符合模型的个数:13 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:13
+平均持仓天数:14.1984732824
+所需资金总额:2.86万元
+胜率:0.454
+
+chenggong_codeinfos['002006.SZ--mairu_riq:20211118--maichu_riq:20211201', '601226.SH--mairu_riq:20211109--maichu_riq:20211217', '603178.SH--mairu_riq:20211109--maichu_riq:20211123']
+shibai_codeinfos['002045.SZ--mairu_riq:20211110--maichu_riq:20211202', '002384.SZ--mairu_riq:20211109--maichu_riq:20211202', '002515.SZ--mairu_riq:20211120--maichu_riq:20211220', '002540.SZ--mairu_riq:20211113--maichu_riq:20211220', '002598.SZ--mairu_riq:20211109--maichu_riq:20211116', '600285.SH--mairu_riq:20211118--maichu_riq:20211118']
+weizhiyingsun_codeinfos['002483.SZ--mairu_riq:20211109--maichu_riq:20211221', '600338.SH--mairu_riq:20211120--maichu_riq:20211221', '603286.SH--mairu_riq:20211118--maichu_riq:20211221', '603360.SH--mairu_riq:20211117--maichu_riq:20211221']
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.3----日期间隔:20211109--20211117
+总的盈利:884.0元
+成功次数:3
+失败次数:6
+持仓中的:4
+所有符合模型的个数:13 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:13
+平均持仓天数:18.3969465649
+所需资金总额:2.86万元
+胜率:0.333
+
+chenggong_codeinfos['000503.SZ--mairu_riq:20220105--maichu_riq:20220105', '000912.SZ--mairu_riq:20211225--maichu_riq:20211227']
+shibai_codeinfos['600463.SH--mairu_riq:20211225--maichu_riq:20211228', '600860.SH--mairu_riq:20211222--maichu_riq:20211223', '603058.SH--mairu_riq:20220105--maichu_riq:20220106']
+weizhiyingsun_codeinfos[]
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.05----日期间隔:20211222--20220105
+总的盈利:-457.0元
+成功次数:2
+失败次数:3
+持仓中的:0
+所有符合模型的个数:5 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:5
+平均持仓天数:1.56862745098
+所需资金总额:1.0万元
+胜率:0.399
+
+chenggong_codeinfos['000503.SZ--mairu_riq:20220105--maichu_riq:20220106']
+shibai_codeinfos['000912.SZ--mairu_riq:20211225--maichu_riq:20220114', '600463.SH--mairu_riq:20211225--maichu_riq:20211228', '600860.SH--mairu_riq:20211222--maichu_riq:20211223', '603058.SH--mairu_riq:20220105--maichu_riq:20220106']
+weizhiyingsun_codeinfos[]
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.1----日期间隔:20211222--20220105
+总的盈利:-625.0元
+成功次数:1
+失败次数:4
+持仓中的:0
+所有符合模型的个数:5 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:5
+平均持仓天数:4.3137254902
+所需资金总额:1.0万元
+胜率:0.2
+
+chenggong_codeinfos['000503.SZ--mairu_riq:20220105--maichu_riq:20220106']
+shibai_codeinfos['000912.SZ--mairu_riq:20211225--maichu_riq:20220114', '600463.SH--mairu_riq:20211225--maichu_riq:20211228', '600860.SH--mairu_riq:20211222--maichu_riq:20211223', '603058.SH--mairu_riq:20220105--maichu_riq:20220106']
+weizhiyingsun_codeinfos[]
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.15----日期间隔:20211222--20220105
+总的盈利:-625.0元
+成功次数:1
+失败次数:4
+持仓中的:0
+所有符合模型的个数:5 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:5
+平均持仓天数:4.3137254902
+所需资金总额:1.0万元
+胜率:0.2
+
+chenggong_codeinfos[]
+shibai_codeinfos['000503.SZ--mairu_riq:20220105--maichu_riq:20220111', '000912.SZ--mairu_riq:20211225--maichu_riq:20220114', '600463.SH--mairu_riq:20211225--maichu_riq:20211228', '600860.SH--mairu_riq:20211222--maichu_riq:20211223', '603058.SH--mairu_riq:20220105--maichu_riq:20220106']
+weizhiyingsun_codeinfos[]
+
+
+飞龙在天--回测盈利信息 目标止盈率:1.2----日期间隔:20211222--20220105
+总的盈利:-1124.0元
+成功次数:0
+失败次数:5
+持仓中的:0
+所有符合模型的个数:5 ,可以手动计算  成功+ 失败+持仓是否 等于该值(限制价格的不会计算在内)
+符合模型 中数据为空的个数:0
+成功+失败+未止损盈:5
+平均持仓天数:4.90196078431
+所需资金总额:1.0万元
+胜率:0.0
+
