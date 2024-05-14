@@ -7,6 +7,7 @@ import datetime
 
 from jishu_stock.z_tool.PyDateTool import getMonthNumber
 from jishu_stock.z_tool.duoxiancheng.ModelCode import get_modelcode
+from jishu_stock.z_tool.email import webhook
 from stock.settings import BASE_DIR
 import pandas as pd
 import tushare as ts
@@ -172,7 +173,7 @@ def writeLog_to_txt_path_getcodename(info ,path,code):
 
     info = info + '**' + str(code)
     # print info
-
+    webhook.sendData(info)
 
     path = BASE_DIR + '/jishu_stock/sJieGuo/huizong/' + path
     with open(path, "a") as f:  # 写入单独模型文件

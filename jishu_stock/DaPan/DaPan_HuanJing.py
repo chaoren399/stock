@@ -1,5 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
+import os
+
 import tushare as ts
 import sys
 
@@ -9,7 +11,7 @@ from jishu_stock.bChanKe.Tool_Token import token_init
 reload(sys)
 sys.setdefaultencoding('utf8')
 from jishu_stock.z_tool.PyDateTool import getDayNumberYMD
-
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + './')
 
 '''
 判断 大盘当前的环境 - 仓位的量化管理

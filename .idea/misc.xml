@@ -1,44 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectInspectionProfilesVisibleTreeState">
-    <entry key="Project Default">
-      <profile-state>
-        <expanded-state>
-          <State>
-            <id />
-          </State>
-        </expanded-state>
-        <selected-state>
-          <State>
-            <id>AngularJS</id>
-          </State>
-        </selected-state>
-      </profile-state>
-    </entry>
-  </component>
-  <component name="ProjectPlainTextFileTypeManager">
-    <file url="file://$PROJECT_DIR$/jishu_stock/JiaGeZhongShu/huice_jiagezhongshu/huice_JGZS_KanZhangYinXian4.py" />
-  </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 2.7 (stock)" project-jdk-type="Python SDK" />
-  <component name="PyCharmProfessionalAdvertiser">
-    <option name="shown" value="true" />
-  </component>
-  <component name="PyPackaging">
-    <option name="earlyReleasesAsUpgrades" value="true" />
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ScopeChooserConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
-  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="stockpy27" project-jdk-type="Python SDK" />
 </project>

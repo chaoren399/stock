@@ -1,9 +1,17 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
+import sys
+import os
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_parent_dir_name = os.path.dirname(os.path.dirname(current_dir))
+print current_dir
+print(parent_parent_dir_name)
+sys.path.append(parent_parent_dir_name)
 
+
+from jishu_stock.agetdata.test_ziji_model.XiaoV.XiaoV import isAn_XiaoV_model
+from jishu_stock.z_tool.email import webhook
 import pandas as pd
-
-from jishu_stock.ChuShuiFuRong.ChuShuiFuRong import isAn_ChuShuiFuRong_model
 from jishu_stock.DaPan.DaPan_HuanJing import get_DaPan_HuanJing
 from jishu_stock.DaYou.DaYou import isAn_DaYou_model
 from jishu_stock.FanKeWeiZhu.FanKeWeiZhu import isAn_FanKeWeiZhu_model
@@ -75,6 +83,8 @@ from jishu_stock.z_tool.PyDateTool import getDayNumberYMD
 from stock.settings import BASE_DIR
 import tushare as ts
 
+
+
 '''
 G8M2 一键运行
 '''
@@ -84,7 +94,7 @@ def g8m2_yijianyunxing():
 '''
 周线 价格中枢一键运行
 '''
-def jiagezhognshu_yijianyunxing():
+def yijianyunxing_jiagezhongshu():
     JGZS_yijianyunxing()
 
 '''
@@ -92,13 +102,16 @@ def jiagezhognshu_yijianyunxing():
 平时下午 4 点准时更新
 周五数据延迟, 5:58 可以下载
 '''
-def yijianyunxing():
+def yijianyunxing_rixian():
     today = getDayNumberYMD()
     print  '-----大盘环境------'+ get_DaPan_HuanJing(today)
     # 日线 操作
     localpath1 = '/jishu_stock/stockdata/data1/'
 
+
+
     get_all_codes() #下载所有 股票数据
+
 
     stock_codes = get_all_codes_from_tool() # 获取所有股票代码
     for index, item in enumerate(stock_codes):
@@ -132,6 +145,19 @@ def yijianyunxing():
 """
 def task1(data6_1,stock_code):
 
+
+
+    # 1 V型 反转
+    # isAnV_model(data6_1, stock_code)
+    # 8 龙战于野
+    # isAn_LongZhanYuYe_model(data6_1, stock_code)
+    #以逸待劳
+    # isAn_YiYiDaiLao_model(data6_1, stock_code)
+    # xiaoV
+    isAn_XiaoV_model(data6_1,stock_code)
+
+
+
     #海底捞
     # isAn_HaiDiLao_model(data6_1,stock_code)
 
@@ -157,12 +183,6 @@ def task1(data6_1,stock_code):
     #出水芙蓉 主力底部强势洗盘
     # isAn_ChuShuiFuRong_model(data6_1, stock_code)
 
-    # 1 V型 反转
-    isAnV_model(data6_1, stock_code)
-    # 8 龙战于野
-    # isAn_LongZhanYuYe_model(data6_1, stock_code)
-    #以逸待劳
-    # isAn_YiYiDaiLao_model(data6_1, stock_code)
 
 
 
@@ -376,13 +396,7 @@ if __name__ == '__main__':
 
     localpath1 = '/jishu_stock/stockdata/data1/'
 
-
-
-
-    yijianyunxing()
-
-
-
+    yijianyunxing_rixian()
 
 
     endtime = time()
