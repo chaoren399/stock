@@ -208,9 +208,11 @@ def writeLog_to_txt_path_getcodename(info ,path,code):
 
 '''
 def csv_paixu_path1_zhuanyong():
+    # print path1
     df = pd.read_csv(path1, sep=',', header=-1, engine='python',index_col=0) #header=-1时（可用于读取无表头CSV文件
+
     df=df.sort_index(axis=0, ascending=True)
-    # print df
+    print df
     df.to_csv(path1, index=True)
 
 

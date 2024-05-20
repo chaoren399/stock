@@ -25,7 +25,7 @@ localpath = '/jishu_stock/stockdata/data1/' #数据存放路径
 ts.set_token('731d2ea0abcf1f14d59ec7215d6ec520e09a439fccd2772c43a906be')
 
 def get_all_codes():
-    webhook.sendData("开始下载数据")
+    # webhook.sendData("开始下载数据")
 
     starttime = time()
 

@@ -40,7 +40,8 @@ XiaoV
 3- 止损： 这3天的最低价 （收盘的时候止损）
 '''
 chengongs=[]
-modelname='向下跳空缺口阴线'
+modelname='XiaoV'
+#BASE_DIR + '/jishu_stock/stockdata/模型编码.csv'
 
 
 
@@ -142,7 +143,7 @@ def isAn_XiaoV_model(data,stockcode):
         # if(key_1==1 ):
             info = ''
 
-            info = info + "--Xiao V成功了--"  + str(mairuriqi)
+            info = info + "XiaoV--"  + str(mairuriqi)
             # print len(data)
             # print info
 

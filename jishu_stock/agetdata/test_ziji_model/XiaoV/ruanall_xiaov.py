@@ -2,7 +2,7 @@
 # -*- coding: utf8 -*-
 import datetime
 
-from jishu_stock.agetdata.test_ziji_model.XiaoV.XiaoV_huice import get_all_XiaoV
+from jishu_stock.agetdata.test_ziji_model.XiaoV.huice.XiaoV_huice import get_all_XiaoV
 
 if __name__ == '__main__':
     starttime = datetime.datetime.now()

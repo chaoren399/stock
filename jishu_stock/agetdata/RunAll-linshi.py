@@ -113,7 +113,7 @@ def yijianyunxing_rixian():
 
 
 
-    get_all_codes() #下载所有 股票数据
+    # get_all_codes() #下载所有 股票数据
 
 
     stock_codes = get_all_codes_from_tool() # 获取所有股票代码
@@ -159,7 +159,7 @@ def task1(data6_1,stock_code):
     #以逸待劳
     # isAn_YiYiDaiLao_model(data6_1, stock_code)
     # xiaoV
-    isAn_XiaoV_model(data6_1,stock_code)
+    # isAn_XiaoV_model(data6_1,stock_code)
 
 
 
@@ -205,12 +205,12 @@ def task1(data6_1,stock_code):
 
 
     #  神龙摆尾1 神1
-    # isAn_Shen1_model(data6_1, stock_code)
+    isAn_Shen1_model(data6_1, stock_code)
 
     #神1  6天数据模型
     # isAn_Shen1_Pro_model(data6_1, stock_code)  #pro  济民医疗
     # 神2pro 改进版, 之前的有些拿不到
-    # isAn_ShenLongBaiWei2_Pro_model(data6_1, stock_code)
+    isAn_ShenLongBaiWei2_Pro_model(data6_1, stock_code)
     #  神龙摆尾3 神3
     # isAnShenLongBaiwei3_model(data6_1, stock_code)
 

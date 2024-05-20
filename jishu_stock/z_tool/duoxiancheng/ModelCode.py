@@ -30,5 +30,6 @@ def get_modelcode(modelname):
 
 if __name__ == '__main__':
 
-    modelname = '出水芙蓉'
+    # modelname = '出水芙蓉'
+    modelname = 'XiaoV'
     print get_modelcode(modelname)

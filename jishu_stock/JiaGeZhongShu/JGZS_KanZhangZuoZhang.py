@@ -10,6 +10,7 @@ from jishu_stock.JiaGeZhongShu.jiagezhognshu_Get_Week_K_data import getAll_jiage
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, print1, isYinXian, isYangXian, \
     jiagezhongshu_writeLog_to_txt_path_getcodename, writeLog_to_txt_path_getcodename
 from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
+from jishu_stock.z_tool.email import webhook
 from stock.settings import BASE_DIR
 from jishu_stock.z_tool.ShiTiDaXiao import *
 import pandas as pd
@@ -42,6 +43,7 @@ modelname='价格中枢-看涨做涨'
 
 def get_all_JGZS_KanZhangZuoZhang(localpath1):
     info1=  '--上涨初期 价格中枢-看涨做涨 start-- '
+    webhook.sendData( info1)
     writeLog_to_txt_nocode(info1)
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path, dtype={'code': str})

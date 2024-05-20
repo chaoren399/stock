@@ -8,12 +8,13 @@ from jishu_stock.JiaGeZhongShu.JGZS_KanZhangYinXian4 import get_all_JGZS_KanZhan
 from jishu_stock.JiaGeZhongShu.JGZS_KanZhangZuoZhang import get_all_JGZS_KanZhangZuoZhang
 from jishu_stock.JiaGeZhongShu.jiagezhognshu_Get_Week_K_data import getAll_jiagezhongshu_WeekKdata
 from jishu_stock.JiaGeZhongShu.jiagezhongshu_KanDieZuoZhang import get_all_jiagezhongshu_KanDieZuoZhang
-
+from jishu_stock.z_tool.email import webhook
 
 
 def JGZS_yijianyunxing():
     # 日线 操作
     localpath1 = '/jishu_stock/stockdata/data1/'
+    starttime = datetime.datetime.now()
     today = starttime.strftime('%Y%m%d')
     #先更新数据
     getAll_jiagezhongshu_WeekKdata(localpath1)
@@ -21,12 +22,13 @@ def JGZS_yijianyunxing():
 
     #2 看涨做涨
     get_all_JGZS_KanZhangZuoZhang(localpath1)
+    webhook.sendData("-----看涨做涨yiwancheng ----"  )
 
     #5 看涨阴线4
-    get_all_JGZS_KanZhangYinXian4(localpath1)
+    # get_all_JGZS_KanZhangYinXian4(localpath1)
 
     # 3  看涨阴线1 上涨初期
-    get_all_JGZS_KanZhangYinXian1(localpath1)
+    # get_all_JGZS_KanZhangYinXian1(localpath1)
 
 
     # 其他 价格中枢

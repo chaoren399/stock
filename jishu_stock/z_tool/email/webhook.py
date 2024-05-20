@@ -20,7 +20,7 @@ def getJsonData(content):
         'msgtype': 'text',
         'text': {
             'content':  content,
-            'mentioned_list':['@all']
+            # 'mentioned_list':['@all']
         },
     }
     return json_data
