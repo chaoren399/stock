@@ -11,18 +11,23 @@ import tushare as ts
 import sys
 import pandas as pd
 import time
+
+import sys
 reload(sys)
+sys.setdefaultencoding( 'utf-8' )
+
 from threading import Thread
 from time import sleep
 from time import *
 starttime = datetime.datetime.now()
 today = starttime.strftime('%Y%m%d')
 
-start_date = '20200701'
+start_date = '20230101'
+# start_date = '20200701'
 end_date = today
 localpath = '/jishu_stock/stockdata/data1/' #数据存放路径
 
-ts.set_token('731d2ea0abcf1f14d59ec7215d6ec520e09a439fccd2772c43a906be')
+
 
 def get_all_codes():
     # webhook.sendData("开始下载数据")

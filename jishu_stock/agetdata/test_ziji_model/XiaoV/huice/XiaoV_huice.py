@@ -181,8 +181,8 @@ def test_isAn_XiaoV_model_laoshi():
 '''
 回测  5月份的数据
 '''
-def test_Befor_data():
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+def test_Befor_data_onestock_oneyear():
+    # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST_tmp.csv'
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
@@ -207,6 +207,24 @@ def test_Befor_data():
         for i in range(0,n):
             isAn_XiaoV_model(data7_4[i:i + 200], stock_code)
 
+
+
+'''
+回测  5月份的数据
+'''
+def test_Befor_data_allstock_oneday():
+    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    data = pd.read_csv(path, dtype={'code': str})
+    for index, row in data.iterrows():
+        # print row['ts_code']
+        stock_code = row['ts_code']
+        stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
+        df = pd.read_csv(stockdata_path, index_col=0)
+        n=3
+        data6_1 = df.iloc[0+n:30+n]  # 前6行
+        # data6_1 = df.iloc[20:32]  # 前6行
+        len1 = len(data6_1)
+        isAn_XiaoV_model(data6_1, stock_code)
 
 
 
@@ -258,7 +276,8 @@ if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
 
     # test_isAn_XiaoV_model_laoshi()
-    test_Befor_data()
+    # test_Befor_data_onestock_oneyear()
+    test_Befor_data_allstock_oneday()
 
     endtime = time()
     print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"

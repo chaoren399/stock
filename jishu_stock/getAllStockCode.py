@@ -77,7 +77,7 @@ def getallstock_list_chuli():
                     stock_liutongshizhi = jibenmin_row['circ_mv']
                     # if(stock_liutongshizhi < 1000000 ): #过滤流通市值 100 亿以下的
                     if (stock_liutongshizhi < 2000000):  # 过滤流通市值 100 亿以下的
-                        if (stock_close_price >= 2 and stock_close_price < 40):
+                        if (stock_close_price >= 2 and stock_close_price < 20):
                             print  code
                             tamp.append(row)
                 except:
