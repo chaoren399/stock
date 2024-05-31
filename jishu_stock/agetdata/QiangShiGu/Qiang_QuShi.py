@@ -32,7 +32,7 @@ pd.set_option('display.max_rows', None)
 1 一定是有人气的票， 什么票有人气？  就是突破的票，吸引了人。
 2 一定是在人们胆怯的时候进去。。
 
-XiaoV
+Qiang_QuShi
 
 1-一定是上涨趋势的突破 （近20天是1年来最高点）
 
@@ -41,44 +41,30 @@ XiaoV
 3- 止损： 这3天的最低价 （收盘的时候止损）
 '''
 chengongs=[]
-modelname='XiaoV'
+modelname='Qiang_QuShi'
 #BASE_DIR + '/jishu_stock/stockdata/模型编码.csv'
 
-def get_all_XiaoV_from_Qiang_QuShi(localpath1):
-    info1=  '--小V  start--   '
-    writeLog_to_txt_nocode(info1)
-    path = BASE_DIR + '/jishu_stock/stockdata/qiang_qushi_stocks.csv'
-    # path =  '/app/stock/stock/jishu_stock/stockdata/qiang_qushi_stocks.csv'
-    data = pd.read_csv(path, dtype={'code': str})
-    for index, row in data.iterrows():
-        # print row['ts_code']
 
-        stock_code = row['代码']
+def test():
+
+    # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/stockdata/qiang_qushi_stocks.csv'
+
+    data = pd.read_csv(path, dtype={'code': str})
+    all_count=0
+    for index, row in data.iterrows():
+        code = row['代码']
         # stock_code = row['ts_code']
         # print row
-        stock_code = getSockCode_from_SZSH601899(stock_code)
-        stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
-        # print stockdata_path
-        try:
-           df = pd.read_csv(stockdata_path, index_col=0)
-
-        except Exception as e:
-            # `e` has the error info
-            print `e`
-            continue
-
-
-
-        data6_1 = df.iloc[0:130]  # 前6行
-        # data6_1 = df.iloc[20:32]  # 前6行
-        len1 = len(data6_1)
-        isAn_XiaoV_model(data6_1, stock_code)
-
-def get_all_XiaoV(localpath1):
-    info1=  '--小V  start--   '
+        code = getSockCode_from_SZSH601899(code)
+        if(code):
+            print code
+def get_all_Qiang_QuShi(localpath1):
+    info1=  '--Qiang_QuShi  start--   '
     writeLog_to_txt_nocode(info1)
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path, dtype={'code': str})
+    all_count=0
     for index, row in data.iterrows():
         # print row['ts_code']
         stock_code = row['ts_code']
@@ -88,13 +74,16 @@ def get_all_XiaoV(localpath1):
         data6_1 = df.iloc[0:130]  # 前6行
         # data6_1 = df.iloc[20:32]  # 前6行
         len1 = len(data6_1)
-        isAn_XiaoV_model(data6_1, stock_code)
+        x = isAn_Qiang_QuShi_model(data6_1, stock_code)
 
+        if (x == 1):
+            all_count = all_count + 1
 
+    print modelname+"总数量=" + str(all_count)
 '''
 #2 单独一个函数 判断 6 个数据是不是符合模型
 '''
-def isAn_XiaoV_model(data,stockcode):
+def isAn_Qiang_QuShi_model(data, stockcode):
     if (data is None or data.empty):
         print '--df.empty--' + str(stockcode)
         return 0
@@ -123,7 +112,7 @@ def isAn_XiaoV_model(data,stockcode):
         # 设置两个 key
         key_1=0; # 3tian  yin -yin -yang
 
-        key_2=0; # jin 30 tian zuigaodian shi jinnian de zuigaodian (tupo)
+        key_2=0; # 近30天 最高点是近1年的最高点 --突破
         key_3=1 ; #3前边没有涨停板
 
 
@@ -168,11 +157,12 @@ def isAn_XiaoV_model(data,stockcode):
             key_2=1
 
 
-        if(key_1==1 & key_2==1):
+        # if(key_1==1 & key_2==1):
+        if(key_2==1):
         # if(key_1==1 ):
             info = ''
 
-            info = info + "XiaoV--"  + str(mairuriqi)
+            info = info + "Qiang_QuShi--"  + str(mairuriqi)
             # print len(data)
             # print info
 
@@ -184,6 +174,8 @@ def isAn_XiaoV_model(data,stockcode):
             chenggong_code={'stockcode':stockcode,'mairuriqi':mairuriqi,'zhisundian':zhisundian}
             # print1(day2_shizixing_low)
             chengongs.append(chenggong_code)
+            return 1
+    return 0
 
 
 
@@ -192,14 +184,14 @@ def isAn_XiaoV_model(data,stockcode):
 '''
 测试老师的案例
 '''
-def test_isAn_XiaoV_model_laoshi():
+def test_isAn_Qiang_QuShi_model_laoshi():
     # 案例 1 dongfangdianzi
     st_code='000017.SZ'
     df1 = ts.pro_bar(ts_code=st_code,adj='qfq', start_date='20210206', end_date='20240513')
 
     data7_1 = df1.iloc[0:100]  # 前7行
     # print data7_1
-    isAn_XiaoV_model(data7_1,st_code)
+    isAn_Qiang_QuShi_model(data7_1, st_code)
 
     # 案例 2 zhongguoxidian
     st_code='601179.SH'
@@ -220,9 +212,8 @@ if __name__ == '__main__':
 
     # test_isAn_XiaoV_model_laoshi()
 
-    # get_all_XiaoV(localpath1)
-    get_all_XiaoV_from_Qiang_QuShi(localpath1)
-
+    get_all_Qiang_QuShi(localpath1)
+    # test()
 
     endtime = time()
     print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"

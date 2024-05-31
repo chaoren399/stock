@@ -61,9 +61,9 @@ def jisuan_all_shouyilv_one_two(chenggongs, modelname):
 
 
 
-    # path = BASE_DIR + '/jishu_stock/sJieGuo/huice/' + datetime.datetime.now().strftime(
+    # path = BASE_DIR + '/jishu_stock/zJieGuo/huice/' + datetime.datetime.now().strftime(
         # '%Y-%m-%d') + '.txt'
-    path = BASE_DIR + '/jishu_stock/sJieGuo/huice/' + modelname+ '.txt'
+    path = BASE_DIR + '/jishu_stock/zJieGuo/huice/' + modelname+ '.txt'
 
     info1=''
     info1=info1+'chenggong_codeinfos'+ str(chenggong_codeinfos) +'\n'

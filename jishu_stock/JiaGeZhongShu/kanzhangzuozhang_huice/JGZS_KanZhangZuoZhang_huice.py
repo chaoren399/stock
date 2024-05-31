@@ -87,7 +87,7 @@ def isAn_JGZS_KanZhangZuoZhang_model(data,stockcode):
         mairuriqi = 0
         zhisundian = 0
         # print1(data1)
-        riqi = data1.ix[0]['trade_date']  # 阳线的日期
+        riqi = data1.ix[1]['trade_date']  # 阳线的日期
 
 
         # 设置两个 key
@@ -201,7 +201,7 @@ def isAn_JGZS_KanZhangZuoZhang_model(data,stockcode):
             # info = info + manage_info
 
 
-            path = BASE_DIR + '/jishu_stock/sJieGuo/JiaGeZhongShu/' + datetime.datetime.now().strftime(
+            path = BASE_DIR + '/jishu_stock/zJieGuo/JiaGeZhongShu/' + datetime.datetime.now().strftime(
                 '%Y-%m-%d') + '.txt'
 
             jiagezhongshu_writeLog_to_txt_path_getcodename(info, path, stockcode)
@@ -211,6 +211,162 @@ def isAn_JGZS_KanZhangZuoZhang_model(data,stockcode):
 
             chenggong_code = {'stockcode': stockcode, 'mairuriqi': mairuriqi, 'zhisundian': zhisundian}
             chengongs.append(chenggong_code)
+
+
+'''
+#2 单独一个函数 判断 6 个数据是不是符合模型
+'''
+def isAn_JGZS_KanZhangZuoZhang_model_pro(data,stockcode):
+    # print stockcode
+    if (data is None or data.empty):
+        print '--df.empty--' + str(stockcode)
+        return 0
+    len_data = len(data)
+    if (len_data == 0):
+        print str(stockcode) + '--data --is null'
+    if(len_data >= 2):
+        data = data.sort_values(by='trade_date', axis=0, ascending=True)  # 按照日期 从旧到新 排序
+        data = data.reset_index(drop=True)  # 重新建立索引 ,
+
+        data1= data[len_data-2:len_data]
+        data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
+        print data1
+        mairuriqi = 0
+        zhisundian = 0
+        # print1(data1)
+        riqi = data1.ix[1]['trade_date']  # 阳线的日期
+
+
+        # 设置两个 key
+
+        key_1=0;  #1实体的1/2恰好是中枢价
+        key_2=0; # 2收盘价 在中枢价之上
+        key_3=0; # 3上下影线 都不会很长, 且等长 ,
+
+        key_4=0; # 4 第 2 周 高开高走
+
+        key_5=0; #第一周实体较大, 我这里大于 1 来测试一下
+        key_6=0; #上下影线都不长, 比实体要小
+
+
+        week1_zhongshujiage=0
+        week1_shiti_yiban=0
+        week1_close=0
+        week1_xiayingxian=0
+        week1_shangyingxian=0
+        week2_open=0
+        week1_shiti=0
+        week1_open=0
+        count=0
+        for index, row in data1.iterrows():
+            if(index==0 and isYangXian(row)==1):
+                count=count+1
+                week1_zhongshujiage=round((row['high']+row['low'])/2,2)
+                week1_shiti_yiban=round((row['open']+row['close'])/2,2)
+                week1_close=row['close']
+                week1_open=row['open']
+                week1_xiayingxian=row['open']-row['low']
+                week1_shangyingxian=row['high']-row['close']
+                week1_shiti=getShiTiDaXiao(row)
+                zhisundian=row['low']
+
+
+
+            if(index==1 and isYangXian(row)==1):
+                count=count+1
+                week2_open=row['open']
+                mairuriqi=row['trade_date']
+
+
+         # 0第一周第 2 周都是 阳线
+        if(count ==2):
+            #1实体的1/2恰好是中枢价
+            week1_zhongshu_shitiyiban=abs(week1_zhongshujiage-week1_shiti_yiban)
+            if(week1_zhongshu_shitiyiban < 0.1): # 案例 值 0.01,0.04,0.05,0.01
+                key_1=1
+            #2收盘价 在中枢价之上
+            if(week1_close > week1_zhongshujiage):
+                key_2=1
+            #3 上下影线 都不会很长, 且等长 ,
+
+            week1_xiayingxian= week1_xiayingxian+0.0001
+            shangyingxian_xiayingxian= round(week1_shangyingxian /week1_xiayingxian ,2) # 上影线-下影线的绝对值
+            # print shangyingxian_xiayingxian
+            if(  shangyingxian_xiayingxian< 2.51 and shangyingxian_xiayingxian > 0.5):
+                key_3=1
+
+            #4  第 2 周 刚开高走 的阳线.  周四买入也可以.
+            gaokai = week2_open - week1_close
+            # print1(gaokai)
+            # if(  gaokai> -0.05 ):  # 案例中 最小的是一个是 - 0.01
+            if(  gaokai >= - 0.02):  # 案例中 最小的是一个是 - 0.01
+                key_4=1
+
+            # 5 第一周实体较大, 我这里大于 1 来测试一下
+            if (week1_shiti > 1):
+                key_5 = 1
+
+            # 6 上下影线都不长, 比实体要小
+
+            tmp_week1 = week1_close - week1_open  # 这里的实体长度是纯 价格 因为下边一步 相除后就抵消了.
+            week1_shangyingxian = week1_shangyingxian + 0.001  # 为了防止除数为 0
+            # print1()
+            shiti_yingxian_jibei = round(tmp_week1 / week1_shangyingxian, 2)
+            if (shiti_yingxian_jibei > 2):  # 实体的长度 大于 上影线的长度
+                key_6 = 1
+
+
+
+        #
+        # if(0):
+        if(1):
+
+            print1(key_1)
+            print1(key_2)
+            print1(key_3)
+            print1(key_4)
+            print1(key_5)
+            print1(key_6)
+
+        # print1(shiti_yingxian_jibei)
+        # print1(shangyingxian_xiayingxian)
+
+
+        # if(key_1==1 and  key_2 ==1 and key_3==1 and key_4==1 ):
+        # if(key_1==1 and  key_2 ==1 and key_3==1  and key_4==1 and key_5==1 and key_6==1 ):
+        # if(key_1==1 and  key_2 ==1 and key_3==1  and key_4==1 and key_5==1 ):
+        if(key_1==1 and  key_2 ==1 and key_4==1 and key_5==1 ):
+
+        #     print1(shangyingxian_xiayingxian)
+            info = ''
+            info = info + "--价格中枢看涨做涨--" + str(riqi)
+            info=info+'价格中枢-实体一半=' +str(week1_zhongshu_shitiyiban)
+            info=info+'--上影线是下的几倍=' +str(shangyingxian_xiayingxian)
+            info=info+'--阳线实体=' +str(week1_shiti)
+            info=info+'--实体是影线的几倍=' +str(shiti_yingxian_jibei)
+
+
+            # print info
+            # writeLog_to_txt(info, stockcode)
+
+            # # 统一 info管理 一个函数,每次都要执行, 并且信息 返回后,要添加到 info中,
+            # # 方便后期修改,这样一改,所有的都可以执行了.
+            # from jishu_stock.z_tool.InfoTool import manage_info
+            # manage_info = manage_info(info, stockcode, riqi, '')
+            # info = info + manage_info
+
+
+            path = BASE_DIR + '/jishu_stock/zJieGuo/JiaGeZhongShu/' + datetime.datetime.now().strftime(
+                '%Y-%m-%d') + '.txt'
+            # print stockcode
+            jiagezhongshu_writeLog_to_txt_path_getcodename(info, path, stockcode)
+
+            path = '价格中枢看涨做涨.txt'
+            writeLog_to_txt_path_getcodename(info, path, stockcode)
+
+            chenggong_code = {'stockcode': stockcode, 'mairuriqi': mairuriqi, 'zhisundian': zhisundian}
+            chengongs.append(chenggong_code)
+
 
 
 '''
@@ -251,7 +407,23 @@ def test_isAn_JGZS_KanZhangZuoZhang_ziji():
     df = pd.read_csv(stockdata_path, index_col=0)
     df = df.reset_index(drop=False)  # 重新建立索引 ,
     data7_1 = df.iloc[0:8]  # 前7行
-    isAn_JGZS_KanZhangZuoZhang_model(data7_1,'000812.SZ')
+    # isAn_JGZS_KanZhangZuoZhang_model(data7_1,'000812.SZ')
+
+
+    # 案例 4  000426 xingyeyinxi
+    stock_code = '000426.SZ'
+    # df = ts.pro_bar(ts_code=tock_code, adj='qfq', freq='W', start_date='20170101', end_date='2024023')
+    df = ts.pro_bar(ts_code=stock_code, adj='qfq', freq='W', start_date='20170101', end_date='20240315')
+    data7_1 = df.iloc[0:100]  # 1 年有 50 周
+    # print data7_1
+    # isAn_JGZS_KanZhangZuoZhang_model_pro(data7_1, stock_code)
+
+
+    # 案例 4  gansu nengyuan
+    stock_code = '000791.SZ'
+    df = ts.pro_bar(ts_code= stock_code, adj='qfq', freq='W', start_date='20170101', end_date='20250526')
+    data7_1 = df.iloc[0:100]  # 1 年有 50 周
+    isAn_JGZS_KanZhangZuoZhang_model_pro(data7_1, stock_code)
 
 
 
@@ -311,8 +483,10 @@ def test_Befor_5_data():
         data7_4 = df.iloc[8:10]  # 1 年有 52 周
         data7_4 = df.iloc[8:8+2+4]  # 上个与的
         data7_4 = df.iloc[1:8+1]  # 上个与的
-
-        isAn_JGZS_KanZhangZuoZhang_model(data7_4[1:1+ 2], stock_code)
+        data7_4 = df.iloc[1:8+30]  # 上个与的
+        n=15
+        # n=0
+        isAn_JGZS_KanZhangZuoZhang_model(data7_4[n:n+ 2], stock_code)
 
         # len_1=len(data7_4)
         # for i in range(0, len_1 - 2 + 1):
@@ -328,10 +502,10 @@ if __name__ == '__main__':
     localpath1 = '/jishu_stock/stockdata/data1/'
     # get_all_JGZS_KanZhangZuoZhang(localpath1)
     # test_isAn_JGZS_KanZhangZuoZhang_laoshi() #测试老师的案例
-    # test_isAn_JGZS_KanZhangZuoZhang_ziji()
+    test_isAn_JGZS_KanZhangZuoZhang_ziji()
     # test_Befor_data()
     # jisuan_all_shouyilv(chengongs, modelname, 1.03)
-    test_Befor_5_data()
+    # test_Befor_5_data()
 
     endtime = time()
     print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"

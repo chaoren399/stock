@@ -32,7 +32,7 @@ GetToday_JGZS
 def GetToday_JGZS():
     # 1.首先获取当天符合模型的代码
     yuefen = str(getMonthNumber())
-    path1 = BASE_DIR + '/jishu_stock/sJieGuo/' + yuefen + '月/' + datetime.datetime.now().strftime(
+    path1 = BASE_DIR + '/jishu_stock/zJieGuo/' + yuefen + '月/' + datetime.datetime.now().strftime(
         '%Y-%m-%d') + '.csv'
 
     df = pd.read_csv(path1, sep=',', header=None, engine='python')

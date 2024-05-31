@@ -218,7 +218,7 @@ def isAn_KanDieZuoZhang_model(data,stockcode):
                 # info=info+'-上影线比实体长1倍大于2最好='+str(shangyingxian_bi_shiti)
                 info = info + "-----价格中枢 看跌做涨  成功了" + ' ----' + stockcode + ' ----' + str(riqi)
 
-                path = BASE_DIR + '/jishu_stock/sJieGuo/JiaGeZhongShu/' + datetime.datetime.now().strftime(
+                path = BASE_DIR + '/jishu_stock/zJieGuo/JiaGeZhongShu/' + datetime.datetime.now().strftime(
                     '%Y-%m-%d') + '.txt'
 
                 jiagezhongshu_writeLog_to_txt_path_getcodename(info, path, stockcode)

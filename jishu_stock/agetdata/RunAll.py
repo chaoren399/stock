@@ -9,7 +9,7 @@ print(parent_parent_dir_name)
 sys.path.append(parent_parent_dir_name)
 
 
-from jishu_stock.agetdata.test_ziji_model.XiaoV.XiaoV import isAn_XiaoV_model
+from jishu_stock.agetdata.test_ziji_model.XiaoV.XiaoV import isAn_XiaoV_model, get_all_XiaoV_from_Qiang_QuShi
 from jishu_stock.z_tool.email import webhook
 import pandas as pd
 from jishu_stock.DaPan.DaPan_HuanJing import get_DaPan_HuanJing
@@ -115,7 +115,7 @@ def yijianyunxing_rixian():
 
     get_all_codes() #下载所有 股票数据
 
-
+    getXiaoV()
     stock_codes = get_all_codes_from_tool() # 获取所有股票代码
     for index, item in enumerate(stock_codes):
         # print index, item
@@ -143,7 +143,9 @@ def yijianyunxing_rixian():
     #根据股票代码 获取 当天是不是价格中枢
     # GetToday_JGZS()
 
-
+def getXiaoV():
+    localpath1 = '/jishu_stock/stockdata/data1/'
+    get_all_XiaoV_from_Qiang_QuShi(localpath1)
 
 """
 主要是 今天要看的模型数据
@@ -159,7 +161,7 @@ def task1(data6_1,stock_code):
     #以逸待劳
     # isAn_YiYiDaiLao_model(data6_1, stock_code)
     # xiaoV
-    isAn_XiaoV_model(data6_1,stock_code)
+    # isAn_XiaoV_model(data6_1,stock_code)
 
 
 
@@ -205,12 +207,12 @@ def task1(data6_1,stock_code):
 
 
     #  神龙摆尾1 神1
-    # isAn_Shen1_model(data6_1, stock_code)
+    isAn_Shen1_model(data6_1, stock_code)
 
     #神1  6天数据模型
     # isAn_Shen1_Pro_model(data6_1, stock_code)  #pro  济民医疗
     # 神2pro 改进版, 之前的有些拿不到
-    # isAn_ShenLongBaiWei2_Pro_model(data6_1, stock_code)
+    isAn_ShenLongBaiWei2_Pro_model(data6_1, stock_code)
     #  神龙摆尾3 神3
     # isAnShenLongBaiwei3_model(data6_1, stock_code)
 

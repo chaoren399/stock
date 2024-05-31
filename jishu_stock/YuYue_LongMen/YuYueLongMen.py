@@ -112,13 +112,13 @@ def is_YuYueLongMen_model(data, stock_code):
         if(key_isxiangjiang_2015_2018==1 and key_is_shangzhang_5==1):
             info = stock_code + "-----鱼跃龙门  佛系翻倍-----------"
 
-            path = BASE_DIR + '/jishu_stock/sJieGuo/YuYueLongM/' + 'Yu' + datetime.datetime.now().strftime(
+            path = BASE_DIR + '/jishu_stock/zJieGuo/YuYueLongM/' + 'Yu' + datetime.datetime.now().strftime(
                 '%Y-%m-%d') + '.txt'
             if (isInQiangShi_gupiaochi(stock_code)):
                 info = info + '--强势股票--'
             info = info + '--' + get_Stock_Name(stock_code)
             print info
-            #/Users/mac/PycharmProjects/gitproject/stock/jishu_stock/sJieGuo/YuYueLongM
+            #/Users/mac/PycharmProjects/gitproject/stock/jishu_stock/zJieGuo/YuYueLongM
             with open(path, "a") as f:
                 f.write(info + '' + "\n")
 

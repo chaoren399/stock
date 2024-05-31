@@ -11,7 +11,7 @@ from stock.settings import BASE_DIR
 
 
 '''
-path1 = BASE_DIR + '/jishu_stock/sJieGuo/12月/' + datetime.datetime.now().strftime(
+path1 = BASE_DIR + '/jishu_stock/zJieGuo/12月/' + datetime.datetime.now().strftime(
         '%Y-%m-%d') + '.csv'
 '''
 

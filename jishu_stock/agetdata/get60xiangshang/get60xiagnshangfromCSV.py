@@ -12,7 +12,7 @@ from jishu_stock.z_tool.PyDateTool import getMonthNumber, getDayNumberYMD
 from jishu_stock.z_tool.isShangZhang_60Week import  is_60WEEK_ShangZhang_with_number
 from stock.settings import BASE_DIR
 
-day_jieguo_path = BASE_DIR + '/jishu_stock/sJieGuo/'+str(getMonthNumber())+'月/' + datetime.datetime.now().strftime(
+day_jieguo_path = BASE_DIR + '/jishu_stock/zJieGuo/'+str(getMonthNumber())+'月/' + datetime.datetime.now().strftime(
         '%Y-%m-%d') + '.csv'
 
 '''

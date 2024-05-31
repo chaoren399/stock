@@ -226,7 +226,7 @@ def jisuan_all_shouyilv(chenggongs, modelname, zhiying_shouyilv):
             datais_null=datais_null+1
 
 
-    path = BASE_DIR + '/jishu_stock/sJieGuo/huice/' + modelname+ '.txt'
+    path = BASE_DIR + '/jishu_stock/zJieGuo/huice/' + modelname+ '.txt'
 
     import json
     chenggong_codeinfos = json.dumps(chenggong_codeinfos, encoding='UTF-8', ensure_ascii=False)

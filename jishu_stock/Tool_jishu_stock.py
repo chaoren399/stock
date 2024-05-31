@@ -162,6 +162,7 @@ def jiagezhongshu_writeLog_to_txt_path_getcodename(info ,path,code):
 def writeLog_to_txt_path_getcodename(info ,path,code):
     modename= path.split('.')[0]
     info = info + get_Stock_Name(code)
+    # print info
 
     # if (isInQiangShi_gupiaochi(code) == 1):
     #     info = info + '--强势股票'
@@ -175,7 +176,7 @@ def writeLog_to_txt_path_getcodename(info ,path,code):
     # print info
     webhook.sendData(info)
 
-    path = BASE_DIR + '/jishu_stock/sJieGuo/huizong/' + path
+    path = BASE_DIR + '/jishu_stock/zJieGuo/huizong/' + path
     with open(path, "a") as f:  # 写入单独模型文件
         f.write(info + '' + '\n')
 
@@ -225,10 +226,10 @@ def writeLog_to_txt_path(info ,path):
 #  两个函数用用一路径 每月只需改动这一个就可以
 yuefen = str( getMonthNumber())
 
-path = BASE_DIR + '/jishu_stock/sJieGuo/'+yuefen+'月/' + datetime.datetime.now().strftime(
+path = BASE_DIR + '/jishu_stock/zJieGuo/'+yuefen+'月/' + datetime.datetime.now().strftime(
         '%Y-%m-%d') + '.txt'
 
-path1 = BASE_DIR + '/jishu_stock/sJieGuo/'+yuefen+'月/' + datetime.datetime.now().strftime(
+path1 = BASE_DIR + '/jishu_stock/zJieGuo/'+yuefen+'月/' + datetime.datetime.now().strftime(
         '%Y-%m-%d') + '.csv'
 
 
@@ -236,7 +237,7 @@ path1 = BASE_DIR + '/jishu_stock/sJieGuo/'+yuefen+'月/' + datetime.datetime.now
 固定路径的写入 带 code 的, 每个输出都有的
 '''
 def writeLog_to_txt(info,code):
-    # path = BASE_DIR + '/jishu_stock/sJieGuo/10月/' + datetime.datetime.now().strftime(
+    # path = BASE_DIR + '/jishu_stock/zJieGuo/10月/' + datetime.datetime.now().strftime(
     #     '%Y-%m-%d') + '.txt'
 
     info = info  + get_Stock_Name(code)
@@ -261,7 +262,7 @@ def writeLog_to_txt(info,code):
 固定路径的写入
 '''
 def writeLog_to_txt_nocode(info):
-    # path = BASE_DIR + '/jishu_stock/sJieGuo/10月/' + datetime.datetime.now().strftime(
+    # path = BASE_DIR + '/jishu_stock/zJieGuo/10月/' + datetime.datetime.now().strftime(
     #     '%Y-%m-%d') + '.txt'
 
     qianzhui ='---------------------------------------'
@@ -414,6 +415,7 @@ def isShangZhang_QuShi(data):
 给出 股票代码 得到 股票的名字
 '''
 def  get_Stock_Name(code):
+    # print code
     # path = path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
     path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path)

@@ -100,7 +100,7 @@ def isAn_YuYueLongMen1_model(data,stockcode):
 
             info = info + "-----鱼跃龙门1 成功了"  + str(riqi)
 
-            path = BASE_DIR + '/jishu_stock/sJieGuo/YuYueLongM/' + 'Yu' + datetime.datetime.now().strftime(
+            path = BASE_DIR + '/jishu_stock/zJieGuo/YuYueLongM/' + 'Yu' + datetime.datetime.now().strftime(
                 '%Y-%m-%d') + '.txt'
             if (isInQiangShi_gupiaochi(stockcode)):
                 info = info + '--强势股票--'
