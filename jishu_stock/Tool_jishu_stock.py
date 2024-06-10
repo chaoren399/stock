@@ -3,7 +3,7 @@
 import collections
 import csv
 import datetime
-
+import os
 
 from jishu_stock.z_tool.PyDateTool import getMonthNumber
 from jishu_stock.z_tool.duoxiancheng.ModelCode import get_modelcode
@@ -42,7 +42,7 @@ def test_getallstockdata_isLongZhan_YuYe():
 获取所有的股票信息, 为了便于 回测,返回 所有股票的代码数组.
 '''
 def get_all_codes_from_tool():
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path, dtype={'code': str})
     stock_codes = []
     for index, row in data.iterrows():
@@ -226,7 +226,9 @@ def writeLog_to_txt_path(info ,path):
 #  两个函数用用一路径 每月只需改动这一个就可以
 yuefen = str( getMonthNumber())
 
-path = BASE_DIR + '/jishu_stock/zJieGuo/'+yuefen+'月/' + datetime.datetime.now().strftime(
+pathyuefen = BASE_DIR + '/jishu_stock/zJieGuo/'+yuefen+'月/'
+
+path = pathyuefen + datetime.datetime.now().strftime(
         '%Y-%m-%d') + '.txt'
 
 path1 = BASE_DIR + '/jishu_stock/zJieGuo/'+yuefen+'月/' + datetime.datetime.now().strftime(
@@ -268,7 +270,9 @@ def writeLog_to_txt_nocode(info):
     qianzhui ='---------------------------------------'
     info = qianzhui + info + qianzhui
     print info
-
+    dir_path = pathyuefen
+    if not os.path.exists(dir_path):
+        os.makedirs(dir_path)
 
     with open(path, "a") as f:
         f.write(info + '' + "\n")
@@ -416,8 +420,8 @@ def isShangZhang_QuShi(data):
 '''
 def  get_Stock_Name(code):
     # print code
-    # path = path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    # path = path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST-1.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path)
     for index, row in data.iterrows():
         if (row['ts_code'] == code):
@@ -432,7 +436,7 @@ def  get_Stock_Name(code):
 '''
 
 def is_YouQianJun_gupiaochi(code):
-    path= BASE_DIR + '/jishu_stock/stockdata/有钱君股票池.csv'
+    path= BASE_DIR + '/jishu_stock/z_stockdata/有钱君股票池.csv'
     data = pd.read_csv(path)
 
     count = 0
@@ -449,7 +453,7 @@ def is_YouQianJun_gupiaochi(code):
 '''
 
 def is_XiaoShu_gupiaochi(code):
-    path = BASE_DIR + '/jishu_stock/stockdata/小树股票池.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/小树股票池.csv'
     data = pd.read_csv(path)
 
     count = 0
@@ -463,7 +467,7 @@ def is_XiaoShu_gupiaochi(code):
 判断一只股票是不是 在强势股票池中
 '''
 def isInQiangShi_gupiaochi(code):
-    path = BASE_DIR + '/jishu_stock/stockdata/强者恒强股票池.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/强者恒强股票池.csv'
     data = pd.read_csv(path)
 
     count = 0

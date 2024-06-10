@@ -29,8 +29,8 @@ modelname='鱼跃龙门1'
 def get_all_YuYueLongMen1(localpath1):
     info1=  '--鱼跃龙门1 start--   '
     writeLog_to_txt_nocode(info1)
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
-    # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
+    # path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST-1.csv'
 
     count = 0
     data = pd.read_csv(path, dtype={'code': str})
@@ -38,7 +38,7 @@ def get_all_YuYueLongMen1(localpath1):
 
         for index, row in data.iterrows():
             stock_code = row['ts_code']
-            stockdata_path = BASE_DIR + '/jishu_stock/stockdata/MONTH_DATA_K/' + stock_code + '_Month' + ".csv"
+            stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/MONTH_DATA_K/' + stock_code + '_Month' + ".csv"
             df = pd.read_csv(stockdata_path, index_col=0)
             # print df
             if (df.empty):
@@ -140,7 +140,7 @@ def test_isAn_YuYueLongMen1_ziji():
 回测 8 月份的数据
 '''
 def test_Befor_data():
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
         stock_code = row['ts_code']
@@ -158,7 +158,7 @@ if __name__ == '__main__':
     from  time import  *
     starttime = time()
 
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     get_all_YuYueLongMen1(localpath1)
 
 

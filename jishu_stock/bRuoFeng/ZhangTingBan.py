@@ -70,7 +70,7 @@ if __name__ == '__main__':
     starttime = time()
 
 
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     # get_all_ChouMaTuPo(localpath1)
 
     # test_ZhangTingBan()

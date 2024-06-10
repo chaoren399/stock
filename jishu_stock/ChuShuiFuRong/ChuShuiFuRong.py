@@ -50,7 +50,7 @@ def get_all_ChuShuiFuRong(localpath1):
     info1=  '--出水芙蓉 主力底部强势洗盘--   '
     writeLog_to_txt_nocode(info1)
 
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
 
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
@@ -240,7 +240,7 @@ def test_shenglv_zhunquexing():
 回测 8 月份的数据
 '''
 def test_Befor_data():
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
 
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
@@ -284,7 +284,7 @@ if __name__ == '__main__':
     from  time import  *
     starttime = time()
 
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     # get_all_ChuShuiFuRong(localpath1)
     # test_isAn_ChuShuiFuRong_laoshi()
     # test_isAn_ChuShuiFuRong_ziji()

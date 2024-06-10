@@ -41,7 +41,7 @@ def get_all_ShenLongBaiWei4(localpath1):
     info1= "神龙摆尾4  下跌横盘缓慢上涨 66 且 3 个月内最大值  start "
     writeLog_to_txt_nocode(info1)
 
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
     # print "ssss"
     # print path
     count = 0
@@ -239,7 +239,7 @@ def test_isAn_ShenLongBaiwei4_model_form_ts():
 
 
 def test_isAn_ShenLongBaiwei4_model():
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     # stock_code ='000520.SZ'
     # stock_code ='002247.SZ'
     stock_code ='000519.SZ'
@@ -264,7 +264,7 @@ def test_ziji():
 回测 8 月份的数据
 '''
 def test_Befor_data():
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
 
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
@@ -331,7 +331,7 @@ if __name__ == '__main__':
 
     # getallstockdata_isShenLongBaiWei('20210701', '20210805')
     # anstock_isShenLongBaiWei_model('000539.SZ','20210701', '20210805')
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     # get_all_ShenLongBaiWei4(localpath1)
     # test_isAn_ShenLongBaiwei4_model_form_ts()
     # test_isAn_ShenLongBaiwei4_model()

@@ -18,7 +18,7 @@ from stock.settings import BASE_DIR
 
 def getallstockdata_isZhangTingBan_fromLocal(localpath1):
     # path = BASE_DIR + '/jishu_stock/rQiXingLuoChangKong/data/stockcodelist_No_ST.csv'
-    path = BASE_DIR + '/jishu_stock/stockdata/xiadiecodes.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/xiadiecodes.csv'
     # print "ssss"
     # print path
     count = 0
@@ -27,7 +27,7 @@ def getallstockdata_isZhangTingBan_fromLocal(localpath1):
         # print row['ts_code']
         stock_code = row['ts_code']
 
-        # localpath1 ='/jishu_stock/stockdata/data1/'
+        # localpath1 ='/jishu_stock/z_stockdata/data1/'
         stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
         # df =  pd.read_csv(stockdata_path, dtype={'code': str})
         df = pd.read_csv(stockdata_path, index_col=0)
@@ -87,7 +87,7 @@ if __name__ == '__main__':
 
     # getallstockdata_isShenLongBaiWei('20210701', '20210805')
     # anstock_isShenLongBaiWei_model('000539.SZ','20210701', '20210805')
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     getallstockdata_isZhangTingBan_fromLocal(localpath1)
 
     endtime = datetime.datetime.now()

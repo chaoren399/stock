@@ -20,8 +20,8 @@ from stock.settings import BASE_DIR
 def getall_ShenLongBaiWei1(localpath1):
     info1= "神龙摆尾  首先要看是不是 下跌后横盘  横盘后出现的第一个涨停板 start "
     writeLog_to_txt_nocode(info1)
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
-    # path = BASE_DIR + '/jishu_stock/stockdata/xiadiecodes.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
+    # path = BASE_DIR + '/jishu_stock/z_stockdata/xiadiecodes.csv'
     # print "ssss"
     # print path
     count = 0
@@ -30,7 +30,7 @@ def getall_ShenLongBaiWei1(localpath1):
         # print row['ts_code']
         stock_code = row['ts_code']
 
-        # localpath1 ='/jishu_stock/stockdata/data1/'
+        # localpath1 ='/jishu_stock/z_stockdata/data1/'
         stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
         # df =  pd.read_csv(stockdata_path, dtype={'code': str})
         df = pd.read_csv(stockdata_path, index_col=0)
@@ -246,7 +246,7 @@ def test_linshi():
 回测 6月份的数据
 '''
 def test_Befor_data():
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
 
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
@@ -272,7 +272,7 @@ if __name__ == '__main__':
 
     # getallstockdata_isShenLongBaiWei('20210701', '20210805')
     # anstock_isShenLongBaiWei_model('000539.SZ','20210701', '20210805')
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     # getall_ShenLongBaiWei1(localpath1)
     # test_Befor_data() # 找到 7 月份的数据
     # test_isAnShenLongBaiwei_model() # 老师案例

@@ -20,8 +20,8 @@ import pandas as pd
 '''
 def stock_code_zhuanhuan_dongfangcaifu():
 
-    # no_houzhui_path= BASE_DIR + '/jishu_stock/stockdata/z_code/小树股票池_NO_HOUZHUI.csv'
-    no_houzhui_path= BASE_DIR + '/jishu_stock/stockdata/z_code/有钱君股票池_NO_HOUZHUI.csv'
+    # no_houzhui_path= BASE_DIR + '/jishu_stock/z_stockdata/z_code/小树股票池_NO_HOUZHUI.csv'
+    no_houzhui_path= BASE_DIR + '/jishu_stock/z_stockdata/z_code/有钱君股票池_NO_HOUZHUI.csv'
     data1 = pd.read_csv(no_houzhui_path,dtype='object')
 
     data_list=[]
@@ -45,7 +45,7 @@ def stock_code_zhuanhuan_dongfangcaifu():
 把 000809 这样的代码 转化为 000809.SZ 
 '''
 def get_houzhui_code(code):
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST-1.csv'
     data = pd.read_csv(path)
     for index, row in data.iterrows():
         code_no_houzhui=row['ts_code'][0:6]

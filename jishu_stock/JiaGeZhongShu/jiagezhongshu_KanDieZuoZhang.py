@@ -56,7 +56,7 @@ modelname='价格中枢看跌做涨'
 def get_all_jiagezhongshu_KanDieZuoZhang(localpath1):
     info1=  '--价格中枢 看跌做涨 start--   '
     writeLog_to_txt_nocode(info1)
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
     count = 0
     data = pd.read_csv(path, dtype={'code': str})
     if (len(data) > 0):
@@ -65,7 +65,7 @@ def get_all_jiagezhongshu_KanDieZuoZhang(localpath1):
         # print '1111111'
         for index, row in data.iterrows():
             stock_code = row['ts_code']
-            stockdata_path = BASE_DIR + '/jishu_stock/stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+            stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
             df = pd.read_csv(stockdata_path, index_col=0)
             # print df
             if (df.empty):
@@ -277,13 +277,13 @@ def test_isAn_KanDieZuoZhang_ziji():
 回测 8 月份的数据
 '''
 def test_Befor_data():
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
         stock_code = row['ts_code']
 
-        # stockdata_path = BASE_DIR + '/jishu_stock/stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
-        stockdata_path = BASE_DIR + '/jishu_stock/stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+        # stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+        stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
         df = pd.read_csv(stockdata_path, index_col=0)
             # print df
         if (df.empty):
@@ -313,7 +313,7 @@ def test_Befor_data():
 
 
 if __name__ == '__main__':
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     # getAll_jiagezhongshu_WeekKdata(localpath1) #每周运行钱需要先下载数据
     # get_all_jiagezhongshu_KanDieZuoZhang(localpath1)
 

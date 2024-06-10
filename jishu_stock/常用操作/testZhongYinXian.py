@@ -29,5 +29,5 @@ def testZhangtingban():
             print1(chazhi1)
 
 if __name__ == '__main__':
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     testZhangtingban()

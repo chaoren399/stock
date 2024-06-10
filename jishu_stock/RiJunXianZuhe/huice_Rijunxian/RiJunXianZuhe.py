@@ -38,7 +38,7 @@ def get_5_13_34_RiJunXian(localpath1):
     info1=  '--日均线组合5-13-34  start--固定 4 个值 来判断金叉 data7_1 = df.iloc[0:4]  '
     writeLog_to_txt_nocode(info1)
 
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
 
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
@@ -141,7 +141,7 @@ def isRiJunxianZuHe_mode_pro4(data, stock_code):
 
 def ma60_Week_is_XiangShang(stock_code):
     stock_code = stock_code
-    stockdata_path = BASE_DIR + '/jishu_stock/stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+    stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
     df = pd.read_csv(stockdata_path, index_col=0)
     df = df.sort_values(by='trade_date', axis=0, ascending=False)  # 按照日期 从新到旧 排序
     # print df
@@ -208,7 +208,7 @@ def test_get_5_13_34_RiJunXian_Pro3_1():
 '''
 def ma5_ma13_is0():
 
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
 
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
@@ -227,7 +227,7 @@ def ma5_ma13_is0():
 
 
 if __name__ == '__main__':
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     # get_5_13_34_RiJunXian_Pro3(localpath1=localpath1)
     test_get_5_13_34_RiJunXian_Pro3_1()
     # ma5_ma13_is0()

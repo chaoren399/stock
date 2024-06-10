@@ -19,7 +19,7 @@ from stock.settings import BASE_DIR
 '''
 
 def getallstockdata_isXiaDie(start_date,end_date):
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
     # print "ssss"
     print path
     count = 0
@@ -40,7 +40,7 @@ def getallstockdata_isXiaDie(start_date,end_date):
         # if(count =100):
 
     sss = pd.DataFrame(codes,columns=['ts_code'])
-    path1= BASE_DIR+'/jishu_stock/stockdata/xiadiecodes.csv'
+    path1= BASE_DIR+'/jishu_stock/z_stockdata/xiadiecodes.csv'
     sss.to_csv(path1)
         # print "第"+str(count)+"个"
         # print code

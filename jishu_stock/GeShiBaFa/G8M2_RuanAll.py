@@ -13,7 +13,7 @@ G8M2 一键运行
 
 def G8M2_yijianyunxing():
     # 日线 操作
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     today = starttime.strftime('%Y%m%d')
     #先更新数据
     getAllWeekKdata(localpath1)

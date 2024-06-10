@@ -41,8 +41,8 @@ MA10 - MA60 的值放到数组中
 
 def getallstockdata_isG8_Mai2_Pro_fromLocal():
     print '------start 葛式八法---'
-    # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
+    # path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST-1.csv'
     count = 0
     data = pd.read_csv(path, dtype={'code': str})
     if(len(data)>0):
@@ -51,7 +51,7 @@ def getallstockdata_isG8_Mai2_Pro_fromLocal():
         # print '1111111'
         for index, row in data.iterrows():
             stock_code = row['ts_code']
-            stockdata_path = BASE_DIR + '/jishu_stock/stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+            stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
             df = pd.read_csv(stockdata_path, index_col=0)
             # print df
             if (df.empty):
@@ -151,7 +151,7 @@ def test_one_stock_is_GeShi_8fa():
     # stock_code='000002.SZ'
     # stock_code='000301.SZ'
     stock_code='002318.SZ'
-    stockdata_path = BASE_DIR + '/jishu_stock/stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+    stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
     df = pd.read_csv(stockdata_path, index_col=0)
     # print df
     # df = df.iloc[6:11]  # 测试  上个月的数据 6 月份

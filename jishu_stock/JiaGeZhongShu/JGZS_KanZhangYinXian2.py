@@ -38,13 +38,13 @@ JGZS_KanZhangYinXian2
 def get_all_JGZS_KanZhangYinXian2(localpath1):
     info1=  '--价格中枢-看涨阴线2 start--   '
     writeLog_to_txt_nocode(info1)
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
         # print row['ts_code']
         stock_code = row['ts_code']
         # stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
-        stockdata_path = BASE_DIR + '/jishu_stock/stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+        stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
 
         df = pd.read_csv(stockdata_path, index_col=0)
         df = df.reset_index(drop=False)
@@ -192,7 +192,7 @@ def test_isAn_JGZS_KanZhangYinXian2_laoshi():
 
 def test_bendi_shuju():
     stock_code = '000100.SZ'
-    stockdata_path = BASE_DIR + '/jishu_stock/stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+    stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
     df = pd.read_csv(stockdata_path, index_col=0)
     data7_1=df.loc['2020-05-03':'2020-04-12' ]
     print data7_1
@@ -209,19 +209,19 @@ def test_isAn_JGZS_KanZhangYinXian1_ziji():
     df = ts.pro_bar(ts_code='603595.SH', adj='qfq', freq='W', start_date='20170101', end_date='20211022')
     data7_1 = df.iloc[0:6]  # 1 年有 50 周
     # print data7_1
-    isAn_JGZS_KanZhangYinXian1_model(data7_1, '603595.SH')
+    # isAn_JGZS_KanZhangYinXian1_model(data7_1, '603595.SH')
 
 '''
 回测 8 月份的数据
 '''
 def test_Befor_data():
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
         stock_code = row['ts_code']
 
-        # stockdata_path = BASE_DIR + '/jishu_stock/stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
-        stockdata_path = BASE_DIR + '/jishu_stock/stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+        # stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+        stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
         df = pd.read_csv(stockdata_path, index_col=0)
             # print df
         if (df.empty):
@@ -241,7 +241,7 @@ def test_Befor_data():
 
 
 if __name__ == '__main__':
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     # get_all_JGZS_KanZhangYinXian2(localpath1)
     # test_isAn_JGZS_KanZhangYinXian2_laoshi()  #
     # test_ziaxian_zhuan_Week()

@@ -27,9 +27,9 @@ count_3tian_manzu= 0
 
 def getallstockdata_is_ShuangLong_Qushui_FromLocal(localpath1):
     print "双龙取水  start "
-    # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
-    # path = BASE_DIR + '/jishu_stock/stockdata/xiadiecodes.csv'
+    # path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST-1.csv'
+    # path = BASE_DIR + '/jishu_stock/z_stockdata/xiadiecodes.csv'
 
     # print "ssss"
     print path
@@ -144,7 +144,7 @@ if __name__ == '__main__':
 
     # getallstockdata_isShenLongBaiWei('20210701', '20210805')
     # anstock_isShenLongBaiWei_model('000539.SZ','20210701', '20210805')
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     getallstockdata_is_ShuangLong_Qushui_FromLocal(localpath1)
     # global count_2tian_manzu
     # global count_3tian_manzu

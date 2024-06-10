@@ -33,7 +33,7 @@ modelname='下周持仓量'
 def get_all_NextWeek_ChiCangLiang(localpath1):
     info1=  '--下周持仓量 start--   '
     writeLog_to_txt_nocode(info1)
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
         import time
@@ -193,7 +193,7 @@ if __name__ == '__main__':
     starttime = time()
 
 
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     get_all_NextWeek_ChiCangLiang(localpath1)
 
 

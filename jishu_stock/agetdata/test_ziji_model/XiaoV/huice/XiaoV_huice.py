@@ -46,7 +46,7 @@ modelname='向下跳空缺口阴线'
 def get_all_XiaoV(localpath1):
     info1=  '--小V  start--   '
     writeLog_to_txt_nocode(info1)
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
         # print row['ts_code']
@@ -182,8 +182,8 @@ def test_isAn_XiaoV_model_laoshi():
 回测  5月份的数据
 '''
 def test_Befor_data_onestock_oneyear():
-    # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST_tmp.csv'
+    # path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST_tmp.csv'
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
         stock_code = row['ts_code']
@@ -213,7 +213,7 @@ def test_Befor_data_onestock_oneyear():
 回测  5月份的数据
 '''
 def test_Befor_data_allstock_oneday():
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
         # print row['ts_code']
@@ -237,7 +237,7 @@ def test_Befor_data_allstock_oneday():
 回测 8 月份的数据
 '''
 def test_Befor_data1():
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
         stock_code = row['ts_code']
@@ -273,7 +273,7 @@ if __name__ == '__main__':
     starttime = time()
 
 
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
 
     # test_isAn_XiaoV_model_laoshi()
     # test_Befor_data_onestock_oneyear()

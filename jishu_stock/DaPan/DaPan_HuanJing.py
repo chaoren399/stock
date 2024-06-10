@@ -2,6 +2,7 @@
 # -*- coding: utf8 -*-
 import os
 
+import pandas as pd
 import tushare as ts
 import sys
 
@@ -12,7 +13,11 @@ reload(sys)
 sys.setdefaultencoding('utf8')
 from jishu_stock.z_tool.PyDateTool import getDayNumberYMD
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + './')
-
+from jishu_stock.z_tool.email import webhook
+# 显示所有列
+pd.set_option('display.max_columns', None)
+# 显示所有行
+pd.set_option('display.max_rows', None)
 '''
 判断 大盘当前的环境 - 仓位的量化管理
 
@@ -53,7 +58,10 @@ def get_DaPan_HuanJing(enddate):
     key_3_3 = 0;  # 4 天内 最多只有 1 天 成交量 在 120vol 以上
 
     count=0
+    vol_dapan=0
     for index,row in data.iterrows():
+        if(index==3):
+            vol_dapan=row['vol']
         vol = row['vol']
         mavol120= row['ma_v_120']
         if(vol > mavol120):
@@ -110,7 +118,9 @@ def get_DaPan_HuanJing(enddate):
         juti_info = juti_info + '---成交量不满足要求 '
 
     info = info +'------'+ juti_info +'---' + str(enddate)
-
+    vol_dapan_vol="--大盘成交量"+  str(vol_dapan)
+    info=info+vol_dapan_vol
+    webhook.sendData(info)
     # print info
     return info
 

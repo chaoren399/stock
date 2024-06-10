@@ -35,7 +35,7 @@ def get_all_DaYou(localpath1):
     info1=  '--大有  上涨初期洗盘模型 start--   '
     writeLog_to_txt_nocode(info1)
 
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
 
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
@@ -256,7 +256,7 @@ def ceshi_xueyuan_anli():
 回测 8 月份的数据
 '''
 def test_Befor_data():
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
 
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
@@ -294,7 +294,7 @@ if __name__ == '__main__':
     starttime = time()
 
 
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     # get_all_DaYou(localpath1)
     test_isAn_DaYou_laoshi()#测试老师案例
     # test_isAn_DaYou_ziji()

@@ -42,13 +42,13 @@ Qiang_QuShi
 '''
 chengongs=[]
 modelname='Qiang_QuShi'
-#BASE_DIR + '/jishu_stock/stockdata/模型编码.csv'
+#BASE_DIR + '/jishu_stock/z_stockdata/模型编码.csv'
 
 
 def test():
 
-    # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
-    path = BASE_DIR + '/jishu_stock/stockdata/qiang_qushi_stocks.csv'
+    # path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/qiang_qushi_stocks.csv'
 
     data = pd.read_csv(path, dtype={'code': str})
     all_count=0
@@ -62,7 +62,7 @@ def test():
 def get_all_Qiang_QuShi(localpath1):
     info1=  '--Qiang_QuShi  start--   '
     writeLog_to_txt_nocode(info1)
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path, dtype={'code': str})
     all_count=0
     for index, row in data.iterrows():
@@ -208,7 +208,7 @@ if __name__ == '__main__':
     starttime = time()
 
 
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
 
     # test_isAn_XiaoV_model_laoshi()
 

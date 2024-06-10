@@ -48,7 +48,7 @@ def get_all_FanKeWeiZhu(localpath1):
     info1=  '--反客为主 找 刚起来 不超过 3 个月的 强庄主力仅用一天的强势洗盘 start--   '
     writeLog_to_txt_nocode(info1)
 
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
 
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
@@ -273,7 +273,7 @@ def test_isAn_FanKeWeiZhu_ziji():
 回测 8 月份的数据
 '''
 def test_Befor_data():
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
 
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
@@ -308,7 +308,7 @@ if __name__ == '__main__':
     from  time import  *
     starttime = time()
 
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     # get_all_FanKeWeiZhu(localpath1)
     # test_isAn_FanKeWeiZhu_laoshi()
     test_Befor_data()

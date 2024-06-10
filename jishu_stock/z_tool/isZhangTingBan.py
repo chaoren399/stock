@@ -42,4 +42,4 @@ if __name__ == '__main__':
 
     starttime = datetime.datetime.now()
 
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'

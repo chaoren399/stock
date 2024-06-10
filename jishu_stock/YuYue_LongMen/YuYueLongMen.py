@@ -37,8 +37,8 @@ from stock.settings import BASE_DIR
 
 def getallstockdata_isYuYueLongMen_fromLocal():
     print '------start 鱼跃龙门  佛系翻倍---'
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
-    # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
+    # path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST-1.csv'
 
     count = 0
     data = pd.read_csv(path, dtype={'code': str})
@@ -48,7 +48,7 @@ def getallstockdata_isYuYueLongMen_fromLocal():
         # print '1111111'
         for index, row in data.iterrows():
             stock_code = row['ts_code']
-            stockdata_path = BASE_DIR + '/jishu_stock/stockdata/MONTH_DATA_K/' + stock_code + '_Month' + ".csv"
+            stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/MONTH_DATA_K/' + stock_code + '_Month' + ".csv"
             df = pd.read_csv(stockdata_path, index_col=0)
             # print df
             if (df.empty):
@@ -154,7 +154,7 @@ def test_is_YuYueLongMen_model():
     # stock_code = '002536.SZ' #飞龙股份
     stock_code = '000059.SZ' #飞龙股份
     stock_code = '000158.SZ' #飞龙股份
-    stockdata_path = BASE_DIR + '/jishu_stock/stockdata/MONTH_DATA_K/' + stock_code + '_Month' + ".csv"
+    stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/MONTH_DATA_K/' + stock_code + '_Month' + ".csv"
     print "测试---test_is_YuYueLongMen_model "
     df = pd.read_csv(stockdata_path, index_col=0)
     # print df[0:3]
@@ -163,7 +163,7 @@ def test_is_YuYueLongMen_model():
 
 if __name__ == '__main__':
     starttime = datetime.datetime.now()
-    localpath = '/jishu_stock/stockdata/data1/'
+    localpath = '/jishu_stock/z_stockdata/data1/'
     today = starttime.strftime('%Y%m%d')
     # test_is_YuYueLongMen_model()
     getallstockdata_isYuYueLongMen_fromLocal()

@@ -23,7 +23,7 @@ https://blog.csdn.net/qq_45103998/article/details/102521676
 
 def test_get_WeekMa10_Ma60():
     stock_code='000001.SZ'
-    path1= BASE_DIR + '/jishu_stock/stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+    path1= BASE_DIR + '/jishu_stock/z_stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
 
     data = pd.read_csv(path1, dtype={'code': str})
     data['WeekMa10'] =  data['close'].rolling(10).mean()

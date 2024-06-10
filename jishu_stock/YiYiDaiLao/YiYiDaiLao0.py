@@ -39,7 +39,7 @@ def get_all_YiYiDaiLao2(localpath1):
     info1=  '--以逸待劳0前 5 天满足模型, 第 6 天待定 主力洗盘模型 start--   '
     writeLog_to_txt_nocode(info1)
 
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
 
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
@@ -210,7 +210,7 @@ def test_isAn_YiYiDaiLao2_laoshi():
 回测 8 月份的数据
 '''
 def test_Befor_data():
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
 
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
@@ -229,7 +229,7 @@ def test_Befor_data():
 
 
 if __name__ == '__main__':
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     # test_get_5_13_34_RiJunXian_Pro3()
     # test_isAn_YiYiDaiLao2_laoshi()
     get_all_YiYiDaiLao2(localpath1)

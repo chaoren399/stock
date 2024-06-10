@@ -45,8 +45,8 @@ def cover_day_K_to_Month_K(df,outpath):
 
 def getAllMonth_Kdata(localpath1):
     print '日K 转换为 月K'
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
-    # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
+    # path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST-1.csv'
     count = 0
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
@@ -55,9 +55,9 @@ def getAllMonth_Kdata(localpath1):
 
 
         stockdata_path1 = BASE_DIR + localpath1 + stock_code + ".csv"
-        localpath2 = '/jishu_stock/stockdata/data2020/'   #
+        localpath2 = '/jishu_stock/z_stockdata/data2020/'   #
         stockdata_path2 = BASE_DIR + localpath2 + stock_code + ".csv"
-        localpath3 = '/jishu_stock/stockdata/data2015_2017/'   #
+        localpath3 = '/jishu_stock/z_stockdata/data2015_2017/'   #
         stockdata_path3 = BASE_DIR + localpath3 + stock_code + ".csv"
 
         df1 = pd.read_csv(stockdata_path1, index_col=0)
@@ -70,7 +70,7 @@ def getAllMonth_Kdata(localpath1):
         # print df
         if (df.empty):
             return
-        outpath= BASE_DIR + '/jishu_stock/stockdata/MONTH_DATA_K/' + stock_code +'_Month'+ ".csv"
+        outpath= BASE_DIR + '/jishu_stock/z_stockdata/MONTH_DATA_K/' + stock_code +'_Month'+ ".csv"
         cover_day_K_to_Month_K(df,outpath)
         count = count+1
         # print count
@@ -89,9 +89,9 @@ def test_cover_day_K_to_Month_K():
     stock_code='000002.SZ'
 
     stockdata_path1 = BASE_DIR + localpath1 + stock_code + ".csv"
-    localpath2 = '/jishu_stock/stockdata/data2020/'  #
+    localpath2 = '/jishu_stock/z_stockdata/data2020/'  #
     stockdata_path2 = BASE_DIR + localpath2 + stock_code + ".csv"
-    localpath3 = '/jishu_stock/stockdata/data2015_2017/'  #
+    localpath3 = '/jishu_stock/z_stockdata/data2015_2017/'  #
     stockdata_path3 = BASE_DIR + localpath3 + stock_code + ".csv"
 
     df1 = pd.read_csv(stockdata_path1, index_col=0)
@@ -104,7 +104,7 @@ def test_cover_day_K_to_Month_K():
     # print df
     if (df.empty):
         return
-    outpath = BASE_DIR + '/jishu_stock/stockdata/MONTH_DATA_K/' + stock_code + '_Month' + ".csv"
+    outpath = BASE_DIR + '/jishu_stock/z_stockdata/MONTH_DATA_K/' + stock_code + '_Month' + ".csv"
     cover_day_K_to_Month_K(df, outpath)
 
 '''
@@ -128,7 +128,7 @@ if __name__ == '__main__':
 
 
     # test1()
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     getAllMonth_Kdata(localpath1)
     # test_cover_day_K_to_Month_K()
     # test_getTushare_Month_k()

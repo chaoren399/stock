@@ -55,7 +55,7 @@ def get_all_ZaoChenZhiXing2_duoxiancheng(localpath1):
 def get_all_ZaoChenZhiXing2(localpath1):
     info1=  '--早晨之星2start--   '
     writeLog_to_txt_nocode(info1)
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
         # print row['ts_code']
@@ -381,7 +381,7 @@ def huice_one_stock(stock_code):
 if __name__ == '__main__':
     starttime = datetime.datetime.now()
 
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     # get_all_ZaoChenZhiXing2(localpath1)
     # test_isAn_ZaoChenZhiXing2_laoshi()
     # test_shizixing_da()

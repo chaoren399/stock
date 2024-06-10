@@ -24,7 +24,7 @@ today = starttime.strftime('%Y%m%d')
 
 start_date = '20180101'
 end_date = '20221231'
-localpath = '/jishu_stock/stockdata/data2020/' #数据存放路径
+localpath = '/jishu_stock/z_stockdata/data2020/' #数据存放路径
 
 
 
@@ -47,7 +47,7 @@ def get_all_codes():
         print  info
         # writeLog_to_txt_path_getcodename(info, path, stockcode)
 
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
 
 
     data = pd.read_csv(path, dtype={'code': str})

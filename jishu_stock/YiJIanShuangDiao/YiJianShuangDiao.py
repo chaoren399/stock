@@ -61,7 +61,7 @@ def get_all_YiJianShuangDiao(localpath1):
     info1=  '--一箭双雕 主力中继洗盘模型 start--   '
     writeLog_to_txt_nocode(info1)
 
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
 
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
@@ -320,7 +320,7 @@ def linshi():
 回测 8 月份的数据
 '''
 def test_Befor_data():
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
 
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
@@ -345,7 +345,7 @@ if __name__ == '__main__':
     from  time import  *
     starttime = time()
 
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     # get_all_YiJianShuangDiao(localpath1)
     # test_isAn_YiJianShuangDiao_laoshi()#测试老师举例 5个成功案例 其中一个 阴线实体为0, 总共 4 个成功
     # test_isAn_YiJianShuangDiao_laoshi_shibai_anli()#测试老师举例讲解学生 失败案例 符合程序的为 0,说明程序非常不错

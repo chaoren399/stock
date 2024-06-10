@@ -35,10 +35,10 @@ zhisundian=0 #这里的变量是个意外, 因为程序是最早写, 没有按�
 def getallstockdata_isV_fromLocal(localpath1):
     info1=  'V型反转start'
     writeLog_to_txt_nocode(info1)
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
-    # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
+    # path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST-1.csv'
 
-    # path = BASE_DIR + '/jishu_stock/stockdata/xiadiecodes.csv'
+    # path = BASE_DIR + '/jishu_stock/z_stockdata/xiadiecodes.csv'
     # print "ssss"
     # print path
     count = 0
@@ -47,7 +47,7 @@ def getallstockdata_isV_fromLocal(localpath1):
         # print row['ts_code']
         stock_code = row['ts_code']
 
-        # localpath1 ='/jishu_stock/stockdata/data1/'
+        # localpath1 ='/jishu_stock/z_stockdata/data1/'
         stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
         # df =  pd.read_csv(stockdata_path, dtype={'code': str})
         df = pd.read_csv(stockdata_path, index_col=0)
@@ -244,7 +244,7 @@ def test_V_anli_ziji():
 回测 8 月份的数据
 '''
 def test_Befor_data():
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
 
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
@@ -274,7 +274,7 @@ if __name__ == '__main__':
     from  time import  *
     starttime = time()
 
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     getallstockdata_isV_fromLocal(localpath1)
 
     # test_V_anli_laoshi()

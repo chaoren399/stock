@@ -25,7 +25,7 @@ https://waditu.com/document/2?doc_id=144  (这是 没有复权 后的数据, 跟
 
 def getAllWeekKdata(localpath1):
     print '日K 转换为 周K'
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
     count = 0
     data = pd.read_csv(path, dtype={'code': str})
 
@@ -36,7 +36,7 @@ def getAllWeekKdata(localpath1):
         # print row['ts_code']
         stock_code = row['ts_code']
 
-        outpath= BASE_DIR + '/jishu_stock/stockdata/WEEK_DATA_K/' + stock_code +'_Week'+ ".csv"
+        outpath= BASE_DIR + '/jishu_stock/z_stockdata/WEEK_DATA_K/' + stock_code +'_Week'+ ".csv"
 
         count = count+1
         print str(count) +'--'+str(stock_code)
@@ -86,9 +86,9 @@ def test_cover_day_K_to_Week_K():
 
 
     stock_code='000001.SZ'
-    outpath = BASE_DIR + '/jishu_stock/stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+    outpath = BASE_DIR + '/jishu_stock/z_stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
 
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
     df = pd.read_csv(stockdata_path, index_col=0)
 
@@ -192,7 +192,7 @@ if __name__ == '__main__':
 
 
     # test1()
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     getAllWeekKdata(localpath1)  # 默认是运行当天的日期 可以 手动修改日期  #周 5 下午 4 点数据不准
     #下次测试一下  晚上 6 点的数据
     # 周五的 晚上 8 点以后是可以

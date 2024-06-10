@@ -30,7 +30,7 @@ def huice_get_5_13_34_RiJunXian_Pro3(localpath1):
     info1=  '--日均线组合5-13-34  start-- 如果结果比较少,可以 缩小 data7_1 = df.iloc[0:10]  '
     writeLog_to_txt_nocode(info1)
 
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
 
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
@@ -130,7 +130,7 @@ def jisuan_7days_is_success(stock_code,start_date):
 
 def test_get_5_13_34_RiJunXian_Pro3():
     stock_code='000026.SZ'
-    stockdata_path = BASE_DIR + '/jishu_stock/stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+    stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
     df = pd.read_csv(stockdata_path, index_col=0)
     # print df
 
@@ -144,5 +144,5 @@ def test_get_5_13_34_RiJunXian_Pro3():
 
 
 if __name__ == '__main__':
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     huice_get_5_13_34_RiJunXian_Pro3(localpath1=localpath1)

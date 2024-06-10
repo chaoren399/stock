@@ -40,13 +40,13 @@ YueXian_JGZS_KanZhangZuoZhang
 def get_all_YueXian_JGZS_KanZhangZuoZhang(localpath1):
     info1=  '--月线 上涨初期 价格中枢-看涨做涨 start--   '
     writeLog_to_txt_nocode(info1)
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
 
         stock_code = row['ts_code']
 
-        stockdata_path = BASE_DIR + '/jishu_stock/stockdata/MONTH_DATA_K/' + stock_code + '_Month' + ".csv"
+        stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/MONTH_DATA_K/' + stock_code + '_Month' + ".csv"
 
         df = pd.read_csv(stockdata_path, index_col=0)
         if (df.empty):
@@ -222,7 +222,7 @@ def test_isAn_YueXian_JGZS_KanZhangZuoZhang_ziji():
     #价格中枢-实体一半=0.04---上影线是下的几倍=1.33---阳线实体=7.26---实体看涨做涨--2021-10-31--维力医疗**603309.SH
     # df1 = ts.pro_bar(ts_code='603309.SZ',adj='qfq', start_date='20210206', end_date='20211008')
     stock_code = '603309.SH'
-    stockdata_path = BASE_DIR + '/jishu_stock/stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+    stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
     df = pd.read_csv(stockdata_path, index_col=0)
     df = df.reset_index(drop=False)  # 重新建立索引 ,
     data7_1 = df.iloc[0:8]  # 前7行
@@ -232,12 +232,12 @@ def test_isAn_YueXian_JGZS_KanZhangZuoZhang_ziji():
 回测 8 月份的数据
 '''
 def test_Befor_data():
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
         stock_code = row['ts_code']
 
-        stockdata_path = BASE_DIR + '/jishu_stock/stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+        stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
         df = pd.read_csv(stockdata_path, index_col=0)
             # print df
         if (df.empty):
@@ -253,7 +253,7 @@ def test_Befor_data():
 
 
 if __name__ == '__main__':
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     get_all_YueXian_JGZS_KanZhangZuoZhang(localpath1)
     # test_isAn_YueXian_JGZS_KanZhangZuoZhang_laoshi() #测试老师的案例
     # test_isAn_YueXian_jiagezhognshu_KanZhangZuoZhang_ziji()

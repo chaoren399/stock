@@ -109,7 +109,7 @@ def yijianyunxing_rixian():
     webhook.sendData("开始下载数据--"+ today)
     print  '-----大盘环境------'+ get_DaPan_HuanJing(today)
     # 日线 操作
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
 
 
 
@@ -399,7 +399,7 @@ if __name__ == '__main__':
     starttime = time()
     ts.set_token('0c9acbe761612301ff2baaa9b3e8ec4053150ad1c1fb0e7b6d53bd5d')
 
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
 
     yijianyunxing_rixian()
 

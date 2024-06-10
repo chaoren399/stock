@@ -33,8 +33,8 @@ count_isG8=0
 count_isDayu10_baifen=0
 def getallstockdata_is_GeShi_8fa():
     print '------start 葛式八法---'
-    # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
+    # path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST-1.csv'
     count = 0
     data = pd.read_csv(path, dtype={'code': str})
     if(len(data)>0):
@@ -43,7 +43,7 @@ def getallstockdata_is_GeShi_8fa():
         # print '1111111'
         for index, row in data.iterrows():
             stock_code = row['ts_code']
-            stockdata_path = BASE_DIR + '/jishu_stock/stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+            stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
             df = pd.read_csv(stockdata_path, index_col=0)
             # print df
             if (df.empty):
@@ -184,7 +184,7 @@ def getRiQi_Ater_Days(date,numdays):
     return result_date
 def test_one_stock_is_GeShi_8fa():
     stock_code='000001.SZ'
-    stockdata_path = BASE_DIR + '/jishu_stock/stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+    stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
     df = pd.read_csv(stockdata_path, index_col=0)
     # print df
 
@@ -192,7 +192,7 @@ def test_one_stock_is_GeShi_8fa():
 
 if __name__ == '__main__':
 
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     # getAllWeekKdata(localpath1)  #更新数据的时候可以打开 可以每周更新一次
 
     getallstockdata_is_GeShi_8fa()

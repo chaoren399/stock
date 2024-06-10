@@ -17,7 +17,7 @@ YuYueLM
 
 def YuYueLM_yijianyunxing():
 
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
 
     # 1下载数据
     getAllMonth_Kdata(localpath1)

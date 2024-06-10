@@ -42,8 +42,8 @@ def getAllStockData(start_date , end_date, localpath):
             stockcode = '000001.SZ'
             info='下载数据开始='+str(df1.ix[0]['trade_date'])
             writeLog_to_txt_path_getcodename(info, path, stockcode)
-    # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    # path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST-1.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
     # print "ssss"
     print path
     data = pd.read_csv(path, dtype={'code': str})
@@ -99,7 +99,7 @@ def testGet_one_stockData():
     # 打印最新的数据
     df = ts.pro_bar(ts_code='000001.SZ', adj='qfq',start_date='20180801', end_date='20210904',ma=[5, 13, 34])
     print df[0:2]
-    localpath2 = '/jishu_stock/stockdata/data1/'
+    localpath2 = '/jishu_stock/z_stockdata/data1/'
     stockdata_path = BASE_DIR + localpath2
     df.to_csv(stockdata_path + '000001.SZ' + ".csv")
     print df
@@ -109,7 +109,7 @@ def testGet_one_stockData():
 '''
 def get_all_2018_2020_data():
     print '2020 年到 2018 年的 所有 K 线数据'
-    localpath = '/jishu_stock/stockdata/data2020/'
+    localpath = '/jishu_stock/z_stockdata/data2020/'
     getAllStockData(start_date='20180101', end_date='20201231', localpath=localpath)
 
 
@@ -118,7 +118,7 @@ def get_all_2018_2020_data():
 '''
 def get_all_2015_2018_data():
     print '得到 2015 年到 2018 年的 所有 K 线数据  为月线做准备的, 结果 tushare 官方提供月线'
-    localpath = '/jishu_stock/stockdata/data2015_2017/'
+    localpath = '/jishu_stock/z_stockdata/data2015_2017/'
     getAllStockData(start_date='20150101', end_date='20171231', localpath=localpath)
 
 '''
@@ -133,7 +133,7 @@ def get_all_2021_to_now_data(localpath):
 
 
 def test_get_all_2015_2018_data():
-    localpath = '/jishu_stock/stockdata/data2015_2017/'
+    localpath = '/jishu_stock/z_stockdata/data2015_2017/'
     ts.set_token('731d2ea0abcf1f14d59ec7215d6ec520e09a439fccd2772c43a906be')
 
     # 查询当前所有正常上市交易的股票列表
@@ -185,7 +185,7 @@ if __name__ == '__main__':
     starttime = time()
 
 
-    localpath= '/jishu_stock/stockdata/data1/'
+    localpath= '/jishu_stock/z_stockdata/data1/'
 
 
     get_all_2021_to_now_data(localpath)

@@ -66,7 +66,7 @@ def getdata(stock_pool_path):
         code = row['code'].zfill(6)
         df_1.iloc[index, 0] = code # 把 776转成 000776
         print code
-        # stockdata = ts.get_realtime_quotes(row['code']) #df[['code','name','price','bid','ask','volume','amount','time']]
+        # z_stockdata = ts.get_realtime_quotes(row['code']) #df[['code','name','price','bid','ask','volume','amount','time']]
 
         enddate = str(datetime.date.today())  # 获取股票池的最近 1 年的 数据
 
@@ -74,10 +74,10 @@ def getdata(stock_pool_path):
         # print enddate
         print row['code']
         pro = ts.pro_api()
-        # stockdata = pro.daily_basic(ts_code=row['code'], trade_date= enddate,
+        # z_stockdata = pro.daily_basic(ts_code=row['code'], trade_date= enddate,
         #                      fields='ts_code,close,trade_date,turnover_rate,volume_ratio,pe,pb')
         stockdata = ts.pro_bar(ts_code=row['code'], adj='qfq', start_date='20220101', end_date=enddate)
-        # print stockdata
+        # print z_stockdata
 
 
         # data3.trade - data3.lowprice

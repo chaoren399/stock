@@ -70,7 +70,7 @@ def jiagezhognshu_yijianyunxing():
 '''
 def yijianyunxing():
     # 日线 操作
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
 
     dingshi_ceshi()
     # today = starttime.strftime('%Y%m%d')

@@ -31,8 +31,8 @@ https://www.yuque.com/chaoren399/eozlgk/hafzse
 def getallstockdata_isLongZhan_YuYe(localpath1):
     info1=  '----龙战于野  低位涨停  次日大阴线 第 3 日高过  阴线 开盘价 start----'
     writeLog_to_txt_nocode(info1)
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
-    # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
+    # path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST-1.csv'
     count = 0
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
@@ -125,7 +125,7 @@ if __name__ == '__main__':
     import datetime
 
     starttime = datetime.datetime.now()
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
 
     getallstockdata_isLongZhan_YuYe(localpath1)
     # test_getallstockdata_isLongZhan_YuYe()

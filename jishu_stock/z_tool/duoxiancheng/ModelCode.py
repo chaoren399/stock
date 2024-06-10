@@ -11,8 +11,8 @@ modelcode 根据传入的模型名字, 获取模型编码
 '''
 def get_modelcode(modelname):
     # modelname='一箭双雕'
-    #/Users/mac/PycharmProjects/gitproject/stock/jishu_stock/stockdata/
-    path = BASE_DIR + '/jishu_stock/stockdata/模型编码.csv'
+    #/Users/mac/PycharmProjects/gitproject/stock/jishu_stock/z_stockdata/
+    path = BASE_DIR + '/jishu_stock/z_stockdata/模型编码.csv'
     data = pd.read_csv(path, sep=',', header=None, engine='python')
 
     data.columns = ['modelcode', 'name']

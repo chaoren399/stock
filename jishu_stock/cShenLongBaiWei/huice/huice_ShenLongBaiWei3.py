@@ -42,7 +42,7 @@ def get_all_ShenLongBaiWei3(localpath1):
     info1= "神龙摆尾3价格筑底后缓慢运行,第一个涨停板   start "
     writeLog_to_txt_nocode(info1)
 
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
 
     count = 0
     data = pd.read_csv(path, dtype={'code': str})
@@ -214,7 +214,7 @@ def test_isAn_ShenLongBaiWei3_ziji():
 回测 8 月份的数据
 '''
 def test_Befor_data():
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
 
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
@@ -244,7 +244,7 @@ if __name__ == '__main__':
     from  time import  *
     starttime = time()
 
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     # get_all_ShenLongBaiWei3(localpath1)
     # test_isAn_ShenLongBaiWei2_laoshi()
 

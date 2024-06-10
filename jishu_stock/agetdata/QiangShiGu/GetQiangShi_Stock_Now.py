@@ -29,8 +29,8 @@ sys.setdefaultencoding('utf8')
 '''
 
 def getallQiang_stock_12():
-    # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    # path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST-1.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
     count = 0
     data = pd.read_csv(path, dtype={'code': str})
 
@@ -61,7 +61,7 @@ def getallQiang_stock_12():
             if(close_end > close_start):
                 count = count + 1
                 # line = {'ts_code': stock_code}
-                # path1 = BASE_DIR + '/jishu_stock/stockdata/qiangshi_stock.csv'
+                # path1 = BASE_DIR + '/jishu_stock/z_stockdata/qiangshi_stock.csv'
                 # print df
                 path1 = 'qiangshi_stock.csv'
                 writeLog_to_txt_path(stock_code,path1)

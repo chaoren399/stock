@@ -19,7 +19,7 @@ today = starttime.strftime('%Y%m%d')
 
 start_date = '20200701'
 end_date = today
-localpath = '/jishu_stock/stockdata/data1/' #数据存放路径
+localpath = '/jishu_stock/z_stockdata/data1/' #数据存放路径
 
 # ts.set_token('731d2ea0abcf1f14d59ec7215d6ec520e09a439fccd2772c43a906be')
 ts.set_token('0c9acbe761612301ff2baaa9b3e8ec4053150ad1c1fb0e7b6d53bd5d')
@@ -42,7 +42,7 @@ def get_all_codes_k_data():
         info = '下载数据开始=' + str(df1.ix[0]['trade_date'])
         writeLog_to_txt_path_getcodename(info, path, stockcode)
 
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST-1.csv'
 
 
     data = pd.read_csv(path, dtype={'code': str})

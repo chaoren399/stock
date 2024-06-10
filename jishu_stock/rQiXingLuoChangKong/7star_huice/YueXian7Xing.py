@@ -28,7 +28,7 @@ def getallstockdata_is7start_From_Month_K(localpath1):
 
     writeLog_to_txt_nocode(info1 )
 
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
 
     # print "ssss"
     print path
@@ -40,7 +40,7 @@ def getallstockdata_is7start_From_Month_K(localpath1):
         stock_code = row['ts_code']
 
         # stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
-        stockdata_path = BASE_DIR + '/jishu_stock/stockdata/MONTH_DATA_K/' + stock_code + '_Month' + ".csv"
+        stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/MONTH_DATA_K/' + stock_code + '_Month' + ".csv"
 
         df = pd.read_csv(stockdata_path, index_col=0)
         if (df.empty):
@@ -98,7 +98,7 @@ def isAn7start_model_pro_Month_K(dataframe_df,stockcode):
 
 def test_isAn7start_model_pro_Month_K():
     stockdata_path = BASE_DIR + localpath1 + '600919.SH' + ".csv"
-    # stockdata_path = BASE_DIR + '/jishu_stock/stockdata/MONTH_DATA_K/' + stock_code + '_Month' + ".csv"
+    # stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/MONTH_DATA_K/' + stock_code + '_Month' + ".csv"
 
     # df =  pd.read_csv(stockdata_path, dtype={'code': str})
 
@@ -111,7 +111,7 @@ if __name__ == '__main__':
     import datetime
 
     starttime = datetime.datetime.now()
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
 
     # test_isAn7start_model_pro_Month_K()
     getallstockdata_is7start_From_Month_K(localpath1)

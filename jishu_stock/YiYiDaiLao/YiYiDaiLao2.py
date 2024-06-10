@@ -46,7 +46,7 @@ def get_all_YiYiDaiLao(localpath1):
     info1=  '--以逸待劳2 完美符合模型, 第 67天阳线收盘主力洗盘模型 start--   '
     writeLog_to_txt_nocode(info1)
 
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
 
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
@@ -264,7 +264,7 @@ def test_ziji():
 回测 8 月份的数据
 '''
 def test_Befor_data():
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
 
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
@@ -298,7 +298,7 @@ def test_Befor_data():
     jisuan_all_shouyilv(chengongs1, modelname, 1.30)
 
 if __name__ == '__main__':
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
 
     # test_isAn_YiYiDaiLao_laoshi_9()
     # test_isAn_YiYiDaiLao_laoshi_6()

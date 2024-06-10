@@ -37,12 +37,12 @@ modelname = '持仓量_周线'
 def get_all_ChiCangLiang_ZhouXian(localpath1):
     info1 = '--持仓量_周线 start--   '
     writeLog_to_txt_nocode(info1)
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
         # print row['ts_code']
         stock_code = row['ts_code']
-        stockdata_path = BASE_DIR + '/jishu_stock/stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+        stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
         df = pd.read_csv(stockdata_path, index_col=0)
         # stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
         # df = pd.read_csv(stockdata_path, index_col=0)
@@ -229,7 +229,7 @@ def test_isAn_ChiCangLiang_ZhouXian_ziji():
 
 
 def test_Befor_data():
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
         stock_code = row['ts_code']
@@ -263,7 +263,7 @@ if __name__ == '__main__':
 
     starttime = time()
 
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     get_all_ChiCangLiang_ZhouXian(localpath1)
     # test_isAn_ChiCangLiang_ZhouXian_laoshi()
     # test_isAn_ChiCangLiang_ZhouXian_ziji()

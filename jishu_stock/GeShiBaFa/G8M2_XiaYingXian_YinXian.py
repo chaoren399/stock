@@ -28,15 +28,15 @@ G8M2_XiaYingXian_YinXian
 
 def get_all_G8M2_XiaYingXian_YinXian():
     print '------G8M2 阴线影线下穿 60 周均线start 葛式八法---'
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
-    # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST-1.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
+    # path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST-1.csv'
     count = 0
     data = pd.read_csv(path, dtype={'code': str})
     if(len(data)>0):
 
         for index, row in data.iterrows():
             stock_code = row['ts_code']
-            stockdata_path = BASE_DIR + '/jishu_stock/stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+            stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
             df=pd.DataFrame()
             try:
                 df = pd.read_csv(stockdata_path, index_col=0)
@@ -163,7 +163,7 @@ def test_isAn_G8M2_XiaYingXian_YinXian_ziji():
 
 
     stock_code ='600176.SH'
-    stockdata_path = BASE_DIR + '/jishu_stock/stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+    stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
     df = pd.read_csv(stockdata_path, index_col=0)
     df = df.reset_index(drop=False)  # 重新建立索引 ,
     data7_1 = df.iloc[15:31]  # 1 年有 50 周

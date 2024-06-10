@@ -45,7 +45,7 @@ def getallstockdata_is7start_FromLocal(localpath1):
 
     writeLog_to_txt_nocode(info1 )
 
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
 
     # print "ssss"
     print path
@@ -115,7 +115,7 @@ if __name__ == '__main__':
     # data_show_050002_wucelue() #无策略
     # anstock_isAn7start_model("000002")
     # getallstockdata_is7start(start_date='20210701', end_date='2021726')
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'
     getallstockdata_is7start_FromLocal(localpath1=localpath1)
 
     endtime = datetime.datetime.now()

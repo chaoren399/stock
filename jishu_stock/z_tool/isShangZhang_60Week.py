@@ -86,4 +86,4 @@ def is_60WEEK_ShangZhang(stock_code,riqi):
 
 
 if __name__ == '__main__':
-    localpath1 = '/jishu_stock/stockdata/data1/'
+    localpath1 = '/jishu_stock/z_stockdata/data1/'

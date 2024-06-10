@@ -27,8 +27,8 @@ def getSockCode_from_SZSH601899(code):
 
 def test():
 
-    # path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
-    path =  '/app/stock/stock/jishu_stock/stockdata/qiang_qushi_stocks.csv'
+    # path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
+    path = '/jishu_stock/z_stockdata/qiang_qushi_stocks.csv'
 
     data = pd.read_csv(path, dtype={'code': str})
     all_count=0

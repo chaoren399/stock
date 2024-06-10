@@ -15,7 +15,7 @@ circ_mv		流通市值（万元）
 
 '''
 
-localpath = '/jishu_stock/stockdata/'  # 数据存放路径
+localpath = '/jishu_stock/z_stockdata/'  # 数据存放路径
 
 LiuTongshizhibiao_path = BASE_DIR + localpath +'流通市值表.csv'
 df = pd.read_csv(LiuTongshizhibiao_path, index_col=0)
@@ -109,7 +109,7 @@ def LTSZ_IS_Small_100YI(stock_code,shizhimax):
 从 股票池中 得到流通市值小于 100 亿的股票池
 '''
 def get_my_gupiaochi_xioayu_100_yi():
-    path = BASE_DIR + '/jishu_stock/stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
         ts_code= row['ts_code']
