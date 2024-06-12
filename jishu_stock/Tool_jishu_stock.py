@@ -429,6 +429,20 @@ def  get_Stock_Name(code):
 
     return ',codename null-'
 
+'''
+给出 股票代码 得到 股票的名字
+'''
+def  get_Stock_Name_byKanzhanghuice(code):
+    # print code
+    # path = path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST-1.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
+    data = pd.read_csv(path)
+    for index, row in data.iterrows():
+        if (row['ts_code'] == code):
+            # return ','+ row['industry']+','+row['name']
+            return ','+ row['name']
+
+    return 0
 
 
 '''

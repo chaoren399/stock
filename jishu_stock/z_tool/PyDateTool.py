@@ -120,6 +120,17 @@ def get_date1_date2_days(startdate, enddate):
     end_day = datetime(int(enddate[0:4]), int(enddate[4:6]), int(enddate[6:8]))
     return (end_day - start_day).days
 
+'''
+    date = '20210609'
+    outdate='2021=06-09'
+'''
+def covert_date(date):
+    # startdate='20210609'
+    startdate=date
+    start_day = datetime(int(startdate[0:4]), int(startdate[4:6]), int(startdate[6:8]))
+    ss= start_day
+    day = datetime.strftime(ss, '%Y-%m-%d')
+    return day
 
 
 if __name__ == '__main__':
@@ -127,4 +138,5 @@ if __name__ == '__main__':
     startdate = '20210719'
     # print get_date1_date2_days(startdate,enddate)
     date1='2021-07-09'
-    riqi_geshi_zhuanhua1(date1)
+    # riqi_geshi_zhuanhua1(date1)
+    covert_date(enddate)
