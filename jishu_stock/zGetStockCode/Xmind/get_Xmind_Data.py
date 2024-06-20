@@ -12,9 +12,10 @@ import pandas as pd
 
 from stock.settings import BASE_DIR
 
-def getXimndData():
+def getXmindData():
     path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
-    xmind = BASE_DIR + '/jishu_stock/z_stockdata/xmind.txt'
+
+    xmind = BASE_DIR + '/jishu_stock/agetdata/xmind.txt'
 
     path_xmind = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST_xmind.csv'
 
@@ -41,4 +42,4 @@ def getXimndData():
 
 
 if __name__ == '__main__':
-    getXimndData()
+    getXmindData()

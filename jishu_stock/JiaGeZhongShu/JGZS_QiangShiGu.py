@@ -44,6 +44,7 @@ def get_all_JGZS_QiangShiGu(localpath1):
     webhook.sendData( info1)
     writeLog_to_txt_nocode(info1)
     path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
+    # path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST_xmind.csv'
     data = pd.read_csv(path, dtype={'code': str})
     all_count=0
     for index, row in data.iterrows():

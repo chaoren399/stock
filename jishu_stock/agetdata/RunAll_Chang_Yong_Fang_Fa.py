@@ -3,7 +3,7 @@
 import sys
 import os
 
-from jishu_stock.zGetStockCode.Xmind.get_Xmind_Data import getXimndData
+from jishu_stock.zGetStockCode.Xmind.get_Xmind_Data import getXmindData
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_parent_dir_name = os.path.dirname(os.path.dirname(current_dir))
@@ -16,4 +16,4 @@ sys.path.append(parent_parent_dir_name)
 if __name__ == '__main__':
 
 
-    getXimndData()
+    getXmindData()

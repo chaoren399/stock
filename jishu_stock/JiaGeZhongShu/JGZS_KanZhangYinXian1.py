@@ -36,8 +36,8 @@ JGZS_KanZhangYinXian1
 def get_all_JGZS_KanZhangYinXian1(localpath1):
     info1=  '--价格中枢-看涨阴线1 start--   '
     writeLog_to_txt_nocode(info1)
-    # path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
-    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST_xmind.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
+    # path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST_xmind.csv'
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
         # print row['ts_code']
@@ -295,8 +295,8 @@ def test_Befor_data():
 
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/z_stockdata/data1/'
-    # get_all_JGZS_KanZhangYinXian1(localpath1)
+    get_all_JGZS_KanZhangYinXian1(localpath1)
     # test_isAn_JGZS_KanZhangYinXian1_laoshi()  #
     # test_ziaxian_zhuan_Week()
-    test_isAn_JGZS_KanZhangYinXian1_ziji()
+    # test_isAn_JGZS_KanZhangYinXian1_ziji()
     # test_Befor_data()
