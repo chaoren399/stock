@@ -42,15 +42,17 @@ def get_all_JGZS_KanZhangYinXian4(localpath1):
         stock_code = row['ts_code']
         # stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
         stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+        try:
+            df = pd.read_csv(stockdata_path, index_col=0)
+            df = df.reset_index(drop=False)
 
-        df = pd.read_csv(stockdata_path, index_col=0)
-        df = df.reset_index(drop=False)
-
-        data6_1 = df.iloc[0:6]  # 前6行
-        # data6_1 = df.iloc[2:8]  # 前6行
-        # data6_1 = df.iloc[20:32]  # 前6行
-        len1 = len(data6_1)
-        isAn_JGZS_KanZhangYinXian4_model(data6_1, stock_code)
+            data6_1 = df.iloc[0:6]  # 前6行
+            # data6_1 = df.iloc[2:8]  # 前6行
+            # data6_1 = df.iloc[20:32]  # 前6行
+            len1 = len(data6_1)
+            isAn_JGZS_KanZhangYinXian4_model(data6_1, stock_code)
+        except:
+            print  'stock_code is null = ' + str(stock_code)
 
 
 

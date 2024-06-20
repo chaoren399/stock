@@ -36,23 +36,25 @@ JGZS_KanZhangYinXian1
 def get_all_JGZS_KanZhangYinXian1(localpath1):
     info1=  '--价格中枢-看涨阴线1 start--   '
     writeLog_to_txt_nocode(info1)
-    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
+    # path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST_xmind.csv'
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
         # print row['ts_code']
         stock_code = row['ts_code']
         # stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
         stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+        try:
+            df = pd.read_csv(stockdata_path, index_col=0)
+            df = df.reset_index(drop=False)
 
-        df = pd.read_csv(stockdata_path, index_col=0)
-        df = df.reset_index(drop=False)
-
-        data6_1 = df.iloc[0:6]  # 前6行
-        # data6_1 = df.iloc[2:8]  # 前6行
-        # data6_1 = df.iloc[20:32]  # 前6行
-        len1 = len(data6_1)
-        isAn_JGZS_KanZhangYinXian1_model(data6_1, stock_code)
-
+            data6_1 = df.iloc[0:6]  # 前6行
+            # data6_1 = df.iloc[2:8]  # 前6行
+            # data6_1 = df.iloc[20:32]  # 前6行
+            len1 = len(data6_1)
+            isAn_JGZS_KanZhangYinXian1_model(data6_1, stock_code)
+        except:
+            print  'stock_code is null = ' + str(stock_code)
 
 
 '''
@@ -76,7 +78,7 @@ def isAn_JGZS_KanZhangYinXian1_model(data,stockcode):
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
         # print1(data1)
 
-        data2= data[len_data-2-3:len_data-2]
+        data2= data[len_data-2-2:len_data-2]
         data2 = data2.reset_index(drop=True)  # 重新建立索引 ,
         # print1(data2)
         # 设置两个 key
@@ -147,19 +149,19 @@ def isAn_JGZS_KanZhangYinXian1_model(data,stockcode):
                    key_4=0
 
 
+        if(0):
+            print1(key_1)
+            print1(key_2)
+            print1(key_3)
+            print1(key_4)
+            print1(week1_close)
+            # print1(shangyingxian_xiayingxian_beishu)
 
-        # print1(key_1)
-        # print1(key_2)
-        # print1(key_3)
-        # print1(key_4)
-        # print1(week1_close)
-        # print1(shangyingxian_xiayingxian_beishu)
-
-        # print1(yinxian_jiagezhongshu)
-        # print1(shangyingxian_daxiao)
-        # print1(week1_shiti_daxiao)
-        # print1(week1_open_close)
-        # print1(shiti_yingxian_beishu)
+            # print1(yinxian_jiagezhongshu)
+            # print1(shangyingxian_daxiao)
+            # print1(week1_shiti_daxiao)
+            # print1(week1_open_close)
+            # print1(shiti_yingxian_beishu)
 
         if(stockcode=='000983.SZ'):
             print1(yinxian_jiagezhongshu)
@@ -228,7 +230,44 @@ def test_isAn_JGZS_KanZhangYinXian1_ziji():
     df = ts.pro_bar(ts_code='603595.SH', adj='qfq', freq='W', start_date='20170101', end_date='20211022')
     data7_1 = df.iloc[0:6]  # 1 年有 50 周
     # print data7_1
-    isAn_JGZS_KanZhangYinXian1_model(data7_1, '603595.SH')
+    # isAn_JGZS_KanZhangYinXian1_model(data7_1, '603595.SH')
+
+    #水星家纺**603365.SH
+    ts_code = '603365.SH'
+    df = ts.pro_bar(ts_code=ts_code, adj='qfq', freq='W', start_date='20170101', end_date='20240329')
+    data7_1 = df.iloc[0:6]  # 1 年有 50 周
+    # print data7_1
+    # isAn_JGZS_KanZhangYinXian1_model(data7_1, ts_code)
+
+    ts_code = '600843.SH' #工申贝**600843.SH
+    df = ts.pro_bar(ts_code=ts_code, adj='qfq', freq='W', start_date='20170101', end_date='20240614')
+    data7_1 = df.iloc[0:6]  # 1 年有 50 周
+    # print data7_1
+    # isAn_JGZS_KanZhangYinXian1_model(data7_1, ts_code)
+
+    ts_code = '601500.SH' #通用股份
+    df = ts.pro_bar(ts_code=ts_code, adj='qfq', freq='W', start_date='20170101', end_date='20240329')
+    data7_1 = df.iloc[0:6]  # 1 年有 50 周
+    # print data7_1
+    # isAn_JGZS_KanZhangYinXian1_model(data7_1, ts_code)
+
+    ts_code = '000400.SZ' #通用股份
+    df = ts.pro_bar(ts_code=ts_code, adj='qfq', freq='W', start_date='20170101', end_date='20240208')
+    data7_1 = df.iloc[0:6]  # 1 年有 50 周
+    # print data7_1
+    # isAn_JGZS_KanZhangYinXian1_model(data7_1, ts_code)
+
+    ts_code = '000791.SZ' #通用股份
+    df = ts.pro_bar(ts_code=ts_code, adj='qfq', freq='W', start_date='20170101', end_date='20240617')
+    data7_1 = df.iloc[0:6]  # 1 年有 50 周
+    # print data7_1
+    # isAn_JGZS_KanZhangYinXian1_model(data7_1, ts_code)
+
+    ts_code = '002099.SZ' #海翔药业
+    df = ts.pro_bar(ts_code=ts_code, adj='qfq', freq='W', start_date='20170101', end_date='20240617')
+    data7_1 = df.iloc[0:6]  # 1 年有 50 周
+    # print data7_1
+    isAn_JGZS_KanZhangYinXian1_model(data7_1, ts_code)
 
 '''
 回测 8 月份的数据
@@ -241,22 +280,23 @@ def test_Befor_data():
 
         # stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
         stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+        try:
+            df = pd.read_csv(stockdata_path, index_col=0)
+            df = df.reset_index(drop=False)  # 重新建立索引 ,
 
-        df = pd.read_csv(stockdata_path, index_col=0)
-        df = df.reset_index(drop=False)  # 重新建立索引 ,
-
-        data7_4 = df.iloc[8:15]  # 前10个交易日
-        len_1=len(data7_4)
-        for i in range(0, len_1 - 5 + 1):
-            # print "i" + str(i )+ "j"+str(i+3)
-            isAn_JGZS_KanZhangYinXian1_model(data7_4[i:i + 5], stock_code)
-
+            data7_4 = df.iloc[5:15]  # 前10个交易日
+            len_1=len(data7_4)
+            for i in range(0, len_1 - 5 + 1):
+                # print "i" + str(i )+ "j"+str(i+3)
+                isAn_JGZS_KanZhangYinXian1_model(data7_4[i:i + 5], stock_code)
+        except:
+            print  'stock_code is null = ' + str(stock_code)
 
 
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/z_stockdata/data1/'
-    get_all_JGZS_KanZhangYinXian1(localpath1)
+    # get_all_JGZS_KanZhangYinXian1(localpath1)
     # test_isAn_JGZS_KanZhangYinXian1_laoshi()  #
     # test_ziaxian_zhuan_Week()
-    # test_isAn_JGZS_KanZhangYinXian1_ziji()
+    test_isAn_JGZS_KanZhangYinXian1_ziji()
     # test_Befor_data()

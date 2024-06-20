@@ -6,6 +6,7 @@ import datetime
 from jishu_stock.JiaGeZhongShu.JGZS_KanZhangYinXian2 import get_all_JGZS_KanZhangYinXian2
 # from jishu_stock.JiaGeZhongShu.JGZS_KanZhangYinXian4 import get_all_JGZS_KanZhangYinXian4
 from jishu_stock.JiaGeZhongShu.JGZS_KanZhangZuoZhang import get_all_JGZS_KanZhangZuoZhang
+from jishu_stock.JiaGeZhongShu.JGZS_QiangShiGu import get_all_JGZS_QiangShiGu
 from jishu_stock.JiaGeZhongShu.jiagezhognshu_Get_Week_K_data import getAll_jiagezhongshu_WeekKdata
 from jishu_stock.JiaGeZhongShu.jiagezhongshu_KanDieZuoZhang import get_all_jiagezhongshu_KanDieZuoZhang
 from jishu_stock.z_tool.email import webhook
@@ -23,6 +24,10 @@ def JGZS_yijianyunxing():
     #2 看涨做涨
     get_all_JGZS_KanZhangZuoZhang(localpath1)
     webhook.sendData("-----看涨做涨yiwancheng ----"  )
+
+    #3 zhouxian  qiangshi gu
+
+    get_all_JGZS_QiangShiGu(localpath1)
 
     #5 看涨阴线4
     # get_all_JGZS_KanZhangYinXian4(localpath1)

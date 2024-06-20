@@ -47,6 +47,7 @@ def getallstock_list_chuli():
     df_jibemian = df_jibemian.set_index(['ts_code'])
 
     print '得到 不包含 ST  和 300 开头的创业板 688开头的科创板股票 的 股票池'
+    # print '得到 不包含 ST  和 688开头的科创板股票 的 股票池'
 
     data = pro.stock_basic(exchange='', list_status='L', fields='ts_code,symbol,name,area,industry,list_date')
 
@@ -67,6 +68,7 @@ def getallstock_list_chuli():
         #     print "688278"
         if (
                 'ST' not in name and code_300 != '300' and code_300 != '688' and BJ_houzhui != '.BJ'):  # 不包含 ST  和 300 开头的创业板 688开头的科创板股票
+                # 'ST' not in name  and code_300 != '688' and BJ_houzhui != '.BJ'):  # 不包含 ST  和 300 开头的创业板 688开头的科创板股票
             if (list_date < '20200101'):  # 排除所有新上市的公司
                 key1 = 1;
 

@@ -84,6 +84,19 @@ def isYangXian(row):
         # if(row['open'] == row['close']):
         #     return 2 # 不阴不阳
     return 0
+'''
+判断是不是十字星
+'''
+def isShiZiXing(row):
+    if (len(row) > 0):
+        # print'--+++++++++++++++++---'
+        if (abs(row['open'] - row['close']) <0.2):
+
+            # print row['open']
+            return 1
+
+    return 0
+
 
 
 import inspect
