@@ -157,7 +157,7 @@ def task1(data6_1,stock_code):
     # 1 V型 反转
     # isAnV_model(data6_1, stock_code)
     # 8 龙战于野
-    # isAn_LongZhanYuYe_model(data6_1, stock_code)
+    isAn_LongZhanYuYe_model(data6_1, stock_code)
     #以逸待劳
     # isAn_YiYiDaiLao_model(data6_1, stock_code)
     # xiaoV
