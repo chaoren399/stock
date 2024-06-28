@@ -2,6 +2,7 @@
 # -*- coding: utf8 -*-
 import datetime
 
+from jishu_stock.JiaGeZhongShu.JGZS_KanZhangYinXian1 import get_all_JGZS_KanZhangYinXian1
 # from jishu_stock.JiaGeZhongShu.JGZS_KanZhangYinXian1 import get_all_JGZS_KanZhangYinXian1
 from jishu_stock.JiaGeZhongShu.JGZS_KanZhangYinXian2 import get_all_JGZS_KanZhangYinXian2
 # from jishu_stock.JiaGeZhongShu.JGZS_KanZhangYinXian4 import get_all_JGZS_KanZhangYinXian4
@@ -12,6 +13,7 @@ from jishu_stock.JiaGeZhongShu.jiagezhongshu_KanDieZuoZhang import get_all_jiage
 from jishu_stock.z_tool.email import webhook
 
 
+#shell 定时脚本
 def JGZS_yijianyunxing():
     # 日线 操作
     localpath1 = '/jishu_stock/z_stockdata/data1/'
@@ -23,17 +25,25 @@ def JGZS_yijianyunxing():
 
     #2 看涨做涨
     get_all_JGZS_KanZhangZuoZhang(localpath1)
-    webhook.sendData("-----看涨做涨yiwancheng ----"  )
+    webhook.sendData("-----看涨做涨yi wan cheng ----"  )
+
+    # 3  看涨阴线1 上涨初期
+    get_all_JGZS_KanZhangYinXian1(localpath1)
+    webhook.sendData("-----看涨阴线1--yi wan cheng ----"  )
+
+    # 4 看涨阴线 2 回调位置
+    get_all_JGZS_KanZhangYinXian2(localpath1)
+    webhook.sendData("-----看涨阴线2--yi wan cheng ----"  )
 
     #3 zhouxian  qiangshi gu
 
     get_all_JGZS_QiangShiGu(localpath1)
 
+
     #5 看涨阴线4
     # get_all_JGZS_KanZhangYinXian4(localpath1)
 
-    # 3  看涨阴线1 上涨初期
-    # get_all_JGZS_KanZhangYinXian1(localpath1)
+
 
 
     # 其他 价格中枢

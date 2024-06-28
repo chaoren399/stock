@@ -220,31 +220,35 @@ def test_Befor_data():
     data = pd.read_csv(path, dtype={'code': str})
     for index, row in data.iterrows():
         stock_code = row['ts_code']
+        try:
+            # stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+            stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+            df = pd.read_csv(stockdata_path, index_col=0)
+                # print df
+            if (df.empty):
+                continue
 
-        # stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
-        stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
-        df = pd.read_csv(stockdata_path, index_col=0)
-            # print df
-        if (df.empty):
-            continue
+            df = df.reset_index(drop=False)  # 重新建立索引 ,
 
-        df = df.reset_index(drop=False)  # 重新建立索引 ,
-        data7_4 = df.iloc[0:6]  # 1 年有 52 周
-        data7_4 = df.iloc[8:12]  # 1 年有 52 周
+            data7_4 = df.iloc[1:6]  # 1 年有 52 周
+            # data7_4 = df.iloc[8:12]  # 1 年有 52 周
+            n=5
+            data7_4 = df.iloc[n:n+5]  # 1 年有 52 周
 
-        len_1=len(data7_4)
-        for i in range(0, len_1 - 2 + 1):
-            # print "i" + str(i )+ "j"+str(i+3)
-            isAn_JGZS_KanZhangYinXian2_model(data7_4[i:i + 2], stock_code)
-
+            len_1=len(data7_4)
+            for i in range(0, len_1 - 2 + 1):
+                # print "i" + str(i )+ "j"+str(i+3)
+                isAn_JGZS_KanZhangYinXian2_model(data7_4[i:i + 2], stock_code)
+        except:
+            print  'stock_code is null = ' + str(stock_code)
 
 
 
 
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/z_stockdata/data1/'
-    get_all_JGZS_KanZhangYinXian2(localpath1)
+    # get_all_JGZS_KanZhangYinXian2(localpath1)
     # test_isAn_JGZS_KanZhangYinXian2_laoshi()  #
     # test_ziaxian_zhuan_Week()
     # test_isAn_JGZS_KanZhangYinXian2_ziji()
-    # test_Befor_data()
+    test_Befor_data()
