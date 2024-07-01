@@ -232,13 +232,19 @@ def test_Befor_data():
 
             data7_4 = df.iloc[1:6]  # 1 年有 52 周
             # data7_4 = df.iloc[8:12]  # 1 年有 52 周
-            n=5
-            data7_4 = df.iloc[n:n+5]  # 1 年有 52 周
+            n=6
+            data7_4 = df.iloc[n:n+2]  # 1 年有 52 周
 
             len_1=len(data7_4)
-            for i in range(0, len_1 - 2 + 1):
-                # print "i" + str(i )+ "j"+str(i+3)
-                isAn_JGZS_KanZhangYinXian2_model(data7_4[i:i + 2], stock_code)
+
+            isAn_JGZS_KanZhangYinXian2_model(data7_4, stock_code)
+
+            '''
+            一个时间段 内所有的。
+            '''
+            # for i in range(0, len_1 - 2 + 1):
+            #     # print "i" + str(i )+ "j"+str(i+3)
+            #     isAn_JGZS_KanZhangYinXian2_model(data7_4[i:i + 2], stock_code)
         except:
             print  'stock_code is null = ' + str(stock_code)
 
