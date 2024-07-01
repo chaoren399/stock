@@ -143,6 +143,9 @@ def yijianyunxing_rixian():
     #根据股票代码 获取 当天是不是价格中枢
     # GetToday_JGZS()
 
+
+    webhook.sendData("--执行完毕--" )
+
 def getXiaoV():
     localpath1 = '/jishu_stock/z_stockdata/data1/'
     get_all_XiaoV_from_Qiang_QuShi(localpath1)

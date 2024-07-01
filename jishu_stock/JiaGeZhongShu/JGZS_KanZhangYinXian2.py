@@ -253,8 +253,8 @@ def test_Befor_data():
 
 if __name__ == '__main__':
     localpath1 = '/jishu_stock/z_stockdata/data1/'
-    # get_all_JGZS_KanZhangYinXian2(localpath1)
+    get_all_JGZS_KanZhangYinXian2(localpath1)
     # test_isAn_JGZS_KanZhangYinXian2_laoshi()  #
     # test_ziaxian_zhuan_Week()
     # test_isAn_JGZS_KanZhangYinXian2_ziji()
-    test_Befor_data()
+    # test_Befor_data()

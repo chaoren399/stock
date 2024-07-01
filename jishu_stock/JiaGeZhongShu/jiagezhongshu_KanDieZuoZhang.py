@@ -66,21 +66,26 @@ def get_all_jiagezhongshu_KanDieZuoZhang(localpath1):
         for index, row in data.iterrows():
             stock_code = row['ts_code']
             stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
-            df = pd.read_csv(stockdata_path, index_col=0)
-            # print df
-            if (df.empty):
-                continue
+            try:
+                df = pd.read_csv(stockdata_path, index_col=0)
+                # print df
+                if (df.empty):
+                    continue
 
-            df = df.reset_index(drop=False)  # 重新建立索引 ,
-            df = df.iloc[0:100]  # 1 年有 52 周
-            # df = df.iloc[1:101]  # 1 年有 52 周
-            # 1 m 是 上涨的部分 之选 2-4 周
-            # 2 n 是下降部分  选择 4-10
-            # df=df.iloc[2:8]  # 只找最近 1 个月的
-            # print df
+                df = df.reset_index(drop=False)  # 重新建立索引 ,
+                df = df.iloc[0:100]  # 1 年有 52 周
+                # df = df.iloc[1:101]  # 1 年有 52 周
+                # 1 m 是 上涨的部分 之选 2-4 周
+                # 2 n 是下降部分  选择 4-10
+                # df=df.iloc[2:8]  # 只找最近 1 个月的
+                # print df
 
-            isAn_KanDieZuoZhang_model(df, stock_code)
-            count = count + 1
+                isAn_KanDieZuoZhang_model(df, stock_code)
+                count = count + 1
+
+            except:
+                print  'stock_code is null = ' + str(stock_code)
+
 '''
 #2 单独一个函数 判断 6 个数据是不是符合模型
 '''
@@ -316,7 +321,7 @@ if __name__ == '__main__':
     localpath1 = '/jishu_stock/z_stockdata/data1/'
     # getAll_jiagezhongshu_WeekKdata(localpath1) #每周运行钱需要先下载数据
     # get_all_jiagezhongshu_KanDieZuoZhang(localpath1)
-
-    # test_isAn_KanDieZuoZhang_laoshi()
     test_Befor_data()
+    # test_isAn_KanDieZuoZhang_laoshi()
+
     # test_isAn_KanDieZuoZhang_ziji()

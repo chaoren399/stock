@@ -25,7 +25,7 @@ def JGZS_yijianyunxing():
 
     #2 看涨做涨
     get_all_JGZS_KanZhangZuoZhang(localpath1)
-    webhook.sendData("-----看涨做涨yi wan cheng ----"  )
+    webhook.sendData("-----看涨做涨--yi wan cheng ----"  )
 
     # 3  看涨阴线1 上涨初期
     get_all_JGZS_KanZhangYinXian1(localpath1)
