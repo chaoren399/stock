@@ -144,7 +144,7 @@ def yijianyunxing_rixian():
     # GetToday_JGZS()
 
 
-    webhook.sendData("--执行完毕--" )
+    webhook.sendData("--all 执行完毕--" )
 
 def getXiaoV():
     localpath1 = '/jishu_stock/z_stockdata/data1/'

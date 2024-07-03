@@ -182,7 +182,7 @@ def test_isAn_LongZhanYuYe_ziji():
 
     #自己的 案例
     df1 = ts.pro_bar(ts_code='603335.SH',adj='qfq', start_date='20210206', end_date='20211108')
-    data7_1 = df1.iloc[0:6]  # 前7行
+    data7_1 = df1.iloc[0:30]  # 前7行
     isAn_LongZhanYuYe_model(data7_1,'603335.Sh')
 
 '''
@@ -200,16 +200,16 @@ def test_Befor_data():
 
 
         # data7_4 = df.iloc[22:42]  # 前10个交易日
-        data7_4 = df.iloc[10:42]  # 前10个交易日
-        # data7_4 = df.iloc[22:22+250]  # 1年的数据
+        data7_4 = df.iloc[1:72]  # 前10个交易日
+        # data7_4 = df.iloc[1:22+250]  # 1年的数据
         len_1=len(data7_4)
+        n=0
+        isAn_LongZhanYuYe_model(data7_4[n:n+ 30], stock_code)
+        #
+        # for i in range(0, len_1 - 6 + 1):
+        #     # print "i" + str(i )+ "j"+str(i+3)
+        #     isAn_LongZhanYuYe_model(data7_4[i:i + 26], stock_code)
 
-        for i in range(0, len_1 - 6 + 1):
-            # print "i" + str(i )+ "j"+str(i+3)
-            isAn_LongZhanYuYe_model(data7_4[i:i + 6], stock_code)
-    jisuan_all_shouyilv(chengongs, modelname, 1.05)
-    jisuan_all_shouyilv(chengongs, modelname, 1.10)
-    jisuan_all_shouyilv(chengongs, modelname, 1.15)
 
 if __name__ == '__main__':
     from  time import  *
@@ -217,8 +217,8 @@ if __name__ == '__main__':
 
     localpath1 = '/jishu_stock/z_stockdata/data1/'
     # get_all_LongZhanYuYe(localpath1)
-    # test_Befor_data()
-    test_isAn_LongZhanYuYe_laoshi()
+    test_Befor_data()
+    # test_isAn_LongZhanYuYe_laoshi()
     # test_isAn_LongZhanYuYe_ziji()
 
     endtime = time()

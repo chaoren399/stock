@@ -53,8 +53,6 @@ def f():
     get_all_JGZS_KanZhangYinXian4(localpath1)
     getXmindData()
 
-    # 8 龙战于野
-    # isAn_LongZhanYuYe_model(data6_1, stock_code)
 
 if __name__ == '__main__':
 
