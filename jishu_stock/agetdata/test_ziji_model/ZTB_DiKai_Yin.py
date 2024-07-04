@@ -24,7 +24,7 @@ pd.set_option('display.max_rows', None)
 
 3-涨停板+大阴线-凯中精密
 
-https://www.yuque.com/chaoren399/zxadsn/wz5e1vyeztfcgk8b
+https://www.yuque.com/chaoren399/zxadsn/vdn7zgqgilq0roys
 
 
 -涨停板+大阴线-凯中精密
@@ -80,46 +80,38 @@ def isAn_ZTB_Yin_model(data, stockcode):
         # 设置两个 key
         key_1=0; #1-昨天 是一个涨停板,
 
-        key_2=0; # 2阴线放量
+        key_2=0; # 2阴线 底开的打阴线
 
 
         count=0
 
-
+        day1_close=0
+        day2_open=0
 
         for index,row in data1.iterrows():
             if(index==0 and isZhangTingBan(row)==1):
                 count=count+1
                 day1_close=row['close']
-
-                day1_amount=row['amount']
-            if(index==1 and isZhangTingBan(row)==1):
-                count=count+1
-                day2_open= row['open']
-                day2_close= row['close']
-                mairuriqi= row['trade_date']
-                day2_amount=row['amount']
-                zhisundian = row['low']
-
-        if(count==2):
-            if(day2_open > day1_close and day2_close > day1_close): #-1昨天 是一个涨停板, 今天来了一个跳空高开的大阴线
                 key_1=1
 
-            if(day1_amount < day2_amount): # 2阴线放量
-                key_2=1
-        # 3前边没有涨停板
-        for index,row in data2.iterrows():
-            if(isZhangTingBan(row)==1):
-                key_3=0
 
+            if(index==1 and isYinXian(row)==1):
+                count=count+1
+                day2_open= row['open']
 
+        if(count==2):
+            if(day2_open < day1_close):
+                key_2 = 1
+
+        if(0):
+
+           print "key_1=" + str(key_2)
+           print "key_1=" + str(key_2)
         # print1(key_1)
-        # 增加 key_2  胜率提高  增加 key3 后 反而不好
-        if(key_1==1 and key_3==1 ):
-        # if(key_1==1 and key_2==1):
-            info = ''
 
-            info = info + "--涨停后跳空涨停 成功了"  + str(riqi)
+        if(key_1==1 and key_2==1 ):
+            info = ''
+            info = info + "--涨停后低开阴线 成功了"  + str(riqi)
             # print info
             writeLog_to_txt(info, stockcode)
 
@@ -149,10 +141,12 @@ def test_isAn_ZTB_Yin_laoshi():
 测试自己的案例
 '''
 def test_isAn_ZTB_Yin_ziji():
-    #自己的 案例
-    df1 = ts.pro_bar(ts_code='002507.SZ',adj='qfq', start_date='20210206', end_date='20211008')
+    #自己的 案例 凯中精密
+    ts_code='002823.SZ'
+    df1 = ts.pro_bar(ts_code=ts_code,adj='qfq', start_date='20210206', end_date='20240628')
+    # print df1
     data7_1 = df1.iloc[0:6]  # 前7行
-    isAn_ZTB_Yin_model(data7_1, '002507.SZ')
+    isAn_ZTB_Yin_model(data7_1,ts_code)
 
 '''
 回测 8 月份的数据
@@ -164,28 +158,20 @@ def test_Befor_data():
         stock_code = row['ts_code']
         stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
         df = pd.read_csv(stockdata_path, index_col=0)
-        n=3
+        n=7
 
-
-        data7_4 = df.iloc[22:22+n+22]  #1 个月
+        # data7_4 = df.iloc[22:22+n+22]  #1 个月
         # data7_4 = df.iloc[22:22+n+120]  # 半年
         # data7_4 = df.iloc[22:22+132+250]  # 1年
+        data7_4 = df.iloc[n:n+3]  # 1年
+        isAn_ZTB_Yin_model(data7_4, stock_code)
 
         len_1=len(data7_4)
-        for i in range(0, len_1 - n + 1):
-            # print "i" + str(i )+ "j"+str(i+3)
-            isAn_ZTB_Yin_model(data7_4[i:i + n], stock_code)
+        # for i in range(0, len_1 - n + 1):
+        #     # print "i" + str(i )+ "j"+str(i+3)
+        #     isAn_ZTB_Yin_model(data7_4[i:i + n], stock_code)
 
-    from jishu_stock.aShengLv.HuiCeTool import wirteList_to_txt
-    from jishu_stock.aShengLv.HuiCeTool import getList_from_txt
-    from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
-    wirteList_to_txt(chengongs)
-    # chengongs1 = getList_from_txt()
-    jisuan_all_shouyilv(chengongs, modelname, 1.03)
-    jisuan_all_shouyilv(chengongs, modelname, 1.05)
-    jisuan_all_shouyilv(chengongs, modelname, 1.07)
-    jisuan_all_shouyilv(chengongs, modelname, 1.10)
-    jisuan_all_shouyilv(chengongs, modelname, 1.15)
+
 
 
 if __name__ == '__main__':
@@ -195,6 +181,7 @@ if __name__ == '__main__':
 
     localpath1 = '/jishu_stock/z_stockdata/data1/'
     # get_all_ZTB_ZTB_TiaoKong(localpath1)
+    # test_isAn_ZTB_Yin_ziji()
     test_Befor_data()
 
 

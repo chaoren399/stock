@@ -216,8 +216,8 @@ if __name__ == '__main__':
     starttime = time()
 
     localpath1 = '/jishu_stock/z_stockdata/data1/'
-    # get_all_LongZhanYuYe(localpath1)
-    test_Befor_data()
+    get_all_LongZhanYuYe(localpath1)
+    # test_Befor_data()
     # test_isAn_LongZhanYuYe_laoshi()
     # test_isAn_LongZhanYuYe_ziji()
 
