@@ -15,6 +15,7 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/venv" />
+      <excludeFolder url="file://$MODULE_DIR$/jishu_stock/z_stockdata/data1" />
     </content>
     <orderEntry type="jdk" jdkName="stock" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
