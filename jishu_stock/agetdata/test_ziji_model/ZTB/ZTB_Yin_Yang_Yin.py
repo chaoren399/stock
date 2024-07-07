@@ -20,7 +20,7 @@ pd.set_option('display.max_rows', None)
 
 ''''
 山推股份
-涨停板-阴线-阳-阴
+涨停板-阴-阳-阴-
 
 
 '''
