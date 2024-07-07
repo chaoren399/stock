@@ -79,8 +79,11 @@ def getallstock_list_chuli():
                     stock_liutongshizhi = jibenmin_row['circ_mv']
                     # if(stock_liutongshizhi < 1000000 ): #过滤流通市值 100 亿以下的
                     if (stock_liutongshizhi < 2000000):  # 过滤流通市值 100 亿以下的
-                        if (stock_close_price >= 2 and stock_close_price < 20):
+                        if (stock_close_price >= 3 and stock_close_price < 20):
                             print  code
+                            # if(code=='000677.SZ'):
+                            #     print code
+                            #     print stock_close_price
                             tamp.append(row)
                 except:
                     '''  get_stock_jibenmian(code) is  null= 002408.SZ 公司停牌 '''

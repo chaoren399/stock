@@ -20,23 +20,17 @@ pd.set_option('display.max_rows', None)
 
 ''''
 
-涨停板-阴线
 
-3-涨停板+大阴线-凯中精密
-
-https://www.yuque.com/chaoren399/zxadsn/vdn7zgqgilq0roys
-
-
--涨停板+大阴线-凯中精密
+-涨停板-今日
 
 '''
 chengongs=[]
-modelname='涨停后阴线'
+modelname='涨停板今日'
 
 
 
-def get_all_ZTB_Yin(localpath1):
-    info1=  '--涨停板+大阴线-start--   '
+def get_all_ZTB_TODAY(localpath1):
+    info1=  '--涨停板-今日-start--   '
     writeLog_to_txt_nocode(info1)
     path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path, dtype={'code': str})
@@ -49,14 +43,14 @@ def get_all_ZTB_Yin(localpath1):
         data6_1 = df.iloc[0:30]  # 前6行
         # data6_1 = df.iloc[20:32]  # 前6行
         len1 = len(data6_1)
-        isAn_ZTB_Yin_model(data6_1, stock_code)
+        isAn_ZTB_TODAY_model(data6_1, stock_code)
 
 
 
 '''
 #2 单独一个函数 判断 6 个数据是不是符合模型
 '''
-def isAn_ZTB_Yin_model(data, stockcode):
+def isAn_ZTB_TODAY_model(data, stockcode):
     if (data is None or data.empty):
         print '--df.empty--' + str(stockcode)
         return 0
@@ -67,7 +61,7 @@ def isAn_ZTB_Yin_model(data, stockcode):
         data = data.sort_values(by='trade_date', axis=0, ascending=True)  # 按照日期 从旧到新 排序
         data = data.reset_index(drop=True)  # 重新建立索引 ,默认为false，索引列（被设置为索引的列）被还原为普通列，并将索引重置为整数索引，否则直接丢弃索引列。
 
-        data1= data[len_data-2:len_data]
+        data1= data[len_data-1:len_data]
         data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
         mairuriqi = 0
@@ -80,38 +74,26 @@ def isAn_ZTB_Yin_model(data, stockcode):
         # 设置两个 key
         key_1=0; #1-昨天 是一个涨停板,
 
-        key_2=0; # 2阴线 底开的打阴线
 
-
-        count=0
-
-        day1_close=0
-        day2_open=0
 
         for index,row in data1.iterrows():
             if(index==0 and isZhangTingBan(row)==1):
-                count=count+1
-                day1_close=row['close']
+
                 key_1=1
 
 
-            if(index==1 and isYinXian(row)==1):
-                count=count+1
-                day2_open= row['open']
 
-        if(count==2):
-            if(day2_open < day1_close):
-                key_2 = 1
+
 
         if(0):
 
            print "key_1=" + str(key_2)
-           print "key_1=" + str(key_2)
+
         # print1(key_1)
 
-        if(key_1==1 and key_2==1 ):
+        if(key_1==1 ):
             info = ''
-            info = info + "--涨停后低开阴线 成功了"  + str(riqi)
+            info = info + "--涨停板-今日 成功了"  + str(riqi)
             # print info
             writeLog_to_txt(info, stockcode)
 
@@ -131,7 +113,7 @@ def test_isAn_ZTB_Yin_laoshi():
     df1 = ts.pro_bar(ts_code='000408.SZ',adj='qfq', start_date='20210206', end_date='20210518')
     data7_1 = df1.iloc[0:30]  # 前7行
     # print data7_1
-    isAn_ZTB_Yin_model(data7_1, '002174.SZ')
+    isAn_ZTB_TODAY_model(data7_1, '002174.SZ')
 
     # 案例 2
 
@@ -146,7 +128,7 @@ def test_isAn_ZTB_Yin_ziji():
     df1 = ts.pro_bar(ts_code=ts_code,adj='qfq', start_date='20210206', end_date='20240628')
     # print df1
     data7_1 = df1.iloc[0:6]  # 前7行
-    isAn_ZTB_Yin_model(data7_1,ts_code)
+    isAn_ZTB_TODAY_model(data7_1, ts_code)
 
 '''
 回测 8 月份的数据
@@ -157,20 +139,24 @@ def test_Befor_data():
     for index, row in data.iterrows():
         stock_code = row['ts_code']
         stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
-        df = pd.read_csv(stockdata_path, index_col=0)
-        n=7
+        try:
+            df = pd.read_csv(stockdata_path, index_col=0)
+            n=9
 
-        # data7_4 = df.iloc[22:22+n+22]  #1 个月
-        # data7_4 = df.iloc[22:22+n+120]  # 半年
-        # data7_4 = df.iloc[22:22+132+250]  # 1年
-        data7_4 = df.iloc[n:n+3]  # 1年
-        isAn_ZTB_Yin_model(data7_4, stock_code)
+            # data7_4 = df.iloc[22:22+n+22]  #1 个月
+            # data7_4 = df.iloc[22:22+n+120]  # 半年
+            # data7_4 = df.iloc[22:22+132+250]  # 1年
+            data7_4 = df.iloc[n:n+3]  # 1年
+            isAn_ZTB_TODAY_model(data7_4, stock_code)
 
-        len_1=len(data7_4)
-        # for i in range(0, len_1 - n + 1):
-        #     # print "i" + str(i )+ "j"+str(i+3)
-        #     isAn_ZTB_Yin_model(data7_4[i:i + n], stock_code)
-
+            len_1=len(data7_4)
+            # for i in range(0, len_1 - n + 1):
+            #     # print "i" + str(i )+ "j"+str(i+3)
+            #     isAn_ZTB_Yin_model(data7_4[i:i + n], stock_code)
+        except Exception as e:
+            # `e` has the error info
+            print `e`
+            continue
 
 
 
@@ -180,9 +166,10 @@ if __name__ == '__main__':
 
 
     localpath1 = '/jishu_stock/z_stockdata/data1/'
-    # get_all_ZTB_ZTB_TiaoKong(localpath1)
+
+    get_all_ZTB_TODAY(localpath1)
     # test_isAn_ZTB_Yin_ziji()
-    test_Befor_data()
+    # test_Befor_data()
 
 
     endtime = time()

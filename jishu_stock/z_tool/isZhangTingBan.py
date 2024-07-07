@@ -19,8 +19,9 @@ def isZhangTingBan(row):
     '''
 
     zhangfuMax = 9.1 # 涨幅 是不是大于 这个
+
     pct_chg = row['pct_chg']
-    if(pct_chg > zhangfuMax):  # 涨停板
+    if(pct_chg > zhangfuMax ):  # 涨停板
         return 1;
 
     return 0;
