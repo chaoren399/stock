@@ -1,7 +1,7 @@
 ### Python template
 
 
-# zzy add
+# zzy add  添加后 整个目录 data1 都不会同步，文件夹名都没有
 #jishu_stock/z_stockdata/data1/
 #jishu_stock/z_stockdata/jiagezhongshu/*
 
