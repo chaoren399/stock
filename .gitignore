@@ -3,7 +3,7 @@
 
 # zzy add
 #jishu_stock/z_stockdata/data1/
-#jishu_stock/z_stockdata/jiagezhongshu/
+#jishu_stock/z_stockdata/jiagezhongshu/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
