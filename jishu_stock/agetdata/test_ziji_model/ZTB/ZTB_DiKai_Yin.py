@@ -184,9 +184,9 @@ if __name__ == '__main__':
 
 
     localpath1 = '/jishu_stock/z_stockdata/data1/'
-    # get_all_ZTB_ZTB_TiaoKong(localpath1)
+    get_all_ZTB_Yin(localpath1)
     # test_isAn_ZTB_Yin_ziji()
-    test_Befor_data()
+    # test_Befor_data()
 
 
     endtime = time()

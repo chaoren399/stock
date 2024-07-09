@@ -497,6 +497,7 @@ def test_Befor_data():
 
 
 '''
+
 回测 2024-05 月份的数据
 '''
 def test_Befor_5_data():
@@ -508,24 +509,26 @@ def test_Befor_5_data():
         stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/jiagezhongshu/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
         # print stockdata_path
         # stockdata_path = BASE_DIR + '/jishu_stock/z_stockdata/WEEK_DATA_K/' + stock_code + '_Week' + ".csv"
+        try:
+            df = pd.read_csv(stockdata_path, index_col=0)
+                # print df
+            if (df.empty):
+                continue
 
-        df = pd.read_csv(stockdata_path, index_col=0)
-            # print df
-        if (df.empty):
-            continue
-
-        df = df.reset_index(drop=False)  # 重新建立索引 ,
-        data7_4 = df.iloc[8:10]  # 1 年有 52 周
-        data7_4 = df.iloc[8:8+2+4]  # 上个与的
-        data7_4 = df.iloc[1:8+1]  # 上个与的
-        data7_4 = df.iloc[1:8+50]  # 上个与的
-        n=12
-        # n=19 CHUN JIE
-        # n=0
-        isAn_JGZS_KanZhangZuoZhang_model(data7_4[n:n+ 2], stock_code)
-        #
-        # for n in range(24,2,-1):
-        #     isAn_JGZS_KanZhangZuoZhang_model(data7_4[n:n + 2], stock_code)
+            df = df.reset_index(drop=False)  # 重新建立索引 ,
+            data7_4 = df.iloc[8:10]  # 1 年有 52 周
+            data7_4 = df.iloc[8:8+2+4]  # 上个与的
+            data7_4 = df.iloc[1:8+1]  # 上个与的
+            data7_4 = df.iloc[1:8+50]  # 上个与的
+            n=12
+            # n=19 CHUN JIE
+            # n=0
+            isAn_JGZS_KanZhangZuoZhang_model(data7_4[n:n+ 2], stock_code)
+            #
+            # for n in range(24,2,-1):
+            #     isAn_JGZS_KanZhangZuoZhang_model(data7_4[n:n + 2], stock_code)
+        except:
+            print  'stock_code is null = ' + str(stock_code)
 
 
 

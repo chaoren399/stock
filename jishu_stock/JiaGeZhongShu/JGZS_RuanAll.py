@@ -37,7 +37,7 @@ def JGZS_yijianyunxing():
 
     #3 zhouxian  qiangshi gu
 
-    get_all_JGZS_QiangShiGu(localpath1)
+    # get_all_JGZS_QiangShiGu(localpath1)
 
 
     #5 看涨阴线4
