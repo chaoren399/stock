@@ -139,24 +139,20 @@ def isAn_ZTB_Yin_Yang_Yin_model(data, stockcode):
             path = modelname+'.txt'
             writeLog_to_txt_path_getcodename(info, path, stockcode)
 
-            chenggong_code={'stockcode':stockcode,'mairuriqi':mairuriqi,'zhisundian':zhisundian}
-            # print1(day2_shizixing_low)
-            chengongs.append(chenggong_code)
+                # print int(riqi)
+            start_date= str(riqi)
+            ts_code=str(stockcode)
+            from jishu_stock.aShengLv.HuiCeTool import get_n_data_by_date
+
+            huice_info = get_n_data_by_date(ts_code,start_date,n=5)
+            pathin= '/app/stock/stock/jishu_stock/agetdata/test_ziji_model/ZTB/0ZTB_Yin_Yang_Yin_huice/huicedata/1.csv'
+            writeLog_to_txt_path(huice_info, pathin);
+            sleep(5)
 
 
-'''
-测试老师的案例
-'''
-def test_isAn_ZTB_Yin_Yang_Yin_laoshi():
-    # 案例 1
-    df1 = ts.pro_bar(ts_code='000408.SZ',adj='qfq', start_date='20210206', end_date='20210518')
-    data7_1 = df1.iloc[0:30]  # 前7行
-    # print data7_1
-    isAn_ZTB_Yin_Yang_Yin_model(data7_1, '002174.SZ')
 
-    # 案例 2
 
-    # 案例 3
+
 
 '''
 测试自己的案例
@@ -171,18 +167,7 @@ def test_isAn_ZTB_Yin_Yang_Yin_ziji():
 
     #南京化纤**600889.SH
 
-    ts_code='600889.SH'
-    df1 = ts.pro_bar(ts_code=ts_code,adj='qfq', start_date='20210206', end_date='20240628')
-    # print df1
-    data7_1 = df1.iloc[0:6]  # 前7行
-    isAn_ZTB_Yin_Yang_Yin_model(data7_1,ts_code)
 
-    #20240425,机床制造,日发精机**002520.SZ
-    ts_code='002520.SZ'
-    df1 = ts.pro_bar(ts_code=ts_code,adj='qfq', start_date='20210206', end_date='20240430')
-    # print df1
-    data7_1 = df1.iloc[0:6]  # 前7行
-    isAn_ZTB_Yin_Yang_Yin_model(data7_1,ts_code)
 
 
 '''
@@ -215,6 +200,7 @@ def test_Befor_data():
             x=5 #循环  22
             nx= x*22
             data7_4 = df.iloc[nx:22+n+nx]  #1 个月
+            data7_4 = df.iloc[1:1+n+120]  # 半年
             len_1=len(data7_4)
             for i in range(0, len_1 - n + 1):
                 # print "i" + str(i )+ "j"+str(i+3)
@@ -240,3 +226,5 @@ if __name__ == '__main__':
 
     endtime = time()
     print "总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟"
+
+

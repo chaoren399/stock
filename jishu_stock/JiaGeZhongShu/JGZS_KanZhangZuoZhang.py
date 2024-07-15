@@ -65,7 +65,8 @@ def get_all_JGZS_KanZhangZuoZhang(localpath1):
             len1 = len(data6_1)
             isAn_JGZS_KanZhangZuoZhang_model(data6_1, stock_code)
         except:
-            print  'stock_code is null = ' + str(stock_code)
+            # print  'stock_code is null = ' + str(stock_code)
+            print  'stock_code is null = '
 
 
 '''

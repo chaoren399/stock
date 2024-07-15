@@ -212,7 +212,7 @@ def test_Befor_data():
             data7_4 = df.iloc[22:22+n+22]  #1 个月
             data7_4 = df.iloc[22+22:22+n+22+22]  #1 个月
             data7_4 = df.iloc[22+22+22:22+n+22+22+22]  #1 个月
-            x=5 #循环  22
+            x=4 #循环  22
             nx= x*22
             data7_4 = df.iloc[nx:22+n+nx]  #1 个月
             len_1=len(data7_4)

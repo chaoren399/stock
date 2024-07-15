@@ -2,6 +2,9 @@
 # -*- coding: utf8 -*-
 import sys
 import os
+
+from jishu_stock.agetdata.test_ziji_model.ZTB.ZTB_Yin_Yang_Yin.ZTB_Yin_Yang_Yin import get_all_ZTB_Yin_Yang_Yin
+
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_parent_dir_name = os.path.dirname(os.path.dirname(current_dir))
 # print current_dir
@@ -112,9 +115,9 @@ def yijianyunxing_rixian():
     localpath1 = '/jishu_stock/z_stockdata/data1/'
 
 
-
+    webhook.sendData("-----日线数据更新-开始 ----"  )
     get_all_codes() #下载所有 股票数据
-
+    webhook.sendData("-----日线数据更新-结束 ----")
     getXiaoV()
     stock_codes = get_all_codes_from_tool() # 获取所有股票代码
     for index, item in enumerate(stock_codes):
@@ -155,7 +158,9 @@ def getXiaoV():
 """
 def task1(data6_1,stock_code):
 
-
+    webhook.sendData("-----涨停板-阴-阳-阴-开始 ----"  )
+    get_all_ZTB_Yin_Yang_Yin(localpath1)
+    webhook.sendData("-----涨停板-阴-阳-阴- 结束----"  )
 
     # 1 V型 反转
     # isAnV_model(data6_1, stock_code)

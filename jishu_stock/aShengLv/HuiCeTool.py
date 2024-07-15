@@ -101,6 +101,57 @@ def get_oneweekOpenClosePrice_twoweekClose(code,date):
     #     print "get_oneweekOpenClosePrice_twoweekClose + df length < 4"
     #     return 0
 
+'''
+根据买入 日期， 得到 第n 天 卖出价格
+'''
+def get_n_data_by_date(code,date,n):
+    # ts_code='603389.SH'
+    ts_code=code
+    # start_date='20231105'
+    start_date=date
+    today = getDayNumberYMD()
+    # print today
+    end_date=today
+
+    df=''
+    try:
+        # 这里是可能会出错的代码
+
+        df = ts.pro_bar(ts_code=ts_code, adj='qfq', freq='D', start_date=start_date, end_date=end_date,retry_count = 5)
+        lendf = len(df)
+        data7_1 = df.iloc[lendf - n:lendf]  #
+
+        data1 = data7_1
+
+        data1 = data1.sort_values(by='trade_date', axis=0, ascending=True)  # 按照日期 从旧到新 排序
+        data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
+
+        # print df
+        huice_info = str(date) + get_Stock_Name_byKanzhanghuice(code) + ',' + code + ','
+        # print data1
+        for index, row in data1.iterrows():
+
+            if (index == 3):
+                huice_info = huice_info + str(row['close']) + ','
+            if (index == 4):
+                huice_info = huice_info + str(row['close'])
+
+
+        return huice_info
+
+        '''
+        日期，股票,买入价,第一周卖,第2周卖,第3周卖,第4周卖
+        '''
+    except Exception as e:
+        # 这里处理错误，比如打印错误信息，或者记录日志
+        print(e)
+
+def test_get_n_data_by_date():
+    ts_code='002423.SZ'
+    start_date='20240131'
+    info = get_n_data_by_date(ts_code,start_date,n=5)
+    print info
+
 def test_feiyada():
     ts_code='000026.SZ'
     start_date='20231112'
@@ -112,3 +163,4 @@ if __name__ == '__main__':
     start_date='20231105'
     # get_oneweekOpenClosePrice_twoweekClose(ts_code,start_date)
     # test_feiyada()
+    test_get_n_data_by_date()

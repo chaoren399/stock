@@ -20,20 +20,25 @@ def JGZS_yijianyunxing():
     starttime = datetime.datetime.now()
     today = starttime.strftime('%Y%m%d')
     #先更新数据
+    webhook.sendData("-----周线数据更新-开始 ----"  )
     getAll_jiagezhongshu_WeekKdata(localpath1)
+    webhook.sendData("-----周线数据更新-结束 ----"  )
 
 
     #2 看涨做涨
+    webhook.sendData("-----看涨做涨-开始 ----"  )
     get_all_JGZS_KanZhangZuoZhang(localpath1)
-    webhook.sendData("-----看涨做涨--yi wan cheng ----"  )
+    webhook.sendData("-----看涨做涨--结束 ----"  )
 
-    # 3  看涨阴线1 上涨初期
+    # 3  看涨阴线1 回调位置
+    webhook.sendData("-----看涨阴线1--开始 ----"  )
     get_all_JGZS_KanZhangYinXian1(localpath1)
-    webhook.sendData("-----看涨阴线1--yi wan cheng ----"  )
+    webhook.sendData("-----看涨阴线1--结束----"  )
 
     # 4 看涨阴线 2 回调位置
+    webhook.sendData("-----看涨阴线2--开始 ----"  )
     get_all_JGZS_KanZhangYinXian2(localpath1)
-    webhook.sendData("-----看涨阴线2--yi wan cheng ----"  )
+    webhook.sendData("-----看涨阴线2--结束 ----"  )
 
     #3 zhouxian  qiangshi gu
 
