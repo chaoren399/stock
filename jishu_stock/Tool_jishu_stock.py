@@ -69,6 +69,8 @@ def isYinXian(row):
     return 0
 
 
+
+
 '''
 判断一行是不是 阳线, 返回 1 是阳线, 返回0 是阴线
 '''
@@ -222,7 +224,7 @@ def writeLog_to_txt_path_getcodename(info ,path,code):
 
 '''
 def csv_paixu_path1_zhuanyong():
-    # print path1
+    print path1
     df = pd.read_csv(path1, sep=',', header=-1, engine='python',index_col=0) #header=-1时（可用于读取无表头CSV文件
 
     df=df.sort_index(axis=0, ascending=True)
@@ -246,6 +248,17 @@ path = pathyuefen + datetime.datetime.now().strftime(
 
 path1 = BASE_DIR + '/jishu_stock/zJieGuo/'+yuefen+'月/' + datetime.datetime.now().strftime(
         '%Y-%m-%d') + '.csv'
+
+
+import os
+
+dir_path = pathyuefen
+
+# 如果目录不存在，则创建目录
+if not os.path.exists(dir_path):
+    os.mkdir(dir_path)
+
+print "目录"+dir_path+"已创建"
 
 
 '''

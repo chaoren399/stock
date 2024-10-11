@@ -93,6 +93,7 @@ def getallstock_list_chuli():
     tamp = pd.DataFrame(tamp, columns=['ts_code', 'symbol', 'name', 'area', 'industry', 'list_date'])
     tamp = tamp.reset_index(drop=True)
     tamp.to_csv("allstockcode_No_ST.csv")
+    print "allstockcode_No_ST.csv"
 
     print  str(len(tamp))
 

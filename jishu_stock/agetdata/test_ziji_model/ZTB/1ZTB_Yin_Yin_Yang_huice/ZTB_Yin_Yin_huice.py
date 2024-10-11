@@ -19,18 +19,17 @@ pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
 
 ''''
-山推股份
-涨停板-阴-阳-阴-
+吉林化纤
+涨停板-阴-阴-阳
 
- https://www.yuque.com/chaoren399/zxadsn/atz26u5tdloxosn3
- 
+https://www.yuque.com/chaoren399/zxadsn/bik65os2960bkgcs
 '''
 chengongs=[]
-modelname='涨停板-阴线-阳-阴'
+modelname='涨停板-阴-阴-阳'
 
 
 
-def get_all_ZTB_Yin_Yang_Yin(localpath1):
+def get_all_ZTB_Yin_Yin_Yang(localpath1):
     info1=  '--'+ modelname+'--start--'
     writeLog_to_txt_nocode(info1)
     path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
@@ -44,25 +43,25 @@ def get_all_ZTB_Yin_Yang_Yin(localpath1):
         data6_1 = df.iloc[0:30]  # 前6行
         # data6_1 = df.iloc[20:32]  # 前6行
         len1 = len(data6_1)
-        isAn_ZTB_Yin_Yang_Yin_model(data6_1, stock_code)
+        isAn_ZTB_Yin_Yin_Yang_model(data6_1, stock_code)
 
 
 
 '''
 #2 单独一个函数 判断 6 个数据是不是符合模型
 '''
-def isAn_ZTB_Yin_Yang_Yin_model(data, stockcode):
+def isAn_ZTB_Yin_Yin_Yang_model(data, stockcode):
     if (data is None or data.empty):
         print '--df.empty--' + str(stockcode)
         return 0
     len_data = len(data)
     if (len_data == 0):
         print str(stockcode) + '--data --is null'
-    if(len_data >= 4):
+    if(len_data >= 3):
         data = data.sort_values(by='trade_date', axis=0, ascending=True)  # 按照日期 从旧到新 排序
         data = data.reset_index(drop=True)  # 重新建立索引 ,默认为false，索引列（被设置为索引的列）被还原为普通列，并将索引重置为整数索引，否则直接丢弃索引列。
 
-        data1= data[len_data-4:len_data]
+        data1= data[len_data-3:len_data]
         data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
         mairuriqi = 0
@@ -76,10 +75,11 @@ def isAn_ZTB_Yin_Yang_Yin_model(data, stockcode):
         key_1=0; #1-第一天是一个涨停板,
 
         key_2=0; # 第2天阴线
-        key_3=0; # 第3天阳线
-        key_4=0; # 第4天阴线
+        key_3=0; # 第3天阴线
 
-        key_5=0; # 涨停板的第2天必须 阴线 低开
+
+
+        key_5=0; # 涨停板的第2天必须 阴线 低开  ，收盘价
 
         key_6=0 # 第3天阳线 低开
         key_7=0 # 第4天阴险 低开
@@ -104,13 +104,11 @@ def isAn_ZTB_Yin_Yang_Yin_model(data, stockcode):
                 day2_open= row['open']
                 day2_close= row['close']
                 key_2=1
-            if(index==2 and isYangXian(row)==1):
+            if(index==2 and isYinXian(row)==1):
                 day3_open=row['open']
                 day3_close=row['close']
                 key_3=1
-            if(index==3 and isYinXian(row)==1):
-                day4_open=row['open']
-                key_4=1
+
 
         if(day2_open <day1_close):
             key_5=1
@@ -130,7 +128,8 @@ def isAn_ZTB_Yin_Yang_Yin_model(data, stockcode):
         # print1(key_1)
 
         # if(key_1==1 and key_2==1 and key_3==1 and key_4==1 and key_5==1 ) :
-        if(key_1==1 and key_2==1 and key_3==1 and key_4==1 and key_5==1 and key_6==1 and key_7 ==1 ) :
+        # if(key_1==1 and key_2==1 and key_3==1 and key_4==1 and key_5==1 and key_6==1 and key_7 ==1 ) :
+        if(key_1==1 and key_2==1 and key_3==1 ) :
             info = '--'
             info = info + modelname+"成功了--"  + str(riqi)
             # print info
@@ -142,12 +141,12 @@ def isAn_ZTB_Yin_Yang_Yin_model(data, stockcode):
                 # print int(riqi)
             start_date= str(riqi)
             ts_code=str(stockcode)
-            from jishu_stock.aShengLv.HuiCeTool import get_n_data_by_date
-
-            huice_info = get_n_data_by_date(ts_code,start_date,n=5)
-            pathin= '/app/stock/stock/jishu_stock/agetdata/test_ziji_model/ZTB/0ZTB_Yin_Yang_Yin_huice/huicedata/1.csv'
-            writeLog_to_txt_path(huice_info, pathin);
-            sleep(5)
+            # from jishu_stock.aShengLv.HuiCeTool import get_n_data_by_date
+            #
+            # huice_info = get_n_data_by_date(ts_code,start_date,n=5)
+            # pathin= '/app/stock/stock/jishu_stock/agetdata/test_ziji_model/ZTB/0ZTB_Yin_Yin_Yang_huice/huicedata/1.csv'
+            # writeLog_to_txt_path(huice_info, pathin);
+            # sleep(5)
 
 
 
@@ -157,13 +156,13 @@ def isAn_ZTB_Yin_Yang_Yin_model(data, stockcode):
 '''
 测试自己的案例
 '''
-def test_isAn_ZTB_Yin_Yang_Yin_ziji():
-    #自己的 案例 山推股份
-    ts_code='000680.SZ'
-    df1 = ts.pro_bar(ts_code=ts_code,adj='qfq', start_date='20210206', end_date='20240617')
+def test_isAn_ZTB_Yin_Yin_Yang_ziji():
+    #自己的 案例 吉林化纤
+    ts_code='000420.SZ'
+    df1 = ts.pro_bar(ts_code=ts_code,adj='qfq', start_date='20210206', end_date='20240314')
     # print df1
     data7_1 = df1.iloc[0:6]  # 前7行
-    isAn_ZTB_Yin_Yang_Yin_model(data7_1,ts_code)
+    isAn_ZTB_Yin_Yin_Yang_model(data7_1,ts_code)
 
     #南京化纤**600889.SH
 
@@ -190,21 +189,21 @@ def test_Befor_data():
             ###-  ---找到 某天  内所有的  ###
             n = 13  #13
             data7_4 = df.iloc[n:n+4]  # 1年
-            # isAn_ZTB_Yin_Yang_Yin_model(data7_4, stock_code)
+            # isAn_ZTB_Yin_Yin_Yang_model(data7_4, stock_code)
 
             ###-  ---找到 30天 内所有的  ###
             n = 4 #数据间隔
             data7_4 = df.iloc[22:22+n+22]  #1 个月
             data7_4 = df.iloc[22+22:22+n+22+22]  #1 个月
             data7_4 = df.iloc[22+22+22:22+n+22+22+22]  #1 个月
-            x=5 #循环  22
+            x=1#循环  22
             nx= x*22
             data7_4 = df.iloc[nx:22+n+nx]  #1 个月
-            data7_4 = df.iloc[1:1+n+120]  # 半年
+            # data7_4 = df.iloc[1:1+n+120]  # 半年
             len_1=len(data7_4)
             for i in range(0, len_1 - n + 1):
                 # print "i" + str(i )+ "j"+str(i+3)
-                isAn_ZTB_Yin_Yang_Yin_model(data7_4[i:i + n], stock_code)
+                isAn_ZTB_Yin_Yin_Yang_model(data7_4[i:i + n], stock_code)
 
         except Exception as e:
             # `e` has the error info
@@ -219,8 +218,8 @@ if __name__ == '__main__':
 
 
     localpath1 = '/jishu_stock/z_stockdata/data1/'
-    # get_all_ZTB_ZTB_TiaoKong(localpath1)
-    # test_isAn_ZTB_Yin_Yang_Yin_ziji()
+    # get_all_ZTB_Yin_Yin_Yang(localpath1)
+    # test_isAn_ZTB_Yin_Yin_Yang_ziji()
     test_Befor_data()
 
 

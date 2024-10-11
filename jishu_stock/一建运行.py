@@ -49,7 +49,7 @@ from jishu_stock.JiuSiYiSheng.JiuSiYiSheng2 import get_all_JiuSiYiSheng_2
 from jishu_stock.YiYiDaiLao.yiyidailaoAll.YiYiDaiLao0 import get_all_YiYiDaiLao
 from jishu_stock.YiJIanShuangDiao.YiJianShuangDiao import get_all_YiJianShuangDiao
 from jishu_stock.getAllStockData import getAllStockData
-from jishu_stock.zYouQianJun.YouQianJun120_250 import get_all_120_250
+from jishu_stock.yYouQianJun.YouQianJun120_250 import get_all_120_250
 
 '''
 G8M2 一键运行

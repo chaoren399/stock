@@ -220,8 +220,8 @@ if __name__ == '__main__':
 
     # test_isAn_XiaoV_model_laoshi()
 
-    # get_all_XiaoV(localpath1)
-    get_all_XiaoV_from_Qiang_QuShi(localpath1)
+    get_all_XiaoV(localpath1)
+    # get_all_XiaoV_from_Qiang_QuShi(localpath1)
 
 
     endtime = time()

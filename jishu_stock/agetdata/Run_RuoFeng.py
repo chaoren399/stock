@@ -69,7 +69,7 @@ from jishu_stock.YiYiDaiLao.yiyidailaoAll.YiYiDaiLao0 import isAn_YiYiDaiLao_mod
 from jishu_stock.YiJIanShuangDiao.YiJianShuangDiao import isAn_YiJianShuangDiao_model
 from jishu_stock.cShenLongBaiWei.Shen1_Pro import isAn_Shen1_Pro_model
 from jishu_stock.cShenLongBaiWei.ShenLongBaiWei4_1 import get_all_ShenLongBaiWei4_1
-from jishu_stock.zYouQianJun.YouQianJun120_250 import get_all_120_250
+from jishu_stock.yYouQianJun.YouQianJun120_250 import get_all_120_250
 from jishu_stock.z_tool.PyDateTool import getDayNumberYMD
 
 from stock.settings import BASE_DIR

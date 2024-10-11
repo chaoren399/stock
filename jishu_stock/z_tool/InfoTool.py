@@ -13,10 +13,18 @@ def manage_info(info, stockcode,date,yuliu):
 
     bacinfo = isAn_ChiCangLiang_BiaoZhun(stockcode, date)
     zhouxian_info = ''
-    if (len(bacinfo) == 2):
-        if (bacinfo[0] == 1):
-            key_6 = 1
-        zhouxian_info = bacinfo[1]
+    try:
+        if (len(bacinfo) == 2):
+            if (bacinfo[0] == 1):
+                key_6 = 1
+            zhouxian_info = bacinfo[1]
+
+    except Exception as e:
+        # `e` has the error info
+        print `e`
+
+
+
 
     info = info + zhouxian_info
 

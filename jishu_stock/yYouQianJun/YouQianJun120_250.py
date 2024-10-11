@@ -7,7 +7,7 @@ import tushare as ts
 import pandas as pd
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, print1, \
     writeLog_to_txt_path_getcodename
-from jishu_stock.zYouQianJun.get_120_250_data import getStockCode_to_SHSZ
+from jishu_stock.yYouQianJun.get_120_250_data import getStockCode_to_SHSZ
 from stock.settings import BASE_DIR
 
 ''''
@@ -21,7 +21,7 @@ def get_all_120_250():
     info1=  '--有钱君-120-250 均线交易法 start--   '
     writeLog_to_txt_nocode(info1)
 
-    path = BASE_DIR + '/jishu_stock/zYouQianJun/150stock.csv'  # 150个的数据
+    path = BASE_DIR + '/jishu_stock/yYouQianJun/150stock.csv'  # 150个的数据
     data_150stock = pd.read_csv(path, dtype='object')
 
     for index,row in data_150stock.iterrows():
@@ -35,7 +35,7 @@ def get_all_120_250():
 
             #2 开始chuli 数据
 
-            stockdata_path = BASE_DIR + '/jishu_stock/zYouQianJun/150data/' + stock_code + '_150' + ".csv"
+            stockdata_path = BASE_DIR + '/jishu_stock/yYouQianJun/150data/' + stock_code + '_150' + ".csv"
             df = pd.read_csv(stockdata_path, index_col=0)
             if (df is None or df.empty):
                 print '--df.empty--' + str(stock_code)

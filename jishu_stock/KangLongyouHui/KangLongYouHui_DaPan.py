@@ -113,20 +113,24 @@ def test_isAn_KangLongYouHui_DaPan_ChengGong_anli():
 测试案例
 '''
 def test_isAn_KangLongYouHui_DaPan():
-    ts.set_token('731d2ea0abcf1f14d59ec7215d6ec520e09a439fccd2772c43a906be')
+    # ts.set_token('731d2ea0abcf1f14d59ec7215d6ec520e09a439fccd2772c43a906be')
     pro = ts.pro_api()
     # df = ts.pro_bar(ts_code='000001.SH', adj='qfq', start_date='20160608', end_date='20160614')
-    df = ts.pro_bar(ts_code='000001.SH', asset='I',freq='D',start_date='20160608',end_date='20211003 ')
+    # df = ts.pro_bar(ts_code='000001.SH', asset='I',freq='D',start_date='20160608',end_date='20211003 ')
+    df = ts.pro_bar(ts_code='000001.SH', asset='I',freq='D',start_date='20211003',end_date='20240927 ')
+    # df = pro.index_daily(ts_code='399300.SZ', start_date='20180101', end_date='20181010')
+
     data7_1 = df.iloc[0:3]  # 前7行
     # print data7_1
     # isAn_KangLongYouHui_DaPan_model(data7_1,'000001.SZ')
 
     data7_2 = df.iloc[0:100]  # 前7行
+    print data7_2
     len1=len(data7_2)
     for i in range(0, len1 - 3 + 1):
         isAn_KangLongYouHui_DaPan_model(data7_2[i:i + 3], '000001.SZ')
 
 if __name__ == '__main__':
-    # test_isAn_KangLongYouHui_DaPan()
+    test_isAn_KangLongYouHui_DaPan()
     # get_all_KangLongYouHui_DaPan()
-    test_isAn_KangLongYouHui_DaPan_ChengGong_anli()
+    # test_isAn_KangLongYouHui_DaPan_ChengGong_anli()

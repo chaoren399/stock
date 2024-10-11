@@ -30,6 +30,7 @@ localpath = '/jishu_stock/z_stockdata/data1/' #数据存放路径
 
 
 def get_all_codes():
+    webhook.sendData("-----日线数据更新-开始 ----")
     # webhook.sendData("开始下载数据")
 
     starttime = time()
@@ -87,7 +88,8 @@ def get_all_codes():
     info = info+'-------------------------------------------'
 
     print info+ "get_all_codes 下载数据总共运行时长:" + str(round((endtime - starttime) / 60, 2)) + "分钟" +info
-    webhook.sendData("数据下载完成")
+    # webhook.sendData("数据下载完成")
+    webhook.sendData("-----日线数据更新-结束 ----")
 
 def download_onestock_token1(stock_code):
     # ts.set_token('731d2ea0abcf1f14d59ec7215d6ec520e09a439fccd2772c43a906be')

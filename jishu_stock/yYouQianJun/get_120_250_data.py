@@ -29,7 +29,7 @@ def get_120_250_StockData():
     # 查询当前所有正常上市交易的股票列表
 
 
-    path_150stock = BASE_DIR + '/jishu_stock/zYouQianJun/150stock.csv'  # 150个的数据
+    path_150stock = BASE_DIR + '/jishu_stock/yYouQianJun/150stock.csv'  # 150个的数据
 
 
     data_150stock = pd.read_csv(path_150stock, dtype='object')
@@ -47,7 +47,7 @@ def get_120_250_StockData():
             #  2021年08月16日 增加 ma5 ma13 ma 34
             df = ts.pro_bar(ts_code=stock_code, adj='qfq', start_date=start_date, end_date=end_date, ma=[120, 250])
             df = df.dropna(how='any', axis=0)  # 删除 列数据为空的 的行
-            stockdata_path = BASE_DIR + '/jishu_stock/zYouQianJun/150data/'+stock_code+'_150'+".csv"
+            stockdata_path = BASE_DIR + '/jishu_stock/yYouQianJun/150data/'+stock_code+'_150'+".csv"
             # 3 保存数据
 
             df.to_csv(stockdata_path)
@@ -60,7 +60,7 @@ def get_120_250_StockData():
 得到 150 只股票对应的同花顺代码
 '''
 def getStockCode_to_SHSZ(stockcode_1):
-    path = BASE_DIR + '/jishu_stock/zYouQianJun/' + 'allstock_list' + ".csv"
+    path = BASE_DIR + '/jishu_stock/yYouQianJun/' + 'allstock_list' + ".csv"
     data = pd.read_csv(path, dtype={'code': str})
     for index1, row1 in data.iterrows():
         name = row1['name']

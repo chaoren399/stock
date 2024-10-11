@@ -3,7 +3,10 @@
 import sys
 import os
 
-from jishu_stock.agetdata.test_ziji_model.ZTB.ZTB_Yin_Yang_Yin.ZTB_Yin_Yang_Yin import get_all_ZTB_Yin_Yang_Yin
+from jishu_stock.bRuoFeng.youzimodel.fancuiruo_shuangxiangpao import isAn_fancuiruo_shuangxiangpao_model
+from jishu_stock.bRuoFeng.youzimodel.lizhuang_fanbao import isAn_lizhuang_fanbao_model
+
+# from jishu_stock.agetdata.test_ziji_model.ZTB.ZTB_Yin_Yang_Yin.ZTB_Yin_Yang_Yin import get_all_ZTB_Yin_Yang_Yin
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_parent_dir_name = os.path.dirname(os.path.dirname(current_dir))
@@ -12,75 +15,26 @@ print(parent_parent_dir_name)
 sys.path.append(parent_parent_dir_name)
 
 
-from jishu_stock.agetdata.test_ziji_model.XiaoV.XiaoV import isAn_XiaoV_model, get_all_XiaoV_from_Qiang_QuShi
+from jishu_stock.agetdata.test_ziji_model.XiaoV.XiaoV import get_all_XiaoV_from_Qiang_QuShi, isAn_XiaoV_model
 from jishu_stock.z_tool.email import webhook
 import pandas as pd
 from jishu_stock.DaPan.DaPan_HuanJing import get_DaPan_HuanJing
-from jishu_stock.DaYou.DaYou import isAn_DaYou_model
-from jishu_stock.FanKeWeiZhu.FanKeWeiZhu import isAn_FanKeWeiZhu_model
-from jishu_stock.FanKeWeiZhu.FanKeWeiZhu_Plus import isAn_FanKeWeiZhu_Plus_model
-from jishu_stock.FeiLongZaiTian.FeiLongZaiTian import isAn_FeiLongZaiTian_model
-from jishu_stock.FengHuiLuZhuan.FengHuiLuZhuan import isAn_FengHuiLuZhuan_model
-from jishu_stock.GeShanDaNiu.GeShanDaNiu import isAn_GeShanDaNiu_model
 from jishu_stock.GeShiBaFa.G8M2_RuanAll import G8M2_yijianyunxing
-from jishu_stock.JiaGeZhongShu.GetToday_JGZS import GetToday_JGZS
 from jishu_stock.JiaGeZhongShu.JGZS_RuanAll import JGZS_yijianyunxing
-from jishu_stock.JianLongZaiTian.JianLongZaiTian5 import isAn_JianLongZaiTian5_model
-from jishu_stock.JieJie.JieJie import isAn_JieJie_model
-from jishu_stock.JiuSiYiSheng.jiusiyisheng1 import isAn_jiusiyisheng1_model
-from jishu_stock.KanDieZuoZhang.KanDieZuoZhang import isAn_KanDieZuoZhang_model
-from jishu_stock.KangLongyouHui.KangLongYouHuiGeGu import isAn_KangLongYouHui_GeGu_model
 from jishu_stock.KangLongyouHui.KangLongYouHui_DaPan import get_all_KangLongYouHui_DaPan
-from jishu_stock.LiuAnHuaMing.LiuAnHuaMing2 import isAn_LiuAnHuaMing2_model
-from jishu_stock.LongZhan_YuYe.LongZhanYuYe import isAn_LongZhanYuYe_model
-from jishu_stock.PiJiTaiLai.PiJiTaiLai import get_all_PiJiTaiLai
-from jishu_stock.QiBaoJunXian.QiBaoJunXian1 import isAn_QiBaoJunXian1_model
-from jishu_stock.QiBaoJunXian.QiBaoJunXian2 import isAn_QiBaoJunXian2_model
-from jishu_stock.QiBaoJunXian.QiBaoJunXian3 import isAn_QiBaoJunXian3_model
-from jishu_stock.QiBaoJunXian.QiBaoJunXian4 import isAn_QiBaoJunXian4_model
-from jishu_stock.SiHuiFuRan.SiHuiFuRan import isAn_SiHuiFuRan_model
-from jishu_stock.Tool_jishu_stock import get_2stockcode, get_all_codes_from_tool, \
+from jishu_stock.Tool_jishu_stock import get_all_codes_from_tool, \
     csv_paixu_path1_zhuanyong
-from jishu_stock.WuLiKanHua.WuLiKanHua import isAn_WuLiKanHua_model
-from jishu_stock.YiYiDaiLao.YiYiDaiLao0 import isAn_YiYiDaiLao2_model
-from jishu_stock.YinCuoYangCha.YinCuoYangCha import isAn_YinCuoYangCha_model
 from jishu_stock.YouJingWuXian.YouJingWuXian1 import isAn_YouJingWuXian1_model
 from jishu_stock.YouJingWuXian.YouJingWuXian2_1 import isAn_YouJingWuXian2_1_model
 from jishu_stock.YouJingWuXian.YouJingWuXian2_2 import isAn_YouJingWuXian2_2_model
 from jishu_stock.YouJingWuXian.YouJingWuXian2_3 import isAn_YouJingWuXian2_3_model
 from jishu_stock.agetdata.getdata_2theard import get_all_codes
-from jishu_stock.agetdata.test_ziji_model.ZTB_XiaoYinXian_TiaoKong import isAn_ZTB_YinXian_TiaoKong_model
-from jishu_stock.bCaoMaoGui.NXingFanZhuan import isAn_NXingFanZhuan_model
-from jishu_stock.bCaoMaoGui.TaXingDi import isAn_TaXingDi_model
-from jishu_stock.bCaoMaoGui.ZaoChenZhiXing import isAn_ZaoChenZhiXing_model
-from jishu_stock.bChanKe.ChouMaTuPo import isAn_ChouMaTuPo_model
-from jishu_stock.bChanKe.JianCangPoZhan import isAn_JianCangPoZhan_model
-from jishu_stock.bChanKe.quekou.DaoXingQueKou import isAn_DaoXingQueKou_model
-from jishu_stock.bRuoFeng.HaiDiLao import isAn_HaiDiLao_model
-from jishu_stock.bWuWei.DuiLiang1 import isAn_DuiLiang1_model
-from jishu_stock.bWuWei.FanBao1 import isAn_FanBao1_model
-from jishu_stock.bWuWei.VOLYinJinYangSheng import isAn_VOLYinJinYangSheng_model
-from jishu_stock.bWuWei.Wu_LianYang import isAn_5LianYang_model
-from jishu_stock.bWuWei.XiaoYangJianCang import isAn_XiaoYangJianCang_model
-from jishu_stock.bWuWei.Yang4_1ZhangTB import isAn_4Yang1ZTB_model
-from jishu_stock.bWuWei.ZhuiJiYiZiBan import isAn_ZhuiJiYiZiBan_model
-from jishu_stock.b_xiaogujiang.DuanXianQiangZhuangGu import isAn_DuanXianQiangZhuangGu_model
-from jishu_stock.b_xiaogujiang.DuanXianQiangZhuangGu2 import isAn_DuanXianQiangZhuangGu2_model
+from jishu_stock.bRuoFeng.youzimodel.erlianban_damian_fanbao_guchi import isAn_lianban_damian_fanbao_model
 from jishu_stock.cShenLongBaiWei.Shen1 import isAn_Shen1_model
-from jishu_stock.cShenLongBaiWei.ShenLongBaiWei0 import isAn_ShenLongBaiWei0_model
 from jishu_stock.cShenLongBaiWei.ShenLongBaiWei2 import get_all_ShenLongBaiWei2
 from jishu_stock.cShenLongBaiWei.ShenLongBaiWei2_Pro import isAn_ShenLongBaiWei2_Pro_model
-from jishu_stock.cShenLongBaiWei.ShenLongBaiWei3 import isAnShenLongBaiwei3_model
 from jishu_stock.cShenLongBaiWei.ShenLongBaiWei4 import get_all_ShenLongBaiWei4
-from jishu_stock.VXingFanZhuan.VXingFanzhuan_all import isAnV_model
-from jishu_stock.QingTingDianShui_QueKou.QueKou_QingTingDianShui import get_all_QingTingDianShui
-from jishu_stock.LingBoWeiBu.LingBoWeiBu import get_all_LingBoWeiBu
-from jishu_stock.JiuSiYiSheng.JiuSiYiSheng2 import isAn_JiuSiYiSheng_2_model
-from jishu_stock.YiYiDaiLao.yiyidailaoAll.YiYiDaiLao0 import isAn_YiYiDaiLao_model
-from jishu_stock.YiJIanShuangDiao.YiJianShuangDiao import isAn_YiJianShuangDiao_model
-from jishu_stock.cShenLongBaiWei.Shen1_Pro import isAn_Shen1_Pro_model
 from jishu_stock.cShenLongBaiWei.ShenLongBaiWei4_1 import get_all_ShenLongBaiWei4_1
-from jishu_stock.zYouQianJun.YouQianJun120_250 import get_all_120_250
 from jishu_stock.z_tool.PyDateTool import getDayNumberYMD
 
 from stock.settings import BASE_DIR
@@ -115,9 +69,9 @@ def yijianyunxing_rixian():
     localpath1 = '/jishu_stock/z_stockdata/data1/'
 
 
-    webhook.sendData("-----日线数据更新-开始 ----"  )
+
     get_all_codes() #下载所有 股票数据
-    webhook.sendData("-----日线数据更新-结束 ----")
+
     getXiaoV()
     stock_codes = get_all_codes_from_tool() # 获取所有股票代码
     for index, item in enumerate(stock_codes):
@@ -158,66 +112,17 @@ def getXiaoV():
 """
 def task1(data6_1,stock_code):
 
-    webhook.sendData("-----涨停板-阴-阳-阴-开始 ----"  )
-    get_all_ZTB_Yin_Yang_Yin(localpath1)
-    webhook.sendData("-----涨停板-阴-阳-阴- 结束----"  )
-
-    # 1 V型 反转
-    # isAnV_model(data6_1, stock_code)
-    # 8 龙战于野
-    isAn_LongZhanYuYe_model(data6_1, stock_code)
-    #以逸待劳
-    # isAn_YiYiDaiLao_model(data6_1, stock_code)
-    # xiaoV
-    # isAn_XiaoV_model(data6_1,stock_code)
-
-
-
-    #海底捞
-    # isAn_HaiDiLao_model(data6_1,stock_code)
-
-    #岛型反转缺口  大盘 破 20 日均线才可以做
-    # isAn_DaoXingQueKou_model(data6_1, stock_code)
-
-    #建仓破绽 洗盘模型
-    # isAn_JianCangPoZhan_model(data6_1, stock_code)
-
-    #筹码突破
-    # isAn_ChouMaTuPo_model(data6_1, stock_code)
-    #短线强庄股2
-    # isAn_DuanXianQiangZhuangGu2_model(data6_1, stock_code)
-    #短线强庄股
-    # isAn_DuanXianQiangZhuangGu_model(data6_1, stock_code)
-
-    #阴错阳差
-    # isAn_YinCuoYangCha_model(data6_1, stock_code)
-
-    #见龙在田5
-    # isAn_JianLongZaiTian5_model(data6_1, stock_code)
-
-    #出水芙蓉 主力底部强势洗盘
-    # isAn_ChuShuiFuRong_model(data6_1, stock_code)
-
-
-
-
-    # 飞龙在天, 是萧先生 所有模型里边,挣钱最多, 最快的一个.  胜率最高的
-    # isAn_FeiLongZaiTian_model(data6_1, stock_code)
-    # 反客为主 上涨 一天强势洗盘 胜率 80%
-    # isAn_FanKeWeiZhu_model(data6_1, stock_code)
-    #反客为主plus
-    # isAn_FanKeWeiZhu_Plus_model(data6_1, stock_code)
-
-    # 一箭双雕 复盘 8 月份 94% 的成功率
-    # isAn_YiJianShuangDiao_model(data6_1, stock_code)
-    #大有模型
-    # isAn_DaYou_model(data6_1, stock_code)
-
+    # 二连板大面反包
+    isAn_lianban_damian_fanbao_model(data6_1, stock_code)
+     # 立桩反包
+    isAn_lizhuang_fanbao_model(data6_1, stock_code)
+    # 反脆弱双响炮
+    isAn_fancuiruo_shuangxiangpao_model(data6_1, stock_code)
 
     #  神龙摆尾1 神1
     isAn_Shen1_model(data6_1, stock_code)
 
-    #神1  6天数据模型
+    # 神1  6天数据模型
     # isAn_Shen1_Pro_model(data6_1, stock_code)  #pro  济民医疗
     # 神2pro 改进版, 之前的有些拿不到
     isAn_ShenLongBaiWei2_Pro_model(data6_1, stock_code)
@@ -225,17 +130,61 @@ def task1(data6_1,stock_code):
     # isAnShenLongBaiwei3_model(data6_1, stock_code)
 
 
-    #隔山打牛
-    # isAn_GeShanDaNiu_model(data6_1, stock_code)
-
-    # 熊市末期亢龙有悔 个股上的应用:
-    # isAn_KangLongYouHui_GeGu_model(data6_1, stock_code)
-
-
 '''
 目前精力不放在这里的
 '''
 def task5(data6_1,stock_code):
+    # 1 V型 反转
+    # isAnV_model(data6_1, stock_code)
+    # 8 龙战于野
+    # isAn_LongZhanYuYe_model(data6_1, stock_code)
+    # 以逸待劳
+    # isAn_YiYiDaiLao_model(data6_1, stock_code)
+    # xiaoV
+    isAn_XiaoV_model(data6_1,stock_code)
+
+    # 海底捞
+    # isAn_HaiDiLao_model(data6_1,stock_code)
+
+    # 岛型反转缺口  大盘 破 20 日均线才可以做
+    # isAn_DaoXingQueKou_model(data6_1, stock_code)
+
+    # 建仓破绽 洗盘模型
+    # isAn_JianCangPoZhan_model(data6_1, stock_code)
+
+    # 筹码突破
+    # isAn_ChouMaTuPo_model(data6_1, stock_code)
+    # 短线强庄股2
+    # isAn_DuanXianQiangZhuangGu2_model(data6_1, stock_code)
+    # 短线强庄股
+    # isAn_DuanXianQiangZhuangGu_model(data6_1, stock_code)
+
+    # 阴错阳差
+    # isAn_YinCuoYangCha_model(data6_1, stock_code)
+
+    # 见龙在田5
+    # isAn_JianLongZaiTian5_model(data6_1, stock_code)
+
+    # 出水芙蓉 主力底部强势洗盘
+    # isAn_ChuShuiFuRong_model(data6_1, stock_code)
+
+    # 飞龙在天, 是萧先生 所有模型里边,挣钱最多, 最快的一个.  胜率最高的
+    # isAn_FeiLongZaiTian_model(data6_1, stock_code)
+    # 反客为主 上涨 一天强势洗盘 胜率 80%
+    # isAn_FanKeWeiZhu_model(data6_1, stock_code)
+    # 反客为主plus
+    # isAn_FanKeWeiZhu_Plus_model(data6_1, stock_code)
+
+    # 一箭双雕 复盘 8 月份 94% 的成功率
+    # isAn_YiJianShuangDiao_model(data6_1, stock_code)
+    # 大有模型
+    # isAn_DaYou_model(data6_1, stock_code)
+
+    # 隔山打牛
+    # isAn_GeShanDaNiu_model(data6_1, stock_code)
+
+    # 熊市末期亢龙有悔 个股上的应用:
+    # isAn_KangLongYouHui_GeGu_model(data6_1, stock_code)
 
     # 晓波 SCS1
     # isAn_SCS_1_model(data6_1, stock_code)

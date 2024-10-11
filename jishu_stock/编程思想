@@ -1,4 +1,8 @@
-
+操作步骤：
+1-获取股票代码，并过滤
+jishu_stock/zGetStockCode/getAllStockCode_chuli.py
+2-
+把 allstockcode_No_ST.csv 内容 复制到 /jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
 
 每个模型都有条件的 1,2,3
 
