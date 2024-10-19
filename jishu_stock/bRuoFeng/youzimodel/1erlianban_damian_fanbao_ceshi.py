@@ -70,7 +70,7 @@ def isAn_lianban_damian_fanbao_model(data,stockcode):
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
         mairuriqi = 0  # 第一天买入， 第2天卖出
         zhisundian = 0
-        print1(data1)
+
 
 
 
@@ -100,7 +100,8 @@ def isAn_lianban_damian_fanbao_model(data,stockcode):
                 key_4=1
                 mairuriqi = row['trade_date']
 
-        if (1):
+        if (0):
+            print1(data1)
             print key_1
             print key_2
             print key_3
@@ -153,6 +154,36 @@ def test_isAn_lianban_damian_fanbao_model_laoshi():
     # print data7_1
     isAn_lianban_damian_fanbao_model(data7_1,st_code)
 
+'''
+回测 8 月份的数据
+'''
+def test_Befor_data():
+    path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
+    # path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST_tmp1.csv'
+    data = pd.read_csv(path, dtype={'code': str})
+    for index, row in data.iterrows():
+        stock_code = row['ts_code']
+        stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
+        df = pd.read_csv(stockdata_path, index_col=0)
+        # data7_4 = df.iloc[0:22]  # 前10个交易日
+        data7_4 = df.iloc[20:22+20]  # 前10个交易日  8月
+        data7_4 = df.iloc[20+20:22+20+20]  # 前10个交易日  7月
+        data7_4 = df.iloc[20+20+20:22+20+20+20]  # 前10个交易日  6月
+        data7_4 = df.iloc[20+20+20+20:22+20+20+20+20]  # 前10个交易日  5月
+        data7_4 = df.iloc[20+20+20+20+20:22+20+20+20+20+20]  # 前10个交易日  4月
+        data7_4 = df.iloc[20+20+20+20+20+20:22+20+20+20+20+20+20]  # 前10个交易日  3月
+        data7_4 = df.iloc[20+20+20+20+20+20+20:22+20+20+20+20+20+20+20]  # 前10个交易日  2月
+        data7_4 = df.iloc[20+20+20+20+20+20+20+20:22+20+20+20+20+20+20+20+20]  # 前10个交易日  1月
+        data7_4 = df.iloc[20+20+20+20+20+20+20+20+20:22+20+20+20+20+20+20+20+20+20]  # 前10个交易日  1月
+
+        len_1=len(data7_4)
+        # print data7_4
+        for i in range(0, len_1 ):
+            # print "i" + str(i )+ "j"+str(i+3)
+            isAn_lianban_damian_fanbao_model(data7_4[i:i + 4], stock_code)
+            # print data7_4[i:i + 2]
+
+
 
 if __name__ == '__main__':
     from  time import  *
@@ -161,10 +192,10 @@ if __name__ == '__main__':
 
     localpath1 = '/jishu_stock/z_stockdata/data1/'
 
-    test_isAn_lianban_damian_fanbao_model_laoshi()
+    # test_isAn_lianban_damian_fanbao_model_laoshi()
 
     # get_all_lianban_damian_fanbao(localpath1)
-    # get_all_lianban_damian_fanbao_from_Qiang_QuShi(localpath1)
+    test_Befor_data()
 
 
 

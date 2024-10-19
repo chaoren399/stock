@@ -7,7 +7,7 @@ import tushare as ts
 import sys
 
 from jishu_stock.Tool_jishu_stock import print1
-from jishu_stock.bChanKe.Tool_Token import token_init
+
 
 reload(sys)
 sys.setdefaultencoding('utf8')

@@ -6,8 +6,6 @@ import exceptions
 import tushare as ts
 import pandas as pd
 
-from jishu_stock.GeShiBaFa.Get_Week_K_data_From_Ts import getAllWeekKdata
-from jishu_stock.JiaGeZhongShu.jiagezhognshu_Get_Week_K_data import getAll_jiagezhongshu_WeekKdata
 from jishu_stock.Tool_jishu_stock import writeLog_to_txt, writeLog_to_txt_nocode, print1, isYinXian, isYangXian, \
     writeLog_to_txt_path_getcodename, writeLog_to_txt_path, jiagezhongshu_writeLog_to_txt_path_getcodename
 from jishu_stock.z_tool.PyDateTool import get_date1_date2_days, riqi_geshi_zhuanhua1

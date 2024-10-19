@@ -18,16 +18,13 @@ sys.path.append(parent_parent_dir_name)
 from jishu_stock.agetdata.test_ziji_model.XiaoV.XiaoV import get_all_XiaoV_from_Qiang_QuShi, isAn_XiaoV_model
 from jishu_stock.z_tool.email import webhook
 import pandas as pd
-from jishu_stock.DaPan.DaPan_HuanJing import get_DaPan_HuanJing
-from jishu_stock.GeShiBaFa.G8M2_RuanAll import G8M2_yijianyunxing
+
+
 from jishu_stock.JiaGeZhongShu.JGZS_RuanAll import JGZS_yijianyunxing
-from jishu_stock.KangLongyouHui.KangLongYouHui_DaPan import get_all_KangLongYouHui_DaPan
+
 from jishu_stock.Tool_jishu_stock import get_all_codes_from_tool, \
     csv_paixu_path1_zhuanyong
-from jishu_stock.YouJingWuXian.YouJingWuXian1 import isAn_YouJingWuXian1_model
-from jishu_stock.YouJingWuXian.YouJingWuXian2_1 import isAn_YouJingWuXian2_1_model
-from jishu_stock.YouJingWuXian.YouJingWuXian2_2 import isAn_YouJingWuXian2_2_model
-from jishu_stock.YouJingWuXian.YouJingWuXian2_3 import isAn_YouJingWuXian2_3_model
+
 from jishu_stock.agetdata.getdata_2theard import get_all_codes
 from jishu_stock.bRuoFeng.youzimodel.erlianban_damian_fanbao_guchi import isAn_lianban_damian_fanbao_model
 from jishu_stock.cShenLongBaiWei.Shen1 import isAn_Shen1_model
@@ -41,12 +38,6 @@ from stock.settings import BASE_DIR
 import tushare as ts
 
 
-
-'''
-G8M2 一键运行
-'''
-def g8m2_yijianyunxing():
-    G8M2_yijianyunxing()
 
 '''
 周线 价格中枢一键运行
@@ -64,7 +55,7 @@ def yijianyunxing_rixian():
     today = getDayNumberYMD()
 
     webhook.sendData("开始下载数据--"+ today)
-    print  '-----大盘环境------'+ get_DaPan_HuanJing(today)
+    # print  '-----大盘环境------'+ get_DaPan_HuanJing(today)
     # 日线 操作
     localpath1 = '/jishu_stock/z_stockdata/data1/'
 
@@ -115,17 +106,17 @@ def task1(data6_1,stock_code):
     # 二连板大面反包
     isAn_lianban_damian_fanbao_model(data6_1, stock_code)
      # 立桩反包
-    isAn_lizhuang_fanbao_model(data6_1, stock_code)
+    # isAn_lizhuang_fanbao_model(data6_1, stock_code)
     # 反脆弱双响炮
-    isAn_fancuiruo_shuangxiangpao_model(data6_1, stock_code)
+    # isAn_fancuiruo_shuangxiangpao_model(data6_1, stock_code)
 
     #  神龙摆尾1 神1
-    isAn_Shen1_model(data6_1, stock_code)
+    # isAn_Shen1_model(data6_1, stock_code)
 
     # 神1  6天数据模型
     # isAn_Shen1_Pro_model(data6_1, stock_code)  #pro  济民医疗
     # 神2pro 改进版, 之前的有些拿不到
-    isAn_ShenLongBaiWei2_Pro_model(data6_1, stock_code)
+    # isAn_ShenLongBaiWei2_Pro_model(data6_1, stock_code)
     #  神龙摆尾3 神3
     # isAnShenLongBaiwei3_model(data6_1, stock_code)
 
@@ -241,29 +232,6 @@ def task5(data6_1,stock_code):
 
     print 'task4目前精力不放在这里的运行完了'
 
-'''
-有惊无险 4 个方法 + 起爆均线 4 个
-'''
-def task6(data6_1,stock_code):
-    #有惊无险1
-    isAn_YouJingWuXian1_model(data6_1,stock_code)
-    #有惊无险2-1
-    isAn_YouJingWuXian2_1_model(data6_1, stock_code)
-    # 有惊无险2-2
-    isAn_YouJingWuXian2_2_model(data6_1, stock_code)
-    # 有惊无险2-3
-    isAn_YouJingWuXian2_3_model(data6_1, stock_code)
-
-
-    #起爆均线 1
-    # isAn_QiBaoJunXian1_model(data6_1, stock_code)
-    #起爆均线 2
-    # isAn_QiBaoJunXian2_model(data6_1, stock_code)
-    # 起爆均线 3
-    # isAn_QiBaoJunXian3_model(data6_1, stock_code)
-    #起爆均线4 胜率 80%
-    # isAn_QiBaoJunXian4_model(data6_1, stock_code)
-
 
 
 '''
@@ -314,7 +282,7 @@ def task3(data6_1,stock_code):
 '''
 def task4_teshu():
     #0  上证 50 上证指数  大盘亢龙有悔
-    get_all_KangLongYouHui_DaPan()
+    # get_all_KangLongYouHui_DaPan()
     # 神龙摆尾2
     get_all_ShenLongBaiWei2(localpath1)  # 改起来有点复杂
 
