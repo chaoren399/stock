@@ -8,7 +8,8 @@
 只做 00 60 开头的 股票
 '''
 
-
+# zhangting_xishu = 1.098
+# dieting_xishu = 0.903
 
 def isDieTingBan_pro(row):
     '''
@@ -129,6 +130,80 @@ def isHuangXian(row,day0close):
 
 
     return 0
+
+
+zhangting_xishu = 1.098
+dieting_xishu = 0.901
+
+'''
+2024年11月9日 重新判断 涨停板：
+涨停： 今日最高价等于收盘价， 并且收盘价等于 昨日的收盘价 X 1.098 （其实是1.10)
+跌停：今日最低价等于收盘价， 并且 收盘价等于昨日的收盘价 X 0.903（其实就是0.9）
+炸板： 今日最高价等于 昨日收盘价 X 1.098 并且 收盘价小于 最高价  
+
+
+  print '涨停为1,跌停为2,炸板为3-------------------'
+
+'''
+def isZhangTingBan_zzy(df):
+    '''
+    60  00 开头的 10%
+
+    30 68 开头的 20%
+
+    '''
+    if(len(df) ==2) :
+
+        data1 = df
+        data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
+
+        day0_close=0
+
+        day1_open=0
+        day1_close=0
+        day1_high=0
+        day1_low=0
+
+        riqi = data1.ix[1]['trade_date']  # 阳线的日期
+
+        for index, row in data1.iterrows():
+            if (index == 0):
+                day0_close = row['close']
+            if (index == 1):
+                day1_open=row['open']
+                day1_close=row['close']
+                day1_high=row['high']
+                day1_low=row['low']
+
+        zhangting_jiage= day0_close * zhangting_xishu
+        zhangting_jiage = round(zhangting_jiage,1)  #保留 1位小数
+        dieting_jiage = day0_close * dieting_xishu
+        dieting_jiage = round(dieting_jiage,1)
+
+        zhaban_yuzhi=0.15
+        day1_high_zhangting_jiage = day1_high - zhangting_jiage
+        zhangting_yuzhi=0.05
+        day1_close_zhangting_jiage = day1_close - zhangting_jiage
+
+        if(0):
+            print "K线日期=" + riqi
+            print str(zhangting_jiage) + '=zhangting_jiage'
+            print 'day1_high - zhangting_jiage=' +str(day1_high - zhangting_jiage)
+            print 'day1_close - zhangting_jiage =' +str(day1_close - zhangting_jiage )
+
+        if(day1_high==day1_close and abs(day1_close_zhangting_jiage) < zhangting_yuzhi):
+            #涨停
+            return 1
+        elif(day1_low == day1_close and day1_close <= dieting_jiage):
+            #跌停
+            return 2
+        elif( abs(day1_high_zhangting_jiage) < zhaban_yuzhi  and day1_close < day1_high):
+            # 炸板
+            return 3
+
+    else:
+        print 'isZhangTingBan_zzy < 2 days '
+    return 0;
 
 def testIsHuangXian():
     return 1

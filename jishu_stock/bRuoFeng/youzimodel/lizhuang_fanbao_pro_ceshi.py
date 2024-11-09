@@ -27,16 +27,16 @@ pd.set_option('display.max_rows', None)
 https://www.yuque.com/chaoren399/zxadsn/bvq80d3ccgho84zq
 
 
-lizhuang_fanbao
+lizhuang_fanbao_pro
 
 '''
 chengongs=[]
-modelname='lizhuang_fanbao'
+modelname='lizhuang_fanbao_pro'
 #BASE_DIR + '/jishu_stock/z_stockdata/模型编码.csv'
 
 
 def get_all_lizhuang_fanbao(localpath1):
-    info1 = '--立桩反包  start--'
+    info1 = '--立桩反包 pro start--'
     writeLog_to_txt_nocode(info1)
     path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
     data = pd.read_csv(path, dtype={'code': str})
@@ -46,7 +46,7 @@ def get_all_lizhuang_fanbao(localpath1):
         stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
         df = pd.read_csv(stockdata_path, index_col=0)
 
-        data6_1 = df.iloc[0:4]  # 前6行
+        data6_1 = df.iloc[0:5]  # 前6行
         # data6_1 = df.iloc[20:32]  # 前6行
         len1 = len(data6_1)
         isAn_lizhuang_fanbao_model(data6_1, stock_code)
@@ -66,7 +66,7 @@ def isAn_lizhuang_fanbao_model(data,stockcode):
         data = data.sort_values(by='trade_date', axis=0, ascending=True)  # 按照日期 从旧到新 排序
         data = data.reset_index(drop=True)  # 重新建立索引 ,默认为false，索引列（被设置为索引的列）被还原为普通列，并将索引重置为整数索引，否则直接丢弃索引列。
 
-        data1= data[len_data-4:len_data]   # huoqu suo xuyao de shuju1
+        data1= data[len_data-5:len_data]   # huoqu suo xuyao de shuju1
         data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
         mairuriqi = 0  # 第一天买入， 第2天卖出
@@ -76,6 +76,7 @@ def isAn_lizhuang_fanbao_model(data,stockcode):
 
 
         # 设置两个 key
+        key_0=1; #di 0天不涨停
         key_1=0; # 第1天 涨停
 
         key_2=0; # 第2天 大面
@@ -88,20 +89,22 @@ def isAn_lizhuang_fanbao_model(data,stockcode):
 
 
         for index,row in data1.iterrows():
+            if(index==0 and isZhangTingBan(row)==0):
+                key_0=1
 
-
-            if(index==0 and isZhangTingBan(row)==1):
+            if(index==1 and isZhangTingBan(row)==1):
                 key_1=1
 
-            if(index==1 and isYinXian(row)==1):
+            if(index==2 and isZhangTingBan(row)==0):
                 key_2=1
-            if(index==2 and isYangXian(row)==1):
+            if(index==3 and isZhangTingBan(row)==0):
                 key_3=1
-            if(index==3 and isZhangTingBan(row)==1):
+            if(index==4 and isZhangTingBan(row)==1):
                 key_4=1
                 mairuriqi = row['trade_date']
 
         if (1):
+            print key_0
             print key_1
             print key_2
             print key_3
