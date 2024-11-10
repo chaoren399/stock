@@ -177,33 +177,126 @@ def isZhangTingBan_zzy(df):
 
         zhangting_jiage= day0_close * zhangting_xishu
         zhangting_jiage = round(zhangting_jiage,1)  #保留 1位小数
+
         dieting_jiage = day0_close * dieting_xishu
-        dieting_jiage = round(dieting_jiage,1)
+        dieting_jiage = round(dieting_jiage,2)
 
         zhaban_yuzhi=0.15
         day1_high_zhangting_jiage = day1_high - zhangting_jiage
         zhangting_yuzhi=0.05
         day1_close_zhangting_jiage = day1_close - zhangting_jiage
 
+        lanK_yuzhi=0.5
+        day1_close_dieting_jiage=day1_close - dieting_jiage
+
+
         if(0):
             print "K线日期=" + riqi
             print str(zhangting_jiage) + '=zhangting_jiage'
             print 'day1_high - zhangting_jiage=' +str(day1_high - zhangting_jiage)
             print 'day1_close - zhangting_jiage =' +str(day1_close - zhangting_jiage )
+            # print 'day1_close - dieting_jiage =' +str(day1_close - dieting_jiage )
+
+            print 'day1_low - dieting_jiage =' + str(day1_low - dieting_jiage)
+            print 'dieting_jiage='+str(dieting_jiage)
+
+        key=9
 
         if(day1_high==day1_close and abs(day1_close_zhangting_jiage) < zhangting_yuzhi):
             #涨停
-            return 1
-        elif(day1_low == day1_close and day1_close <= dieting_jiage):
+            key=1
+        # elif(day1_low == day1_close and abs(day1_close_dieting_jiage) <lanK_yuzhi):
+        elif( (day1_low - dieting_jiage)  <lanK_yuzhi):
             #跌停
-            return 2
+            key=2
         elif( abs(day1_high_zhangting_jiage) < zhaban_yuzhi  and day1_close < day1_high):
+
             # 炸板
-            return 3
+            key = 3
+
 
     else:
         print 'isZhangTingBan_zzy < 2 days '
-    return 0;
+    return key;
+
+
+
+def isLanK_zzy(df):
+    '''
+    60  00 开头的 10%
+
+    30 68 开头的 20%
+
+    '''
+    if(len(df) ==2) :
+
+        data1 = df
+        data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
+
+        day0_close=0
+
+        day1_open=0
+        day1_close=0
+        day1_high=0
+        day1_low=0
+
+        riqi = data1.ix[1]['trade_date']  # 阳线的日期
+
+        for index, row in data1.iterrows():
+            if (index == 0):
+                day0_close = row['close']
+            if (index == 1):
+                day1_open=row['open']
+                day1_close=row['close']
+                day1_high=row['high']
+                day1_low=row['low']
+
+        zhangting_jiage= day0_close * zhangting_xishu
+        zhangting_jiage = round(zhangting_jiage,1)  #保留 1位小数
+
+        dieting_jiage = day0_close * dieting_xishu
+        dieting_jiage = round(dieting_jiage,2)
+
+        zhaban_yuzhi=0.15
+        day1_high_zhangting_jiage = day1_high - zhangting_jiage
+        zhangting_yuzhi=0.05
+        day1_close_zhangting_jiage = day1_close - zhangting_jiage
+
+        lanK_yuzhi=0.3
+        day1_low_dieting_jiage=day1_low - dieting_jiage
+        # print 'day1_low - dieting_jiage =' + str(day1_low - dieting_jiage)
+
+        if(0):
+        # if(1):
+            print "K线日期=" + riqi
+            print str(zhangting_jiage) + '=zhangting_jiage'
+            print 'day1_high - zhangting_jiage=' +str(day1_high - zhangting_jiage)
+            print 'day1_close - zhangting_jiage =' +str(day1_close - zhangting_jiage )
+            # print 'day1_close - dieting_jiage =' +str(day1_close - dieting_jiage )
+
+            print 'day1_low - dieting_jiage =' + str(day1_low - dieting_jiage)
+            print 'dieting_jiage='+str(dieting_jiage)
+
+        key=9
+
+        if (abs(day1_low_dieting_jiage) < lanK_yuzhi):
+            key=1
+        isYinXian=0
+        if(day1_close < day1_open):
+            isYinXian=1
+        if(abs(day1_high_zhangting_jiage)< zhangting_yuzhi and isYinXian==1):
+            #yinxian
+            key=2
+        # if(day1_high_zhangting_jiage < zhangting_yuzhi and day1_open >= day0_close):
+        #     key=3
+
+
+
+    else:
+        print 'isZhangTingBan_zzy < 2 days '
+    return key;
+
+
 
 def testIsHuangXian():
     return 1

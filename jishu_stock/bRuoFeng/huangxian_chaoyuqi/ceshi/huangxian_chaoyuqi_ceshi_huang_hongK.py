@@ -141,12 +141,13 @@ def test_isAn_huangxian_chaoyuqi_model_laoshi_HuangK():
     # df1 = ts.pro_bar(ts_code=st_code,adj='qfq', start_date='20210206', end_date='20241010')
     # df1 = ts.pro_bar(ts_code=st_code,adj='qfq', start_date='20210206', end_date='20240930')
     # df1 = ts.pro_bar(ts_code=st_code,adj='qfq', start_date='20210206', end_date='20240926')
-    df1 = ts.pro_bar(ts_code=st_code,adj='qfq', start_date='20210206', end_date='20240924')
+    # df1 = ts.pro_bar(ts_code=st_code,adj='qfq', start_date='20210206', end_date='20240924')
+    df1 = ts.pro_bar(ts_code=st_code,adj='qfq', start_date='20210206', end_date='20241010')
 
 
     data7_1 = df1.iloc[0:100]  # 前7行
     # print data7_1
-    # isAn_huangxian_chaoyuqi_model(data7_1,st_code)
+    isAn_huangxian_chaoyuqi_model(data7_1,st_code)
 
     # 案例 2 上海电气 **601727.SH
     st_code='601727.SH'
@@ -155,8 +156,30 @@ def test_isAn_huangxian_chaoyuqi_model_laoshi_HuangK():
     df1 = ts.pro_bar(ts_code=st_code,adj='qfq', start_date='20210206', end_date='20240930')
     data7_1 = df1.iloc[0:30]  # 前7行
     # print data7_1
-    isAn_huangxian_chaoyuqi_model(data7_1,st_code)
+    # isAn_huangxian_chaoyuqi_model(data7_1,st_code)
 
+    # 案例 3 森特股份
+    st_code='603098.SH'
+    # df1 = ts.pro_bar(ts_code=st_code,adj='qfq', start_date='20210206', end_date='20241107')
+    # df1 = ts.pro_bar(ts_code=st_code,adj='qfq', start_date='20210206', end_date='20241031')
+    df1 = ts.pro_bar(ts_code=st_code,adj='qfq', start_date='20210206', end_date='20241104')
+    data7_1 = df1.iloc[0:30]  # 前7行
+    # print data7_1
+    # isAn_huangxian_chaoyuqi_model(data7_1,st_code)
+
+    # 案例 4-海能达
+    st_code='002583.SZ'
+    df1 = ts.pro_bar(ts_code=st_code,adj='qfq', start_date='20210206', end_date='20241017')
+    data7_1 = df1.iloc[0:30]  # 前7行
+    # print data7_1
+    # isAn_huangxian_chaoyuqi_model(data7_1,st_code)
+
+    # 案例 4-瑞贝卡
+    st_code='600439.SH'
+    df1 = ts.pro_bar(ts_code=st_code,adj='qfq', start_date='20210206', end_date='20241025')
+    data7_1 = df1.iloc[0:30]  # 前7行
+    # print data7_1
+    # isAn_huangxian_chaoyuqi_model(data7_1,st_code)
 
 
 '''
@@ -222,9 +245,9 @@ if __name__ == '__main__':
 
     localpath1 = '/jishu_stock/z_stockdata/data1/'
 
-    # test_isAn_huangxian_chaoyuqi_model_laoshi_HuangK()
+    test_isAn_huangxian_chaoyuqi_model_laoshi_HuangK()
     # test_isAn_huangxian_chaoyuqi_model_laoshi_HongK()
-    test_isAn_huangxian_chaoyuqi_model_laoshi_LanK()
+    # test_isAn_huangxian_chaoyuqi_model_laoshi_LanK()
     # get_all_huangxian_chaoyuqi(localpath1)
     # get_all_huangxian_chaoyuqi_from_Qiang_QuShi(localpath1)
 

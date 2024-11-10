@@ -46,7 +46,7 @@ def get_all_huangxian_chaoyuqi(localpath1):
         stockdata_path = BASE_DIR + localpath1 + stock_code + ".csv"
         df = pd.read_csv(stockdata_path, index_col=0)
 
-        data6_1 = df.iloc[0:4]  # 前6行
+        data6_1 = df.iloc[0:40]  # 前6行
         # data6_1 = df.iloc[20:32]  # 前6行
         len1 = len(data6_1)
         isAn_huangxian_chaoyuqi_model(data6_1, stock_code)
@@ -69,7 +69,7 @@ def isAn_huangxian_chaoyuqi_model(data,stockcode):
 
         data1= data[len_data-2:len_data]   #  要计算 振幅 需要 前一天数据， 所以需要4个
         data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
-        riqi = data1.ix[0]['trade_date']  # 阳线的日期
+        riqi = data1.ix[1]['trade_date']  # 阳线的日期
         mairuriqi = riqi  # 第一天买入， 第2天卖出
 
 
@@ -113,7 +113,7 @@ def isAn_huangxian_chaoyuqi_model(data,stockcode):
 
 
 
-        if (1):
+        if (0):
             print key_1
             print key_2
             print 'count=' + str(count)
@@ -178,8 +178,8 @@ if __name__ == '__main__':
     localpath1 = '/jishu_stock/z_stockdata/data1/'
 
 
-    test_isAn_huangxian_chaoyuqi_model_laoshi()
-    # get_all_huangxian_chaoyuqi(localpath1)
+    # test_isAn_huangxian_chaoyuqi_model_laoshi()
+    get_all_huangxian_chaoyuqi(localpath1)
     # get_all_huangxian_chaoyuqi_from_Qiang_QuShi(localpath1)
 
 

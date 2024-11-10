@@ -5,8 +5,7 @@ import sys
 import pandas as pd
 
 from jishu_stock.Tool_jishu_stock import print1, getRiQi_Befor_Ater_Days
-from jishu_stock.bChanKe.Tool_LiuTongShiZhi import LTSZ_IS_Small_100YI, get_stock_jibenmian, get_LiuTongShiZhi
-from jishu_stock.bChanKe.Tool_Token import token_init
+
 from jishu_stock.z_tool.PyDateTool import getDayNumberYMD
 from stock.settings import BASE_DIR
 
@@ -14,7 +13,7 @@ reload(sys)
 
 sys.setdefaultencoding('utf8')
 
-token_init()
+
 
 # 查询当前所有正常上市交易的股票列表
 pro = ts.pro_api()
@@ -78,7 +77,7 @@ def getallstock_list_chuli():
                     stock_close_price = jibenmin_row['close']
                     stock_liutongshizhi = jibenmin_row['circ_mv']
                     # if(stock_liutongshizhi < 1000000 ): #过滤流通市值 100 亿以下的
-                    if (stock_liutongshizhi < 2000000):  # 过滤流通市值 100 亿以下的
+                    if (stock_liutongshizhi < 9000000):  # 过滤流通市值 100 亿以下的
                         if (stock_close_price >= 3 and stock_close_price < 20):
                             print  code
                             # if(code=='000677.SZ'):
