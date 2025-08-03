@@ -1,3 +1,25 @@
+
+
+#更新文档： 
+二连板大面反包
+
+https://www.yuque.com/chaoren399/zxadsn/ni1chkqee8b72mo2
+
+lianban_damian_fanbao
+
+
+    # 二连板大面反包
+    isAn_lianban_damian_fanbao_model(data6_1, stock_code)
+
+
+
+
+
+
+
+
+# 技术文档： 
+
 # stock
 zzy 交易系统
 

@@ -147,7 +147,7 @@ def test_isAn_huangxian_chaoyuqi_model_laoshi_HuangK():
 
     data7_1 = df1.iloc[0:100]  # 前7行
     # print data7_1
-    isAn_huangxian_chaoyuqi_model(data7_1,st_code)
+    # isAn_huangxian_chaoyuqi_model(data7_1,st_code)
 
     # 案例 2 上海电气 **601727.SH
     st_code='601727.SH'
@@ -180,6 +180,13 @@ def test_isAn_huangxian_chaoyuqi_model_laoshi_HuangK():
     data7_1 = df1.iloc[0:30]  # 前7行
     # print data7_1
     # isAn_huangxian_chaoyuqi_model(data7_1,st_code)
+
+    # 案例 6华塑控股**000509.SZ
+    st_code = '000509.SZ'
+    df1 = ts.pro_bar(ts_code=st_code,adj='qfq', start_date='20210206', end_date='20241025')
+    data7_1 = df1.iloc[0:30]  # 前7行
+    # print data7_1
+    isAn_huangxian_chaoyuqi_model(data7_1,st_code)
 
 
 '''

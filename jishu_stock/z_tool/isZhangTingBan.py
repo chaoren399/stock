@@ -266,8 +266,8 @@ def isLanK_zzy(df):
         day1_low_dieting_jiage=day1_low - dieting_jiage
         # print 'day1_low - dieting_jiage =' + str(day1_low - dieting_jiage)
 
-        if(0):
-        # if(1):
+        # if(0):
+        if(1):
             print "K线日期=" + riqi
             print str(zhangting_jiage) + '=zhangting_jiage'
             print 'day1_high - zhangting_jiage=' +str(day1_high - zhangting_jiage)
