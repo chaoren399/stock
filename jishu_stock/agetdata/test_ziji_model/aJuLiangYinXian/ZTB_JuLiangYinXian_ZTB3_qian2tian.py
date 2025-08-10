@@ -26,16 +26,16 @@ pd.set_option('display.max_rows', None)
 
 涨停板后 放巨量的大阴险+ 然后反包 的票（可以不涨停）
 
-https://xueqiu.com/3476656801/206120146
-ZTB_ZTB_TiaoKong
+
+ZTB_JuLiangYinXian_ZTB
 
 '''
 chengongs=[]
-modelname='涨停后跳空涨停'
+modelname='涨停后放巨量的大阴险'
 
 
 
-def get_all_ZTB_ZTB_TiaoKong(localpath1):
+def get_all_ZTB_JuLiangYinXian_ZTB(localpath1):
     info1=  '-- start-- 涨停板后 放巨量的大阴险+ 然后反包 的票（可以不涨停）  '
     writeLog_to_txt_nocode(info1)
     path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
@@ -49,14 +49,14 @@ def get_all_ZTB_ZTB_TiaoKong(localpath1):
         data6_1 = df.iloc[0:30]  # 前6行
         # data6_1 = df.iloc[20:32]  # 前6行
         len1 = len(data6_1)
-        isAn_ZTB_ZTB_TiaoKong_model(data6_1, stock_code)
+        isAn_ZTB_JuLiangYinXian_ZTB_model(data6_1, stock_code)
 
 
 
 '''
 #2 单独一个函数 判断 6 个数据是不是符合模型
 '''
-def isAn_ZTB_ZTB_TiaoKong_model(data,stockcode):
+def isAn_ZTB_JuLiangYinXian_ZTB_model(data,stockcode):
     if (data is None or data.empty):
         print '--df.empty--' + str(stockcode)
         return 0
@@ -67,7 +67,7 @@ def isAn_ZTB_ZTB_TiaoKong_model(data,stockcode):
         data = data.sort_values(by='trade_date', axis=0, ascending=True)  # 按照日期 从旧到新 排序
         data = data.reset_index(drop=True)  # 重新建立索引 ,默认为false，索引列（被设置为索引的列）被还原为普通列，并将索引重置为整数索引，否则直接丢弃索引列。
 
-        data1= data[len_data-3:len_data]
+        data1= data[len_data-2:len_data]
         data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
         mairuriqi = 0
@@ -80,16 +80,20 @@ def isAn_ZTB_ZTB_TiaoKong_model(data,stockcode):
         # 设置两个 key
         key_1=0; #1-昨天 是一个涨停板, 今天来了一个跳空高开的大阴线
 
-        key_2=0; # 2阴线放量
-        key_3=0 ; #3 反包，大阳线
+        key_2=0; # 2阴线
 
+
+        key_4=0; #阴线放量
+        key_5=0;#阴线收盘价 < 上个涨停板价格
 
 
 
         count=0
+        day0_close=0
         day1_close=0
         day2_open=0
         day2_close=0
+        day0_amount=0
         day1_amount=0
         day2_amount=0
 
@@ -97,21 +101,27 @@ def isAn_ZTB_ZTB_TiaoKong_model(data,stockcode):
 
 
             if(index==0 and isZhangTingBan(row)==1):
+
+                day0_amount=row['amount']
+                day0_close=row['close']
                 key_1=1
 
             if(index==1 and isYinXian(row)==1):
+                day1_amount=row['amount']
+                day1_close=row['close']
                 key_2=1
-            if(index==2 and isYangXian(row)==1):
-                key_3=1
                 mairuriqi = row['trade_date']
 
+        if(day0_amount < day1_amount):
+            key_4=1
+        if(day0_close > day1_close):
+            key_5=1
 
-
-        if(key_1==1 and key_2==1 and key_3==1 ):
+        if(key_1==1 and key_2==1  and key_4==1and key_5==1):
         # if(key_1==1 and key_2==1):
             info = ''
 
-            info = info + "--涨停后跳空涨停 成功了"  + str(riqi)
+            info = info + "--涨停后放巨量的大阴险 成功了"  + str(riqi)
             # print info
             writeLog_to_txt(info, stockcode)
 
@@ -131,7 +141,7 @@ def test_isAn_ZTB_ZTB_TiaoKong_laoshi():
     df1 = ts.pro_bar(ts_code='000408.SZ',adj='qfq', start_date='20210206', end_date='20210518')
     data7_1 = df1.iloc[0:30]  # 前7行
     # print data7_1
-    isAn_ZTB_ZTB_TiaoKong_model(data7_1,'002174.SZ')
+    isAn_ZTB_JuLiangYinXian_ZTB_model(data7_1,'002174.SZ')
 
     # 案例 2
 
@@ -144,7 +154,7 @@ def test_isAn_ZTB_ZTB_TiaoKong_ziji():
     #自己的 案例
     df1 = ts.pro_bar(ts_code='002507.SZ',adj='qfq', start_date='20210206', end_date='20211008')
     data7_1 = df1.iloc[0:6]  # 前7行
-    isAn_ZTB_ZTB_TiaoKong_model(data7_1,'002507.SZ')
+    isAn_ZTB_JuLiangYinXian_ZTB_model(data7_1,'002507.SZ')
 
 '''
 回测 8 月份的数据
@@ -166,18 +176,9 @@ def test_Befor_data():
         len_1=len(data7_4)
         for i in range(0, len_1 - n + 1):
             # print "i" + str(i )+ "j"+str(i+3)
-            isAn_ZTB_ZTB_TiaoKong_model(data7_4[i:i + n], stock_code)
+            isAn_ZTB_JuLiangYinXian_ZTB_model(data7_4[i:i + n], stock_code)
 
-    from jishu_stock.aShengLv.HuiCeTool import wirteList_to_txt
-    from jishu_stock.aShengLv.HuiCeTool import getList_from_txt
-    from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
-    wirteList_to_txt(chengongs)
-    # chengongs1 = getList_from_txt()
-    jisuan_all_shouyilv(chengongs, modelname, 1.03)
-    jisuan_all_shouyilv(chengongs, modelname, 1.05)
-    jisuan_all_shouyilv(chengongs, modelname, 1.07)
-    jisuan_all_shouyilv(chengongs, modelname, 1.10)
-    jisuan_all_shouyilv(chengongs, modelname, 1.15)
+
 
 
 if __name__ == '__main__':
@@ -187,6 +188,7 @@ if __name__ == '__main__':
 
     localpath1 = '/jishu_stock/z_stockdata/data1/'
     # get_all_ZTB_ZTB_TiaoKong(localpath1)
+    # get_all_ZTB_JuLiangYinXian_ZTB(localpath1)
     test_Befor_data()
 
 
