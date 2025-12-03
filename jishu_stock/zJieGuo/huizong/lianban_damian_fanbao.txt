@@ -224,3 +224,7 @@ lianban_damian_fanbao--20250801,化学制药,德展健康**000813.SZ
 lianban_damian_fanbao--20250801,化工机械,克劳斯**600579.SH
 lianban_damian_fanbao--20250801,区域地产,珠江股份**600684.SH
 lianban_damian_fanbao--20250801,服饰,安正时尚**603839.SH
+lianban_damian_fanbao--20251203,通信设备,雷科防务**002413.SZ
+lianban_damian_fanbao--20251203,通信设备,通宇通讯**002792.SZ
+lianban_damian_fanbao--20251203,商贸代理,汇鸿集团**600981.SH
+lianban_damian_fanbao--20251203,元器件,睿能科技**603933.SH

@@ -44,7 +44,7 @@ def get_all_codes():
         writeLog_to_txt_nocode(df1.ix[0]['trade_date'])
         path = '00_测试定时任务.txt'
         stockcode = '000001.SZ'
-        info = '下载数据开始=' + str(df1.ix[0]['trade_date'])
+        info = 'getdata_2theard.py 下载数据开始=' + str(df1.ix[0]['trade_date'])
 
         print  info
         # writeLog_to_txt_path_getcodename(info, path, stockcode)
@@ -67,19 +67,16 @@ def get_all_codes():
 
     len_codes = len(stock_codes)
     # print len_codes/2
-    a = stock_codes[0:len_codes / 2]
-    b = stock_codes[len_codes / 2:len_codes]
-    # c = stock_codes[(len_codes/3)*2 :len_codes]
-    # # print1( a)
-    # print1(b)
+
+    a = stock_codes[0:len_codes]
+
 
     t1 = Thread(target=getdata_task1, args=(a,))  # 定义线程t1，线程任务为调用task1函数，task1函数的参数是6
-    t2 = Thread(target=getdata_task2,args=(b,))  # 定义线程t2，线程任务为调用task2函数，task2函数无参数
     t1.start()  # 开始运行t1线程
-    t2.start()  # 开始运行t2线程
+
     #join()只有在你需要等待线程完成时候才是有用的。
     t1.join()
-    t2.join()
+
     print 't2.join() 我来了'
 
     endtime = time()
@@ -94,7 +91,7 @@ def get_all_codes():
 def download_onestock_token1(stock_code):
     # ts.set_token('731d2ea0abcf1f14d59ec7215d6ec520e09a439fccd2772c43a906be')
     import time
-    time.sleep(0.15)
+    time.sleep(1.5)
 
     df = ts.pro_bar(ts_code=stock_code, adj='qfq', start_date=start_date, end_date=end_date,
                     ma=[5, 13, 34, 144, 169, 75,10,20,30,60,120])

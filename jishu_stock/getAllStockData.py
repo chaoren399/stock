@@ -40,7 +40,7 @@ def getAllStockData(start_date , end_date, localpath):
             writeLog_to_txt_nocode(df1.ix[0]['trade_date'])
             path = '00_测试定时任务.txt'
             stockcode = '000001.SZ'
-            info='下载数据开始='+str(df1.ix[0]['trade_date'])
+            info=' getAllStockData.py 下载数据开始='+str(df1.ix[0]['trade_date'])
             writeLog_to_txt_path_getcodename(info, path, stockcode)
     # path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST-1.csv'
     path = BASE_DIR + '/jishu_stock/z_stockdata/stockcodelist_No_ST.csv'
@@ -57,7 +57,8 @@ def getAllStockData(start_date , end_date, localpath):
             stock_code = row['ts_code']
             if (1):
                 # 下载股票信息 近一个月的
-                time.sleep(0.05)  # //睡觉
+                # time.sleep(0.05)  # //睡觉
+                time.sleep(1.2)  # //睡觉
                 df = ts.pro_bar(ts_code=stock_code,adj='qfq', start_date=start_date, end_date=end_date, ma=[5, 13, 34])
                 stockdata_path = BASE_DIR + localpath
                 df.to_csv(stockdata_path + stock_code + ".csv")
