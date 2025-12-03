@@ -8,7 +8,7 @@ import pandas as pd
 from time import *
 from jishu_stock.Tool_jishu_stock import *
 from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
-from jishu_stock.z_tool.isZhangTingBan import isZhangTingBan
+from jishu_stock.z_tool.isZhangTingBan import isZhangTingBan, isZhangTingBan_pro
 from stock.settings import BASE_DIR
 from jishu_stock.z_tool.ShiTiDaXiao import *
 from jishu_stock.z_tool.isXiongShiMoQi import  hasXiongShiMoQi
@@ -67,7 +67,7 @@ def isAn_ZTB_FL_FL_ZTBB_model(data,stockcode):
         data = data.sort_values(by='trade_date', axis=0, ascending=True)  # 按照日期 从旧到新 排序
         data = data.reset_index(drop=True)  # 重新建立索引 ,默认为false，索引列（被设置为索引的列）被还原为普通列，并将索引重置为整数索引，否则直接丢弃索引列。
 
-        data1= data[len_data-3:len_data]
+        data1= data[len_data-4:len_data]
         data1 = data1.reset_index(drop=True)  # 重新建立索引 ,
         riqi = data1.ix[0]['trade_date']  # 阳线的日期
         mairuriqi = 0
@@ -81,9 +81,12 @@ def isAn_ZTB_FL_FL_ZTBB_model(data,stockcode):
         key_1=0; #1-第一天涨停板,
 
         key_2=0; # 第2天 放量
-        key_3=0 ; # 第3天 放量
+        key2_1=0 # 第2天 不能涨停板
+        key_3=0  # 第3天 放量
+        key3_1=0 # 第3天 非涨停板
         key_4=0;#第3天 陽
 
+        key5=0 #第 4天开盘价格大于第一天的收盘价
 
 
 
@@ -96,6 +99,7 @@ def isAn_ZTB_FL_FL_ZTBB_model(data,stockcode):
         day1_amount=0
         day2_amount=0
         day3_amount=0
+        day4_open=0
 
 
         for index,row in data1.iterrows():
@@ -105,19 +109,41 @@ def isAn_ZTB_FL_FL_ZTBB_model(data,stockcode):
                 key_1=1
                 day1_amount = row['amount']
             if(index==1 ):
-
                 day2_amount=row['amount']
+                if(isZhangTingBan_pro(row)!=1):
+                    key2_1 = 1;
             if(index==2 ):
-
                 mairuriqi = row['trade_date']
                 day3_amount = row['amount']
+                # print row
+                if(isZhangTingBan_pro(row)!=1):
+                    key3_1=1;
 
+
+            if(index==3 ):
+                day4_open=row['open']
+
+        # print day1_amount
+        # print day3_amount
         if(day1_amount < day2_amount):
             key_2=1
         if(day1_amount < day3_amount):
             key_3=1
 
-        if(key_1==1 and key_2==1 and key_3==1 ):
+        if(day4_open > day1_close):
+            key5=1
+
+        if (0):
+            print1(data1)
+            print key_1
+            print key_2
+            print key_3
+            print key2_1
+            print key3_1
+
+        if(key_1==1 and key_2==1 and key_3==1 and key2_1==1 and key3_1==1 ):
+        # if(key_1==1 and key_2==1 and key_3==1 and key2_1==1  ):
+        # if(key_1==1 and key_2==1 and key_3==1  ):
         # if(key_1==1 and key_2==1):
             info = ''
 
@@ -138,10 +164,10 @@ def isAn_ZTB_FL_FL_ZTBB_model(data,stockcode):
 '''
 def test_isAn_ZTB_ZTB_TiaoKong_laoshi():
     # 案例 1 瀚新材 -301076
-    df1 = ts.pro_bar(ts_code='301076.SZ',adj='qfq', start_date='20250424', end_date='20250808')
+    df1 = ts.pro_bar(ts_code='301076.SZ',adj='qfq', start_date='20250124', end_date='20250429')
     data7_1 = df1.iloc[0:30]  # 前7行
     # print data7_1
-    isAn_ZTB_FL_FL_ZTBB_model(data7_1,'002174.SZ')
+    isAn_ZTB_FL_FL_ZTBB_model(data7_1,'301076.SZ')
 
     # 案例 2
 
@@ -169,25 +195,14 @@ def test_Befor_data():
         n=3
 
 
-        data7_4 = df.iloc[22:22+n+22]  #1 个月
+        # data7_4 = df.iloc[22:22+n+22]  #1 个月
         # data7_4 = df.iloc[22:22+n+120]  # 半年
-        # data7_4 = df.iloc[22:22+132+250]  # 1年
+        data7_4 = df.iloc[22:22+132+250]  # 1年
 
         len_1=len(data7_4)
         for i in range(0, len_1 - n + 1):
             # print "i" + str(i )+ "j"+str(i+3)
             isAn_ZTB_FL_FL_ZTBB_model(data7_4[i:i + n], stock_code)
-
-    from jishu_stock.aShengLv.HuiCeTool import wirteList_to_txt
-    from jishu_stock.aShengLv.HuiCeTool import getList_from_txt
-    from jishu_stock.aShengLv.ShengLv import jisuan_all_shouyilv
-    wirteList_to_txt(chengongs)
-    # chengongs1 = getList_from_txt()
-    jisuan_all_shouyilv(chengongs, modelname, 1.03)
-    jisuan_all_shouyilv(chengongs, modelname, 1.05)
-    jisuan_all_shouyilv(chengongs, modelname, 1.07)
-    jisuan_all_shouyilv(chengongs, modelname, 1.10)
-    jisuan_all_shouyilv(chengongs, modelname, 1.15)
 
 
 if __name__ == '__main__':
@@ -198,8 +213,8 @@ if __name__ == '__main__':
     localpath1 = '/jishu_stock/z_stockdata/data1/'
     # get_all_ZTB_ZTB_TiaoKong(localpath1)
     # get_all_ZTB_FL_FL_ZTBB(localpath1)
-    # test_Befor_data()
-    test_isAn_ZTB_ZTB_TiaoKong_laoshi()
+    test_Befor_data()
+    # test_isAn_ZTB_ZTB_TiaoKong_laoshi()
 
 
     endtime = time()
